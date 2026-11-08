@@ -13,7 +13,6 @@
   --m2-frame: #64676c;
   --m2-bg: #50535a;
   --m2-control-bg: #50535af0;
-  --m2-hover: #565a60;
 }
 html body { background: #46494f; color: #e2e3e4; }
 html h1, html h2, html h3, html h4 { color: #eceded; }
