@@ -65,7 +65,3 @@ html #m2-downloads > a:hover, html #m2-downloads summary:hover, html #m2-downloa
 /* the style picker on the top bar as Reactome's top-bar buttons: white edge and text on the blue */
 html #sp-chip { background: #58c3e5; border-color: #fff; color: #fff; }
 html #sp-chip:hover, html #sp.sp-open #sp-chip { background: #1e94d0; border-color: #fff; color: #fff; }
-
-/* the drag grip in the map window's lower right corner: two diagonal lines in the frame's blue (Chrome, Edge,
-   Safari; Firefox draws its own and cannot be styled) */
-html #m2-view::-webkit-resizer { background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M10 3L3 10M10 7L7 10' stroke='%2358c3e5' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat right bottom / 12px; }
