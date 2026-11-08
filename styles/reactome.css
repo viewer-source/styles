@@ -1,51 +1,57 @@
-/* Reactome: after the Reactome pathway browser (user, 2026-11-08). Its sky blue frame (#58c3e5) around white
-   panels with round corners, the chosen item in a strong blue box with white bold text (#0088cc), a dark teal
-   search field (#347c9d), light blue boxes for text (#b3e5fc) and Arial. The maps stay on white. */
+/* Reactome: after the Reactome pathway browser (user, 2026-11-08). White ground; the sky blue (#58c3e5) only as the
+   top bar and the thin lines between the windows; the chosen map in the stronger blue of Reactome's active tab
+   (#5492cf); a dark teal search field; Arial. Little room between the windows, so the map window is wider. The maps
+   stay on white. */
 :root {
-  --m2-accent: #0088cc;
+  --m2-accent: #5492cf;
   --m2-on-accent: #fff;
   --m2-link: #1572b6;
   --m2-text: #333;
   --m2-text-soft: #333;
   --m2-muted: #4f6f80;
   --m2-faint: #7c97a5;
-  --m2-button: #1e94d0;
-  --m2-line: #a4d8ed;
-  --m2-frame: #a4d8ed;
+  --m2-button: #3a7fc1;
+  --m2-line: #58c3e5;
+  --m2-frame: #58c3e5;
   --m2-bg: #fff;
   --m2-control-bg: #fffffff0;
   --m2-hover: #e8f4fa;
   --m2-radius: 4px;
   --m2-radius-button: 4px;
 }
-html body { background: #58c3e5; font-family: Arial, Helvetica, sans-serif; color: #333; }
+html body { background: #fff; font-family: Arial, Helvetica, sans-serif; color: #333; }
 html body button, html body input { font-family: Arial, Helvetica, sans-serif; }
 
-/* the list, the map with its downloads and text, and the panel as white panels on the blue */
-html .m2-nav, html .m2-main { background: #fff; border-radius: 10px; padding: 10px; box-sizing: border-box; }
-html .m2-info:not(.m2-over) { background: #fff; border-radius: 10px; padding: 10px 12px; box-sizing: border-box; }
-html #m2-view { border-radius: 8px; }
+/* the top bar: the blue across the whole width, white name and subtitle, 8 px down to the windows */
+html .wrapper-masthead { background: #58c3e5; }
+html .wrapper-masthead .container { width: calc(100vw / var(--zoom, 1) - 16px); }
+html .masthead { padding: 6px 0 7px; }
+html .site-name a, html .site-name a:hover { color: #fff; }
+html .site-description { color: #f0f9fd; }
+html #main { padding-top: 8px; }
+
+/* the windows 8 px from the page's edges and 8 px apart; no empty column on the right: the panel's column is
+   there only while it shows something, so the map window takes the rest */
+html .m2 { width: calc(100vw / var(--zoom, 1) - 16px); column-gap: 8px; grid-template-columns: 240px minmax(600px, 1fr) auto; }
+html .m2-info:not(.m2-over) { width: 260px; box-sizing: border-box; padding: 8px 10px; border: 1px solid #58c3e5; border-radius: 4px; }
+/* the map list in a window of its own, framed by the blue line as the map */
+html .m2-nav { border: 1px solid #58c3e5; border-radius: 4px; padding: 8px; box-sizing: border-box; }
+html #m2-title { margin-top: 12px; }
 
 /* the search: Reactome's dark teal field, white text */
-html #m2-search { background: #347c9d; color: #fff; border: 1px solid #2e7798; border-radius: 14px; padding: 5px 12px; }
+html #m2-search { background: #347c9d; color: #fff; border: 1px solid #2e7798; border-radius: 14px; padding: 5px 12px; margin-bottom: 10px; }
 html #m2-search:focus { border-color: #1d5670; }
 html #m2-search::placeholder { color: #b9e1ef; }
 
-/* the chosen map and group: the strong blue box with bold white text */
+/* the chosen map: the stronger blue with bold white text; group names in a dark blue */
 html .m2-item.m2-on { font-weight: 700; }
-html .m2-group { font-weight: 700; color: #1e6f99; }
+html .m2-group { font-weight: 700; color: #2a5f8f; }
 
-/* zoom buttons and the panel's chips in the browser's blues */
-html .m2-ctrl button { border-color: #58c3e5; color: #1e94d0; }
-html .m2-ctrl button:hover { background: #0088cc; border-color: #0088cc; color: #fff; }
-html .m2-chip { background: #b3e5fc; border-color: #b3e5fc; color: #1d4f66; }
-html .m2-chip:hover { border-color: #0088cc; color: #0088cc; }
-html .m2-card { background: #e1f4fd; border-color: #b3e5fc; }
-html .m2-card:hover { border-color: #0088cc; }
+/* zoom buttons and the panel's chips */
+html .m2-ctrl button { border-color: #58c3e5; color: #3a7fc1; }
+html .m2-ctrl button:hover { background: #5492cf; border-color: #5492cf; color: #fff; }
+html .m2-chip:hover { border-color: #5492cf; color: #5492cf; }
+html .m2-card:hover { border-color: #5492cf; }
 
-/* downloads as Reactome's tabs: white with blue text, the strong blue on hover */
+/* downloads: white with blue text and edge, the stronger blue on hover */
 html #m2-downloads > a, html #m2-downloads summary { font-weight: 700; }
-
-/* the site header on the blue, as Reactome's top bar: white name and subtitle */
-html .site-name a, html .site-name a:hover { color: #fff; }
-html .site-description { color: #e8f6fc; }
