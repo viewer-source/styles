@@ -42,6 +42,8 @@ html .m2-nav { border: 1px solid #58c3e5; border-radius: 4px; padding: 8px 8px 0
    frame adds no padding under it and its lower edge takes the list's last pixel */
 html #m2-list { margin-bottom: -1px; }
 html #m2-title { margin-top: 12px; }
+/* the download buttons 8 px under the map window, as the other gaps (the buttons bring 4 px of their own) */
+html #m2-downloads { margin-top: 4px; }
 
 /* the search: the blue of the chosen map, white text (user: not Reactome's dark teal) */
 html #m2-search { background: #1e94d0; color: #fff; border: 1px solid #1e94d0; border-radius: 14px; padding: 4px 10px; margin-bottom: 10px; }
