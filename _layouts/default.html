@@ -8,6 +8,28 @@
     <link rel="stylesheet" id="style-file" disabled />
   </head>
   <body>
+    <!-- the site header as on a published site (presentation mode, user 2026-11-08): the website's name and subtitle -->
+    <style>
+      /* the header as the smaller top bar of the next Metabolism Regulation version (name 21 px, subtitle 13 px, 12 px
+         under it), its left edge on the map list's */
+      .wrapper-masthead { margin-bottom: 0; }
+      .wrapper-masthead .container { max-width: none; width: min(100vw / var(--zoom, 1) - 32px, 2000px); padding: 0; }
+      .masthead { padding: 10px 0 0; }
+      .site-name { font-size: 21px; }
+      .site-description { font-size: 13px; }
+      @media (max-width: 940px) { .wrapper-masthead .container { width: auto; padding: 0 16px; } }
+    </style>
+    <div class="wrapper-masthead">
+      <div class="container">
+        <header class="masthead clearfix">
+          <div class="site-info">
+            <h1 class="site-name"><a href="/styles/">{{ site.name }}</a></h1>
+            <p class="site-description">{{ site.description }}</p>
+          </div>
+        </header>
+      </div>
+    </div>
+
     <div id="main" role="main" class="container">
       {{ content }}
     </div>
