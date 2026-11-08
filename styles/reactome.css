@@ -1,6 +1,6 @@
 /* Reactome: after the Reactome pathway browser (user, 2026-11-08). White ground; the sky blue (#58c3e5) only as the
    top bar and the thin lines between the windows; the chosen map in the stronger blue of Reactome's active tab
-   (#1e94d0, as in its newer screenshot); a dark teal search field; Arial. Little room between the windows, so the map window is wider. The maps
+   (#1e94d0, as in its newer screenshot); the search field in the same blue as the chosen map; Arial. Little room between the windows, so the map window is wider. The maps
    stay on white. */
 :root {
   --m2-accent: #1e94d0;
@@ -38,10 +38,10 @@ html .m2-info:not(.m2-over) { width: 260px; box-sizing: border-box; padding: 8px
 html .m2-nav { border: 1px solid #58c3e5; border-radius: 4px; padding: 8px; box-sizing: border-box; }
 html #m2-title { margin-top: 12px; }
 
-/* the search: Reactome's dark teal field, white text */
-html #m2-search { background: #347c9d; color: #fff; border: 1px solid #2e7798; border-radius: 14px; padding: 5px 12px; margin-bottom: 10px; }
-html #m2-search:focus { border-color: #1d5670; }
-html #m2-search::placeholder { color: #b9e1ef; }
+/* the search: the blue of the chosen map, white text (user: not Reactome's dark teal) */
+html #m2-search { background: #1e94d0; color: #fff; border: 1px solid #1e94d0; border-radius: 14px; padding: 5px 12px; margin-bottom: 10px; }
+html #m2-search:focus { border-color: #1780b5; }
+html #m2-search::placeholder { color: #d6edf8; }
 
 /* the chosen map: the stronger blue with bold white text; group names in a dark blue */
 html .m2-item.m2-on { font-weight: 700; }
