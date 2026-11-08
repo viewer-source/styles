@@ -2,6 +2,7 @@
 # whose maps it shows: baseurl stays "" so the viewer reads /index.json, /atlas-data/ and /data/ of the demo.
 name: Styles
 description: "The viewer in other looks"
+header: Viewer Source   # the name in the site header (user, 2026-11-09)
 url: https://viewer-source.github.io
 baseurl: ""
 defaults:
