@@ -1,9 +1,9 @@
 /* Reactome: after the Reactome pathway browser (user, 2026-11-08). White ground; the sky blue (#58c3e5) only as the
    top bar and the thin lines between the windows; the chosen map in the stronger blue of Reactome's active tab
-   (#5492cf); a dark teal search field; Arial. Little room between the windows, so the map window is wider. The maps
+   (#1e94d0, as in its newer screenshot); a dark teal search field; Arial. Little room between the windows, so the map window is wider. The maps
    stay on white. */
 :root {
-  --m2-accent: #5492cf;
+  --m2-accent: #1e94d0;
   --m2-on-accent: #fff;
   --m2-link: #1572b6;
   --m2-text: #333;
@@ -49,10 +49,14 @@ html .m2-group { font-weight: 700; color: #2a5f8f; }
 
 /* zoom buttons and the panel's chips */
 html .m2-ctrl button { border-color: #58c3e5; color: #3a7fc1; }
-html .m2-ctrl button:hover { background: #5492cf; border-color: #5492cf; color: #fff; }
-html .m2-chip:hover { border-color: #5492cf; color: #5492cf; }
-html .m2-card:hover { border-color: #5492cf; }
+html .m2-ctrl button:hover { background: #1e94d0; border-color: #1e94d0; color: #fff; }
+html .m2-chip:hover { border-color: #1e94d0; color: #1e94d0; }
+html .m2-card:hover { border-color: #1e94d0; }
 
 /* downloads as Reactome's tabs: the sky blue with white text, the stronger blue on hover and while a menu is open */
 html #m2-downloads > a, html #m2-downloads summary { font-weight: 700; background: #58c3e5; border-color: #58c3e5; color: #fff; }
-html #m2-downloads > a:hover, html #m2-downloads summary:hover, html #m2-downloads details[open] summary { background: #5492cf; border-color: #5492cf; color: #fff; }
+html #m2-downloads > a:hover, html #m2-downloads summary:hover, html #m2-downloads details[open] summary { background: #1e94d0; border-color: #1e94d0; color: #fff; }
+
+/* the style picker on the top bar as Reactome's top-bar buttons: white edge and text on the blue */
+html #sp-chip { background: transparent; border-color: #fff; color: #fff; }
+html #sp-chip:hover, html #sp.sp-open #sp-chip { background: #1e94d0; border-color: #fff; color: #fff; }
