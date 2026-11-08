@@ -7,6 +7,11 @@ where needed, a few rules. [ and ] step through the styles; the address keeps th
   /* the chip at the size of the download buttons (user, 2026-11-09), the rows as the map list */
   .masthead { position: relative; }
   #sp { position: absolute; right: 0; top: 50%; transform: translateY(-50%); z-index: 10; cursor: auto; }
+  /* phones (the header centred, 640 px as the site's own break): the chip under the subtitle, centred, its menu under it */
+  @media screen and (max-width: 640px) {
+    #sp { position: relative; right: auto; top: auto; transform: none; display: flex; justify-content: center; margin: 8px 0 2px; }
+    #sp-menu { right: auto; left: 50%; transform: translateX(-50%); }
+  }
   #sp-chip { font-size: 14px; line-height: 20px; padding: 4px 10px; color: var(--m2-muted); background: var(--m2-control-bg);
              border: 1px solid var(--m2-line); border-radius: var(--m2-radius-button); cursor: pointer; }
   #sp-chip:hover, #sp.sp-open #sp-chip { border-color: var(--m2-accent); color: var(--m2-accent); }
