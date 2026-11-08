@@ -17,6 +17,7 @@
   --m2-control-bg: #fffffff0;
   --m2-radius: 4px;
   --m2-radius-button: 4px;
+  --m2-split: 8px;         /* the separator between the list and the map: the 8 px gap */
   --m2-below-view: 46px;   /* the download buttons 8 px under the map window, and 8 px from them to the bottom of the window */
 }
 html body { background: #fff; font-family: Arial, Helvetica, sans-serif; color: #333; }
@@ -32,7 +33,7 @@ html #main { padding-top: 8px; }
 
 /* the windows 8 px from the page's edges and 8 px apart; no empty column on the right: the panel's column is
    there only while it shows something, so the map window takes the rest */
-html .m2 { width: calc(100vw / var(--zoom, 1) - 16px); column-gap: 0; grid-template-columns: 240px minmax(600px, 1fr) auto; }
+html .m2 { width: calc(100vw / var(--zoom, 1) - 16px); column-gap: 0; grid-template-columns: var(--m2-list-w, 240px) minmax(600px, 1fr) auto; }
 /* the 8 px between windows as margins, so no gap stays on the right while the panel's column is empty */
 html .m2-main { margin-left: 8px; }
 html .m2-info:not(.m2-over) { margin-left: 8px; width: 260px; box-sizing: border-box; padding: 8px 10px; border: 1px solid #58c3e5; border-radius: 4px; }
