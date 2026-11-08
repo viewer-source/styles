@@ -1,7 +1,5 @@
 [
   { "id": "quiet-blue", "name": "Quiet blue", "file": null },
   { "id": "slate", "name": "Slate", "file": "slate.css" },
-  { "id": "sharp", "name": "Sharp", "file": "sharp.css" },
-  { "id": "paper", "name": "Paper", "file": "paper.css" },
   { "id": "dark", "name": "Dark", "file": "dark.css" }
 ]
