@@ -20,3 +20,4 @@ html h1, html h2, html h3, html h4 { color: #eceded; }
 html #m2-view { background: #fbfbfb; }
 html #m2-search { background: #50535a; color: #eceded; }
 html .m2-draft { background: transparent; color: #d0d2d5; border-color: #d0d2d5; }
+html #m2-zoom { color: #666; }   /* the zoom value sits on the light map window */
