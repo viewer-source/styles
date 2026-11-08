@@ -39,7 +39,7 @@ html .m2-nav { border: 1px solid #58c3e5; border-radius: 4px; padding: 8px; box-
 html #m2-title { margin-top: 12px; }
 
 /* the search: the blue of the chosen map, white text (user: not Reactome's dark teal) */
-html #m2-search { background: #1e94d0; color: #fff; border: 1px solid #1e94d0; border-radius: 14px; padding: 5px 12px; margin-bottom: 10px; }
+html #m2-search { background: #1e94d0; color: #fff; border: 1px solid #1e94d0; border-radius: 14px; padding: 4px 10px; margin-bottom: 10px; }
 html #m2-search:focus { border-color: #1780b5; }
 html #m2-search::placeholder { color: #d6edf8; }
 
@@ -54,7 +54,7 @@ html .m2-chip:hover { border-color: #1e94d0; color: #1e94d0; }
 html .m2-card:hover { border-color: #1e94d0; }
 
 /* downloads as Reactome's tabs: the sky blue with white text, the stronger blue on hover and while a menu is open */
-html #m2-downloads > a, html #m2-downloads summary { font-weight: 700; background: #58c3e5; border-color: #58c3e5; color: #fff; }
+html #m2-downloads > a, html #m2-downloads summary { background: #58c3e5; border-color: #58c3e5; color: #fff; }
 html #m2-downloads > a:hover, html #m2-downloads summary:hover, html #m2-downloads details[open] summary { background: #1e94d0; border-color: #1e94d0; color: #fff; }
 
 /* the style picker on the top bar as Reactome's top-bar buttons: white edge and text on the blue */
