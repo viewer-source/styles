@@ -2,5 +2,6 @@
   { "id": "default", "name": "Default", "file": null },
   { "id": "slate", "name": "Slate", "file": "slate.css" },
   { "id": "dark", "name": "Dark", "file": "dark.css" },
-  { "id": "reactome", "name": "Reactome", "file": "reactome.css" }
+  { "id": "reactome", "name": "Reactome", "file": "reactome.css" },
+  { "id": "minerva", "name": "MINERVA", "file": "minerva.css" }
 ]
