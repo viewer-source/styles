@@ -1,6 +1,6 @@
 /* Reactome: after the Reactome pathway browser (user, 2026-11-08). White ground; the sky blue (#58c3e5) only as the
    top bar and the thin lines between the windows; the chosen map in the stronger blue of Reactome's active tab
-   (#1e94d0, as in its newer screenshot); the search field in the same blue as the chosen map; Arial. Little room between the windows, so the map window is wider. The maps
+   (#1e94d0, as in its newer screenshot); a white search field with the blue edge; Arial. Little room between the windows, so the map window is wider. The maps
    stay on white. */
 :root {
   --m2-accent: #1e94d0;
@@ -45,10 +45,9 @@ html #m2-title { margin-top: 12px; }
 /* the download buttons 8 px under the map window, as the other gaps (the buttons bring 4 px of their own) */
 html #m2-downloads { margin-top: 4px; }
 
-/* the search: the blue of the chosen map, white text (user: not Reactome's dark teal) */
-html #m2-search { background: #1e94d0; color: #fff; border: 1px solid #1e94d0; border-radius: var(--m2-radius); padding: 4px 10px; margin-bottom: 10px; }
-html #m2-search:focus { border-color: #1780b5; }
-html #m2-search::placeholder { color: #d6edf8; }
+/* the search: quiet white with the blue edge of the windows (user, 2026-11-09), the stronger blue while typing */
+html #m2-search { border: 1px solid #58c3e5; border-radius: var(--m2-radius); margin-bottom: 10px; }
+html #m2-search:focus { border-color: #1e94d0; }
 
 /* the chosen map: the stronger blue with bold white text; group names as in the viewer (user) */
 html .m2-item.m2-on { font-weight: 700; }
