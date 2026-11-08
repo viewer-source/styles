@@ -4,20 +4,21 @@ in styles.json above it. A style is one CSS file in styles/ that redefines the v
 where needed, a few rules. [ and ] step through the styles; the address keeps the chosen one (?style=slate).
 {% endcomment %}
 <style>
-  #sp { position: absolute; left: 8px; bottom: 8px; z-index: 3; font-size: 13px; cursor: auto; }
-  #sp-chip { font: inherit; line-height: 19px; padding: 0 8px; color: var(--m2-text-soft); background: var(--m2-control-bg);
+  /* the chip as the zoom buttons, the rows as the map list: the same font (the browser's for buttons, as theirs) and sizes */
+  #sp { position: absolute; left: 8px; bottom: 8px; z-index: 3; cursor: auto; }
+  #sp-chip { font-size: 13px; height: 21px; padding: 0 8px; color: var(--m2-text-soft); background: var(--m2-control-bg);
              border: 1px solid var(--m2-line); border-radius: var(--m2-radius); cursor: pointer; }
   #sp-chip:hover, #sp.sp-open #sp-chip { border-color: var(--m2-accent); color: var(--m2-accent); }
   #sp-chip:focus { outline: none; }
   #sp-chip .sp-k { color: var(--m2-muted); }
   #sp-menu { display: none; position: absolute; left: 0; bottom: 26px; min-width: 150px; padding: 4px 0; background: var(--m2-bg);
              border: 1px solid var(--m2-line); border-radius: var(--m2-radius-button); box-shadow: 0 2px 8px rgba(0, 0, 0, .12); }
-  #sp.sp-open #sp-menu { display: block; }
-  #sp-menu button { display: block; width: 100%; text-align: left; font: inherit; line-height: 20px; padding: 3px 12px; border: 0;
+  #sp.sp-open #sp-menu { display: flex; flex-direction: column; gap: 2px; }
+  #sp-menu { padding: 4px; min-width: 140px; }
+  #sp-menu button { display: block; width: 100%; text-align: left; font-size: 14px; line-height: 18px; padding: 2px 8px; border: 0; border-radius: var(--m2-radius);
                     color: var(--m2-text-soft); background: none; cursor: pointer; }
   #sp-menu button:hover { background: var(--m2-hover); }
   #sp-menu button.sp-on { background: var(--m2-accent); color: var(--m2-on-accent); }
-  #sp-menu .sp-hint { padding: 4px 12px 2px; font-size: 11px; color: var(--m2-faint); }
 </style>
 <script>
 (function () {
@@ -25,7 +26,7 @@ where needed, a few rules. [ and ] step through the styles; the address keeps th
   var styles = [], at = 0;
   var box = document.createElement('div');
   box.id = 'sp';
-  box.innerHTML = '<div id="sp-menu"></div><button id="sp-chip" type="button"><span class="sp-k">Style:</span> <span id="sp-name"></span> ▾</button>';
+  box.innerHTML = '<div id="sp-menu"></div><button id="sp-chip" type="button" title="[ and ] step through the styles"><span class="sp-k">Style:</span> <span id="sp-name"></span> ▾</button>';
   view.appendChild(box);
   var menu = box.querySelector('#sp-menu'), name = box.querySelector('#sp-name');
   // the map window drags and zooms on pointer and wheel: the picker keeps them to itself
@@ -58,9 +59,6 @@ where needed, a few rules. [ and ] step through the styles; the address keeps th
       b.addEventListener('click', function () { choose(j); box.classList.remove('sp-open'); });
       menu.appendChild(b);
     });
-    var hint = document.createElement('div');
-    hint.className = 'sp-hint'; hint.textContent = '[ and ] to step through';
-    menu.appendChild(hint);
     var want = new URLSearchParams(location.search).get('style');
     choose(Math.max(0, list.findIndex(function (s) { return s.id === want; })));
   });
