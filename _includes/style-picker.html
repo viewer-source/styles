@@ -6,17 +6,16 @@ where needed, a few rules. [ and ] step through the styles; the address keeps th
 <style>
   /* the chip as the zoom buttons, the rows as the map list: the same font (the browser's for buttons, as theirs) and sizes */
   #sp { position: absolute; left: 8px; bottom: 8px; z-index: 3; cursor: auto; }
-  #sp-chip { font-size: 13px; height: 21px; padding: 0 8px; color: var(--m2-text-soft); background: var(--m2-control-bg);
+  #sp-chip { font-size: 13px; height: 21px; padding: 0 8px; color: var(--m2-muted); background: var(--m2-control-bg);
              border: 1px solid var(--m2-line); border-radius: var(--m2-radius); cursor: pointer; }
   #sp-chip:hover, #sp.sp-open #sp-chip { border-color: var(--m2-accent); color: var(--m2-accent); }
   #sp-chip:focus { outline: none; }
-  #sp-chip .sp-k { color: var(--m2-muted); }
   #sp-menu { display: none; position: absolute; left: 0; bottom: 26px; min-width: 150px; padding: 4px 0; background: var(--m2-bg);
              border: 1px solid var(--m2-line); border-radius: var(--m2-radius-button); box-shadow: 0 2px 8px rgba(0, 0, 0, .12); }
   #sp.sp-open #sp-menu { display: flex; flex-direction: column; gap: 2px; }
   #sp-menu { padding: 4px; min-width: 140px; }
   #sp-menu button { display: block; width: 100%; text-align: left; font-size: 14px; line-height: 18px; padding: 2px 8px; border: 0; border-radius: var(--m2-radius);
-                    color: var(--m2-text-soft); background: none; cursor: pointer; }
+                    color: var(--m2-muted); background: none; cursor: pointer; }
   #sp-menu button:hover { background: var(--m2-hover); }
   #sp-menu button.sp-on { background: var(--m2-accent); color: var(--m2-on-accent); }
 </style>
@@ -26,7 +25,7 @@ where needed, a few rules. [ and ] step through the styles; the address keeps th
   var styles = [], at = 0;
   var box = document.createElement('div');
   box.id = 'sp';
-  box.innerHTML = '<div id="sp-menu"></div><button id="sp-chip" type="button" title="[ and ] step through the styles"><span class="sp-k">Style:</span> <span id="sp-name"></span> ▾</button>';
+  box.innerHTML = '<div id="sp-menu"></div><button id="sp-chip" type="button" title="[ and ] step through the styles">Style: <span id="sp-name"></span> ▾</button>';
   view.appendChild(box);
   var menu = box.querySelector('#sp-menu'), name = box.querySelector('#sp-name');
   // the map window drags and zooms on pointer and wheel: the picker keeps them to itself
