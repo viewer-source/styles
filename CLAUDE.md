@@ -10,6 +10,9 @@ Names no private repository in files, pages, code comments or commit messages.
   kept unchanged in this experiment; every experiment is another style beside it.
 - A new style: a file in `styles/` and its line in `styles.json`. Settings on `:root` first; extra rules prefixed
   with `html ` so they win over the viewer's own rules, which come later in the page.
+- Rules for every style (user, 2026-11-09): button sizes stay as in the viewer (a style changes colours, not sizes);
+  the style chip has the size of the download buttons; the window with the map list ends where the download buttons
+  end (a style that frames the list adds no padding under it).
 - The picker (`_includes/style-picker.html`) belongs here only: no site gets it.
 - A style the user likes goes into viewer-source as a named style only when the user says so.
 - Every change is checked on the live page before it counts as done.
