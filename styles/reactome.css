@@ -65,5 +65,5 @@ html #m2-downloads > a, html #m2-downloads summary { background: #58c3e5; border
 html #m2-downloads > a:hover, html #m2-downloads summary:hover, html #m2-downloads details[open] summary { background: #1e94d0; border-color: #1e94d0; color: #fff; }
 
 /* the style picker on the top bar as Reactome's top-bar buttons: white edge and text on the blue */
-html #sp-chip { background: transparent; border-color: #fff; color: #fff; }
+html #sp-chip { background: #58c3e5; border-color: #fff; color: #fff; }
 html #sp-chip:hover, html #sp.sp-open #sp-chip { background: #1e94d0; border-color: #fff; color: #fff; }
