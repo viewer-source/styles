@@ -53,5 +53,6 @@ html .m2-ctrl button:hover { background: #5492cf; border-color: #5492cf; color: 
 html .m2-chip:hover { border-color: #5492cf; color: #5492cf; }
 html .m2-card:hover { border-color: #5492cf; }
 
-/* downloads: white with blue text and edge, the stronger blue on hover */
-html #m2-downloads > a, html #m2-downloads summary { font-weight: 700; }
+/* downloads as Reactome's tabs: the sky blue with white text, the stronger blue on hover and while a menu is open */
+html #m2-downloads > a, html #m2-downloads summary { font-weight: 700; background: #58c3e5; border-color: #58c3e5; color: #fff; }
+html #m2-downloads > a:hover, html #m2-downloads summary:hover, html #m2-downloads details[open] summary { background: #5492cf; border-color: #5492cf; color: #fff; }
