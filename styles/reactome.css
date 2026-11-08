@@ -46,7 +46,7 @@ html #m2-title { margin-top: 12px; }
 html #m2-downloads { margin-top: 4px; }
 
 /* the search: the blue of the chosen map, white text (user: not Reactome's dark teal) */
-html #m2-search { background: #1e94d0; color: #fff; border: 1px solid #1e94d0; border-radius: 14px; padding: 4px 10px; margin-bottom: 10px; }
+html #m2-search { background: #1e94d0; color: #fff; border: 1px solid #1e94d0; border-radius: var(--m2-radius); padding: 4px 10px; margin-bottom: 10px; }
 html #m2-search:focus { border-color: #1780b5; }
 html #m2-search::placeholder { color: #d6edf8; }
 
