@@ -38,7 +38,8 @@ where needed, a few rules. [ and ] step through the styles; the address keeps th
   function choose(i) {
     at = (i + styles.length) % styles.length;
     var s = styles[at];
-    if (s.file) { link.href = '/styles/styles/' + s.file; link.disabled = false; }
+    // ?v= the build time: a new build of a style is fetched at once, not after the browser's 10 minutes
+    if (s.file) { link.href = '/styles/styles/' + s.file + '?v={{ site.time | date: '%s' }}'; link.disabled = false; }
     else { link.disabled = true; link.removeAttribute('href'); }
     // a style can change sizes the viewer computes (the room under the map window): it measures again once the file is in
     if (s.file) link.onload = relayout; else relayout();
