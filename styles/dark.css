@@ -1,0 +1,21 @@
+/* Dark: a dark page and panels; the map window stays light, as the maps are drawn for a white ground */
+:root {
+  --m2-accent: #5b9bd5;
+  --m2-on-accent: #fff;
+  --m2-link: #8ab8e6;
+  --m2-text: #e6e6e6;
+  --m2-text-soft: #dcdcdc;
+  --m2-muted: #a0a0a0;
+  --m2-faint: #8a8a8a;
+  --m2-button: #b0b0b0;
+  --m2-line: #44484e;
+  --m2-frame: #44484e;
+  --m2-bg: #22252a;
+  --m2-control-bg: #22252af0;
+  --m2-hover: #2c3036;
+}
+html body { background: #17191c; color: #dcdcdc; }
+html h1, html h2, html h3, html h4 { color: #e6e6e6; }
+html #m2-view { background: #fff; }
+html #m2-search { background: #22252a; color: #e6e6e6; }
+html .m2-draft { background: transparent; color: #bbb; border-color: #bbb; }

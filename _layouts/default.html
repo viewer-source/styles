@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{{ site.name }} – {{ site.description }}</title>
+    {% include meta.html %}
+    <link rel="stylesheet" href="/styles/style.css?v={{ site.time | date: '%s' }}" />
+    <!-- the chosen style: set by the picker (style-picker.html) -->
+    <link rel="stylesheet" id="style-file" disabled />
+  </head>
+  <body>
+    <div id="main" role="main" class="container">
+      {{ content }}
+    </div>
+  </body>
+</html>

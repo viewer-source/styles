@@ -1,0 +1,18 @@
+# Styles: the viewer of viewer-source in other looks, with a style picker. Served at /styles/ beside the demo,
+# whose maps it shows: baseurl stays "" so the viewer reads /index.json, /atlas-data/ and /data/ of the demo.
+name: Styles
+description: "The viewer in other looks"
+url: https://viewer-source.github.io
+baseurl: ""
+defaults:
+  - scope:
+      path: ""
+    values:
+      noindex: true
+sass:
+  style: :expanded
+exclude:
+  - README.md
+  - CLAUDE.md
+  - VERSION
+  - update.sh

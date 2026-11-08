@@ -1,0 +1,18 @@
+/* Paper: a warm off-white page, a terracotta accent, a serif for names and text */
+:root {
+  --m2-accent: #b0532f;
+  --m2-link: #8c3b1d;
+  --m2-text: #2b2621;
+  --m2-text-soft: #2b2621;
+  --m2-muted: #6f655b;
+  --m2-faint: #93877b;
+  --m2-button: #7d7064;
+  --m2-line: #ddd3c6;
+  --m2-frame: #e2d9cc;
+  --m2-hover: #f1ebe1;
+  --m2-control-bg: #fffdf9f0;
+}
+html body { background: #fbf8f3; color: #2b2621; }
+html .m2, html .m2 button, html .m2 input { font-family: Georgia, "Times New Roman", serif; }
+html #m2-search, html .m2-info.m2-over, html .m2-card, html .m2-chip, html .m2-sq,
+html #m2-downloads > a, html #m2-downloads summary, html #m2-downloads .m2-list { background: #fffdf9; }
