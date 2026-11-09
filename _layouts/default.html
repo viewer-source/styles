@@ -3,6 +3,7 @@
   <head>
     <title>{{ site.name }} – {{ site.description }}</title>
     {% include meta.html %}
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300&display=swap" />
     <link rel="stylesheet" href="/styles/style.css?v={{ site.time | date: '%s' }}" />
     <!-- the chosen style: set by the picker (style-picker.html) -->
     <link rel="stylesheet" id="style-file" disabled />
@@ -15,7 +16,9 @@
       .wrapper-masthead { margin-bottom: 0; }
       .wrapper-masthead .container { max-width: none; width: min(100vw / var(--zoom, 1) - 32px, 2000px); padding: 0; }
       .masthead { padding: 10px 0 0; }
-      .site-name { font-size: 21px; }
+      /* the name as Reactome writes its own, in every style (user, 2026-11-09): small letters in Comfortaa (the nearest
+         free font to Reactome's wordmark), as tall as capitals were */
+      .site-name { font-family: Comfortaa, Arial, sans-serif; font-weight: 300; font-size: 28px; line-height: 28px; letter-spacing: 0; text-transform: lowercase; }
       .site-description { font-size: 13px; }
       @media (max-width: 940px) { .wrapper-masthead .container { width: auto; padding: 0 16px; } }
     </style>

@@ -1,4 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300&display=swap');
 /* Reactome: after the Reactome pathway browser (user, 2026-11-08). White ground; the sky blue (#58c3e5) only as the
    top bar and the thin lines between the windows; the chosen map in the stronger blue of Reactome's active tab
    (#1e94d0, as in its newer screenshot); a blue round search field with a white edge in the top bar; Arial. Little room between the windows, so the map window is wider. The maps
@@ -32,9 +31,6 @@ html .wrapper-masthead { background: #58c3e5; }
 html .wrapper-masthead .container { width: calc(100vw / var(--zoom, 1) - 16px); }
 html .masthead { padding: 6px 0 7px 9px; }   /* the name where the list's text starts (user) */
 html .site-name a, html .site-name a:hover { color: #fff; }
-/* the name as Reactome writes its own: small letters in a rounded font (Comfortaa, the nearest free one to its wordmark,
-   whose font Reactome does not name), as tall as capitals were (user, 2026-11-09) */
-html .site-name { font-family: Comfortaa, Arial, sans-serif; font-weight: 300; font-size: 28px; line-height: 28px; letter-spacing: 0; text-transform: lowercase; }
 html .site-description { color: #f0f9fd; }
 html #main { padding-top: 8px; }
 

@@ -31,7 +31,6 @@ html body button, html body input { font-family: Manrope, Arial, sans-serif; }
 html .wrapper-masthead { border-bottom: 1px solid #e1e0e6; }
 html .wrapper-masthead .container { width: calc(100vw / var(--zoom, 1) - 24px); }   /* the name where the list's text starts, 12 px in (user) */
 html .masthead { padding: 6px 0 7px; }
-html .site-name { letter-spacing: 0; }
 html .site-name a, html .site-name a:hover { color: #070130; }
 html #main { padding-top: 0; }
 /* the header hidden: 6 px above the map for the separator that brings it back */
