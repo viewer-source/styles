@@ -1,12 +1,13 @@
 /* Compact: the Default look with the room it wasted given to the map (user, 2026-11-09, from the Reactome and
    MINERVA experiments). Colours, fonts and sizes as Default; 8 px from the window's edges and between the windows,
    the whole width (no 2000 px limit, no empty right column: the panel's column is there only while it shows),
-   the download buttons 8 px under the map and 8 px from the bottom of the window, a lower top bar. */
+   the download buttons 8 px under the map and at the bottom of the window, the list's content 8 px inside its
+   column as in Reactome, a lower top bar. */
 :root {
   --m2-grip: #b4b4b4;   /* the three dots on the separators: the soft grey of the group chevrons (user) */
   --m2-split: 8px;
   --m2-split-h: 8px;
-  --m2-below-view: 46px;
+  --m2-below-view: 39px;   /* the download buttons 8 px under the map and at the bottom of the window (user) */
 }
 html .wrapper-masthead .container { width: calc(100vw / var(--zoom, 1) - 16px); }
 html .masthead { padding: 6px 0 7px; }
@@ -15,6 +16,8 @@ html .m2 { width: calc(100vw / var(--zoom, 1) - 16px); column-gap: 0; grid-templ
 html .m2-main { margin-left: 8px; }
 html .m2-info:not(.m2-over) { margin-left: 8px; width: 260px; }
 html #m2-search { margin-bottom: 8px; }
+/* the list's content 8 px inside its column, as in Reactome (user: not so close to the window's edge) */
+html .m2-nav { padding: 0 8px; box-sizing: border-box; }
 html #m2-downloads { margin-top: 4px; }
 @media (max-width: 940px) {
   html .m2 { width: auto; }

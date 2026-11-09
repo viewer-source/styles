@@ -1,5 +1,6 @@
 /* Slate: the blue replaced by a cool dark grey, lines a touch cooler */
 :root {
+  --m2-below-view: 45px;   /* the download buttons at the bottom of the window (user, 2026-11-09) */
   --m2-grip: var(--m2-accent);   /* the three dots on the separators (none in Default) */
   --m2-accent: #475569;
   --m2-link: #334155;
