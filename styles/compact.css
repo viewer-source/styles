@@ -14,7 +14,7 @@ html .masthead { padding: 6px 0 7px; }
 html #main { padding-top: 8px; }
 html .m2 { width: calc(100vw / var(--zoom, 1) - 16px); column-gap: 0; grid-template-columns: var(--m2-list-w, 240px) minmax(600px, 1fr) auto; }
 html .m2-main { margin-left: 8px; }
-html .m2-info:not(.m2-over) { margin-left: 8px; width: 260px; }
+html .m2-info:not(.m2-over) { margin-left: 8px; width: var(--m2-info-w, 260px); }
 html #m2-search { margin-bottom: 8px; }
 /* the list's content 8 px inside its column, as in Reactome (user: not so close to the window's edge) */
 html .m2-nav { padding: 0 8px; box-sizing: border-box; }

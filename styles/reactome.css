@@ -39,7 +39,7 @@ html #main { padding-top: 8px; }
 html .m2 { width: calc(100vw / var(--zoom, 1) - 16px); column-gap: 0; grid-template-columns: var(--m2-list-w, 240px) minmax(600px, 1fr) auto; }
 /* the 8 px between windows as margins, so no gap stays on the right while the panel's column is empty */
 html .m2-main { margin-left: 8px; }
-html .m2-info:not(.m2-over) { margin-left: 8px; width: 260px; box-sizing: border-box; padding: 8px 10px; border: 1px solid #58c3e5; border-radius: 4px; }
+html .m2-info:not(.m2-over) { margin-left: 8px; width: var(--m2-info-w, 260px); box-sizing: border-box; padding: 8px 10px; border: 1px solid #58c3e5; border-radius: 4px; }
 /* the map list in a window of its own, framed by the blue line as the map */
 html .m2-nav { border: 1px solid #58c3e5; border-radius: 4px; padding: 8px 8px 0; box-sizing: border-box; }
 /* the list window ends where the download buttons end (user, 2026-11-09): the viewer ends the list there, so the
