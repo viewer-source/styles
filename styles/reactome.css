@@ -84,5 +84,5 @@ html #sp-chip { background: #58c3e5; border-color: #fff; color: #fff; }
 html #sp-chip:hover, html #sp.sp-open #sp-chip { background: #1e94d0; border-color: #fff; color: #fff; }
 
 /* the separators' dots smaller (user: too visible), 8 px apart as the viewer's */
-html #m2-split::after { background: radial-gradient(circle, var(--m2-grip) 1px, transparent 1.3px) center / 4px 8px repeat-y; }
+html #m2-split::after, html #m2-split-r::after { background: radial-gradient(circle, var(--m2-grip) 1px, transparent 1.3px) center / 4px 8px repeat-y; }
 html #m2-split-h > div::after { background: radial-gradient(circle, var(--m2-grip-h) 1px, transparent 1.3px) center / 8px 4px repeat-x; }
