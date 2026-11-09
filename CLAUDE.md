@@ -26,3 +26,5 @@ Names no private repository in files, pages, code comments or commit messages.
 - The Compact styles (user, 2026-11-09): Compact is the master. Its rules live in `_includes/compact-base.css`; Compact,
   Compact Grey, Compact Slate and Compact Dark each include it (Jekyll front matter and `{% include compact-base.css %}`)
   and add only colours. A change to the layout or behaviour of any of them is made in `compact-base.css`, for all.
+- Reactome Fixed is the master of Reactome Fixed Blue (user, 2026-11-09), the same way: its rules in
+  `_includes/reactome-fixed-base.css`, both styles include it, Reactome Fixed Blue adds only colours.
