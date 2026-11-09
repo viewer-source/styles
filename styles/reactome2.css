@@ -92,22 +92,19 @@ html #m2-split-h > div::after { background: radial-gradient(circle, var(--m2-gri
   html .m2-info:not(.m2-over) { width: calc(var(--m2-info-w, 260px) + 8px); margin-right: -8px; padding-right: 18px; border-right: 0; border-radius: 4px 0 0 4px; }
 }
 
-/* the page as the Reactome pathway browser (user, 2026-11-09): it fits the screen and never scrolls. The list runs to
-   the screen's bottom edge, open there too (no line, no round corners at the bottom), and scrolls inside. The map
-   takes the screen down to the download buttons; the separator under it, dragged up, makes it smaller, and the map's
-   name and text come into the room it leaves, scrolling inside only when they are longer than that room */
+/* the page opens as Reactome's, the map down to the download buttons, but scrolls on to the map's name and text under
+   it, so it is never locked (user, 2026-11-09: Reactome's page that cannot move down feels claustrophobic). The top
+   bar with the search stays at the top; the list window runs down to the end of the text, open there (no line, no
+   round corners at the bottom), its list staying in sight while the page scrolls, as does the panel */
 @media (min-width: 941px) {
-  html body { height: calc(100vh / var(--zoom, 1)); overflow: hidden; display: flex; flex-direction: column; }
-  html .wrapper-masthead { flex: none; }
-  html #main { flex: 1; min-height: 0; padding-bottom: 0; margin-bottom: 0; }
-  html .m2 { height: 100%; grid-template-rows: minmax(0, 1fr); align-items: stretch; }
-  html .m2-nav { display: flex; flex-direction: column; min-height: 0; border-bottom: 0; border-radius: 0 4px 0 0; }
-  html #m2-list { flex: 1; min-height: 0; max-height: none !important; margin-bottom: 0; }
-  html .m2-main { display: flex; flex-direction: column; min-height: 0; }   /* no clipping (it left traces of the map's edge in Chrome); nothing hangs below the screen */
-  html #m2-view, html #m2-downloads { flex: none; }
-  html #m2-split { height: 100% !important; }   /* the list's separator the whole height, its dots in the middle */
-  html #m2-downloads { margin-bottom: 6px; }   /* the room under the buttons belongs to them, so the closed name and text take none */
-  html #m2-title { flex: 0 1 auto; min-height: 0; overflow: hidden; margin-top: 0; }
-  html #m2-text { flex: 1 1 0; min-height: 0; overflow-y: auto; }
-  html .m2-info:not(.m2-over) { align-self: start; }
+  html .wrapper-masthead { position: sticky; top: 0; z-index: 5; }
+  html #m2-search { position: fixed; top: 2.7px; }
+  html body.m2-head-shut #m2-search { display: none; }   /* away with the bar, as before */
+  html .m2 { align-items: stretch; }
+  html .m2-nav { border-bottom: 0; border-radius: 0 4px 0 0; }
+  html #m2-list { position: sticky; top: 52px; max-height: calc(100vh / var(--zoom, 1) - 52px) !important; margin-bottom: 0; }
+  html body.m2-head-shut #m2-list { top: 16px; max-height: calc(100vh / var(--zoom, 1) - 16px) !important; }
+  html .m2-info:not(.m2-over) { align-self: start; position: sticky; top: 44px; max-height: calc(100vh / var(--zoom, 1) - 52px); }
+  html body.m2-head-shut .m2-info:not(.m2-over) { top: 8px; max-height: calc(100vh / var(--zoom, 1) - 16px); }
+}
 }
