@@ -96,7 +96,3 @@ html .m2-group::before { margin-top: 4px; }
     -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 10px, #000 calc(100% - 10px), transparent 100%);
     mask-image: linear-gradient(to bottom, transparent 0, #000 10px, #000 calc(100% - 10px), transparent 100%); }
 }
-
-/* a second thin line under each group's name, so the name sits between two separators, no box (user, 2026-11-09):
-   7 px from each line to the name's text, about 7 px from the lower line to the first map's text */
-html .m2-group { border-bottom: 1px solid #e2e2e2; padding-bottom: 6px; margin-bottom: 2px; }
