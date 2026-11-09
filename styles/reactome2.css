@@ -107,4 +107,11 @@ html #m2-split-h > div::after { background: radial-gradient(circle, var(--m2-gri
   html .m2-info:not(.m2-over) { align-self: start; position: sticky; top: 44px; max-height: calc(100vh / var(--zoom, 1) - 52px); }
   html body.m2-head-shut .m2-info:not(.m2-over) { top: 8px; max-height: calc(100vh / var(--zoom, 1) - 16px); }
 }
+
+/* the panel on the right open to the bottom edge, as in Reactome Fixed (user, 2026-11-09): white down to the window's
+   bottom while it is in sight, no line and no round corners there, scrolling inside */
+@media (min-width: 941px) {
+  html .m2-info:not(.m2-over) { height: calc(100vh / var(--zoom, 1) - 44px); max-height: none; border-bottom: 0; border-radius: 4px 0 0 0; }
+  html body.m2-head-shut .m2-info:not(.m2-over) { height: calc(100vh / var(--zoom, 1) - 8px); max-height: none; }
+}
 }

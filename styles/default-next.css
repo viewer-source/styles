@@ -46,3 +46,10 @@ html .m2-ctrl button:hover { background: var(--m2-accent); border-color: var(--m
 /* the style button filled in the accent under the pointer and while its menu is open, white text, as the other
    buttons (user, 2026-11-09: the button selected, not its text) */
 html #sp-chip:hover, html #sp.sp-open #sp-chip { background: var(--m2-accent); border-color: var(--m2-accent); color: var(--m2-on-accent, #fff); }
+
+/* the panel on the right open to the bottom, as in Reactome Fixed (user, 2026-11-09): it runs down as far as the map
+   column (to the download buttons, the window's bottom on first view, as the list) and scrolls inside, so a long
+   annotation never makes the page longer; its own content no longer sets the height of the row */
+@media (min-width: 941px) {
+  html .m2-info:not(.m2-over) { align-self: stretch; max-height: none; contain: size; overflow-y: auto; }
+}

@@ -31,3 +31,5 @@ Names no private repository in files, pages, code comments or commit messages.
 - Default Next (user, 2026-11-09): a copy of Compact, the candidate for the next Default, with no dots on the separator
   above the map. A file of its own (`styles/default-next.css`), not including `compact-base.css`, so Compact
   experiments do not change it; a change is made to it only when the user asks for Default Next.
+  Changed on its own since (user, 2026-11-09): the panel on the right runs down as far as the map column and scrolls
+  inside, as in Reactome Fixed.
