@@ -1,6 +1,5 @@
 [
   { "id": "default-next", "name": "Default", "file": "default-next.css" },
-  { "id": "default-list", "name": "Default List", "file": "default-list.css" },
   { "id": "default-lines", "name": "Default Lines", "file": "default-lines.css" },
   { "id": "default-dark", "name": "Default Dark", "file": "default-dark.css" },
   { "id": "compact", "name": "Compact", "file": "compact.css" },
@@ -10,5 +9,6 @@
   { "id": "reactome", "name": "Reactome Fixed", "file": "reactome.css" },
   { "id": "reactome-fixed-blue", "name": "Reactome Fixed Blue", "file": "reactome-fixed-blue.css" },
   { "id": "minerva", "name": "MINERVA", "file": "minerva.css" },
-  { "id": "default", "name": "Default Version 1", "file": null }
+  { "id": "default", "name": "Default Version 1", "file": null },
+  { "id": "default-list", "name": "Default List", "file": "default-list.css" }
 ]

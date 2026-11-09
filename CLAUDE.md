@@ -58,7 +58,7 @@ Names no private repository in files, pages, code comments or commit messages.
   sight while the page scrolls). Removed the same day (user): Reactome Scroll, Default List and Default Lines keep that
   behaviour, so it was no longer needed for comparing. Default scrolls as Compact Dark: the page, the list and the
   panel move as one (user: more predictable, a feeling of control), the list and the panel still scroll inside.
-- Default List (user, 2026-11-09): Default Next for experiments with the map list. A file of its own
+- Default List (user, 2026-11-09): Default Next for experiments with the map list, last in the picker (after Default Version 1, user 2026-11-09). A file of its own
   (`styles/default-list.css`, a copy of Default Next with its rules at the end): the list flat, group names as
   headings, their maps flush under them with no indent (the indent wasted room for long names); each group's name
   under a thin light grey line, at 15 px (maps 14), half bold: Semibold (600) in the system font (San Francisco, Segoe UI), as Helvetica
