@@ -24,11 +24,7 @@ html .m2-main { margin-left: 8px; }
 html .m2-list-shut .m2-main { margin-left: 0; }
 /* the panel 10 px from the map window, as the search field and the list on the left (user, 2026-11-09: 8 px too little, 16 px too much); the separator in the middle of that room */
 html .m2-info:not(.m2-over) { margin-left: 10px; width: var(--m2-info-w, 240px); }
-/* the search in the top bar, its left edge where the map window starts, as in the Reactome styles, narrower (240 px, user 2026-11-09: saves the room on the left, not as wide as Reactome); it follows the list's separator and stays when the list is out of sight; on narrow windows back above the list */
-html #m2-search { position: absolute; z-index: 3; top: -41.4px; left: max(calc(var(--m2-list-w, 240px) + 8px), 110px); width: 240px; margin: 0; }
-html .m2-list-shut .m2-nav { display: block; visibility: hidden; }
-html .m2-list-shut #m2-search { visibility: visible; }
-@media (max-width: 940px) { html #m2-search { position: static; width: 100%; margin-bottom: 8px; } }
+html #m2-search { margin-bottom: 8px; }   /* above the list (user, 2026-11-09: back for now, after a try in the top bar) */
 /* the list's content 12 px from the window's edge, as in MINERVA (user) */
 html .m2-nav { padding: 0 4px; box-sizing: border-box; }
 html #m2-downloads { margin-top: 4px; }
