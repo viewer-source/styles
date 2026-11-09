@@ -57,7 +57,8 @@ Names no private repository in files, pages, code comments or commit messages.
   under a thin light grey line, at 15 px (maps 14), half bold: Semibold (600) in the system font (San Francisco, Segoe UI), as Helvetica
   Neue's Medium looked almost regular on the Mac; 6 px above the line and under it, under the
   name the same space as between two maps (user, 2026-11-09: chosen from option sheets: white
-  rectangle, then line above; 14 to 17 px; bold too heavy). The list fades at its bottom edge too, as under the search.
+  rectangle, then line above; 14 to 17 px; bold too heavy). The list fades at its bottom edge too, as under the search. A second line under each
+  group's name: the name between two separators, no box.
 - Default Lines (user, 2026-11-09): Default Next with MINERVA's separators: the map without frame or gaps, one thin
   line under the top bar, between the list and the map, between the map and the panel. A file of its own
   (`styles/default-lines.css`, a copy of Default Next with those rules at its end). No dots: a separator's line turns
