@@ -33,7 +33,8 @@ Names no private repository in files, pages, code comments or commit messages.
 - Reactome Fixed is the master of Reactome Fixed Blue (user, 2026-11-09), the same way: its rules in
   `_includes/reactome-fixed-base.css`, both styles include it, Reactome Fixed Blue adds only colours.
 - Default Next (user, 2026-11-09): a copy of Compact, the candidate for the next Default, with no dots on the separator
-  above the map. A file of its own (`styles/default-next.css`), not including `compact-base.css`, so Compact
+  above the map, and since 2026-11-09 none on any separator (user: knowing the areas drag is enough, the dots are
+  noisy; the resize pointer shows them). A file of its own (`styles/default-next.css`), not including `compact-base.css`, so Compact
   experiments do not change it; a change is made to it only when the user asks for Default Next.
   Changed on its own since (user, 2026-11-09): the page's length is set by the map column alone (map, name, description,
   references); the list on the left and the panel on the right scroll inside, stay in sight while the page scrolls and

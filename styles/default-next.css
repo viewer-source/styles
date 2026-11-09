@@ -3,11 +3,13 @@
 ---
 /* Default Next (user, 2026-11-09): a copy of Compact as it stood on 2026-11-09, the candidate for the next Default,
    kept apart from compact-base.css so later Compact experiments do not change it. The one difference: no dots on the
-   separator above the map (it still works: drag up to hide the header, click to bring it back), as in Default. */
+   separator above the map (it still works: drag up to hide the header, click to bring it back), as in Default.
+   No dots on any separator since (user, 2026-11-09: knowing the areas can be dragged is enough, the dots are noisy);
+   the pointer turning into resize arrows over them shows where. */
 :root {
-  --m2-grip: #b4b4b4;   /* the three dots on the separators: the soft grey of the group chevrons (user) */
+  --m2-grip: transparent;   /* no dots on the separators beside the list and the panel (user, 2026-11-09) */
   --m2-grip-t: transparent;   /* no dots above the map (user, 2026-11-09), the separator still works */
-  --m2-grip-h: #b4b4b4; /* and under the map window (user, 2026-11-09) */
+  --m2-grip-h: transparent; /* nor under the map window (user, 2026-11-09) */
   --m2-separator-below: 1; /* that separator on: dragged up the map gets smaller, dragged down past the buttons the map goes to the bottom edge */
   --m2-split-t: 8px;
   --m2-split: 8px;
