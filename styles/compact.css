@@ -14,13 +14,14 @@
 html .wrapper-masthead .container { width: calc(100vw / var(--zoom, 1) - 16px); }
 html .masthead { padding: 6px 0 7px 4px; }   /* the name where the list's text starts (user) */
 html #main { padding-top: 8px; }
-html .m2 { width: calc(100vw / var(--zoom, 1) - 16px); column-gap: 0; grid-template-columns: var(--m2-list-w, 240px) minmax(600px, 1fr) calc(var(--m2-info-w, 240px) + 8px); }
+html .m2 { width: calc(100vw / var(--zoom, 1) - 16px); column-gap: 0; grid-template-columns: var(--m2-list-w, 240px) minmax(600px, 1fr) calc(var(--m2-info-w, 240px) + 16px); }
 /* the right column kept for the panel as in Default, empty until a molecule is chosen (user); dragged shut, it goes */
 html .m2.m2-info-shut { grid-template-columns: var(--m2-list-w, 240px) minmax(600px, 1fr) 0; }
 html .m2-main { margin-left: 8px; }
 /* the list out of sight: the map 8 px from the window's edge, as on the other sides, the separator in that strip */
 html .m2-list-shut .m2-main { margin-left: 0; }
-html .m2-info:not(.m2-over) { margin-left: 8px; width: var(--m2-info-w, 240px); }
+/* the panel 16 px from the map window, more room than the 8 px elsewhere (user, 2026-11-09: too little room to breathe); the separator stays in the middle of that room */
+html .m2-info:not(.m2-over) { margin-left: 16px; width: var(--m2-info-w, 240px); }
 html #m2-search { margin-bottom: 8px; }
 /* the list's content 12 px from the window's edge, as in MINERVA (user) */
 html .m2-nav { padding: 0 4px; box-sizing: border-box; }
