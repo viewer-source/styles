@@ -77,9 +77,10 @@ html .m2-group { font-weight: 700; padding-left: 5px; }
 html .m2-item.m2-sub { margin-left: 0; width: 100%; }
 html .m2-empty { margin-left: 0; }
 
-/* each group's name in a rectangle, a light grey band across the list, and more room above it, so the groups read as
+/* each group's name in a rectangle across the list, white inside with a light grey edge (user, 2026-11-09: grey fill
+   not liked, the rectangle kept), and more room above it, so the groups read as
    separate blocks (user, 2026-11-09: the flat list ran together); the name's text still where the maps' text starts
    (1 px edge, 4 px padding), the arrow inside the band */
-html .m2-group { background: #f2f2f2; border: 1px solid #e2e2e2; border-radius: var(--m2-radius); padding: 3px 6px 3px 4px; margin: 14px 0 4px; }
+html .m2-group { background: #fff; border: 1px solid #e2e2e2; border-radius: var(--m2-radius); padding: 3px 6px 3px 4px; margin: 14px 0 4px; }
 html .m2-group:first-child { margin-top: 0; }
-html .m2-group:hover { background: #ebebeb; }
+html .m2-group:hover { background: #fff; }
