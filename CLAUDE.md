@@ -40,4 +40,6 @@ Names no private repository in files, pages, code comments or commit messages.
   stop 8 px before its end, so a list of thousands of maps never makes the page endless.
 - Default Lines (user, 2026-11-09): Default Next with MINERVA's separators: the map without frame or gaps, one thin
   line under the top bar, between the list and the map, between the map and the panel. A file of its own
-  (`styles/default-lines.css`, a copy of Default Next with those rules at its end).
+  (`styles/default-lines.css`, a copy of Default Next with those rules at its end). No dots: a separator's line turns
+  blue and 2 px wide under the pointer. Kept for comparison only (user, 2026-11-09: split into pieces, "squarey",
+  instead of a viewer window in the middle; not the direction taken).
