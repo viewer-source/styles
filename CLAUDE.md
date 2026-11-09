@@ -28,7 +28,10 @@ Names no private repository in files, pages, code comments or commit messages.
   and 8 px under the map where the style's gaps are 8 px (`--m2-below-view`). Not 0: buttons on the window's edge look
   cut off (a misreading of 2026-11-09, corrected the same day).
 - The picker (`_includes/style-picker.html`) belongs here only: no site gets it. Its button is the same in every style,
-  Default Version 1 included (user, 2026-11-09): filled in the style's accent under the pointer and while open, white text.
+  Default Version 1 included (user, 2026-11-09): filled in the style's accent under the pointer and while open, white text. A style
+  whose own buttons are filled (Reactome, MINERVA) shows the chip as those buttons, filled, and a darker fill under the
+  pointer and while open (user, 2026-11-09): a highlight is a strong fill as the page's buttons have it, never a light
+  tint or coloured text that appears nowhere else on the page.
 - A style the user likes goes into viewer-source as a named style only when the user says so.
 - Every change is checked on the live page before it counts as done.
 - The Compact styles (user, 2026-11-09): Compact is the master. Its rules live in `_includes/compact-base.css`; Compact,
