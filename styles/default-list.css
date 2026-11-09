@@ -34,6 +34,7 @@ html .m2-info:not(.m2-over) { margin-left: 10px; width: var(--m2-info-w, 240px);
 html #m2-search { margin-bottom: 8px; }   /* above the list (user, 2026-11-09: back for now, after a try in the top bar) */
 /* the list's content 12 px from the window's edge, as in MINERVA (user) */
 html .m2-nav { padding: 0 4px; box-sizing: border-box; }
+@media (max-width: 940px) { html .m2-nav { padding: 0; } }   /* narrow windows: the search and the list in line with the map (user, 2026-11-09) */
 html #m2-downloads { margin-top: 4px; }
 @media (max-width: 940px) {
   html .m2 { width: auto; }
