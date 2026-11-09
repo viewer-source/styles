@@ -54,7 +54,7 @@ html #m2-search:focus { border-color: #106ad7; background: #fff; }
 
 /* the search in the top bar, its left edge where the map window starts (user, 2026-11-09); it follows the list's
    separator, and stays when the list is out of sight. On narrow windows back above the list. */
-html #m2-search { position: absolute; z-index: 3; top: -35.7px; left: max(var(--m2-list-w, 240px), 100px); width: 320px; margin: 0; }   /* never over the name */
+html #m2-search { position: absolute; z-index: 3; top: -35.7px; left: calc(max(var(--m2-list-w, 240px), 100px) + 10px); width: 320px; margin: 0; }   /* never over the name; 10 px right of the list's line, not on it (user, 2026-11-09) */
 html .m2-list-shut .m2-nav { display: block; visibility: hidden; }
 html .m2-list-shut #m2-search { visibility: visible; }
 @media (max-width: 940px) { html #m2-search { position: static; width: 100%; margin-bottom: 8px; } }
