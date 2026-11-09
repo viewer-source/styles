@@ -1,13 +1,13 @@
 /* Compact: the Default look with the room it wasted given to the map (user, 2026-11-09, from the Reactome and
    MINERVA experiments). Colours, fonts and sizes as Default; 8 px from the window's edges and between the windows,
    the whole width (no 2000 px limit, no empty right column: the panel's column is there only while it shows),
-   the download buttons 8 px under the map and at the bottom of the window, the list's content 8 px inside its
+   the download buttons 8 px under the map and 8 px above the window's bottom, the list's content 8 px inside its
    column as in Reactome, a lower top bar. */
 :root {
   --m2-grip: #b4b4b4;   /* the three dots on the separators: the soft grey of the group chevrons (user) */
   --m2-split: 8px;
   --m2-split-h: 8px;
-  --m2-below-view: 39px;   /* the download buttons 8 px under the map and at the bottom of the window (user) */
+  --m2-below-view: 46px;   /* the download buttons 8 px under the map and 8 px above the window's bottom (user) */
 }
 html .wrapper-masthead .container { width: calc(100vw / var(--zoom, 1) - 16px); }
 html .masthead { padding: 6px 0 7px 4px; }   /* the name where the list's text starts (user) */
