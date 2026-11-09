@@ -3,7 +3,7 @@
   { "id": "compact", "name": "Compact", "file": "compact.css" },
   { "id": "slate", "name": "Slate", "file": "slate.css" },
   { "id": "dark", "name": "Dark", "file": "dark.css" },
-  { "id": "reactome", "name": "Reactome 1", "file": "reactome.css" },
-  { "id": "reactome2", "name": "Reactome 2", "file": "reactome2.css" },
+  { "id": "reactome", "name": "Reactome Fixed", "file": "reactome.css" },
+  { "id": "reactome2", "name": "Reactome Scroll", "file": "reactome2.css" },
   { "id": "minerva", "name": "MINERVA", "file": "minerva.css" }
 ]
