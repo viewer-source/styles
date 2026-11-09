@@ -1,12 +1,10 @@
-/* Reactome 2: Reactome adjusted further (user, 2026-11-09): no frames around the list and the panel, the search
-   field at the top of the list's column across its whole width. The rest as Reactome:
-   after the Reactome pathway browser (user, 2026-11-08). White ground; the sky blue (#58c3e5) only as the
+/* Reactome 2: an exact copy of Reactome (user, 2026-11-09), to be changed on its own from here. Reactome: after the Reactome pathway browser (user, 2026-11-08). White ground; the sky blue (#58c3e5) only as the
    top bar and the thin lines between the windows; the chosen map in the stronger blue of Reactome's active tab
    (#1e94d0, as in its newer screenshot); a round search field in the bar's sky blue with a white edge; Arial. Little room between the windows, so the map window is wider. The maps
    stay on white. */
 :root {
   --m2-grip: var(--m2-accent);   /* the three dots on the separators (none in Default) */
-  --m2-grip-h: var(--m2-accent); /* and under the map window: kept here only (user, 2026-11-09) */
+  --m2-grip-h: var(--m2-accent); /* and under the map window, when that separator is on again */
   --m2-accent: #1e94d0;
   --m2-on-accent: #fff;
   --m2-link: #1572b6;
@@ -31,7 +29,7 @@ html body button, html body input { font-family: Arial, Helvetica, sans-serif; }
 /* the top bar: the blue across the whole width, white name and subtitle, 8 px down to the windows */
 html .wrapper-masthead { background: #58c3e5; }
 html .wrapper-masthead .container { width: calc(100vw / var(--zoom, 1) - 16px); }
-html .masthead { padding: 6px 0 7px 8px; }   /* the name where the list's text starts (user) */
+html .masthead { padding: 6px 0 7px 9px; }   /* the name where the list's text starts (user) */
 html .site-name a, html .site-name a:hover { color: #fff; }
 html .site-description { color: #f0f9fd; }
 html #main { padding-top: 8px; }
@@ -41,11 +39,12 @@ html #main { padding-top: 8px; }
 html .m2 { width: calc(100vw / var(--zoom, 1) - 16px); column-gap: 0; grid-template-columns: var(--m2-list-w, 240px) minmax(600px, 1fr) auto; }
 /* the 8 px between windows as margins, so no gap stays on the right while the panel's column is empty */
 html .m2-main { margin-left: 8px; }
-html .m2-info:not(.m2-over) { margin-left: 8px; width: var(--m2-info-w, 260px); box-sizing: border-box; padding: 0 2px; }
+html .m2-info:not(.m2-over) { margin-left: 8px; width: var(--m2-info-w, 260px); box-sizing: border-box; padding: 8px 10px; border: 1px solid #58c3e5; border-radius: 4px; }
 /* the map list in a window of its own, framed by the blue line as the map */
-html .m2-nav { box-sizing: border-box; }
-/* the list's rows 8 px in, the search field above them across the column */
-html #m2-list { padding-left: 8px; }
+html .m2-nav { border: 1px solid #58c3e5; border-radius: 4px; padding: 8px 8px 0; box-sizing: border-box; }
+/* the list window ends where the download buttons end (user, 2026-11-09): the viewer ends the list there, so the
+   frame adds no padding under it and its lower edge takes the list's last pixel */
+html #m2-list { margin-bottom: -1px; }
 html #m2-title { margin-top: 12px; }
 /* the download buttons 8 px under the map window, as the other gaps (the buttons bring 4 px of their own) */
 html #m2-downloads { margin-top: 4px; }
