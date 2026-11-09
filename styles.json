@@ -5,8 +5,6 @@
   { "id": "dark", "name": "Dark", "file": "dark.css" },
   { "id": "reactome", "name": "Reactome Fixed", "file": "reactome.css" },
   { "id": "reactome-fixed-blue", "name": "Reactome Fixed Blue", "file": "reactome-fixed-blue.css" },
-  { "id": "reactome-fixed-cm25", "name": "Reactome Fixed cm25", "file": "reactome-fixed-cm25.css" },
-  { "id": "reactome-fixed-cp45", "name": "Reactome Fixed cp45", "file": "reactome-fixed-cp45.css" },
   { "id": "reactome2", "name": "Reactome Scroll", "file": "reactome2.css" },
   { "id": "minerva", "name": "MINERVA", "file": "minerva.css" }
 ]
