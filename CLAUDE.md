@@ -6,7 +6,8 @@ Names no private repository in files, pages, code comments or commit messages.
 
 - The viewer is a copy, never edited here: `sh update.sh <clone of viewer-source.github.io>`, VERSION names the
   commit. A change the viewer needs (a new setting) is made in viewer-source first, then copied.
-- Default Version 1 (named Default until 2026-11-09, user: kept for comparing later; address with no `?style=`): the
+- Default Version 1 (named Default until 2026-11-09, user: kept for comparing later; last in the picker,
+  `?style=default`, since Default Next became Default and took the first place and the address with no `?style=`): the
   first style, the viewer as it is in viewer-source, with no style file. When viewer-source takes a new default look
   (Default Next, if the user says), Default Version 1 first gets a style file of its own that keeps today's look, so it
   stays comparable. Done another way (2026-11-09, when viewer-source took Default Next): the page includes the viewer
@@ -26,7 +27,8 @@ Names no private repository in files, pages, code comments or commit messages.
   download buttons are 8 px above the bottom of the window, the same distance as the windows from the window's edges,
   and 8 px under the map where the style's gaps are 8 px (`--m2-below-view`). Not 0: buttons on the window's edge look
   cut off (a misreading of 2026-11-09, corrected the same day).
-- The picker (`_includes/style-picker.html`) belongs here only: no site gets it.
+- The picker (`_includes/style-picker.html`) belongs here only: no site gets it. Its button is the same in every style,
+  Default Version 1 included (user, 2026-11-09): filled in the style's accent under the pointer and while open, white text.
 - A style the user likes goes into viewer-source as a named style only when the user says so.
 - Every change is checked on the live page before it counts as done.
 - The Compact styles (user, 2026-11-09): Compact is the master. Its rules live in `_includes/compact-base.css`; Compact,
