@@ -49,7 +49,7 @@ html #m2-split { left: -4px; }
 
 /* the search: MINERVA's grey round field in the white top bar (user, 2026-11-09, from a MINERVA screenshot), white
    with the blue edge while typing */
-html #m2-search { background: #eeeeee; border: 1px solid #eeeeee; border-radius: 999px; padding: 4px 12px; margin-bottom: 12px; }
+html #m2-search { background: #f7f7f8; border: 1px solid #f7f7f8; border-radius: 999px; padding: 4px 12px; margin-bottom: 12px; }   /* the light grey of MINERVA 22's search field (user, 2026-11-09: #eee too dark; #f7f7f7 measured on the user's screenshot) */
 html #m2-search:focus { border-color: #106ad7; background: #fff; }
 
 /* the search in the top bar, its left edge where the map window starts (user, 2026-11-09); it follows the list's
