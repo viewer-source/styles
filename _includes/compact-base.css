@@ -43,3 +43,7 @@ html #m2-split-h > div::after { background: radial-gradient(circle, var(--m2-gri
 
 /* the zoom buttons over the map filled in the accent under the pointer, white sign, as in the Reactome styles (user, 2026-11-09) */
 html .m2-ctrl button:hover { background: var(--m2-accent); border-color: var(--m2-accent); color: var(--m2-on-accent, #fff); }
+
+/* the style button filled in the accent under the pointer and while its menu is open, white text, as the other
+   buttons (user, 2026-11-09: the button selected, not its text) */
+html #sp-chip:hover, html #sp.sp-open #sp-chip { background: var(--m2-accent); border-color: var(--m2-accent); color: var(--m2-on-accent, #fff); }
