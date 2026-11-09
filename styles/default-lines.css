@@ -90,3 +90,14 @@ html .m2:has(.m2-info:not(.m2-over):not(:empty)):not(.m2-info-shut) .m2-main { b
 
 /* no dots on the separators (user, 2026-11-09): the lines are grabbed and moved as they are */
 :root { --m2-grip: transparent; --m2-grip-h: transparent; --m2-grip-t: transparent; }
+
+/* the separators found by pointing at them (user, 2026-11-09: without dots not intuitive): under the pointer, and
+   while dragged, the line turns the accent blue and 2 px wide, as in code editors and design tools; the one under
+   the map shows its line the same way in its gap. With the list out of sight its separator sits inside the window,
+   its whole 8 px to grab (it was half outside: 4 px left) */
+html .m2-list-shut #m2-split { left: 0; }
+html #m2-split, html #m2-split-r, html #m2-split-h > div, html #m2-split-t { transition: background-color 0s; }
+html #m2-split:hover, html #m2-split-r:hover, html body.m2-splitting #m2-split:hover {
+  background: linear-gradient(90deg, transparent calc(50% - 1px), var(--m2-accent) calc(50% - 1px), var(--m2-accent) calc(50% + 1px), transparent calc(50% + 1px)); }
+html #m2-split-h > div:hover, html #m2-split-t:hover {
+  background: linear-gradient(180deg, transparent calc(50% - 1px), var(--m2-accent) calc(50% - 1px), var(--m2-accent) calc(50% + 1px), transparent calc(50% + 1px)); }
