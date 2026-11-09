@@ -54,9 +54,9 @@ Names no private repository in files, pages, code comments or commit messages.
   `_includes/default-base.css`, `styles/default-next.css` (Default) and `styles/default-dark.css` include it, Default Dark
   adds only colours. A change to Default's layout or behaviour is made in `default-base.css`, for both; Default List and
   Default Lines stay copies of their own.
-- Default Pinned (user, 2026-11-09): Default as it was before it took Compact Dark's scrolling, kept for comparing
-  (`styles/default-pinned.css`, second in the picker): the list with its search and the panel pinned in sight while the
-  page scrolls, the page as long as the map column. Default since scrolls as Compact Dark: the page, the list and the
+- Default Pinned (user, 2026-11-09): Default as it was before it took Compact Dark's scrolling (list and panel pinned in
+  sight while the page scrolls). Removed the same day (user): Reactome Scroll, Default List and Default Lines keep that
+  behaviour, so it was no longer needed for comparing. Default scrolls as Compact Dark: the page, the list and the
   panel move as one (user: more predictable, a feeling of control), the list and the panel still scroll inside.
 - Default List (user, 2026-11-09): Default Next for experiments with the map list. A file of its own
   (`styles/default-list.css`, a copy of Default Next with its rules at the end): the list flat, group names as
