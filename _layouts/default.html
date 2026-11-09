@@ -20,6 +20,10 @@
          free font to Reactome's wordmark), as tall as capitals were */
       .site-name { font-family: Comfortaa, Arial, sans-serif; font-weight: 300; font-size: 28px; line-height: 28px; letter-spacing: 0; text-transform: lowercase; }
       .site-name a, .site-name a:hover { color: #666; }   /* lighter on white (user: Comfortaa has no weight under 300) */
+      /* lighter than 300, Comfortaa's lightest (user, 2026-11-09: "250?"): a hair of stroke in the header's background
+         colour takes about half the step from 300 to 400 off each letter (measured: ink 1427 at 300, 1732 at 400, 1288
+         at 300 with this stroke); styles on another background set the stroke's colour to theirs */
+      .site-name a { -webkit-text-stroke: 0.12px #fff; }
       .site-description { font-size: 13px; }
       @media (max-width: 940px) { .wrapper-masthead .container { width: auto; padding: 0 16px; } }
     </style>

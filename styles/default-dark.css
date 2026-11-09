@@ -26,6 +26,7 @@ html #m2-search { background: #50535a; color: #eceded; }
 html .m2-draft { background: transparent; color: #d0d2d5; border-color: #d0d2d5; }
 html #m2-zoom { color: #666; }   /* the zoom value sits on the white map window */
 html .site-name a { color: #eceded; }
+html .site-name a { -webkit-text-stroke-color: #46494f; }   /* the thinning stroke in this header's background */
 html .site-description { color: #c0c2c5; }
 /* the zoom buttons sit on the white map window: light as in Compact Dark (white, grey edge, dark sign); the accent fill
    under the pointer stays */

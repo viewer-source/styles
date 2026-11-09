@@ -34,6 +34,7 @@ html .wrapper-masthead { background: #58c3e5; }
 html .wrapper-masthead .container { width: calc(100vw / var(--zoom, 1) - 16px); }
 html .masthead { padding: 6px 0 7px 9px; }   /* the name where the list's text starts (user) */
 html .site-name a, html .site-name a:hover { color: #fff; }
+html .site-name a { -webkit-text-stroke-color: #58c3e5; }   /* the thinning stroke in this header's background */
 html .site-description { color: #f0f9fd; }
 html #main { padding-top: 8px; }
 
