@@ -3,6 +3,7 @@
   { "id": "default-pinned", "name": "Default Pinned", "file": "default-pinned.css" },
   { "id": "default-list", "name": "Default List", "file": "default-list.css" },
   { "id": "default-lines", "name": "Default Lines", "file": "default-lines.css" },
+  { "id": "default-dark", "name": "Default Dark", "file": "default-dark.css" },
   { "id": "compact", "name": "Compact", "file": "compact.css" },
   { "id": "compact-grey", "name": "Compact Grey", "file": "compact-grey.css" },
   { "id": "compact-slate", "name": "Compact Slate", "file": "compact-slate.css" },

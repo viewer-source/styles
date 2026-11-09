@@ -47,6 +47,11 @@ Names no private repository in files, pages, code comments or commit messages.
   Changed on its own since (user, 2026-11-09): the page's length is set by the map column alone (map, name, description,
   references); the list on the left and the panel on the right scroll inside, stay in sight while the page scrolls and
   stop 8 px before its end, so a list of thousands of maps never makes the page endless.
+- Default Dark (user, 2026-11-09): Default in Compact Dark's colours (mid grey page, white map window, light zoom
+  buttons). Default is its master, as Compact is of the Compact styles: Default's rules live in
+  `_includes/default-base.css`, `styles/default-next.css` (Default) and `styles/default-dark.css` include it, Default Dark
+  adds only colours. A change to Default's layout or behaviour is made in `default-base.css`, for both; Default List and
+  Default Lines stay copies of their own.
 - Default Pinned (user, 2026-11-09): Default as it was before it took Compact Dark's scrolling, kept for comparing
   (`styles/default-pinned.css`, second in the picker): the list with its search and the panel pinned in sight while the
   page scrolls, the page as long as the map column. Default since scrolls as Compact Dark: the page, the list and the
