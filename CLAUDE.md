@@ -28,3 +28,6 @@ Names no private repository in files, pages, code comments or commit messages.
   and add only colours. A change to the layout or behaviour of any of them is made in `compact-base.css`, for all.
 - Reactome Fixed is the master of Reactome Fixed Blue (user, 2026-11-09), the same way: its rules in
   `_includes/reactome-fixed-base.css`, both styles include it, Reactome Fixed Blue adds only colours.
+- Default Next (user, 2026-11-09): a copy of Compact, the candidate for the next Default, with no dots on the separator
+  above the map. A file of its own (`styles/default-next.css`), not including `compact-base.css`, so Compact
+  experiments do not change it; a change is made to it only when the user asks for Default Next.
