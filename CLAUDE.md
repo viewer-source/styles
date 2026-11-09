@@ -32,5 +32,5 @@ Names no private repository in files, pages, code comments or commit messages.
   above the map. A file of its own (`styles/default-next.css`), not including `compact-base.css`, so Compact
   experiments do not change it; a change is made to it only when the user asks for Default Next.
   Changed on its own since (user, 2026-11-09): the page's length is set by the map column alone (map, name, description,
-  references); the list on the left and the panel on the right end where it ends and scroll inside, so a list of
-  thousands of maps never makes the page endless.
+  references); the list on the left and the panel on the right scroll inside, stay in sight while the page scrolls and
+  stop 8 px before its end, so a list of thousands of maps never makes the page endless.
