@@ -32,7 +32,7 @@ html body button, html body input { font-family: Arial, Helvetica, sans-serif; }
 /* the top bar: the blue across the whole width, white name and subtitle, 8 px down to the windows */
 html .wrapper-masthead { background: #58c3e5; }
 html .wrapper-masthead .container { width: calc(100vw / var(--zoom, 1) - 16px); }
-html .masthead { padding: 6px 0 7px; }
+html .masthead { padding: 6px 0 7px 8px; }   /* the name where the list's text starts (user) */
 html .site-name a, html .site-name a:hover { color: #fff; }
 /* the name as Reactome writes its own: small letters in a rounded font (Comfortaa, the nearest free one to its wordmark,
    whose font Reactome does not name), as tall as capitals were (user, 2026-11-09) */

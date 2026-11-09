@@ -10,14 +10,14 @@
   --m2-below-view: 39px;   /* the download buttons 8 px under the map and at the bottom of the window (user) */
 }
 html .wrapper-masthead .container { width: calc(100vw / var(--zoom, 1) - 16px); }
-html .masthead { padding: 6px 0 7px; }
+html .masthead { padding: 6px 0 7px 4px; }   /* the name where the list's text starts (user) */
 html #main { padding-top: 8px; }
 html .m2 { width: calc(100vw / var(--zoom, 1) - 16px); column-gap: 0; grid-template-columns: var(--m2-list-w, 240px) minmax(600px, 1fr) auto; }
 html .m2-main { margin-left: 8px; }
 html .m2-info:not(.m2-over) { margin-left: 8px; width: var(--m2-info-w, 260px); }
 html #m2-search { margin-bottom: 8px; }
-/* the list's content 8 px inside its column, as in Reactome (user: not so close to the window's edge) */
-html .m2-nav { padding: 0 8px; box-sizing: border-box; }
+/* the list's content 12 px from the window's edge, as in MINERVA (user) */
+html .m2-nav { padding: 0 4px; box-sizing: border-box; }
 html #m2-downloads { margin-top: 4px; }
 @media (max-width: 940px) {
   html .m2 { width: auto; }

@@ -28,7 +28,7 @@ html body button, html body input { font-family: Manrope, Arial, sans-serif; }
 
 /* the top bar: white, a line under it, the name at the left */
 html .wrapper-masthead { border-bottom: 1px solid #e1e0e6; }
-html .wrapper-masthead .container { width: calc(100vw / var(--zoom, 1) - 32px); }
+html .wrapper-masthead .container { width: calc(100vw / var(--zoom, 1) - 24px); }   /* the name where the list's text starts, 12 px in (user) */
 html .masthead { padding: 6px 0 7px; }
 html .site-name { letter-spacing: 0; }
 html .site-name a, html .site-name a:hover { color: #070130; }

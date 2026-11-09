@@ -1,8 +1,6 @@
-/* Dark, soft: a mid grey page, so the light map window in the middle does not glare (the maps are drawn for
+/* Dark: Default in dark colours, nothing else changed (user, 2026-11-09). Soft: a mid grey page, so the light map window in the middle does not glare (the maps are drawn for
    a white ground, so the window stays light) */
 :root {
-  --m2-below-view: 45px;   /* the download buttons at the bottom of the window (user, 2026-11-09) */
-  --m2-grip: var(--m2-accent);   /* the three dots on the separators (none in Default) */
   --m2-accent: #7aa9d8;
   --m2-on-accent: #fff;
   --m2-link: #a8cbee;
