@@ -34,6 +34,8 @@ html .masthead { padding: 6px 0 7px; }
 html .site-name { letter-spacing: 0; }
 html .site-name a, html .site-name a:hover { color: #070130; }
 html #main { padding-top: 0; }
+/* the header hidden: 6 px above the map for the separator that brings it back */
+html body.m2-head-shut #main { padding-top: 6px; }
 
 /* the whole width, no gaps: the list as a sidebar, the map, the panel, each joined by one line */
 html .m2 { width: calc(100vw / var(--zoom, 1)); column-gap: 0; grid-template-columns: var(--m2-list-w, 240px) minmax(600px, 1fr) auto; }
