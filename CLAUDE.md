@@ -48,7 +48,7 @@ Names no private repository in files, pages, code comments or commit messages.
   references); the list on the left and the panel on the right scroll inside, stay in sight while the page scrolls and
   stop 8 px before its end, so a list of thousands of maps never makes the page endless.
 - Default's fade at the list's top edge under the search: removed (user, 2026-11-09: the items looked faded when
-  switching), brought back the same day once the list kept the item above the chosen map in sight.
+  switching), brought back the same day once the list kept the item above the chosen map in sight, and at the bottom edge too.
 - Default Dark (user, 2026-11-09): Default in Compact Dark's colours (mid grey page, white map window, light zoom
   buttons). Default is its master, as Compact is of the Compact styles: Default's rules live in
   `_includes/default-base.css`, `styles/default-next.css` (Default) and `styles/default-dark.css` include it, Default Dark
