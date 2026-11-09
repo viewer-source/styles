@@ -87,3 +87,6 @@ html .m2:has(.m2-info:not(.m2-over):not(:empty)):not(.m2-info-shut) .m2-main { b
   html .m2-nav { border-right: 0; padding-bottom: 12px; }
   html .m2-info:not(.m2-over) { width: auto; }
 }
+
+/* no dots on the separators (user, 2026-11-09): the lines are grabbed and moved as they are */
+:root { --m2-grip: transparent; --m2-grip-h: transparent; --m2-grip-t: transparent; }
