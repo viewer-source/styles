@@ -9,7 +9,9 @@ Names no private repository in files, pages, code comments or commit messages.
 - Default Version 1 (named Default until 2026-11-09, user: kept for comparing later; address with no `?style=`): the
   first style, the viewer as it is in viewer-source, with no style file. When viewer-source takes a new default look
   (Default Next, if the user says), Default Version 1 first gets a style file of its own that keeps today's look, so it
-  stays comparable.
+  stays comparable. Done another way (2026-11-09, when viewer-source took Default Next): the page includes the viewer
+  with `look="version1"`, which leaves Default Next's block out, so Default Version 1 and every style here keep the
+  base they were made on, with no style file.
 - Default (user, 2026-11-08): the first style is the viewer as it is in viewer-source, with no style file. It is
   kept unchanged in this experiment; every experiment is another style beside it. Default's look never changes with
   the experiment (user, 2026-11-09: "default is default so we could compare"; "visuals should not change but useful
@@ -32,7 +34,8 @@ Names no private repository in files, pages, code comments or commit messages.
   and add only colours. A change to the layout or behaviour of any of them is made in `compact-base.css`, for all.
 - Reactome Fixed is the master of Reactome Fixed Blue (user, 2026-11-09), the same way: its rules in
   `_includes/reactome-fixed-base.css`, both styles include it, Reactome Fixed Blue adds only colours.
-- Default Next (user, 2026-11-09): a copy of Compact, the candidate for the next Default, with no dots on the separator
+- Default Next, named Default in the picker since it became viewer-source's look (user, 2026-11-09; address
+  `?style=default-next` kept): a copy of Compact, the candidate for the next Default, with no dots on the separator
   above the map, and since 2026-11-09 none on any separator (user: knowing the areas drag is enough, the dots are
   noisy; the resize pointer shows them). A file of its own (`styles/default-next.css`), not including `compact-base.css`, so Compact
   experiments do not change it; a change is made to it only when the user asks for Default Next.
