@@ -82,7 +82,9 @@ html .m2-empty { margin-left: 0; }
    chosen from nine options; bold looked smaller than the maps, 15 px chosen from 14 to 17; bold too heavy, half bold).
    Half bold is Semibold (600) in the system font (San Francisco on a Mac, Segoe UI on Windows): Helvetica Neue, the
    page's font, has Medium (500), almost no bolder than regular on the user's Mac, and no Semibold (600 shows Bold).
-   The name's text still where the maps' text starts (5 px), the arrow on the name's line */
-html .m2-group { font-family: -apple-system, BlinkMacSystemFont, system-ui, "Segoe UI", sans-serif; font-size: 15px; font-weight: 600; border-top: 1px solid #e2e2e2; padding: 10px 6px 3px 5px; margin: 14px 0 4px; }
+   The name's text still where the maps' text starts (5 px), the arrow on the name's line.
+   Spacing (user, 2026-11-09): under the name the same as between two maps (3 px as a map's 1 px edge and 2 px
+   padding, then the list's 2 px gap); above the line 6 px, under it 6 px, in place of 14 and 10 */
+html .m2-group { font-family: -apple-system, BlinkMacSystemFont, system-ui, "Segoe UI", sans-serif; font-size: 15px; font-weight: 600; border-top: 1px solid #e2e2e2; padding: 6px 6px 3px 5px; margin: 6px 0 0; }
 html .m2-group:first-child { margin-top: 0; border-top: 0; padding-top: 3px; }
 html .m2-group::before { margin-top: 4px; }

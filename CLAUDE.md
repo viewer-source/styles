@@ -55,7 +55,8 @@ Names no private repository in files, pages, code comments or commit messages.
   (`styles/default-list.css`, a copy of Default Next with its rules at the end): the list flat, group names as
   headings, their maps flush under them with no indent (the indent wasted room for long names); each group's name
   under a thin light grey line, at 15 px (maps 14), half bold: Semibold (600) in the system font (San Francisco, Segoe UI), as Helvetica
-  Neue's Medium looked almost regular on the Mac; 14 px room above (user, 2026-11-09: chosen from option sheets: white
+  Neue's Medium looked almost regular on the Mac; 6 px above the line and under it, under the
+  name the same space as between two maps (user, 2026-11-09: chosen from option sheets: white
   rectangle, then line above; 14 to 17 px; bold too heavy).
 - Default Lines (user, 2026-11-09): Default Next with MINERVA's separators: the map without frame or gaps, one thin
   line under the top bar, between the list and the map, between the map and the panel. A file of its own
