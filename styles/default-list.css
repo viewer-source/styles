@@ -72,7 +72,7 @@ html #sp-chip:hover, html #sp.sp-open #sp-chip { background: var(--m2-accent); b
 }
 
 /* Default List (user, 2026-11-09): the list flat, groups in bold as headings, maps flush under them (no indent);
-   the group's text starts where the maps' text does (the 4 px inside a map's box) */
-html .m2-group { font-weight: 700; padding-left: 4px; }
+   the group's text starts where the maps' text does (a map box's 1 px border and 4 px padding) */
+html .m2-group { font-weight: 700; padding-left: 5px; }
 html .m2-item.m2-sub { margin-left: 0; width: 100%; }
 html .m2-empty { margin-left: 0; }
