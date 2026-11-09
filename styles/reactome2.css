@@ -1,4 +1,4 @@
-/* Reactome 2: an exact copy of Reactome 1 (user, 2026-11-09), to be changed on its own from here. Reactome: after the Reactome pathway browser (user, 2026-11-08). White ground; the sky blue (#58c3e5) only as the
+/* Reactome 2: an exact copy of Reactome 1 (user, 2026-11-09, copied again after Reactome 1's open edges), to be changed on its own from here. Reactome 1: after the Reactome pathway browser (user, 2026-11-08). White ground; the sky blue (#58c3e5) only as the
    top bar and the thin lines between the windows; the chosen map in the stronger blue of Reactome's active tab
    (#1e94d0, as in its newer screenshot); a round search field in the bar's sky blue with a white edge; Arial. Little room between the windows, so the map window is wider. The maps
    stay on white. */
@@ -82,3 +82,11 @@ html #sp-chip:hover, html #sp.sp-open #sp-chip { background: #1e94d0; border-col
 /* the separators' dots smaller (user: too visible), 8 px apart as the viewer's */
 html #m2-split::after, html #m2-split-r::after { background: radial-gradient(circle, var(--m2-grip) 1px, transparent 1.3px) center / 4px 8px repeat-y; }
 html #m2-split-h > div::after { background: radial-gradient(circle, var(--m2-grip-h) 1px, transparent 1.3px) center / 8px 4px repeat-x; }
+
+/* the list and the panel open to the window's edges, as in the Reactome pathway browser (user, 2026-11-09): the list
+   window runs to the left edge with no line there and round corners only on the right, the panel runs to the right
+   edge with round corners only on the left; the text inside stays where it was, the map window keeps its width */
+@media (min-width: 941px) {
+  html .m2-nav { margin-left: -8px; padding-left: 16px; border-left: 0; border-radius: 0 4px 4px 0; }
+  html .m2-info:not(.m2-over) { width: calc(var(--m2-info-w, 260px) + 8px); margin-right: -8px; padding-right: 18px; border-right: 0; border-radius: 4px 0 0 4px; }
+}
