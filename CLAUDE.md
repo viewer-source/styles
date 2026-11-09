@@ -47,6 +47,10 @@ Names no private repository in files, pages, code comments or commit messages.
   Changed on its own since (user, 2026-11-09): the page's length is set by the map column alone (map, name, description,
   references); the list on the left and the panel on the right scroll inside, stay in sight while the page scrolls and
   stop 8 px before its end, so a list of thousands of maps never makes the page endless.
+- Default Pinned (user, 2026-11-09): Default as it was before it took Compact Dark's scrolling, kept for comparing
+  (`styles/default-pinned.css`, second in the picker): the list with its search and the panel pinned in sight while the
+  page scrolls, the page as long as the map column. Default since scrolls as Compact Dark: the page, the list and the
+  panel move as one (user: more predictable, a feeling of control), the list and the panel still scroll inside.
 - Default List (user, 2026-11-09): Default Next for experiments with the map list. A file of its own
   (`styles/default-list.css`, a copy of Default Next with its rules at the end): the list flat, group names in bold as
   headings, their maps flush under them with no indent (the indent wasted room for long names); each group's name in a white
