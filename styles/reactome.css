@@ -4,6 +4,7 @@
    stay on white. */
 :root {
   --m2-grip: var(--m2-accent);   /* the three dots on the separators (none in Default) */
+  --m2-grip-h: var(--m2-accent); /* and under the map window: kept here only (user, 2026-11-09) */
   --m2-accent: #1e94d0;
   --m2-on-accent: #fff;
   --m2-link: #1572b6;
