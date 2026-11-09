@@ -3,6 +3,7 @@
    (#1e94d0, as in its newer screenshot); a white search field with the blue edge; Arial. Little room between the windows, so the map window is wider. The maps
    stay on white. */
 :root {
+  --m2-grip: var(--m2-accent);   /* the three dots on the separators (none in Default) */
   --m2-accent: #1e94d0;
   --m2-on-accent: #fff;
   --m2-link: #1572b6;

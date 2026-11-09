@@ -2,7 +2,7 @@
    tailwind.config.ts). No room wasted: the map has no frame and runs to the page's right edge, the list is a light
    grey sidebar joined to it by one line, the panel opens joined on the right; white bar on top with a line under it;
    blue #106ad7 filled buttons, light blue #ebf4ff for the chosen map; zoom buttons float round over the map;
-   a grey round search field; Manrope. The maps stay on white. */
+   a white round search field; Manrope. The maps stay on white. */
 @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;600&display=swap');
 :root {
   --m2-accent: #106ad7;
@@ -21,7 +21,7 @@
   --m2-radius-button: 6px;
   --m2-split: 8px;         /* the separators sit on the joins: 8 px to grab */
   --m2-split-h: 8px;
-  --m2-below-view: 46px;   /* the download buttons 8 px under the map, 8 px from the bottom of the window */
+  --m2-below-view: 39px;   /* the download buttons 8 px under the map and at the bottom of the window: no room left under them (user) */
 }
 html body { background: #fff; font-family: Manrope, Arial, sans-serif; color: #070130; }
 html body button, html body input { font-family: Manrope, Arial, sans-serif; }
@@ -30,7 +30,7 @@ html body button, html body input { font-family: Manrope, Arial, sans-serif; }
 html .wrapper-masthead { border-bottom: 1px solid #e1e0e6; }
 html .wrapper-masthead .container { width: calc(100vw / var(--zoom, 1) - 32px); }
 html .masthead { padding: 6px 0 7px; }
-html .site-name { font-weight: 600; letter-spacing: 0; }
+html .site-name { letter-spacing: 0; }
 html .site-name a, html .site-name a:hover { color: #070130; }
 html #main { padding-top: 0; }
 
@@ -45,9 +45,9 @@ html #m2-downloads { margin-top: 4px; }
 /* the separator between list and map sits on the sidebar's line */
 html #m2-split { left: -4px; }
 
-/* the search: MINERVA's grey round field */
-html #m2-search { background: #eeeeee; border: 1px solid #eeeeee; border-radius: 999px; padding: 4px 12px; margin-bottom: 12px; }
-html #m2-search:focus { border-color: #106ad7; background: #fff; }
+/* the search: a white round field (user: not darker than the sidebar) */
+html #m2-search { background: #fff; border: 1px solid #e1e0e6; border-radius: 999px; padding: 4px 12px; margin-bottom: 12px; }
+html #m2-search:focus { border-color: #106ad7; }
 html #m2-search::placeholder { color: #6a6977; }
 
 /* the chosen map as MINERVA's open tab: light blue, blue text */

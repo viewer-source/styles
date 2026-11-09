@@ -7,7 +7,10 @@ Names no private repository in files, pages, code comments or commit messages.
 - The viewer is a copy, never edited here: `sh update.sh <clone of viewer-source.github.io>`, VERSION names the
   commit. A change the viewer needs (a new setting) is made in viewer-source first, then copied.
 - Default (user, 2026-11-08): the first style is the viewer as it is in viewer-source, with no style file. It is
-  kept unchanged in this experiment; every experiment is another style beside it.
+  kept unchanged in this experiment; every experiment is another style beside it. Default's look never changes with
+  the experiment (user, 2026-11-09: "default is default so we could compare"; "visuals should not change but useful
+  functionalities stay"): a behaviour the user keeps goes into viewer-source for every style, its look (the dots on
+  the separators) is a setting a style turns on.
 - A new style: a file in `styles/` and its line in `styles.json`. Settings on `:root` first; extra rules prefixed
   with `html ` so they win over the viewer's own rules, which come later in the page.
 - Rules for every style (user, 2026-11-09): button sizes stay as in the viewer (a style changes colours, not sizes);
