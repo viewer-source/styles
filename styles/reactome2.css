@@ -114,7 +114,6 @@ html #m2-split-h > div::after { background: radial-gradient(circle, var(--m2-gri
   html .m2-info:not(.m2-over) { height: calc(100vh / var(--zoom, 1) - 44px); max-height: none; border-bottom: 0; border-radius: 4px 0 0 0; }
   html body.m2-head-shut .m2-info:not(.m2-over) { height: calc(100vh / var(--zoom, 1) - 8px); max-height: none; }
 }
-}
 
 /* no rubber-band pull at the page's top and end (user, 2026-11-09: pulled quickly on a Mac, the page moved down and
    the search, fixed to the window, stayed behind); the page stops at its edges */
