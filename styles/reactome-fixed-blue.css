@@ -133,11 +133,3 @@ html #m2-title:empty { padding-bottom: 0; }
 @media (min-width: 941px) {
   html .m2-info:not(.m2-over) { align-self: stretch; max-height: none; border-bottom: 0; border-radius: 4px 0 0 0; }
 }
-/* the room at the top used (user, 2026-11-09): the top bar and the ground are one blue, so the 8 px gap under the
-   bar showed as a wide blue band; the windows start right under the bar's own 7 px, the search moves up with them
-   to stay in the bar's middle, and the separator above the map takes those 7 px. With the header hidden the 8 px
-   come back, so the windows keep their distance from the screen's top edge */
-html #main { padding-top: 0; }
-html #m2-search { top: -33.4px; }
-:root { --m2-split-t: 7px; }
-html body.m2-head-shut #main { padding-top: 8px; }
