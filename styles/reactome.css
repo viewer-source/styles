@@ -103,10 +103,11 @@ html #m2-split-h > div::after { background: radial-gradient(circle, var(--m2-gri
   html .m2 { height: 100%; grid-template-rows: minmax(0, 1fr); align-items: stretch; }
   html .m2-nav { display: flex; flex-direction: column; min-height: 0; border-bottom: 0; border-radius: 0 4px 0 0; }
   html #m2-list { flex: 1; min-height: 0; max-height: none !important; margin-bottom: 0; }
-  html .m2-main { display: flex; flex-direction: column; min-height: 0; overflow-x: visible; overflow-y: clip; }   /* cut only at the bottom: the list's separator sits just outside it on the left */
+  html .m2-main { display: flex; flex-direction: column; min-height: 0; }   /* no clipping (it left traces of the map's edge in Chrome); nothing hangs below the screen */
   html #m2-view, html #m2-downloads { flex: none; }
   html #m2-split { height: 100% !important; }   /* the list's separator the whole height, its dots in the middle */
-  html #m2-title { flex: 0 1 auto; min-height: 0; overflow: hidden; }
+  html #m2-downloads { margin-bottom: 6px; }   /* the room under the buttons belongs to them, so the closed name and text take none */
+  html #m2-title { flex: 0 1 auto; min-height: 0; overflow: hidden; margin-top: 0; }
   html #m2-text { flex: 1 1 0; min-height: 0; overflow-y: auto; padding-bottom: 8px; }
   html .m2-info:not(.m2-over) { align-self: start; }
 }
