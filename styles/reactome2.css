@@ -100,9 +100,9 @@ html #m2-split-h > div::after { background: radial-gradient(circle, var(--m2-gri
   html .wrapper-masthead { position: sticky; top: 0; z-index: 5; }
   html #m2-search { position: fixed; top: 2.7px; }
   html body.m2-head-shut #m2-search { display: none; }   /* away with the bar, as before */
-  html .m2 { align-items: stretch; }
+  html .m2 { align-items: stretch; transform: none; left: calc(50% - 50vw / var(--zoom, 1) + 8px); }   /* centred without a transform, which would carry the search away with the page */
   html .m2-nav { border-bottom: 0; border-radius: 0 4px 0 0; }
-  html #m2-list { position: sticky; top: 52px; max-height: calc(100vh / var(--zoom, 1) - 52px) !important; margin-bottom: 0; }
+  html #m2-list { box-sizing: border-box; position: sticky; top: 52px; max-height: calc(100vh / var(--zoom, 1) - 52px) !important; margin-bottom: 0; }
   html body.m2-head-shut #m2-list { top: 16px; max-height: calc(100vh / var(--zoom, 1) - 16px) !important; }
   html .m2-info:not(.m2-over) { align-self: start; position: sticky; top: 44px; max-height: calc(100vh / var(--zoom, 1) - 52px); }
   html body.m2-head-shut .m2-info:not(.m2-over) { top: 8px; max-height: calc(100vh / var(--zoom, 1) - 16px); }
