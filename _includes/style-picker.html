@@ -12,7 +12,7 @@ where needed, a few rules. [ and ] step through the styles; the address keeps th
     #sp { position: relative; right: auto; top: auto; transform: none; display: flex; justify-content: center; margin: 8px 0 2px; }
     #sp-menu { right: auto; left: 50%; transform: translateX(-50%); }
   }
-  /* one width in every style (user, 2026-11-09): the longest name fits ("Style: Reactome 2" when there was one); a longer name needs more;
+  /* one width in every style (user, 2026-11-09): the longest name fits ("Style: Reactome 2"); a longer name needs more;
      its text to the left in every style and on phones (user, 2026-11-09) */
   #sp-chip { width: 152px; box-sizing: border-box; white-space: nowrap; overflow: hidden; text-align: left; font-size: 14px; line-height: 20px; padding: 4px 10px; color: var(--m2-muted); background: var(--m2-control-bg);
              border: 1px solid var(--m2-line); border-radius: var(--m2-radius-button); cursor: pointer; }
@@ -68,7 +68,6 @@ where needed, a few rules. [ and ] step through the styles; the address keeps th
       menu.appendChild(b);
     });
     var want = new URLSearchParams(location.search).get('style');
-    if (want === 'reactome2') want = 'reactome';   // Reactome 2 became Reactome (user, 2026-11-09)
     choose(Math.max(0, list.findIndex(function (s) { return s.id === want; })));
   });
 })();
