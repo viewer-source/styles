@@ -3,7 +3,7 @@
    the whole width (no 2000 px limit, no empty right column: the panel's column is there only while it shows),
    the download buttons 8 px under the map and 8 px from the bottom of the window, a lower top bar. */
 :root {
-  --m2-grip: var(--m2-accent);   /* the three dots on the separators (none in Default) */
+  --m2-grip: #b4b4b4;   /* the three dots on the separators: the soft grey of the group chevrons (user) */
   --m2-split: 8px;
   --m2-split-h: 8px;
   --m2-below-view: 46px;
