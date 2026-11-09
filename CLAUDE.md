@@ -6,6 +6,10 @@ Names no private repository in files, pages, code comments or commit messages.
 
 - The viewer is a copy, never edited here: `sh update.sh <clone of viewer-source.github.io>`, VERSION names the
   commit. A change the viewer needs (a new setting) is made in viewer-source first, then copied.
+- Default Version 1 (named Default until 2026-11-09, user: kept for comparing later; address with no `?style=`): the
+  first style, the viewer as it is in viewer-source, with no style file. When viewer-source takes a new default look
+  (Default Next, if the user says), Default Version 1 first gets a style file of its own that keeps today's look, so it
+  stays comparable.
 - Default (user, 2026-11-08): the first style is the viewer as it is in viewer-source, with no style file. It is
   kept unchanged in this experiment; every experiment is another style beside it. Default's look never changes with
   the experiment (user, 2026-11-09: "default is default so we could compare"; "visuals should not change but useful
