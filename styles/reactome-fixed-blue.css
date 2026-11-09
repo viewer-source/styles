@@ -1,4 +1,4 @@
-/* Reactome Fixed Blue (user, 2026-11-09): an exact copy of Reactome Fixed, then the page's ground between the windows in tw6, Tailwind's slate 500 #64748b (user: the sky blue too bright), the windows white on it; the map's name and text in a white window of their own (user); the rules at the end. Reactome Fixed:
+/* Reactome Fixed Blue (user, 2026-11-09): an exact copy of Reactome Fixed, then the page's ground between the windows in Reactome's sky blue #58c3e5, as in the Reactome pathway browser (user, 2026-11-09: tw6 slate #64748b first, then "blue as it is in actual Reactome"), the windows white on it; the map's name and text in a white window of their own (user); the rules at the end. Reactome Fixed:
 Reactome Fixed (named Reactome, then Reactome 1, until 2026-11-09; user: the page fits the window and never scrolls, beside Reactome Scroll): after the Reactome pathway browser (user, 2026-11-08). White ground; the sky blue (#58c3e5) only as the
    top bar and the thin lines between the windows; the chosen map in the stronger blue of Reactome's active tab
    (#1e94d0, as in its newer screenshot); a round search field in the bar's sky blue with a white edge; Arial. Little room between the windows, so the map window is wider. The maps
@@ -114,16 +114,17 @@ html #m2-split-h > div::after { background: radial-gradient(circle, var(--m2-gri
 }
 
 /* Blue (user, 2026-11-09: "apply blue to intermediate (page background) spaces, the text with description then
-   appears in white window"): the ground in tw6, Tailwind's slate 500 (user: "too bright for me, use tw6 colour", for
-   the top bar's sky blue first tried); every window white on it (the list, the map, the panel, the map's name and text) */
-html body { background: #64748b; }
+   appears in white window"): the ground in Reactome's sky blue #58c3e5, the one of the top bar, as measured on the
+   Reactome pathway browser (user: "blue as it is in actual Reactome"; tw6 slate #64748b before); every window white
+   on it (the list, the map, the panel, the map's name and text) */
+html body { background: #58c3e5; }
 html .m2-nav, html .m2-info:not(.m2-over) { background: #fff; }
 /* the map's name and text in one white window under the download buttons, round at the corners as the others */
 /* framed by the sky-blue line as the list and the map; open at the bottom edge as the list */
 html #m2-title { background: #fff; padding: 8px 10px 0; border: 1px solid #58c3e5; border-bottom: 0; border-radius: 4px 4px 0 0; }
 html #m2-text { background: #fff; padding: 0 10px 8px; border: 1px solid #58c3e5; border-top: 0; border-bottom: 0; border-radius: 0; }
 html #m2-title:empty { padding-bottom: 0; }
-/* the download buttons white with blue text on the slate ground; the stronger blue under the pointer as before */
+/* the download buttons white with blue text on the blue ground; the stronger blue under the pointer as before */
 html #m2-downloads > a, html #m2-downloads summary { background: #fff; border-color: #fff; color: #1e94d0; }
-/* the separators' dots white on the slate */
+/* the separators' dots white on the blue */
 :root { --m2-grip: #fff; --m2-grip-h: #fff; }
