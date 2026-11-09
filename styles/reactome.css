@@ -111,3 +111,9 @@ html #m2-split-h > div::after { background: radial-gradient(circle, var(--m2-gri
   html #m2-text { flex: 1 1 0; min-height: 0; overflow-y: auto; }
   html .m2-info:not(.m2-over) { align-self: start; }
 }
+
+/* the panel on the right open to the bottom edge too, as the list (user, 2026-11-09): white down to the screen's
+   bottom, no line and no round corners there, scrolling inside */
+@media (min-width: 941px) {
+  html .m2-info:not(.m2-over) { align-self: stretch; max-height: none; border-bottom: 0; border-radius: 4px 0 0 0; }
+}
