@@ -98,7 +98,7 @@ html #m2-split-h > div::after { background: radial-gradient(circle, var(--m2-gri
    round corners at the bottom), its list staying in sight while the page scrolls, as does the panel */
 @media (min-width: 941px) {
   html .wrapper-masthead { position: sticky; top: 0; z-index: 5; }
-  html #m2-search { position: fixed; top: 2.7px; }
+  html #m2-search { position: fixed; top: 2.7px; left: max(calc(var(--m2-list-w, 240px) + 16px), 118px); }   /* from the window's edge now: where the map window starts, as before */
   html body.m2-head-shut #m2-search { display: none; }   /* away with the bar, as before */
   html .m2 { align-items: stretch; transform: none; left: calc(50% - 50vw / var(--zoom, 1) + 8px); }   /* centred without a transform, which would carry the search away with the page */
   html .m2-nav { border-bottom: 0; border-radius: 0 4px 0 0; }
