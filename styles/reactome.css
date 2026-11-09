@@ -4,7 +4,8 @@
    stay on white. */
 :root {
   --m2-grip: var(--m2-accent);   /* the three dots on the separators (none in Default) */
-  --m2-grip-h: var(--m2-accent); /* and under the map window, when that separator is on again */
+  --m2-grip-h: var(--m2-accent); /* and under the map window */
+  --m2-separator-below: 1;       /* the separator under the map window on: dragged up it makes the map smaller (user, 2026-11-09) */
   --m2-accent: #1e94d0;
   --m2-on-accent: #fff;
   --m2-link: #1572b6;
@@ -89,4 +90,23 @@ html #m2-split-h > div::after { background: radial-gradient(circle, var(--m2-gri
 @media (min-width: 941px) {
   html .m2-nav { margin-left: -8px; padding-left: 16px; border-left: 0; border-radius: 0 4px 4px 0; }
   html .m2-info:not(.m2-over) { width: calc(var(--m2-info-w, 260px) + 8px); margin-right: -8px; padding-right: 18px; border-right: 0; border-radius: 4px 0 0 4px; }
+}
+
+/* the page as the Reactome pathway browser (user, 2026-11-09): it fits the screen and never scrolls. The list runs to
+   the screen's bottom edge, open there too (no line, no round corners at the bottom), and scrolls inside. The map
+   takes the screen down to the download buttons; the separator under it, dragged up, makes it smaller, and the map's
+   name and text come into the room it leaves, scrolling inside only when they are longer than that room */
+@media (min-width: 941px) {
+  html body { height: calc(100vh / var(--zoom, 1)); overflow: hidden; display: flex; flex-direction: column; }
+  html .wrapper-masthead { flex: none; }
+  html #main { flex: 1; min-height: 0; padding-bottom: 0; margin-bottom: 0; }
+  html .m2 { height: 100%; grid-template-rows: minmax(0, 1fr); align-items: stretch; }
+  html .m2-nav { display: flex; flex-direction: column; min-height: 0; border-bottom: 0; border-radius: 0 4px 0 0; }
+  html #m2-list { flex: 1; min-height: 0; max-height: none !important; margin-bottom: 0; }
+  html .m2-main { display: flex; flex-direction: column; min-height: 0; overflow: hidden; }
+  html #m2-view, html #m2-downloads { flex: none; }
+  html #m2-split { height: 100% !important; }   /* the list's separator the whole height, its dots in the middle */
+  html #m2-title { flex: 0 1 auto; min-height: 0; overflow: hidden; }
+  html #m2-text { flex: 1 1 0; min-height: 0; overflow-y: auto; padding-bottom: 8px; }
+  html .m2-info:not(.m2-over) { align-self: start; }
 }
