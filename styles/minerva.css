@@ -78,10 +78,11 @@ html .m2-chip { background: #ebf4ff; border-color: #d4e5fa; color: #106ad7; }
 html .m2-chip:hover { border-color: #106ad7; }
 html .m2-card:hover { border-color: #106ad7; }
 
-/* the style picker as the page's other buttons, the download buttons: filled blue, white text, darker blue under the
-   pointer and while open (user, 2026-11-09: no light blue highlight, which is nowhere else on the page; outlined until then) */
-html #sp-chip { background: #106ad7; border-color: #106ad7; color: #fff; }
-html #sp-chip:hover, html #sp.sp-open #sp-chip { background: #0055bb; border-color: #0055bb; color: #fff; }
+/* the style picker quiet at rest, grey as the search field beside it, almost unseen; filled blue as the download
+   buttons, white text, under the pointer and while open (user, 2026-11-09; filled at rest for an hour before, outlined
+   with a light blue highlight until then) */
+html #sp-chip { background: #f7f7f8; border-color: #f7f7f8; color: #6a6977; }
+html #sp-chip:hover, html #sp.sp-open #sp-chip { background: #106ad7; border-color: #106ad7; color: #fff; }
 
 /* narrow windows: the list above the map, no sidebar line */
 @media (max-width: 940px) {
