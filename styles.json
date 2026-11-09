@@ -4,6 +4,5 @@
   { "id": "slate", "name": "Slate", "file": "slate.css" },
   { "id": "dark", "name": "Dark", "file": "dark.css" },
   { "id": "reactome", "name": "Reactome", "file": "reactome.css" },
-  { "id": "reactome2", "name": "Reactome 2", "file": "reactome2.css" },
   { "id": "minerva", "name": "MINERVA", "file": "minerva.css" }
 ]
