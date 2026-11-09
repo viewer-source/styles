@@ -72,6 +72,6 @@ Names no private repository in files, pages, code comments or commit messages.
   (`styles/default-lines.css`, a copy of Default Next with those rules at its end). No dots, and nothing under the
   pointer (user, 2026-11-09: the blue 2 px line on hover removed, "just there by default"). The download buttons 4 px
   above the window's bottom (`--m2-below-view: 42px`, user 2026-11-09: lower), the one exception to the 8 px rule above:
-  with no frame round the map, the 8 px kept no edge in line. Taken by the expo atlas (user, 2026-11-09: "to try lines
+  with no frame round the map, the 8 px kept no edge in line. The panel on the right is as wide as the list by default, 240 px (user, 2026-11-09; was 300). Taken by the expo atlas (user, 2026-11-09: "to try lines
   for a change"). Kept for comparison only (user, 2026-11-09: split into pieces, "squarey",
   instead of a viewer window in the middle; not the direction taken).
