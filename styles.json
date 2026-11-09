@@ -1,6 +1,7 @@
 [
   { "id": "default", "name": "Default Version 1", "file": null },
   { "id": "default-next", "name": "Default Next", "file": "default-next.css" },
+  { "id": "default-lines", "name": "Default Lines", "file": "default-lines.css" },
   { "id": "compact", "name": "Compact", "file": "compact.css" },
   { "id": "compact-grey", "name": "Compact Grey", "file": "compact-grey.css" },
   { "id": "compact-slate", "name": "Compact Slate", "file": "compact-slate.css" },
