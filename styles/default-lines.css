@@ -80,7 +80,7 @@ html .m2:has(.m2-info:not(.m2-over):not(:empty)):not(.m2-info-shut) .m2-main { b
 @media (min-width: 941px) {
   html #m2-search { top: 12px; }
   html #m2-list { top: 42px; }
-  html .m2-info:not(.m2-over) { top: 0; height: calc(100vh / var(--zoom, 1) - 38px); margin-bottom: 0; }
+  html .m2-info:not(.m2-over) { top: 0; height: calc(100vh / var(--zoom, 1) - 42px); margin-bottom: 0; }   /* to the window's bottom under the top bar (42 px) */
 }
 @media (max-width: 940px) {
   html .m2 { width: auto; }
