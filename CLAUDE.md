@@ -42,6 +42,9 @@ Names no private repository in files, pages, code comments or commit messages.
   Changed on its own since (user, 2026-11-09): the page's length is set by the map column alone (map, name, description,
   references); the list on the left and the panel on the right scroll inside, stay in sight while the page scrolls and
   stop 8 px before its end, so a list of thousands of maps never makes the page endless.
+- Default List (user, 2026-11-09): Default Next for experiments with the map list. A file of its own
+  (`styles/default-list.css`, a copy of Default Next with its rules at the end): the list flat, group names in bold as
+  headings, their maps flush under them with no indent (the indent wasted room for long names).
 - Default Lines (user, 2026-11-09): Default Next with MINERVA's separators: the map without frame or gaps, one thin
   line under the top bar, between the list and the map, between the map and the panel. A file of its own
   (`styles/default-lines.css`, a copy of Default Next with those rules at its end). No dots: a separator's line turns
