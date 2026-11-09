@@ -6,8 +6,8 @@
   { "id": "compact-grey", "name": "Compact Grey", "file": "compact-grey.css" },
   { "id": "compact-slate", "name": "Compact Slate", "file": "compact-slate.css" },
   { "id": "compact-dark", "name": "Compact Dark", "file": "compact-dark.css" },
+  { "id": "reactome2", "name": "Reactome Scroll", "file": "reactome2.css" },
   { "id": "reactome", "name": "Reactome Fixed", "file": "reactome.css" },
   { "id": "reactome-fixed-blue", "name": "Reactome Fixed Blue", "file": "reactome-fixed-blue.css" },
-  { "id": "reactome2", "name": "Reactome Scroll", "file": "reactome2.css" },
   { "id": "minerva", "name": "MINERVA", "file": "minerva.css" }
 ]
