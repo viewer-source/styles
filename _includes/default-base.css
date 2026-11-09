@@ -51,7 +51,7 @@ html #sp-chip:hover, html #sp.sp-open #sp-chip { background: var(--m2-accent); b
 
 /* scrolling as in Compact Dark (user, 2026-11-09: the page moving as one is more predictable, a feeling of control):
    the list with its search, the map and the panel move together with the page; the list and the panel still scroll
-   inside. The list and panel pinned in sight while the page scrolls: Reactome Scroll, Default List, Default Lines. */
+   inside. The list and panel pinned in sight while the page scrolls: Reactome Scroll, Default List. */
 
 /* the list's top edge under the search: items scrolled up fade out over 10 px, so the edge reads as the window's edge,
    not as an item cut off (user, 2026-11-09); 6 px of room above the first item, so nothing fades before scrolling;

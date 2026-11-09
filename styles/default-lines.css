@@ -50,15 +50,10 @@ html .m2-ctrl button:hover { background: var(--m2-accent); border-color: var(--m
    buttons (user, 2026-11-09: the button selected, not its text) */
 html #sp-chip:hover, html #sp.sp-open #sp-chip { background: var(--m2-accent); border-color: var(--m2-accent); color: var(--m2-on-accent, #fff); }
 
-/* the page's length is set by the map column alone: the map, its name, description and references (user, 2026-11-09).
-   The list on the left and the panel on the right never make the page longer (a list of thousands of maps, a long
-   annotation): they scroll inside and stay in sight while the page scrolls, as in Reactome Scroll, the search above
-   the list with them; at the page's end they stop 8 px before it, the room left under them as before (user) */
+/* scrolling as in Default (user, 2026-11-09, for Default Lines on 2026-11-10): the page moves as one, the list with
+   its search, the map and the panel together; the list and the panel still scroll inside. Pinned in sight until then. */
 @media (min-width: 941px) {
-  html .m2-nav { align-self: stretch; contain: size; }
-  html #m2-search { position: sticky; top: 8px; z-index: 2; }
-  html #m2-list { position: sticky; top: 38px; margin-bottom: 8px; }   /* its height the viewer's: down to the download buttons */
-  html .m2-info:not(.m2-over) { align-self: start; position: sticky; top: 8px; contain: size; height: calc(100vh / var(--zoom, 1) - 52px); max-height: none; margin-bottom: 8px; overflow-y: auto; }
+  html .m2-nav { align-self: stretch; }   /* the list's line on its right down to the end of the map column */
 }
 
 
@@ -74,15 +69,9 @@ html .m2-main, html .m2-list-shut .m2-main { margin-left: 0; }
 html #m2-view { border: 0; border-radius: 0; }
 html #m2-downloads, html #m2-title, html #m2-text { padding-left: 12px; padding-right: 12px; }
 html #m2-split { left: -4px; }   /* the list's separator on its line */
-/* the panel joined to the map by a line the whole height of the page: the line belongs to the map column, which
-   sets the page's length, while the panel stays in sight */
+/* the panel joined to the map by a line the whole height of the map column: the line belongs to the map column */
 html .m2-info:not(.m2-over) { margin-left: 0; width: var(--m2-info-w, 240px); box-sizing: border-box; padding: 12px 16px; }   /* as wide as the list by default, 240 px (user, 2026-11-09; was 300) */
 html .m2:has(.m2-info:not(.m2-over):not(:empty)):not(.m2-info-shut) .m2-main { border-right: 1px solid var(--m2-frame); }
-@media (min-width: 941px) {
-  html #m2-search { top: 12px; }
-  html #m2-list { top: 42px; }
-  html .m2-info:not(.m2-over) { top: 0; height: calc(100vh / var(--zoom, 1) - 42px); margin-bottom: 0; }   /* to the window's bottom under the top bar (42 px) */
-}
 @media (max-width: 940px) {
   html .m2 { width: auto; }
   html .m2-nav { border-right: 0; padding-bottom: 12px; }

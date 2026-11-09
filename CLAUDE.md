@@ -56,7 +56,7 @@ Names no private repository in files, pages, code comments or commit messages.
   adds only colours. A change to Default's layout or behaviour is made in `default-base.css`, for both; Default List and
   Default Lines stay copies of their own.
 - Default Pinned (user, 2026-11-09): Default as it was before it took Compact Dark's scrolling (list and panel pinned in
-  sight while the page scrolls). Removed the same day (user): Reactome Scroll, Default List and Default Lines keep that
+  sight while the page scrolls). Removed the same day (user): Reactome Scroll and Default List keep that
   behaviour, so it was no longer needed for comparing. Default scrolls as Compact Dark: the page, the list and the
   panel move as one (user: more predictable, a feeling of control), the list and the panel still scroll inside.
 - Default List (user, 2026-11-09): Default Next for experiments with the map list, last in the picker (after Default Version 1, user 2026-11-09). A file of its own
@@ -72,6 +72,6 @@ Names no private repository in files, pages, code comments or commit messages.
   (`styles/default-lines.css`, a copy of Default Next with those rules at its end). No dots, and nothing under the
   pointer (user, 2026-11-09: the blue 2 px line on hover removed, "just there by default"). The download buttons 4 px
   above the window's bottom (`--m2-below-view: 42px`, user 2026-11-09: lower), the one exception to the 8 px rule above:
-  with no frame round the map, the 8 px kept no edge in line. The panel on the right is as wide as the list by default, 240 px (user, 2026-11-09; was 300). Taken by the expo atlas (user, 2026-11-09: "to try lines
+  with no frame round the map, the 8 px kept no edge in line. The panel on the right is as wide as the list by default, 240 px (user, 2026-11-09; was 300). Scrolls as Default since 2026-11-10 (user: the whole page, not the windows; was pinned as Default Pinned). Taken by the expo atlas (user, 2026-11-09: "to try lines
   for a change"). Kept for comparison only (user, 2026-11-09: split into pieces, "squarey",
   instead of a viewer window in the middle; not the direction taken).
