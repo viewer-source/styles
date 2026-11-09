@@ -23,3 +23,6 @@ Names no private repository in files, pages, code comments or commit messages.
 - The picker (`_includes/style-picker.html`) belongs here only: no site gets it.
 - A style the user likes goes into viewer-source as a named style only when the user says so.
 - Every change is checked on the live page before it counts as done.
+- The Compact styles (user, 2026-11-09): Compact is the master. Its rules live in `_includes/compact-base.css`; Compact,
+  Compact Grey, Compact Slate and Compact Dark each include it (Jekyll front matter and `{% include compact-base.css %}`)
+  and add only colours. A change to the layout or behaviour of any of them is made in `compact-base.css`, for all.
