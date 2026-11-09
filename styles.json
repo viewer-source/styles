@@ -4,6 +4,7 @@
   { "id": "slate", "name": "Slate", "file": "slate.css" },
   { "id": "dark", "name": "Dark", "file": "dark.css" },
   { "id": "reactome", "name": "Reactome Fixed", "file": "reactome.css" },
+  { "id": "reactome-fixed-blue", "name": "Reactome Fixed Blue", "file": "reactome-fixed-blue.css" },
   { "id": "reactome2", "name": "Reactome Scroll", "file": "reactome2.css" },
   { "id": "minerva", "name": "MINERVA", "file": "minerva.css" }
 ]
