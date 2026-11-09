@@ -77,10 +77,11 @@ html .m2-group { font-weight: 700; padding-left: 5px; }
 html .m2-item.m2-sub { margin-left: 0; width: 100%; }
 html .m2-empty { margin-left: 0; }
 
-/* each group's name in a rectangle across the list, white inside with a light grey edge (user, 2026-11-09: grey fill
-   not liked, the rectangle kept), and more room above it, so the groups read as
-   separate blocks (user, 2026-11-09: the flat list ran together); the name's text still where the maps' text starts
-   (1 px edge, 4 px padding), the arrow inside the band */
-html .m2-group { background: #fff; border: 1px solid #e2e2e2; border-radius: var(--m2-radius); padding: 3px 6px 3px 4px; margin: 14px 0 4px; }
-html .m2-group:first-child { margin-top: 0; }
-html .m2-group:hover { background: #fff; }
+/* each group's name under a thin light grey line across the list, at 15 px (maps 14) in Medium weight (500), with more
+   room above, so the groups read as blocks (user, 2026-11-09: the flat list ran together; the white rectangle, then the
+   line above chosen from nine options; bold looked smaller than the maps, 15 px chosen from 14 to 17; bold too heavy,
+   half bold). Medium exists in Helvetica Neue (Mac); a font without it (Arial on Windows) shows the normal weight. The
+   name's text still where the maps' text starts (5 px), the arrow on the name's line */
+html .m2-group { font-size: 15px; font-weight: 500; border-top: 1px solid #e2e2e2; padding: 10px 6px 3px 5px; margin: 14px 0 4px; }
+html .m2-group:first-child { margin-top: 0; border-top: 0; padding-top: 3px; }
+html .m2-group::before { margin-top: 4px; }

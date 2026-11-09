@@ -52,9 +52,10 @@ Names no private repository in files, pages, code comments or commit messages.
   page scrolls, the page as long as the map column. Default since scrolls as Compact Dark: the page, the list and the
   panel move as one (user: more predictable, a feeling of control), the list and the panel still scroll inside.
 - Default List (user, 2026-11-09): Default Next for experiments with the map list. A file of its own
-  (`styles/default-list.css`, a copy of Default Next with its rules at the end): the list flat, group names in bold as
-  headings, their maps flush under them with no indent (the indent wasted room for long names); each group's name in a white
-  rectangle with a light grey edge (grey fill not liked) and 14 px above it, so the groups read as blocks (user, 2026-11-09: the flat list ran together).
+  (`styles/default-list.css`, a copy of Default Next with its rules at the end): the list flat, group names as
+  headings, their maps flush under them with no indent (the indent wasted room for long names); each group's name
+  under a thin light grey line, at 15 px (maps 14), Medium weight (500, half bold), 14 px room above (user, 2026-11-09:
+  chosen from option sheets: white rectangle, then line above; 14 to 17 px; bold too heavy).
 - Default Lines (user, 2026-11-09): Default Next with MINERVA's separators: the map without frame or gaps, one thin
   line under the top bar, between the list and the map, between the map and the panel. A file of its own
   (`styles/default-lines.css`, a copy of Default Next with those rules at its end). No dots: a separator's line turns
