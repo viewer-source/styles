@@ -1,10 +1,12 @@
 /* Compact: the Default look with the room it wasted given to the map (user, 2026-11-09, from the Reactome and
    MINERVA experiments). Colours, fonts and sizes as Default; 8 px from the window's edges and between the windows,
-   the whole width (no 2000 px limit, no empty right column: the panel's column is there only while it shows),
+   the whole width (no 2000 px limit), the right column kept for the panel as in Default,
    the download buttons 8 px under the map and 8 px above the window's bottom, the list's content 8 px inside its
    column as in Reactome, a lower top bar. */
 :root {
   --m2-grip: #b4b4b4;   /* the three dots on the separators: the soft grey of the group chevrons (user) */
+  --m2-grip-t: #b4b4b4; /* and above the map: drag up to hide the header (user) */
+  --m2-split-t: 8px;
   --m2-split: 8px;
   --m2-split-h: 8px;
   --m2-below-view: 46px;   /* the download buttons 8 px under the map and 8 px above the window's bottom (user) */
@@ -12,9 +14,13 @@
 html .wrapper-masthead .container { width: calc(100vw / var(--zoom, 1) - 16px); }
 html .masthead { padding: 6px 0 7px 4px; }   /* the name where the list's text starts (user) */
 html #main { padding-top: 8px; }
-html .m2 { width: calc(100vw / var(--zoom, 1) - 16px); column-gap: 0; grid-template-columns: var(--m2-list-w, 240px) minmax(600px, 1fr) auto; }
+html .m2 { width: calc(100vw / var(--zoom, 1) - 16px); column-gap: 0; grid-template-columns: var(--m2-list-w, 240px) minmax(600px, 1fr) calc(var(--m2-info-w, 240px) + 8px); }
+/* the right column kept for the panel as in Default, empty until a molecule is chosen (user); dragged shut, it goes */
+html .m2.m2-info-shut { grid-template-columns: var(--m2-list-w, 240px) minmax(600px, 1fr) 0; }
 html .m2-main { margin-left: 8px; }
-html .m2-info:not(.m2-over) { margin-left: 8px; width: var(--m2-info-w, 260px); }
+/* the list out of sight: the map 8 px from the window's edge, as on the other sides, the separator in that strip */
+html .m2-list-shut .m2-main { margin-left: 0; }
+html .m2-info:not(.m2-over) { margin-left: 8px; width: var(--m2-info-w, 240px); }
 html #m2-search { margin-bottom: 8px; }
 /* the list's content 12 px from the window's edge, as in MINERVA (user) */
 html .m2-nav { padding: 0 4px; box-sizing: border-box; }

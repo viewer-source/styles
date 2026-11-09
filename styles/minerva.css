@@ -21,6 +21,7 @@
   --m2-radius-button: 6px;
   --m2-split: 8px;         /* the separators sit on the joins: 8 px to grab */
   --m2-split-h: 8px;
+  --m2-split-t: 6px;       /* above the map, under the search in the bar */
   --m2-below-view: 46px;   /* the download buttons 8 px under the map and 8 px above the window's bottom (user) */
 }
 html body { background: #fff; font-family: Manrope, Arial, sans-serif; color: #070130; }
