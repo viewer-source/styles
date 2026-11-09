@@ -50,3 +50,6 @@ html #m2-split-h > div::after { background: radial-gradient(circle, var(--m2-gri
 }
 html .m2-info a, html #m2-text a { text-decoration: underline; text-decoration-color: #bbb; text-underline-offset: 2px; }
 html .m2-info a:hover, html #m2-text a:hover { text-decoration-color: currentColor; }
+
+/* the zoom buttons over the map filled in the accent under the pointer, white sign, as in the Reactome styles (user, 2026-11-09) */
+html .m2-ctrl button:hover { background: var(--m2-accent); border-color: var(--m2-accent); color: var(--m2-on-accent, #fff); }

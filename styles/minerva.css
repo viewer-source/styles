@@ -87,3 +87,6 @@ html #sp-chip:hover, html #sp.sp-open #sp-chip { background: #ebf4ff; border-col
   html .m2-nav { border-right: 0; padding-bottom: 12px; }
   html .m2-info:not(.m2-over) { width: auto; }
 }
+
+/* the zoom buttons over the map filled in the accent under the pointer, white sign, as in the Reactome styles (user, 2026-11-09) */
+html .m2-ctrl button:hover { background: var(--m2-accent); border-color: var(--m2-accent); color: var(--m2-on-accent, #fff); }
