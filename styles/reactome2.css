@@ -102,7 +102,7 @@ html #m2-split-h > div::after { background: radial-gradient(circle, var(--m2-gri
      the top by sticky, not fixed to the window, so it moves with the bar when the page is pulled past its edge on a Mac
      (user, 2026-11-09: fixed, it stayed behind): stuck 100 px down from the start, moved up into the bar by the
      transform, and out of the list's way by its negative margin */
-  html #m2-search { position: sticky; z-index: 6; top: 100px; left: auto; width: 320px; margin: 0 0 -26px;
+  html #m2-search { position: sticky; z-index: 6; top: 100px; left: auto; width: 320px; margin: 0 0 -50px;
                     transform: translate(max(var(--m2-list-w, 240px), 102px), -92.4px); }
   html body.m2-head-shut #m2-search { display: none; }   /* away with the bar, as before */
   html .m2 { align-items: stretch; transform: none; left: calc(50% - 50vw / var(--zoom, 1) + 8px); }   /* centred without a transform, which would carry the search away with the page */
