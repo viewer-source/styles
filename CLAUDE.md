@@ -15,7 +15,7 @@ Names no private repository in files, pages, code comments or commit messages.
   with `html ` so they win over the viewer's own rules, which come later in the page.
 - Rules for every style (user, 2026-11-09): button sizes stay as in the viewer (a style changes colours, not sizes);
   the style chip has the size of the download buttons; the window with the map list ends where the download buttons
-  end (a style that frames the list adds no padding under it).
+  end, a good default, no longer a rule (user, 2026-11-09: to be unlinked when the map window gets its lower separator).
   The space at the bottom (user, 2026-11-09, repeated: "lets not come back to it"): in every style but Default the
   download buttons are 8 px above the bottom of the window, the same distance as the windows from the window's edges,
   and 8 px under the map where the style's gaps are 8 px (`--m2-below-view`). Not 0: buttons on the window's edge look
