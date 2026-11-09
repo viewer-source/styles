@@ -88,3 +88,11 @@ html .m2-empty { margin-left: 0; }
 html .m2-group { font-family: -apple-system, BlinkMacSystemFont, system-ui, "Segoe UI", sans-serif; font-size: 15px; font-weight: 600; border-top: 1px solid #e2e2e2; padding: 6px 6px 3px 5px; margin: 6px 0 0; }
 html .m2-group:first-child { margin-top: 0; border-top: 0; padding-top: 3px; }
 html .m2-group::before { margin-top: 4px; }
+
+/* the list's bottom edge fades too, over 10 px as under the search, with 6 px of room under the last item so it shows
+   whole once the list is scrolled to its end (user, 2026-11-09) */
+@media (min-width: 941px) {
+  html #m2-list { padding-bottom: 6px;
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 10px, #000 calc(100% - 10px), transparent 100%);
+    mask-image: linear-gradient(to bottom, transparent 0, #000 10px, #000 calc(100% - 10px), transparent 100%); }
+}
