@@ -1,5 +1,6 @@
 [
   { "id": "default-next", "name": "Default", "file": "default-next.css" },
+  { "id": "default-pinned", "name": "Default Pinned", "file": "default-pinned.css" },
   { "id": "default-list", "name": "Default List", "file": "default-list.css" },
   { "id": "default-lines", "name": "Default Lines", "file": "default-lines.css" },
   { "id": "compact", "name": "Compact", "file": "compact.css" },
