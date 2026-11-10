@@ -1,0 +1,36 @@
+---
+# Jekyll front matter, kept so the file is built as the other styles
+---
+/* Default Dust Cold (user, 2026-11-10): Default Dust in a cool slate tone at the same lightness (user: a cold version,
+   "slate is the right move"): page #5f6873 (white on it 5.7:1), list and panel #68717c (5.0:1), the chosen map in a
+   pale blue grey with dark text, the map window white. Default Panel is its master: a change to the layout is made in
+   _includes/default-panel-base.css. */
+{% include default-panel-base.css %}
+
+:root {
+  --m2-accent: #d6dee7;
+  --m2-on-accent: #2b323a;
+  --m2-link: #dce7f3;
+  --m2-text: #f6f8fb;
+  --m2-text-soft: #eceff3;
+  --m2-muted: #d3d9e0;
+  --m2-faint: #bec6cf;
+  --m2-button: #e2e7ed;
+  --m2-line: #7f8892;
+  --m2-frame: #7f8892;
+  --m2-bg: #68717c;
+  --m2-control-bg: #68717cf0;
+}
+html body { background: #5f6873; color: #eceff3; }
+html h1, html h2, html h3, html h4 { color: #f6f8fb; }
+html #m2-view { background: #fff; }
+html #m2-search { background: #68717c; color: #f6f8fb; }
+html #m2-search::placeholder { color: #ccd3db; }
+html .m2-draft { background: transparent; color: #d9dfe6; border-color: #d9dfe6; }
+html #m2-zoom { color: #666; }   /* the zoom value sits on the white map window */
+html .site-name a { color: #f6f8fb; }
+html .site-name a { -webkit-text-stroke-color: #5f6873; }   /* the thinning stroke in this header's background */
+html .site-description { color: #d3d9e0; }
+/* the zoom buttons sit on the white map window: light, grey edge, dark sign; the accent fill under the pointer */
+html .m2-ctrl button { background: #fffffff0; border-color: #bbb; color: #222; }
+html .m2-ctrl button:hover { background: var(--m2-accent); border-color: #b5c0cc; color: var(--m2-on-accent); }
