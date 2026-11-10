@@ -6,7 +6,8 @@
    with the download sign (a menu of what the map offers), in place of the search field and the download buttons, so the
    room under the map goes to the map: the map window to 8 px above the window's bottom. Default Code's rules copied
    (a file of its own); Default Panel is its master: a change to the layout is made in
-   _includes/default-panel-base.css. */
+   _includes/default-panel-base.css. Grey highlights (user, 2026-11-10), as Default Linen: the chosen map, the menu's
+   rows and the buttons under the pointer filled in Dust's grey (cp108, #71777c) with white text. */
 {% include default-panel-base.css %}
 
 :root { --code-side: #fff; --code-head: 41px;   /* the top bar's height in the page's own px (the page is zoomed to 90%) */ }
@@ -19,4 +20,5 @@
   html #m2-search { background: #fff; }
 }
 
-:root { --m2-menu: 1; --m2-below-view: 8px; }
+:root { --m2-menu: 1; --m2-below-view: 8px; --m2-accent: #71777c; --m2-on-accent: #fff; }
+html .m2-ctrl button:hover { background: var(--m2-accent); border-color: var(--m2-accent); color: var(--m2-on-accent); }

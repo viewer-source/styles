@@ -37,7 +37,8 @@ Names no private repository in files, pages, code comments or commit messages.
   (`--m2-menu: 1`, made in viewer-source for it), as in Claude's app: Search (magnifying glass, shows the search field
   under the rows) and Downloads (download sign, a menu of the map's files) at the top of the list, no search field and no
   download buttons, the map window to 8 px above the window's bottom; Default Code's rules copied; after Default Code.
-  The search as a pop-up window, as in Claude, not yet (user).
+  Search turns into the field in its own place (user: not below). Grey highlights as Default Linen (#71777c, user). The
+  search as a pop-up window, as in Claude, not yet (user).
 - Default Code Linen (user, 2026-11-10; `?style=default-panel-code-linen`): an exact copy of Default Code, named after
   its side colour (linen, #f5f4f1); a file of its own, after Default Code; since the same day (user) with Default Linen's grey highlights
   (#71777c, white text).
