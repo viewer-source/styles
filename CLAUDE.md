@@ -14,6 +14,12 @@ Names no private repository in files, pages, code comments or commit messages.
   sections below keep the names each style had when they were written: there "Default" and "Default Next" mean Default
   Version 2 Frame Compact, "Default Dark" its dark version, "Default List" its list experiment, "Default Version 1" the original. viewer-source and the
   sites keep Version 2's look until the user says otherwise.
+- Default Panel and Default Panel Dark (user, 2026-11-10): Default (Default Lines) with the panel's column on the
+  right always there, 240 px, empty until a molecule is chosen, as in Version 2; Dark in Version 2 Dark's colours. With
+  Default the main styles, above the first line. Default's rules live in `_includes/default-lines-base.css` (Default and
+  Default Panel include it), Default Panel's in `_includes/default-panel-base.css` (Default Panel and Default Panel
+  Dark include it; Dark adds only colours). A change to Default reaches all three. When Default Lines is replaced, they
+  become Default Version 3 Lines, ... Lines Panel, ... Lines Panel Dark.
 - The viewer is a copy, never edited here: `sh update.sh <clone of viewer-source.github.io>`, VERSION names the
   commit. A change the viewer needs (a new setting) is made in viewer-source first, then copied.
 - Default Version 1 (named Default until 2026-11-09, user: kept for comparing later; last in the picker,
@@ -41,7 +47,7 @@ Names no private repository in files, pages, code comments or commit messages.
   Default Version 1 included (user, 2026-11-09): filled in the style's accent under the pointer and while open, white text.  At rest
   it is quiet, a grey thing almost unseen (MINERVA: the search field's grey); under the pointer and while open it is
   filled in the strong colour of the page's buttons (user, 2026-11-09): a highlight is a strong fill, never a light tint
-  or coloured text that appears nowhere else on the page. The main style, Default (Default Lines; `"main": true` in `styles.json`), comes first with a thin line
+  or coloured text that appears nowhere else on the page. The main styles, Default (Default Lines), Default Panel and Default Panel Dark (`"main": true` in `styles.json`), come first with a thin line
   under them (user, 2026-11-10: the most developed, each carrying what was learned from the other layouts and styles). Styles kept only for comparing (`"kept": true` in
   `styles.json`: the earlier defaults by version, Default Version 1 Frame Original, then Default Version 2 Frame Compact with
   its Dark and List; user, 2026-11-10: Version 2 moved there) come last, under a thin line in the menu (user, 2026-11-09).

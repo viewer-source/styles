@@ -1,6 +1,7 @@
 [
   {"id": "default-lines", "name": "Default", "file": "default-lines.css", "main": true},
   {"id": "default-panel", "name": "Default Panel", "file": "default-panel.css", "main": true},
+  {"id": "default-panel-dark", "name": "Default Panel Dark", "file": "default-panel-dark.css", "main": true},
   {"id": "compact", "name": "Compact", "file": "compact.css"},
   {"id": "compact-grey", "name": "Compact Grey", "file": "compact-grey.css"},
   {"id": "compact-slate", "name": "Compact Slate", "file": "compact-slate.css"},
