@@ -2,14 +2,14 @@
 # Jekyll front matter, kept so the file is built as the other styles
 ---
 /* Default Grey (user, 2026-11-10): Default (Default Panel) in Compact Grey's colours, a little lighter (user: "a bit
-   lighter colour, not too much lighter"): accent #626262 to #6e6e6e, links #444 to #4f4f4f, underlined so they still
-   read as links. Default Panel is its master: a change to the layout is made in _includes/default-panel-base.css. */
+   lighter colour, not too much lighter"): first #6e6e6e, then (user, same day: "a bit stronger or colder") a cool grey a
+   touch darker, #60656c, links #464b52, underlined so they still read as links; well short of Default Slate's blue. Default Panel is its master: a change to the layout is made in _includes/default-panel-base.css. */
 {% include default-panel-base.css %}
 
 :root {
-  --m2-accent: #6e6e6e;
+  --m2-accent: #60656c;
   --m2-on-accent: #fff;
-  --m2-link: #4f4f4f;
+  --m2-link: #464b52;
 }
 html .m2-info a, html #m2-text a { text-decoration: underline; text-decoration-color: #bbb; text-underline-offset: 2px; }
 html .m2-info a:hover, html #m2-text a:hover { text-decoration-color: currentColor; }
