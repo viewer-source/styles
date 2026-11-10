@@ -4,7 +4,6 @@
   {"id": "default-panel-slate", "name": "Default Slate", "file": "default-panel-slate.css", "main": true},
   {"id": "default-panel-grey", "name": "Default Grey", "file": "default-panel-grey.css", "main": true},
   {"id": "default-lines", "name": "Default Wide", "file": "default-lines.css", "main": true},
-  {"id": "compact", "name": "Compact", "file": "compact.css"},
   {"id": "reactome2", "name": "Reactome Scroll", "file": "reactome2.css"},
   {"id": "reactome-scroll-panel", "name": "Reactome Scroll Right Panel", "file": "reactome-scroll-panel.css"},
   {"id": "reactome", "name": "Reactome Fixed", "file": "reactome.css"},

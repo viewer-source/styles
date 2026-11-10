@@ -64,9 +64,10 @@ Names no private repository in files, pages, code comments or commit messages.
   its Dark and List; user, 2026-11-10: Version 2 moved there) come last, under a thin line in the menu (user, 2026-11-09).
 - A style the user likes goes into viewer-source as a named style only when the user says so.
 - Every change is checked on the live page before it counts as done.
-- The Compact styles (user, 2026-11-09): Compact is the master. Its rules live in `_includes/compact-base.css`; Compact,
-  Compact Grey and Compact Slate included it until removed on 2026-11-10 (user; Default Grey and Default Slate keep their colours) (Compact Dark removed 2026-11-09, user: Default Dark took its place) (Jekyll front matter and `{% include compact-base.css %}`)
-  and add only colours. A change to the layout or behaviour of any of them is made in `compact-base.css`, for all.
+- The Compact styles (user, 2026-11-09): Compact, the master, and Compact Grey, Compact Slate, Compact Dark, all removed
+  (Compact Dark 2026-11-09; the others 2026-11-10, user, once Default Grey, Default Slate and Default Version 2 Frame
+  Compact Dots kept what was liked in them). Their rules, `_includes/compact-base.css`, are in the history (commit before
+  the removal).
 - Reactome Scroll is the master of Reactome Scroll Right Panel (user, 2026-11-10; Reactome Scroll Panel for a moment: "panel" alone was not clear): its rules in
   `_includes/reactome-scroll-base.css`, both styles include it; Reactome Scroll Right Panel adds only the panel's window on
   the right, always there, empty until a molecule is chosen (as Default's column).
