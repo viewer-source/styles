@@ -33,6 +33,11 @@ Names no private repository in files, pages, code comments or commit messages.
 - Default Code (user, 2026-11-10; `?style=default-panel-code`): Default laid out as Claude Code's app, the list column from
   the top of the window with the site's name in it, white (first linen #f5f4f1, kept as Default Code Linen; user), the top bar and its line over the map
   and the panel only; includes `_includes/default-panel-base.css`; right after Default in the picker (user, 2026-11-10).
+- Default Code Compact (user, 2026-11-10; `?style=default-panel-code-compact`): Default Code with the viewer's menu
+  (`--m2-menu: 1`, made in viewer-source for it), as in Claude's app: Search (magnifying glass, shows the search field
+  under the rows) and Downloads (download sign, a menu of the map's files) at the top of the list, no search field and no
+  download buttons, the map window to 8 px above the window's bottom; Default Code's rules copied; after Default Code.
+  The search as a pop-up window, as in Claude, not yet (user).
 - Default Code Linen (user, 2026-11-10; `?style=default-panel-code-linen`): an exact copy of Default Code, named after
   its side colour (linen, #f5f4f1); a file of its own, after Default Code; since the same day (user) with Default Linen's grey highlights
   (#71777c, white text).

@@ -1,0 +1,22 @@
+---
+# Jekyll front matter, kept so the file is built as the other styles
+---
+/* Default Code Compact (user, 2026-11-10): Default Code with the viewer's menu (--m2-menu: 1), as in Claude's app: two
+   rows at the top of the list, Search with a magnifying glass (shows the search field under the rows) and Downloads
+   with the download sign (a menu of what the map offers), in place of the search field and the download buttons, so the
+   room under the map goes to the map: the map window to 8 px above the window's bottom. Default Code's rules copied
+   (a file of its own); Default Panel is its master: a change to the layout is made in
+   _includes/default-panel-base.css. */
+{% include default-panel-base.css %}
+
+:root { --code-side: #fff; --code-head: 41px;   /* the top bar's height in the page's own px (the page is zoomed to 90%) */ }
+@media (min-width: 941px) {
+  html .m2-nav { position: relative; top: 0; z-index: 1; margin-top: calc(-1 * var(--code-head) - 1px); padding-top: calc(var(--code-head) + 13px);
+                 background: var(--code-side); align-self: stretch; min-height: calc(100vh / var(--zoom, 1)); }
+  html .site-info { position: relative; z-index: 2; }
+  html .site-name a { -webkit-text-stroke-color: var(--code-side); }   /* the thinning stroke in the side colour */
+  html body.m2-head-shut .m2-nav { margin-top: 0; padding-top: 12px; }   /* the top bar dragged away: the list from the top as it is */
+  html #m2-search { background: #fff; }
+}
+
+:root { --m2-menu: 1; --m2-below-view: 8px; }
