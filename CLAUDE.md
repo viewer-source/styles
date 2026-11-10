@@ -28,6 +28,9 @@ Names no private repository in files, pages, code comments or commit messages.
   Default the main styles, above the first line. Default's rules live in `_includes/default-lines-base.css` (Default and
   Default Panel include it), Default Panel's in `_includes/default-panel-base.css` (Default Panel and Default Panel
   Dark include it; Dark adds only colours). A change to Default Lines' base reaches all three.
+- Default Dust (user, 2026-11-10; `?style=default-panel-dust`): Default Dark in a dusty warm taupe, lighter than Dark but
+  good for white text (page #6e655f, list and panel #776e67), the chosen map in light sand with dark text; includes
+  `_includes/default-panel-base.css`, adds only colours; after Default Dark.
 - Default Slate and Default Grey (user, 2026-11-10): Default (Default Panel) in Compact Slate's and Compact Grey's
   colours (those two removed the same day, user), each a little lighter (user: "not too much lighter"; values in each file's comment). They include
   `_includes/default-panel-base.css` and add only colours (Grey also its underlined links); main styles, after Default Dark. Default Grey made a cool grey a touch darker the same day (user: "a bit stronger or colder").
