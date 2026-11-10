@@ -25,6 +25,9 @@ Names no private repository in files, pages, code comments or commit messages.
   Default the main styles, above the first line. Default's rules live in `_includes/default-lines-base.css` (Default and
   Default Panel include it), Default Panel's in `_includes/default-panel-base.css` (Default Panel and Default Panel
   Dark include it; Dark adds only colours). A change to Default Lines' base reaches all three.
+- Default Slate and Default Grey (user, 2026-11-10): Default (Default Panel) in Compact Slate's and Compact Grey's
+  colours, each a little lighter (user: "not too much lighter"; values in each file's comment). They include
+  `_includes/default-panel-base.css` and add only colours (Grey also its underlined links); main styles, after Default Dark.
 - The viewer is a copy, never edited here: `sh update.sh <clone of viewer-source.github.io>`, VERSION names the
   commit. A change the viewer needs (a new setting) is made in viewer-source first, then copied.
 - Default Version 1 (named Default until 2026-11-09, user: kept for comparing later; last in the picker,

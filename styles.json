@@ -1,6 +1,8 @@
 [
   {"id": "default-panel", "name": "Default", "file": "default-panel.css", "main": true},
   {"id": "default-panel-dark", "name": "Default Dark", "file": "default-panel-dark.css", "main": true},
+  {"id": "default-panel-slate", "name": "Default Slate", "file": "default-panel-slate.css", "main": true},
+  {"id": "default-panel-grey", "name": "Default Grey", "file": "default-panel-grey.css", "main": true},
   {"id": "default-lines", "name": "Default Wide", "file": "default-lines.css", "main": true},
   {"id": "compact", "name": "Compact", "file": "compact.css"},
   {"id": "compact-grey", "name": "Compact Grey", "file": "compact-grey.css"},
