@@ -4,7 +4,7 @@ The atlas viewer of [viewer-source](https://viewer-source.github.io) in other lo
 https://viewer-source.github.io/styles/ (hidden from search engines). It shows the demo's maps.
 
 - Pick a style with the chip at the right end of the header, or step through them with `[` and `]`.
-  The address keeps the choice (`?style=compact-grey`), so a style can be bookmarked or sent.
+  The address keeps the choice (`?style=default-panel-grey`), so a style can be bookmarked or sent.
 - A style is one file in `styles/`: it redefines the viewer's settings (colours and corners, the block at the top
   of `_includes/atlas-app.html`) on `:root`, and adds a few rules where a setting is not enough. `styles.json` lists
   the styles in the picker's order.

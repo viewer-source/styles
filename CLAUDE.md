@@ -26,8 +26,8 @@ Names no private repository in files, pages, code comments or commit messages.
   Default Panel include it), Default Panel's in `_includes/default-panel-base.css` (Default Panel and Default Panel
   Dark include it; Dark adds only colours). A change to Default Lines' base reaches all three.
 - Default Slate and Default Grey (user, 2026-11-10): Default (Default Panel) in Compact Slate's and Compact Grey's
-  colours, each a little lighter (user: "not too much lighter"; values in each file's comment). They include
-  `_includes/default-panel-base.css` and add only colours (Grey also its underlined links); main styles, after Default Dark.
+  colours (those two removed the same day, user), each a little lighter (user: "not too much lighter"; values in each file's comment). They include
+  `_includes/default-panel-base.css` and add only colours (Grey also its underlined links); main styles, after Default Dark. Default Grey made a cool grey a touch darker the same day (user: "a bit stronger or colder").
 - The viewer is a copy, never edited here: `sh update.sh <clone of viewer-source.github.io>`, VERSION names the
   commit. A change the viewer needs (a new setting) is made in viewer-source first, then copied.
 - Default Version 1 (named Default until 2026-11-09, user: kept for comparing later; last in the picker,
@@ -62,7 +62,7 @@ Names no private repository in files, pages, code comments or commit messages.
 - A style the user likes goes into viewer-source as a named style only when the user says so.
 - Every change is checked on the live page before it counts as done.
 - The Compact styles (user, 2026-11-09): Compact is the master. Its rules live in `_includes/compact-base.css`; Compact,
-  Compact Grey and Compact Slate each include it (Compact Dark removed 2026-11-09, user: Default Dark took its place) (Jekyll front matter and `{% include compact-base.css %}`)
+  Compact Grey and Compact Slate included it until removed on 2026-11-10 (user; Default Grey and Default Slate keep their colours) (Compact Dark removed 2026-11-09, user: Default Dark took its place) (Jekyll front matter and `{% include compact-base.css %}`)
   and add only colours. A change to the layout or behaviour of any of them is made in `compact-base.css`, for all.
 - Reactome Scroll is the master of Reactome Scroll Right Panel (user, 2026-11-10; Reactome Scroll Panel for a moment: "panel" alone was not clear): its rules in
   `_includes/reactome-scroll-base.css`, both styles include it; Reactome Scroll Right Panel adds only the panel's window on
