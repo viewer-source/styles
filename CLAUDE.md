@@ -29,7 +29,7 @@ Names no private repository in files, pages, code comments or commit messages.
   Default Panel include it), Default Panel's in `_includes/default-panel-base.css` (Default Panel and Default Panel
   Dark include it; Dark adds only colours). A change to Default Lines' base reaches all three.
 - Default Code (user, 2026-11-10; `?style=default-panel-code`): Default laid out as Claude Code's app, the list column from
-  the top of the window with the site's name in it, light warm side colour #f5f4f1, the top bar and its line over the map
+  the top of the window with the site's name in it, white (first linen #f5f4f1, kept as Default Code Linen; user), the top bar and its line over the map
   and the panel only; includes `_includes/default-panel-base.css`; after Default Dust.
 - Default Code Linen (user, 2026-11-10; `?style=default-panel-code-linen`): an exact copy of Default Code, named after
   its side colour (linen, #f5f4f1); a file of its own, after Default Code.
