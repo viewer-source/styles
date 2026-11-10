@@ -1,0 +1,17 @@
+---
+# Jekyll front matter, kept so the file is built as the other styles
+---
+/* Default Linen (user, 2026-11-10): Default Dust Linen with the linen, #f5f4f1, on the left column alone (the map list
+   with its search); the top bar, the map window and the panel white as in Default. The chosen map and the buttons under
+   the pointer filled in Dust's grey (cp108, #71777c) with white text, as in Default Dust Linen. Default Panel is its
+   master: a change to the layout is made in _includes/default-panel-base.css. */
+{% include default-panel-base.css %}
+
+:root {
+  --m2-accent: #71777c;
+  --m2-on-accent: #fff;
+  --linen: #f5f4f1;
+}
+html .m2-nav { background: var(--linen); }
+html #m2-search { background: #fff; }
+html .m2-ctrl button:hover { background: var(--m2-accent); border-color: var(--m2-accent); color: var(--m2-on-accent); }
