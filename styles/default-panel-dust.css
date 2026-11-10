@@ -3,7 +3,7 @@
 ---
 /* Default Dust (user, 2026-11-10): Default Dark in a lighter tone, still good for white text. First a dusty warm taupe
    (page #6e655f); since the same day (user: cp108's colour as the main one, "brown is not needed") the cool grey of the
-   icon cp108, #71777c, for the page (white on it 4.6:1), the list and the panel a step darker #686e73 (5.4:1), the
+   icon cp108, #71777c, for the page (white on it 4.5:1), the list and the panel a step darker #686e73 (5.3:1), the
    chosen map and the buttons under the pointer in a light grey with dark text, the map window white. Default Panel is
    its master: a change to the layout is made in _includes/default-panel-base.css. */
 {% include default-panel-base.css %}
