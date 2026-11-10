@@ -19,7 +19,9 @@ Names no private repository in files, pages, code comments or commit messages.
   is Default Version 1 Frame Original (`?style=default`). The sections below keep the names each style had when they
   were written: there "Default" and "Default Next" mean Default Version 2 Frame Compact, "Default Dark" its dark
   version, "Default List" its list experiment, "Default Version 1" the original, "Default Lines" Default Wide.
-  viewer-source and the sites keep Version 2's look until the user says otherwise.
+  viewer-source and the sites keep Version 2's look until the user says otherwise. Since 2026-11-10 (user: "apply newest
+  default to mreg-atlas") Default Panel is in viewer-source as `look="panel"`, a copy of `default-lines-base.css` and
+  `default-panel-base.css`: a change to them here is copied there by hand; mreg-atlas uses it, the demo keeps Version 2.
 - Default Version 2 Frame Compact Dots (user, 2026-11-10; `?style=default-next-dots`): Version 2 with Compact's three dots
   (#b4b4b4) on every separator; includes `_includes/default-base.css` and adds only the dots; with the kept styles,
   after Version 2.
