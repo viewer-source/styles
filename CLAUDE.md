@@ -34,7 +34,8 @@ Names no private repository in files, pages, code comments or commit messages.
   the top of the window with the site's name in it, white (first linen #f5f4f1, kept as Default Code Linen; user), the top bar and its line over the map
   and the panel only; includes `_includes/default-panel-base.css`; right after Default in the picker (user, 2026-11-10).
 - Default Code Linen (user, 2026-11-10; `?style=default-panel-code-linen`): an exact copy of Default Code, named after
-  its side colour (linen, #f5f4f1); a file of its own, after Default Code.
+  its side colour (linen, #f5f4f1); a file of its own, after Default Code; since the same day (user) with Default Linen's grey highlights
+  (#71777c, white text).
 - Default Dust (user, 2026-11-10; `?style=default-panel-dust`): Default Dark in a lighter tone, good for white text: first a dusty
   warm taupe (#6e655f), then the same day cp108's cool grey (user: "brown is not needed"): page #71777c, list and panel
   #686e73, the chosen map in light grey #dfe2e5 with dark text; includes

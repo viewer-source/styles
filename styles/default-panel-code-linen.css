@@ -4,10 +4,11 @@
 /* Default Code Linen (user, 2026-11-10): an exact copy of Default Code, named after its side colour #f5f4f1 (linen), so
    Default Code can change while this stays. Default Code's layout: the list column from the top of the window with the
    site's name in it, the top bar and its line over the map and the panel only. Default Panel is its master: a change
-   to the layout is made in _includes/default-panel-base.css. */
+   to the layout is made in _includes/default-panel-base.css. Since 2026-11-10 (user) with Default Linen's grey highlights:
+   the chosen map and the buttons under the pointer filled in Dust's grey (cp108, #71777c) with white text. */
 {% include default-panel-base.css %}
 
-:root { --code-side: #f5f4f1; --code-head: 41px;   /* the top bar's height in the page's own px (the page is zoomed to 90%) */ }
+:root { --m2-accent: #71777c; --m2-on-accent: #fff; --code-side: #f5f4f1; --code-head: 41px;   /* the top bar's height in the page's own px (the page is zoomed to 90%) */ }
 @media (min-width: 941px) {
   html .m2-nav { position: relative; top: 0; z-index: 1; margin-top: calc(-1 * var(--code-head) - 1px); padding-top: calc(var(--code-head) + 13px);
                  background: var(--code-side); align-self: stretch; min-height: calc(100vh / var(--zoom, 1)); }
@@ -16,3 +17,4 @@
   html body.m2-head-shut .m2-nav { margin-top: 0; padding-top: 12px; }   /* the top bar dragged away: the list from the top as it is */
   html #m2-search { background: #fff; }
 }
+html .m2-ctrl button:hover { background: var(--m2-accent); border-color: var(--m2-accent); color: var(--m2-on-accent); }
