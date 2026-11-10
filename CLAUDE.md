@@ -61,6 +61,9 @@ Names no private repository in files, pages, code comments or commit messages.
 - The Compact styles (user, 2026-11-09): Compact is the master. Its rules live in `_includes/compact-base.css`; Compact,
   Compact Grey and Compact Slate each include it (Compact Dark removed 2026-11-09, user: Default Dark took its place) (Jekyll front matter and `{% include compact-base.css %}`)
   and add only colours. A change to the layout or behaviour of any of them is made in `compact-base.css`, for all.
+- Reactome Scroll is the master of Reactome Scroll Panel (user, 2026-11-10): its rules in
+  `_includes/reactome-scroll-base.css`, both styles include it; Reactome Scroll Panel adds only the panel's window on
+  the right, always there, empty until a molecule is chosen (as Default's column).
 - Reactome Fixed is the master of Reactome Fixed Blue (user, 2026-11-09), the same way: its rules in
   `_includes/reactome-fixed-base.css`, both styles include it, Reactome Fixed Blue adds only colours.
 - Default Next, named Default in the picker since it became viewer-source's look (user, 2026-11-09; address
