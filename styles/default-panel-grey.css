@@ -3,13 +3,13 @@
 ---
 /* Default Grey (user, 2026-11-10): Default (Default Panel) in Compact Grey's colours, a little lighter (user: "a bit
    lighter colour, not too much lighter"): first #6e6e6e, then (user, same day: "a bit stronger or colder") a cool grey a
-   touch darker, #60656c, links #464b52, underlined so they still read as links; well short of Default Slate's blue. Default Panel is its master: a change to the layout is made in _includes/default-panel-base.css. */
+   touch darker, #60656c, links #464b52, then a tiny bit lighter (user, same day): #656a71, links #4a4f56, underlined so they still read as links; well short of Default Slate's blue. Default Panel is its master: a change to the layout is made in _includes/default-panel-base.css. */
 {% include default-panel-base.css %}
 
 :root {
-  --m2-accent: #60656c;
+  --m2-accent: #656a71;
   --m2-on-accent: #fff;
-  --m2-link: #464b52;
+  --m2-link: #4a4f56;
 }
 html .m2-info a, html #m2-text a { text-decoration: underline; text-decoration-color: #bbb; text-underline-offset: 2px; }
 html .m2-info a:hover, html #m2-text a:hover { text-decoration-color: currentColor; }
