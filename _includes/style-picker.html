@@ -68,7 +68,7 @@ where needed, a few rules. [ and ] step through the styles; the address keeps th
   fetch('/styles/styles.json', { cache: 'no-cache' }).then(function (r) { return r.json(); }).then(function (list) {
     styles = list;
     list.forEach(function (s, j) {
-      // a line under the main styles (main: true in styles.json, now Default alone: user, 2026-11-10) and
+      // a line under the main styles (main: true in styles.json, now Default, Default Dark and Default Wide: user, 2026-11-10) and
       // above the styles kept only for comparing
       var prev = list[j - 1] || {};
       if ((prev.main && !s.main) || (s.kept && !prev.kept)) { var r = document.createElement('div'); r.className = 'sp-rule'; menu.appendChild(r); }

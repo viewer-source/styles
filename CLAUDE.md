@@ -5,21 +5,26 @@ beside the demo, whose maps it shows (baseurl "", so the viewer reads the demo's
 Names no private repository in files, pages, code comments or commit messages.
 
 - Names (user, 2026-11-10): the defaults are numbered by version and named by how the map sits on the page, for
-  keeping track of their history (long names are fine). Default is Default Lines (first in the picker, the address with
-  no `?style=`; `?style=default-lines` still opens it). The default before it is Default Version 2 Frame Compact
-  (`?style=default-next`, named Default 2026-11-09 to 2026-11-10; it began as a copy of Compact), with Default Version 2
-  Frame Compact Dark (`?style=default-dark`, used by no project, to be deleted later, user) and Default Version 2 Frame
-  Compact List (`?style=default-list`, Default List until 2026-11-10: a copy of Version 2 for experiments with the list). The first is Default Version
-  1 Frame Original (`?style=default`). When Default Lines is replaced in turn, it becomes Default Version 3 Lines. The
-  sections below keep the names each style had when they were written: there "Default" and "Default Next" mean Default
-  Version 2 Frame Compact, "Default Dark" its dark version, "Default List" its list experiment, "Default Version 1" the original. viewer-source and the
-  sites keep Version 2's look until the user says otherwise.
-- Default Panel and Default Panel Dark (user, 2026-11-10): Default (Default Lines) with the panel's column on the
+  keeping track of their history (long names are fine). The main styles, the Lines family (MINERVA's thin lines, no
+  frame round the map): Default is Default Panel (`?style=default-panel`; first in the picker, the address with no
+  `?style=`), Default Dark is Default Panel Dark (`?style=default-panel-dark`), Default Wide is Default Lines, the panel
+  only while a molecule is open and the map the full width otherwise (`?style=default-lines`; it was Default from
+  2026-11-10 until Default Panel took its place the same day, user: the panel more controlled for scrolling, nothing
+  moves when an annotation opens, cosy and easier to focus on the diagram, the space freed easily when needed). When the
+  Lines family is replaced, its styles become Default Version 3 Lines Panel, ... Lines Panel Dark, ... Lines Wide (user:
+  remember it was called Lines). The default before it is Default Version 2 Frame Compact (`?style=default-next`, named
+  Default 2026-11-09 to 2026-11-10; it began as a copy of Compact), with Default Version 2 Frame Compact Dark
+  (`?style=default-dark`, used by no project, to be deleted later, user) and Default Version 2 Frame Compact List
+  (`?style=default-list`, Default List until 2026-11-10: a copy of Version 2 for experiments with the list). The first
+  is Default Version 1 Frame Original (`?style=default`). The sections below keep the names each style had when they
+  were written: there "Default" and "Default Next" mean Default Version 2 Frame Compact, "Default Dark" its dark
+  version, "Default List" its list experiment, "Default Version 1" the original, "Default Lines" Default Wide.
+  viewer-source and the sites keep Version 2's look until the user says otherwise.
+- Default Panel and Default Panel Dark (user, 2026-11-10; in the picker Default and Default Dark): Default Lines with the panel's column on the
   right always there, 240 px, empty until a molecule is chosen, as in Version 2; Dark in Version 2 Dark's colours. With
   Default the main styles, above the first line. Default's rules live in `_includes/default-lines-base.css` (Default and
   Default Panel include it), Default Panel's in `_includes/default-panel-base.css` (Default Panel and Default Panel
-  Dark include it; Dark adds only colours). A change to Default reaches all three. When Default Lines is replaced, they
-  become Default Version 3 Lines, ... Lines Panel, ... Lines Panel Dark.
+  Dark include it; Dark adds only colours). A change to Default Lines' base reaches all three.
 - The viewer is a copy, never edited here: `sh update.sh <clone of viewer-source.github.io>`, VERSION names the
   commit. A change the viewer needs (a new setting) is made in viewer-source first, then copied.
 - Default Version 1 (named Default until 2026-11-09, user: kept for comparing later; last in the picker,
@@ -47,7 +52,7 @@ Names no private repository in files, pages, code comments or commit messages.
   Default Version 1 included (user, 2026-11-09): filled in the style's accent under the pointer and while open, white text.  At rest
   it is quiet, a grey thing almost unseen (MINERVA: the search field's grey); under the pointer and while open it is
   filled in the strong colour of the page's buttons (user, 2026-11-09): a highlight is a strong fill, never a light tint
-  or coloured text that appears nowhere else on the page. The main styles, Default (Default Lines), Default Panel and Default Panel Dark (`"main": true` in `styles.json`), come first with a thin line
+  or coloured text that appears nowhere else on the page. The main styles, Default, Default Dark and Default Wide (`"main": true` in `styles.json`), come first with a thin line
   under them (user, 2026-11-10: the most developed, each carrying what was learned from the other layouts and styles). Styles kept only for comparing (`"kept": true` in
   `styles.json`: the earlier defaults by version, Default Version 1 Frame Original, then Default Version 2 Frame Compact with
   its Dark and List; user, 2026-11-10: Version 2 moved there) come last, under a thin line in the menu (user, 2026-11-09).
