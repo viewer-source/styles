@@ -1,36 +1,37 @@
 ---
 # Jekyll front matter, kept so the file is built as the other styles
 ---
-/* Default Dust (user, 2026-11-10): Default Dark in a dusty warm taupe, lighter than Dark but still good for white text
-   (page #6e655f, white on it 5.7:1; list and panel #776e67, 5.0:1); the chosen map and the buttons under the pointer in
-   a light sand with dark text, the map window white, as the maps are drawn for a white ground. Default Panel is its
-   master: a change to the layout is made in _includes/default-panel-base.css. */
+/* Default Dust (user, 2026-11-10): Default Dark in a lighter tone, still good for white text. First a dusty warm taupe
+   (page #6e655f); since the same day (user: cp108's colour as the main one, "brown is not needed") the cool grey of the
+   icon cp108, #71777c, for the page (white on it 4.6:1), the list and the panel a step darker #686e73 (5.4:1), the
+   chosen map and the buttons under the pointer in a light grey with dark text, the map window white. Default Panel is
+   its master: a change to the layout is made in _includes/default-panel-base.css. */
 {% include default-panel-base.css %}
 
 :root {
-  --m2-accent: #e3d3c1;
-  --m2-on-accent: #3a322c;
-  --m2-link: #f3e3cf;
-  --m2-text: #fbf8f4;
-  --m2-text-soft: #f3eee8;
-  --m2-muted: #e0d8cf;
-  --m2-faint: #cfc5ba;
-  --m2-button: #ece4da;
-  --m2-line: #8e847b;
-  --m2-frame: #8e847b;
-  --m2-bg: #776e67;
-  --m2-control-bg: #776e67f0;
+  --m2-accent: #dfe2e5;
+  --m2-on-accent: #2c3034;
+  --m2-link: #e3ebf3;
+  --m2-text: #f8f9fa;
+  --m2-text-soft: #eef0f2;
+  --m2-muted: #dadde0;
+  --m2-faint: #c6cace;
+  --m2-button: #e6e9ec;
+  --m2-line: #8a9095;
+  --m2-frame: #8a9095;
+  --m2-bg: #686e73;
+  --m2-control-bg: #686e73f0;
 }
-html body { background: #6e655f; color: #f3eee8; }
-html h1, html h2, html h3, html h4 { color: #fbf8f4; }
+html body { background: #71777c; color: #eef0f2; }
+html h1, html h2, html h3, html h4 { color: #f8f9fa; }
 html #m2-view { background: #fff; }
-html #m2-search { background: #776e67; color: #fbf8f4; }
-html #m2-search::placeholder { color: #ddd4ca; }
-html .m2-draft { background: transparent; color: #e6ddd3; border-color: #e6ddd3; }
+html #m2-search { background: #686e73; color: #f8f9fa; }
+html #m2-search::placeholder { color: #d2d6da; }
+html .m2-draft { background: transparent; color: #dde0e3; border-color: #dde0e3; }
 html #m2-zoom { color: #666; }   /* the zoom value sits on the white map window */
-html .site-name a { color: #fbf8f4; }
-html .site-name a { -webkit-text-stroke-color: #6e655f; }   /* the thinning stroke in this header's background */
-html .site-description { color: #e0d8cf; }
+html .site-name a { color: #f8f9fa; }
+html .site-name a { -webkit-text-stroke-color: #71777c; }   /* the thinning stroke in this header's background */
+html .site-description { color: #dadde0; }
 /* the zoom buttons sit on the white map window: light, grey edge, dark sign; the accent fill under the pointer */
 html .m2-ctrl button { background: #fffffff0; border-color: #bbb; color: #222; }
-html .m2-ctrl button:hover { background: var(--m2-accent); border-color: #c9b8a5; color: var(--m2-on-accent); }
+html .m2-ctrl button:hover { background: var(--m2-accent); border-color: #bfc4c9; color: var(--m2-on-accent); }

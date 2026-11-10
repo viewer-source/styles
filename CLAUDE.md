@@ -33,8 +33,9 @@ Names no private repository in files, pages, code comments or commit messages.
   and the panel only; includes `_includes/default-panel-base.css`; after Default Dust.
 - Default Code Linen (user, 2026-11-10; `?style=default-panel-code-linen`): an exact copy of Default Code, named after
   its side colour (linen, #f5f4f1); a file of its own, after Default Code.
-- Default Dust (user, 2026-11-10; `?style=default-panel-dust`): Default Dark in a dusty warm taupe, lighter than Dark but
-  good for white text (page #6e655f, list and panel #776e67), the chosen map in light sand with dark text; includes
+- Default Dust (user, 2026-11-10; `?style=default-panel-dust`): Default Dark in a lighter tone, good for white text: first a dusty
+  warm taupe (#6e655f), then the same day cp108's cool grey (user: "brown is not needed"): page #71777c, list and panel
+  #686e73, the chosen map in light grey #dfe2e5 with dark text; includes
   `_includes/default-panel-base.css`, adds only colours; after Default Dark.
 - Default Dust Cold (user, 2026-11-10; `?style=default-panel-dust-cold`): Default Dust in a cool slate tone at the same
   lightness (page #5f6873, list and panel #68717c); reversed the same day (user): the page pale blue grey #d6dee7, list and
