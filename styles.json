@@ -12,6 +12,5 @@
   {"id": "minerva", "name": "MINERVA", "file": "minerva.css"},
   {"id": "default", "name": "Default Version 1 Frame Original", "file": null, "kept": true},
   {"id": "default-next", "name": "Default Version 2 Frame Compact", "file": "default-next.css", "kept": true},
-  {"id": "default-dark", "name": "Default Version 2 Frame Compact Dark", "file": "default-dark.css", "kept": true},
   {"id": "default-list", "name": "Default Version 2 Frame Compact List", "file": "default-list.css", "kept": true}
 ]

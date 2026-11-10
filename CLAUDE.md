@@ -14,7 +14,7 @@ Names no private repository in files, pages, code comments or commit messages.
   Lines family is replaced, its styles become Default Version 3 Lines Right Panel, ... Lines Right Panel Dark, ... Lines Wide (user:
   remember it was called Lines). The default before it is Default Version 2 Frame Compact (`?style=default-next`, named
   Default 2026-11-09 to 2026-11-10; it began as a copy of Compact), with Default Version 2 Frame Compact Dark
-  (`?style=default-dark`, used by no project, to be deleted later, user) and Default Version 2 Frame Compact List
+  (`?style=default-dark`, removed 2026-11-10, user; Default Panel Dark keeps its colours) and Default Version 2 Frame Compact List
   (`?style=default-list`, Default List until 2026-11-10: a copy of Version 2 for experiments with the list). The first
   is Default Version 1 Frame Original (`?style=default`). The sections below keep the names each style had when they
   were written: there "Default" and "Default Next" mean Default Version 2 Frame Compact, "Default Dark" its dark
@@ -81,7 +81,7 @@ Names no private repository in files, pages, code comments or commit messages.
   switching), brought back the same day once the list kept the item above the chosen map in sight, and at the bottom edge too.
 - Default Dark (user, 2026-11-09): Default in Compact Dark's colours (mid grey page, white map window, light zoom
   buttons). Default is its master, as Compact is of the Compact styles: Default's rules live in
-  `_includes/default-base.css`, `styles/default-next.css` (Default) and `styles/default-dark.css` include it, Default Dark
+  `_includes/default-base.css`, `styles/default-next.css` (Default) and `styles/default-dark.css` (removed 2026-11-10) included it, Default Dark
   adds only colours. A change to Default's layout or behaviour is made in `default-base.css`, for both; Default List and
   Default Lines stay copies of their own.
 - Default Pinned (user, 2026-11-09): Default as it was before it took Compact Dark's scrolling (list and panel pinned in
