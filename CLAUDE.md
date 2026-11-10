@@ -41,9 +41,10 @@ Names no private repository in files, pages, code comments or commit messages.
   Default Version 1 included (user, 2026-11-09): filled in the style's accent under the pointer and while open, white text.  At rest
   it is quiet, a grey thing almost unseen (MINERVA: the search field's grey); under the pointer and while open it is
   filled in the strong colour of the page's buttons (user, 2026-11-09): a highlight is a strong fill, never a light tint
-  or coloured text that appears nowhere else on the page. The two main styles, Default (Default Lines) and Default Version 2 Frame Compact (`"main": true` in `styles.json`), come first with a thin line
+  or coloured text that appears nowhere else on the page. The main style, Default (Default Lines; `"main": true` in `styles.json`), comes first with a thin line
   under them (user, 2026-11-10: the most developed, each carrying what was learned from the other layouts and styles). Styles kept only for comparing (`"kept": true` in
-  `styles.json`: Default Version 1, Default List) come last, under a thin line in the menu (user, 2026-11-09).
+  `styles.json`: the earlier defaults by version, Default Version 1 Frame Original, then Default Version 2 Frame Compact with
+  its Dark and List; user, 2026-11-10: Version 2 moved there) come last, under a thin line in the menu (user, 2026-11-09).
 - A style the user likes goes into viewer-source as a named style only when the user says so.
 - Every change is checked on the live page before it counts as done.
 - The Compact styles (user, 2026-11-09): Compact is the master. Its rules live in `_includes/compact-base.css`; Compact,
