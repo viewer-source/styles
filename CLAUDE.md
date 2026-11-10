@@ -39,9 +39,7 @@ Names no private repository in files, pages, code comments or commit messages.
   `_includes/default-panel-base.css`, adds only colours; after Default Dark.
 - Default Dust Linen (user, 2026-11-10; `?style=default-panel-dust-linen`): linen #f5f4f1 everywhere but the white map
   window, dark text, the chosen map in Dust's grey #71777c with white text; after Default Dust.
-- Default Dust Cold (user, 2026-11-10; `?style=default-panel-dust-cold`): Default Dust in a cool slate tone at the same
-  lightness (page #5f6873, list and panel #68717c); reversed the same day (user): the page pale blue grey #d6dee7, list and
-  panel #dfe6ed, dark text, the chosen map in the slate #5f6873 with white text; after Default Dust.
+- Default Dust Cold (user, 2026-11-10): a cool slate version of Dust, then reversed; removed the same day (user: not liked).
 - Default Slate and Default Grey (user, 2026-11-10): Default (Default Panel) in Compact Slate's and Compact Grey's
   colours (those two removed the same day, user), each a little lighter (user: "not too much lighter"; values in each file's comment). They include
   `_includes/default-panel-base.css` and add only colours (Grey also its underlined links); main styles, after Default Dark. Default Grey made a cool grey a touch darker the same day (user: "a bit stronger or colder").
