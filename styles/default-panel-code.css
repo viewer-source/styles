@@ -10,7 +10,7 @@
 
 :root { --code-side: #f5f4f1; --code-head: 37px; }
 @media (min-width: 941px) {
-  html .m2-nav { position: relative; z-index: 1; margin-top: calc(-1 * var(--code-head) - 1px); padding-top: calc(var(--code-head) + 13px);
+  html .m2-nav { position: relative; top: 0; z-index: 1; margin-top: calc(-1 * var(--code-head) - 1px); padding-top: calc(var(--code-head) + 13px);
                  background: var(--code-side); align-self: stretch; min-height: 100vh; }
   html .site-info { position: relative; z-index: 2; }
   html .site-name a { -webkit-text-stroke-color: var(--code-side); }   /* the thinning stroke in the side colour */
