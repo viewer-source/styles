@@ -1,0 +1,19 @@
+---
+# Jekyll front matter, kept so the file is built as the other styles
+---
+/* Default Code (user, 2026-11-10): Default (Default Panel) laid out as Claude Code's app: the left column with the map
+   list runs from the top of the window, the site's name at its top, in a light warm side colour; the top bar with its
+   line spans only the map and the panel. The list column is drawn up over the bar's place (it covers the bar's line on
+   its own width, so the line follows when the list is dragged wider). Narrow windows stack as in Default. Default
+   Panel is its master: a change to the layout is made in _includes/default-panel-base.css. */
+{% include default-panel-base.css %}
+
+:root { --code-side: #f5f4f1; --code-head: 37px; }
+@media (min-width: 941px) {
+  html .m2-nav { position: relative; z-index: 1; margin-top: calc(-1 * var(--code-head) - 1px); padding-top: calc(var(--code-head) + 13px);
+                 background: var(--code-side); align-self: stretch; min-height: 100vh; }
+  html .site-info { position: relative; z-index: 2; }
+  html .site-name a { -webkit-text-stroke-color: var(--code-side); }   /* the thinning stroke in the side colour */
+  html body.m2-head-shut .m2-nav { margin-top: 0; padding-top: 12px; }   /* the top bar dragged away: the list from the top as it is */
+  html #m2-search { background: #fff; }
+}

@@ -28,6 +28,9 @@ Names no private repository in files, pages, code comments or commit messages.
   Default the main styles, above the first line. Default's rules live in `_includes/default-lines-base.css` (Default and
   Default Panel include it), Default Panel's in `_includes/default-panel-base.css` (Default Panel and Default Panel
   Dark include it; Dark adds only colours). A change to Default Lines' base reaches all three.
+- Default Code (user, 2026-11-10; `?style=default-panel-code`): Default laid out as Claude Code's app, the list column from
+  the top of the window with the site's name in it, light warm side colour #f5f4f1, the top bar and its line over the map
+  and the panel only; includes `_includes/default-panel-base.css`; after Default Dust.
 - Default Dust (user, 2026-11-10; `?style=default-panel-dust`): Default Dark in a dusty warm taupe, lighter than Dark but
   good for white text (page #6e655f, list and panel #776e67), the chosen map in light sand with dark text; includes
   `_includes/default-panel-base.css`, adds only colours; after Default Dark.
