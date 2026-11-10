@@ -1,7 +1,7 @@
 ---
 # Jekyll front matter, kept so the file is built as the other styles
 ---
-/* Default Panel Dark (user, 2026-11-10): Default Panel in the colours of Default Version 2 Frame Compact Dark (copied
+/* Default Panel Dark (user, 2026-11-10): Default Panel in the colours of Default V2 Frame Compact Dark (copied
    from it, as that style is to be deleted later): a mid grey page, the map window white, as the maps are drawn for a
    white ground. Default Panel is its master: a change to the layout is made in _includes/default-panel-base.css. */
 {% include default-panel-base.css %}
