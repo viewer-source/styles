@@ -12,20 +12,23 @@ where needed, a few rules. [ and ] step through the styles; the address keeps th
     #sp { position: relative; right: auto; top: auto; transform: none; display: flex; justify-content: center; margin: 8px 0 2px; }
     #sp-menu { right: auto; left: 50%; transform: translateX(-50%); }
   }
-  /* one width in every style (user, 2026-11-09): the longest name fits ("Style: Default V2 Frame Compact Dark",
-     340 px since the renaming of 2026-11-10; 216 px before, 152 px before 2026-11-09); a longer name needs more;
-     its text to the left in every style and on phones (user, 2026-11-09) */
-  #sp-chip { width: 340px; box-sizing: border-box; white-space: nowrap; overflow: hidden; text-align: left; font-size: 14px; line-height: 20px; padding: 4px 10px; color: var(--m2-muted); background: var(--m2-control-bg);
+  /* one width in every style (user, 2026-11-09): since 2026-11-10 (user) the default width of the panel on the right,
+     240 px, a longer name ending in an ellipsis (340 px before, for the longest name; 216 px, 152 px before 2026-11-09);
+     the menu as wide as its longest name; its text to the left in every style and on phones (user, 2026-11-09) */
+  #sp-chip { width: 240px; box-sizing: border-box; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; text-align: left; font-size: 14px; line-height: 20px; padding: 4px 10px; color: var(--m2-muted); background: var(--m2-control-bg);
              border: 1px solid var(--m2-line); border-radius: var(--m2-radius-button); cursor: pointer; }
   /* the button filled in the style's accent under the pointer and while its menu is open, white text, in every style
      (user, 2026-11-09: the picker is independent of the style shown, and selected means coloured, not its text) */
   #sp-chip:hover, #sp.sp-open #sp-chip { background: var(--m2-accent); border-color: var(--m2-accent); color: var(--m2-on-accent, #fff); }
   #sp-chip:focus { outline: none; }
+  /* the name shortened, the caret kept in sight */
+  #sp-chip { display: flex; align-items: baseline; }
+  #sp-name { flex: 0 1 auto; min-width: 0; overflow: hidden; text-overflow: ellipsis; margin: 0 4px; }
   #sp-menu { display: none; position: absolute; right: 0; top: 34px; padding: 4px 0; background: var(--m2-bg);
              border: 1px solid var(--m2-line); border-radius: var(--m2-radius-button); box-shadow: 0 2px 8px rgba(0, 0, 0, .12); }
   #sp.sp-open #sp-menu { display: flex; flex-direction: column; gap: 2px; }
   #sp-menu { padding: 4px; min-width: 100%; box-sizing: border-box; }   /* as wide as the chip (user, 2026-11-09) */
-  #sp-menu button { display: block; width: 100%; text-align: left; font-size: 14px; line-height: 18px; padding: 2px 8px; border: 0; border-radius: var(--m2-radius);
+  #sp-menu button { display: block; width: 100%; white-space: nowrap; text-align: left; font-size: 14px; line-height: 18px; padding: 2px 8px; border: 0; border-radius: var(--m2-radius);
                     color: var(--m2-muted); background: none; cursor: pointer; }
   /* a line under the main styles (main: true in styles.json, user, 2026-11-10) and above the styles kept only for
      comparing (kept: true in styles.json), at the end of the menu (user, 2026-11-09) */

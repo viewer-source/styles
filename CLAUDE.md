@@ -74,7 +74,8 @@ Names no private repository in files, pages, code comments or commit messages.
 - A new style: a file in `styles/` and its line in `styles.json`. Settings on `:root` first; extra rules prefixed
   with `html ` so they win over the viewer's own rules, which come later in the page.
 - Rules for every style (user, 2026-11-09): button sizes stay as in the viewer (a style changes colours, not sizes);
-  the style chip has the size of the download buttons; the window with the map list ends where the download buttons
+  the style chip has the height of the download buttons and, since 2026-11-10 (user), the panel's default width, 240 px
+  (a longer name ends in an ellipsis, the menu as wide as its longest name); the window with the map list ends where the download buttons
   end, a good default, no longer a rule (user, 2026-11-09: to be unlinked when the map window gets its lower separator).
   The space at the bottom (user, 2026-11-09, repeated: "lets not come back to it"): in every style but Default the
   download buttons are 8 px above the bottom of the window, the same distance as the windows from the window's edges,
