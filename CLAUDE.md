@@ -20,6 +20,9 @@ Names no private repository in files, pages, code comments or commit messages.
   were written: there "Default" and "Default Next" mean Default Version 2 Frame Compact, "Default Dark" its dark
   version, "Default List" its list experiment, "Default Version 1" the original, "Default Lines" Default Wide.
   viewer-source and the sites keep Version 2's look until the user says otherwise.
+- Default Version 2 Frame Compact Dots (user, 2026-11-10; `?style=default-next-dots`): Version 2 with Compact's three dots
+  (#b4b4b4) on every separator; includes `_includes/default-base.css` and adds only the dots; with the kept styles,
+  after Version 2.
 - Default Panel and Default Panel Dark (user, 2026-11-10; in the picker Default and Default Dark): Default Lines with the panel's column on the
   right always there, 240 px, empty until a molecule is chosen, as in Version 2; Dark in Version 2 Dark's colours. With
   Default the main styles, above the first line. Default's rules live in `_includes/default-lines-base.css` (Default and
