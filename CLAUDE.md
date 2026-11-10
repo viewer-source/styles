@@ -11,7 +11,7 @@ Names no private repository in files, pages, code comments or commit messages.
   only while a molecule is open and the map the full width otherwise (`?style=default-lines`; it was Default from
   2026-11-10 until Default Panel took its place the same day, user: the panel more controlled for scrolling, nothing
   moves when an annotation opens, cosy and easier to focus on the diagram, the space freed easily when needed). When the
-  Lines family is replaced, its styles become Default Version 3 Lines Panel, ... Lines Panel Dark, ... Lines Wide (user:
+  Lines family is replaced, its styles become Default Version 3 Lines Right Panel, ... Lines Right Panel Dark, ... Lines Wide (user:
   remember it was called Lines). The default before it is Default Version 2 Frame Compact (`?style=default-next`, named
   Default 2026-11-09 to 2026-11-10; it began as a copy of Compact), with Default Version 2 Frame Compact Dark
   (`?style=default-dark`, used by no project, to be deleted later, user) and Default Version 2 Frame Compact List
@@ -61,8 +61,8 @@ Names no private repository in files, pages, code comments or commit messages.
 - The Compact styles (user, 2026-11-09): Compact is the master. Its rules live in `_includes/compact-base.css`; Compact,
   Compact Grey and Compact Slate each include it (Compact Dark removed 2026-11-09, user: Default Dark took its place) (Jekyll front matter and `{% include compact-base.css %}`)
   and add only colours. A change to the layout or behaviour of any of them is made in `compact-base.css`, for all.
-- Reactome Scroll is the master of Reactome Scroll Panel (user, 2026-11-10): its rules in
-  `_includes/reactome-scroll-base.css`, both styles include it; Reactome Scroll Panel adds only the panel's window on
+- Reactome Scroll is the master of Reactome Scroll Right Panel (user, 2026-11-10; Reactome Scroll Panel for a moment: "panel" alone was not clear): its rules in
+  `_includes/reactome-scroll-base.css`, both styles include it; Reactome Scroll Right Panel adds only the panel's window on
   the right, always there, empty until a molecule is chosen (as Default's column).
 - Reactome Fixed is the master of Reactome Fixed Blue (user, 2026-11-09), the same way: its rules in
   `_includes/reactome-fixed-base.css`, both styles include it, Reactome Fixed Blue adds only colours.
