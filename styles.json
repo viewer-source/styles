@@ -10,5 +10,5 @@
   { "id": "reactome-fixed-blue", "name": "Reactome Fixed Blue", "file": "reactome-fixed-blue.css" },
   { "id": "minerva", "name": "MINERVA", "file": "minerva.css" },
   { "id": "default", "name": "Default Version 1 Frame Original", "file": null, "kept": true },
-  { "id": "default-list", "name": "Default List", "file": "default-list.css", "kept": true }
+  { "id": "default-list", "name": "Default Version 2 Frame Compact List", "file": "default-list.css", "kept": true }
 ]

@@ -8,10 +8,11 @@ Names no private repository in files, pages, code comments or commit messages.
   keeping track of their history (long names are fine). Default is Default Lines (first in the picker, the address with
   no `?style=`; `?style=default-lines` still opens it). The default before it is Default Version 2 Frame Compact
   (`?style=default-next`, named Default 2026-11-09 to 2026-11-10; it began as a copy of Compact), with Default Version 2
-  Frame Compact Dark (`?style=default-dark`, used by no project, to be deleted later, user). The first is Default Version
+  Frame Compact Dark (`?style=default-dark`, used by no project, to be deleted later, user) and Default Version 2 Frame
+  Compact List (`?style=default-list`, Default List until 2026-11-10: a copy of Version 2 for experiments with the list). The first is Default Version
   1 Frame Original (`?style=default`). When Default Lines is replaced in turn, it becomes Default Version 3 Lines. The
   sections below keep the names each style had when they were written: there "Default" and "Default Next" mean Default
-  Version 2 Frame Compact, "Default Dark" its dark version, "Default Version 1" the original. viewer-source and the
+  Version 2 Frame Compact, "Default Dark" its dark version, "Default List" its list experiment, "Default Version 1" the original. viewer-source and the
   sites keep Version 2's look until the user says otherwise.
 - The viewer is a copy, never edited here: `sh update.sh <clone of viewer-source.github.io>`, VERSION names the
   commit. A change the viewer needs (a new setting) is made in viewer-source first, then copied.
