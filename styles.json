@@ -4,6 +4,7 @@
   {"id": "default-panel-dust", "name": "Default Dust", "file": "default-panel-dust.css", "main": true},
   {"id": "default-panel-dust-cold", "name": "Default Dust Cold", "file": "default-panel-dust-cold.css", "main": true},
   {"id": "default-panel-code", "name": "Default Code", "file": "default-panel-code.css", "main": true},
+  {"id": "default-panel-code-linen", "name": "Default Code Linen", "file": "default-panel-code-linen.css", "main": true},
   {"id": "default-panel-slate", "name": "Default Slate", "file": "default-panel-slate.css", "main": true},
   {"id": "default-panel-grey", "name": "Default Grey", "file": "default-panel-grey.css", "main": true},
   {"id": "default-lines", "name": "Default Wide", "file": "default-lines.css", "main": true},
