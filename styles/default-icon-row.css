@@ -22,6 +22,6 @@ html .m2-icons-on .m2-ri { width: 24px; height: 24px; border-radius: 0; }
 html .m2-icons-on .m2-ri svg { width: 21px; height: 21px; }
 html .m2-icon-row #m2-rail { height: 31px; column-gap: 12px; }
 /* Icons Top or Left (Settings, user 2026-11-12: "add back ... vertical vs horizontal"): on the left the same signs down a
-   narrow column, 12 px apart, the first in line with the list's top */
-html .m2-icons-on:not(.m2-icon-row) { padding-left: 40px; }
-html .m2-icons-on:not(.m2-icon-row) #m2-rail { width: 40px; gap: 12px; padding-top: 2px; }
+   column 52 px wide, 14 px apart, the first 12 px down (user, 2026-11-12: more room, Search was too close to the top) */
+html .m2-icons-on:not(.m2-icon-row) { padding-left: 52px; }
+html .m2-icons-on:not(.m2-icon-row) #m2-rail { width: 52px; gap: 14px; padding-top: 12px; }
