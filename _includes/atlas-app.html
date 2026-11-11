@@ -51,6 +51,8 @@ look="panel" (user, 2026-11-10): Default Panel of the styles experiment, its own
                                     the download buttons (user, 2026-11-10, as in Claude's app): off, a style turns it on */
     --m2-icons: 0;               /* a narrow column of icons on the left, each opening its window in the list's place (user,
                                     2026-11-11, from MINERVA's): off, a style turns it on */
+    --m2-info-float: 0;          /* the molecule's panel floating over the map's right side on wide windows too, so the map
+                                    never moves or shrinks when it opens; it slides in (user, 2026-11-11): off, a style turns it on */
     --m2-separator-below: 0;     /* the separator under the map window (its height): off for now (user, 2026-11-09: to think about) */
     --m2-split: 32px;            /* the gap between the list and the map: its separator can be dragged */
     --m2-split-h: 14px;          /* the gap under the map window, down to the download buttons: its separator too */
@@ -158,8 +160,8 @@ look="panel" (user, 2026-11-10): Default Panel of the styles experiment, its own
      (its separator). The download row under the map goes, its files are in the Downloads window. Wide windows only. */
   #m2-rail, .m2 .m2-winhead, #m2-dlwin, #m2-extwin, #m2-infowin { display: none; }
   @media (min-width: 941px) {
-    .m2.m2-icons-on { box-sizing: border-box; padding-left: 44px; }
-    .m2-icons-on #m2-rail { display: flex; flex-direction: column; align-items: center; gap: 4px; position: absolute; left: 0; top: 0; bottom: 0; width: 44px;
+    .m2.m2-icons-on { box-sizing: border-box; padding-left: 52px; }
+    .m2-icons-on #m2-rail { display: flex; flex-direction: column; align-items: center; gap: 4px; position: absolute; left: 0; top: 0; bottom: 0; width: 52px;
       box-sizing: border-box; padding-top: 8px; border-right: 1px solid var(--m2-frame); }
     .m2-icons-on #m2-downloads, .m2-icons-on #m2-menu { display: none; }
     .m2-icons-on #m2-view { max-height: calc(200vh / var(--zoom, 1)); }
@@ -170,21 +172,28 @@ look="panel" (user, 2026-11-10): Default Panel of the styles experiment, its own
     .m2-win-dl #m2-dlwin, .m2-win-ext #m2-extwin, .m2-win-info #m2-infowin { display: block; }
     .m2-win-search:not(.m2-q) #m2-list { display: none; }   /* Search shows results only, not the Maps list again (user, 2026-11-11) */
     #m2-infowin { overflow-y: auto; max-height: calc(100vh / var(--zoom, 1) - 110px); font-size: 14px; line-height: 1.45; color: var(--m2-text-soft); overflow-wrap: anywhere; }
-    .m2 #m2-infowin #m2-title { font-size: 16px; font-weight: 600; margin: 0 0 8px; padding: 0 4px; }
-    .m2 #m2-infowin #m2-text { padding: 0 4px; }
-    .m2 #m2-infowin #m2-text h2 { font-size: 15px; }
+    #m2-infowin p { margin: 0 0 8px; padding: 0 4px; }
+    #m2-infowin .m2-pi-name { font-size: 16px; font-weight: 600; color: var(--m2-text); }
+    #m2-infowin .m2-k { color: var(--m2-muted); }
   }
-  .m2-ri { display: flex; align-items: center; justify-content: center; width: 32px; height: 32px; padding: 0; border: 0; border-radius: var(--m2-radius); background: none; color: var(--m2-muted); cursor: pointer; }
-  .m2-ri svg { width: 19px; height: 19px; }
-  .m2-ri:hover, .m2-ri.m2-open { background: var(--m2-accent); color: var(--m2-on-accent); }
+  /* larger and grey (user, 2026-11-11: "a bit larger, more comfortable, also grey-ish"): 40 px buttons, 23 px signs in
+     a soft grey; under the pointer and open a light grey fill with the sign darker, no blue */
+  .m2-ri { display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; padding: 0; border: 0; border-radius: 8px; background: none; color: #80868b; cursor: pointer; }
+  .m2-ri svg { width: 23px; height: 23px; stroke-width: 1.6; }
+  .m2-ri:hover { background: #f1f3f4; color: #3c4043; }
+  .m2-ri.m2-open { background: #e8eaed; color: #202124; }
   .m2-ri:focus { outline: none; }
   /* plain links in the Downloads and Open in windows, no button look and no download or outside sign on each, the
      window's icon says it already (user, 2026-11-11) */
-  #m2-dlwin a, #m2-extwin a { display: block; font-size: 14px; line-height: 20px; padding: 3px 4px; color: var(--m2-link); text-decoration: none; }
-  #m2-dlwin a:hover, #m2-extwin a:hover { text-decoration: underline; }
+  /* easy to click (user, 2026-11-11: "make download buttons so easy to click"): each a full-width button 36 px tall, a
+     light grey edge, a light grey fill under the pointer, as the icons */
+  #m2-dlwin, #m2-extwin { padding: 0 4px; }
+  #m2-dlwin a, #m2-extwin a { display: block; box-sizing: border-box; font-size: 14px; line-height: 20px; padding: 7px 12px; margin: 0 0 6px;
+    border: 1px solid var(--m2-line, #dadce0); border-radius: 8px; color: var(--m2-text); text-decoration: none; }
+  #m2-dlwin a:hover, #m2-extwin a:hover { background: #f1f3f4; border-color: #c4c7c9; }
   #m2-dlwin a svg, #m2-extwin a svg { display: none; }
   #m2-dlwin a.m2-bad { color: var(--m2-error); cursor: help; }
-  #m2-dlwin .m2-sep { border-top: 1px solid var(--m2-line); margin: 4px 0; }
+  #m2-dlwin .m2-sep { border-top: 1px solid var(--m2-line); margin: 10px 0; }
   .m2-item { display: block; width: 100%; text-align: left; font-size: 14px; line-height: 18px; padding: 2px 4px; border: 1px solid transparent; border-radius: var(--m2-radius); background: none; cursor: pointer; color: var(--m2-text); }
   /* the chosen map: a filled box in the site's link blue, white text */
   /* under the pointer: --m2-hover (none since 2026-11-09; was a very light grey) */
@@ -299,6 +308,12 @@ look="panel" (user, 2026-11-10): Default Panel of the styles experiment, its own
   .m2-info { grid-column: 3; font-size: 14px; line-height: 1.45; color: var(--m2-text-soft); max-height: calc(100vh / var(--zoom, 1) - 140px); overflow-y: auto; overflow-wrap: anywhere; }
   .m2-info.m2-over { position: absolute; z-index: 2; top: 36px; right: 8px; bottom: 8px; width: min(260px, 70%); max-height: none; padding: 10px 12px; background: var(--m2-bg); border: 1px solid var(--m2-line); border-radius: var(--m2-radius); box-shadow: 0 2px 8px #0002; cursor: auto; user-select: text; }
   .m2-info:empty { display: none; }
+  /* --m2-info-float: 1 (user, 2026-11-11): the panel as a card over the map, the list's width (its own --m2-info-w),
+     sliding in from the right when it opens; switching molecules keeps it still */
+  .m2-info-float .m2-info.m2-over { top: 8px; right: 8px; bottom: auto; max-height: calc(100% - 16px); width: var(--m2-info-w, 240px); max-width: 70%;
+    box-sizing: border-box; padding: 12px 16px; border-color: var(--m2-frame, var(--m2-line)); box-shadow: 0 4px 16px #0000001f; animation: m2-slide .16s ease-out; }
+  @keyframes m2-slide { from { opacity: 0; transform: translateX(16px); } }
+  @media (prefers-reduced-motion: reduce) { .m2-info-float .m2-info.m2-over { animation: none; } }
   .m2-info-head { display: flex; align-items: baseline; gap: 6px; margin-bottom: 8px; }
   .m2-info-head h3 { font-size: 16px; font-weight: 400; margin: 0; flex: 1; }
   /* close: a thin cross in the soft grey of the group chevrons */
@@ -518,7 +533,7 @@ html .m2-list-shut #m2-split { left: 0; }
 <div id="m2-list"></div>
 <div id="m2-dlwin"></div>
 <div id="m2-extwin"></div>
-<div id="m2-infowin"></div>
+<div id="m2-infowin"><p class="m2-pi-name">{{ include.name | default: site.name | default: site.title }}</p>{% assign about = include.about | default: site.description %}{% if about %}<p>{{ about }}</p>{% endif %}<p class="m2-k" id="m2-info-count"></p></div>
 </div>
 <div class="m2-main">
 <div id="m2-view" tabindex="0">
@@ -1036,13 +1051,10 @@ html .m2-list-shut #m2-split { left: 0; }
     var q = document.getElementById('m2-search'); g.classList.toggle('m2-q', !!(q && q.value.trim()));
     g.classList.toggle('m2-win-ext', on && w === 'ext');
     g.classList.toggle('m2-win-info', on && w === 'info');
-    // the map's name and text live in the Info window while the icon column is on, under the map otherwise
-    var iw = document.getElementById('m2-infowin'), tt = document.getElementById('m2-title'), tx = document.getElementById('m2-text');
-    if (iw && tt && tx) {
-      var side = on && window.matchMedia('(min-width: 941px)').matches;
-      if (side && tt.parentNode !== iw) { iw.appendChild(tt); iw.appendChild(tx); }
-      if (!side && tt.parentNode === iw) { var mm = document.querySelector('.m2-main'); mm.appendChild(tt); mm.appendChild(tx); }
-    }
+    // Info is about the whole project, briefly, as MINERVA's (user, 2026-11-11: "brief info only on the whole project,
+    // not map"): its name, its description, how many maps; the map's name and text stay under the map
+    var pc = document.getElementById('m2-info-count');
+    if (pc && typeof maps !== 'undefined' && maps && maps.length) pc.textContent = maps.length + (maps.length === 1 ? ' map' : ' maps');
     var t = document.getElementById('m2-wintitle'); if (t) t.textContent = WIN_NAMES[w];
     document.querySelectorAll('#m2-rail .m2-ri').forEach(function (b) { b.classList.toggle('m2-open', on && open && b.dataset.win === w); });
   }
@@ -1131,7 +1143,8 @@ html .m2-list-shut #m2-split { left: 0; }
   // wide windows: the right column; narrower: over the right side of the map
   var wide = window.matchMedia('(min-width: 1030px)');
   function placeInfo() {
-    var over = !wide.matches || isFull();
+    var float = setting('info-float'), over = !wide.matches || isFull() || float;
+    document.querySelector('.m2').classList.toggle('m2-info-float', float);
     info.classList.toggle('m2-over', over);
     var home = over ? view : document.querySelector('.m2');
     if (info.parentNode !== home) home.appendChild(info);
@@ -1254,7 +1267,16 @@ html .m2-list-shut #m2-split { left: 0; }
     member = -1;
     renderInfo();
     if (sel) reopenInfo();
+    clearOfCard();
     drawPin();
+  }
+  // a molecule under the floating card (--m2-info-float): the drawing shifts left just enough to show it beside the
+  // card (MINERVA's rule as the user noted it, 2026-11-11); otherwise nothing moves
+  function clearOfCard() {
+    if (!sel || !info.classList.contains('m2-over') || !info.childNodes.length) return;
+    var k = scaleOf(current), b = sel.box, z0 = pz();
+    var right = tx + (b[0] + b[2]) / k * z, edge = (info.getBoundingClientRect().left - view.getBoundingClientRect().left) / z0 - 16;
+    if (right > edge) { tx -= right - edge; draw(); }
   }
   function closeInfo() { sel = null; renderInfo(); drawPin(); }
   // a search result chosen: its node is selected and centred at reading size
@@ -1879,6 +1901,7 @@ html .m2-list-shut #m2-split { left: 0; }
 
   function setMaps(list) {
     maps = arrange(list); byId = {}; topics = [];
+    railMark(); // the map count in the Info window
     maps.forEach(function (m) {
       byId[m.id] = m;
       var t = topics.filter(function (x) { return x.name === m.topic; })[0];

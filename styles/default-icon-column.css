@@ -8,5 +8,5 @@
    8 px above the window's bottom, a line under it. */
 {% include default-lines-base.css %}
 
-:root { --m2-icons: 1; --m2-below-view: 8px; }
+:root { --m2-icons: 1; --m2-below-view: 8px; --m2-info-float: 1; }   /* the panel floats over the map, which never moves when it opens (user, 2026-11-11) */
 html #m2-view { border-bottom: 1px solid var(--m2-frame); }

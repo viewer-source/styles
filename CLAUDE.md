@@ -37,7 +37,8 @@ Names no private repository in files, pages, code comments or commit messages.
 - Default Icon Column (user, 2026-11-11; `?style=default-icon-column`): Default Wide with the viewer's icon column
   (`--m2-icons: 1`, made in viewer-source for it), from MINERVA's but narrower: Info, Search, Maps, Downloads, Open in (in this order; Info and Open in added, user 2026-11-11; Search its own icon and Symbols out until a legend is
   ready, user, 2026-11-11), each opening its window in the list's place, closed by a second click or its cross; annotations on the right, only while a molecule
-  is open; no download row, the map window 8 px above the window's bottom with a line under it. Named so by the user
+  is open; no download row, the map window 8 px above the window's bottom with a line under it. The panel floats over the map as a card
+  sliding in, so the map does not move when it opens (user, 2026-11-11; `--m2-info-float: 1`). Named so by the user
   (MINERVA2 weighed: the styles are named by how the map sits, and MINERVA is the colour study). After Default Downloads.
 - Default Code (user, 2026-11-10; `?style=default-panel-code`): Default laid out as Claude Code's app, the list column from
   the top of the window with the site's name in it, white (first linen #f5f4f1, kept as Default Code Linen; user), the top bar and its line over the map
