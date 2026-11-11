@@ -14,3 +14,12 @@ html #m2-view { border-bottom: 1px solid var(--m2-frame); }
    Info) soft grey as the icons at rest (user, 2026-11-11); the buttons in Downloads and Open in are the page's download buttons */
 html .m2-icons-on .m2-winhead h3, html #m2-infowin, html #m2-infowin .m2-pi-name { color: #5f6368; }
 html .site-name { visibility: hidden; }   /* no site name in this style (user, 2026-11-11); the bar keeps its height for the style chip */
+
+/* both side windows over the map as temporary panels (user, 2026-11-11: "when list appears it should not modify the usable
+   window, a temporary panel that eventually will go away", "as with annotation bar on the right"): the map window keeps
+   the whole width from the icon column to the page's right edge, a small map stays centred in it, nothing moves when a
+   window opens or closes. The annotations a column over the map's right side, as tall as the map window, a line on its
+   left (no card, no shadow); the drawing shifts only if the chosen item would be under it */
+:root { --m2-nav-float: 1; --m2-info-float: 1; }
+html .m2-info-float .m2-info.m2-over { top: 0; right: 0; bottom: 0; max-height: none; max-width: 70%; border: 0; border-left: 1px solid var(--m2-frame);
+  border-radius: 0; box-shadow: none; padding: 12px 16px; }
