@@ -1,8 +1,8 @@
 [
   {"id": "default-panel", "name": "Default", "file": "default-panel.css", "main": true},
+  {"id": "default-icon-column", "name": "Default Icon Column", "file": "default-icon-column.css", "main": true},
   {"id": "default-panel-downloads", "name": "Default Downloads", "file": "default-panel-downloads.css", "main": true},
   {"id": "default-panel-code", "name": "Default Code", "file": "default-panel-code.css", "main": true},
-  {"id": "default-icon-column", "name": "Default Icon Column", "file": "default-icon-column.css", "main": true},
   {"id": "default-panel-code-downloads", "name": "Default Code Downloads", "file": "default-panel-code-downloads.css", "main": true},
   {"id": "default-panel-dark", "name": "Default Dark", "file": "default-panel-dark.css", "main": true},
   {"id": "default-panel-code-linen", "name": "Default Code Linen", "file": "default-panel-code-linen.css", "main": true},
