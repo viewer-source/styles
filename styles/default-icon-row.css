@@ -9,14 +9,19 @@
    in Downloads), so the map window reaches 8 px above the window's bottom, a line under it. */
 {% include default-lines-base.css %}
 
-:root { --m2-icons: 1; --m2-icon-row: 1; --m2-dl-ext: 1; --m2-below-view: 8px; }
+:root { --m2-icons: 1; --m2-icon-row: 1; --m2-bar-choice: 1; --m2-dl-ext: 1; --m2-below-view: 8px; }
 html #m2-view { border-bottom: 1px solid var(--m2-frame); }
 /* as Default Icon Column: the windows' text soft grey as the icons at rest */
 html #m2-infowin, html #m2-infowin .m2-pi-name { color: #5f6368; }
 /* no Info tab (user, 2026-11-11: "remove info"), no Legend for now (user, the same day) */
-html .m2-icon-row .m2-ri[data-win="info"], html .m2-icon-row .m2-ri[data-win="leg"] { display: none; }
+html .m2-icons-on .m2-ri[data-win="info"], html .m2-icons-on .m2-ri[data-win="leg"] { display: none; }
 /* plain signs, not buttons (user, 2026-11-12: "simply click, not highlight"; "without highlights, so not button view,
    so then they could take narrower bar"): no fill on the open tab or under the pointer, and no change of colour either (user, 2026-11-12, asked twice); 24 px tabs 12 px apart, the bar 24 px tall with 6 px under the signs */
-html .m2-icon-row .m2-ri, html .m2-icon-row .m2-ri.m2-open, html .m2-icon-row .m2-ri:hover { background: none; color: #80868b; }
-html .m2-icon-row .m2-ri { width: 24px; height: 24px; border-radius: 0; }
+html .m2-icons-on .m2-ri, html .m2-icons-on .m2-ri.m2-open, html .m2-icons-on .m2-ri:hover { background: none; color: #80868b; }
+html .m2-icons-on .m2-ri { width: 24px; height: 24px; border-radius: 0; }
+html .m2-icons-on .m2-ri svg { width: 21px; height: 21px; }
 html .m2-icon-row #m2-rail { height: 31px; column-gap: 12px; }
+/* Icons Top or Left (Settings, user 2026-11-12: "add back ... vertical vs horizontal"): on the left the same signs down a
+   narrow column, 12 px apart, the first in line with the list's top */
+html .m2-icons-on:not(.m2-icon-row) { padding-left: 40px; }
+html .m2-icons-on:not(.m2-icon-row) #m2-rail { width: 40px; gap: 12px; padding-top: 2px; }
