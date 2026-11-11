@@ -36,6 +36,7 @@ Names no private repository in files, pages, code comments or commit messages.
 - Default Downloads (user, 2026-11-11; `?style=default-panel-downloads`): Default with the viewer's menu (`--m2-menu: 1`)
   as Default Code Downloads, Search and Downloads rows at the top of the list, the map window to 8 px above the window's
   bottom; Default's colours; includes `_includes/default-panel-base.css`; right after Default in the picker.
+  A line under the map window (in the frame colour), before the page's text (user, 2026-11-11), also in Default Code Downloads.
 - Default Code Downloads (user, 2026-11-10, named Default Code Compact until 2026-11-11, user; `?style=default-panel-code-downloads`,
   the old address opens Default): Default Code with the viewer's menu
   (`--m2-menu: 1`, made in viewer-source for it), as in Claude's app: Search (magnifying glass, shows the search field
@@ -49,12 +50,12 @@ Names no private repository in files, pages, code comments or commit messages.
 - Default Dust (user, 2026-11-10; `?style=default-panel-dust`): Default Dark in a lighter tone, good for white text: first a dusty
   warm taupe (#6e655f), then the same day cp108's cool grey (user: "brown is not needed"): page #71777c, list and panel
   #686e73, the chosen map in light grey #dfe2e5 with dark text; includes
-  `_includes/default-panel-base.css`, adds only colours; after Default Dark.
+  `_includes/default-panel-base.css`, adds only colours; after Default Dark. Removed 2026-11-11 (user); its rules are in the history.
 - Default Dust Linen (user, 2026-11-10; `?style=default-panel-dust-linen`): linen #f5f4f1 everywhere but the white map
-  window, dark text, the chosen map in Dust's grey #71777c with white text; after Default Dust.
+  window, dark text, the chosen map in Dust's grey #71777c with white text; after Default Dust. Removed 2026-11-11 (user); its rules are in the history.
 - Default Linen (user, 2026-11-10; `?style=default-panel-linen`): Default Dust Linen with the linen #f5f4f1 on the left
   column alone (the list and its search field white); top bar, map window and panel white as Default; the chosen map in
-  Dust's grey #71777c with white text, as Dust Linen; after Default Dust Linen.
+  Dust's grey #71777c with white text, as Dust Linen; after Default Dust Linen. Removed 2026-11-11 (user); its rules are in the history.
 - The header line (2026-11-10): `default-lines-base.css` sets no margin under the header, so the vertical lines meet
   it on any site, as viewer-source's `look="panel"`; every Default style has it through the base.
 - Default Dust Cold (user, 2026-11-10): a cool slate version of Dust, then reversed; removed the same day (user: not liked).

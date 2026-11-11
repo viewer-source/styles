@@ -22,3 +22,4 @@
 
 :root { --m2-menu: 1; --m2-below-view: 8px; --m2-accent: #71777c; --m2-on-accent: #fff; }
 html .m2-ctrl button:hover { background: var(--m2-accent); border-color: var(--m2-accent); color: var(--m2-on-accent); }
+html #m2-view { border-bottom: 1px solid var(--m2-frame); }   /* a line under the map window, before the page's text (user, 2026-11-11) */
