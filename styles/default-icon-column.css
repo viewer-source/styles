@@ -11,6 +11,6 @@
 :root { --m2-icons: 1; --m2-below-view: 8px; --m2-info-float: 1; }   /* the panel floats over the map, which never moves when it opens (user, 2026-11-11) */
 html #m2-view { border-bottom: 1px solid var(--m2-frame); }
 /* the highlight blue as in Default (user, 2026-11-11: grey tried and returned the same day); the windows' text (title,
-   Info) soft grey; the buttons in Downloads and Open in are the page's download buttons as the icons at rest (user, 2026-11-11) */
+   Info) soft grey as the icons at rest (user, 2026-11-11); the buttons in Downloads and Open in are the page's download buttons */
 html .m2-icons-on .m2-winhead h3, html #m2-infowin, html #m2-infowin .m2-pi-name { color: #5f6368; }
 html .site-name { visibility: hidden; }   /* no site name in this style (user, 2026-11-11); the bar keeps its height for the style chip */
