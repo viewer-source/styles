@@ -35,8 +35,8 @@ Names no private repository in files, pages, code comments or commit messages.
   as asked (Default Downloads had it already); the other Default styles and viewer-source's `look="panel"` take it
   when the user says.
 - Default Icon Column (user, 2026-11-11; `?style=default-icon-column`): Default Wide with the viewer's icon column
-  (`--m2-icons: 1`, made in viewer-source for it), from MINERVA's but narrower: Maps, Downloads, Symbols, each opening
-  its window in the list's place, closed by a second click or its cross; annotations on the right, only while a molecule
+  (`--m2-icons: 1`, made in viewer-source for it), from MINERVA's but narrower: Maps, Search, Downloads (Search its own icon and Symbols out until a legend is
+  ready, user, 2026-11-11), each opening its window in the list's place, closed by a second click or its cross; annotations on the right, only while a molecule
   is open; no download row, the map window 8 px above the window's bottom with a line under it. Named so by the user
   (MINERVA2 weighed: the styles are named by how the map sits, and MINERVA is the colour study). After Default Downloads.
 - Default Code (user, 2026-11-10; `?style=default-panel-code`): Default laid out as Claude Code's app, the list column from

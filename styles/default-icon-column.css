@@ -3,7 +3,7 @@
 ---
 /* Default Icon Column (user, 2026-11-11): Default Wide (Default Lines: MINERVA's thin lines, the panel only while a
    molecule is open, on the right) with the viewer's icon column (--m2-icons: 1), from MINERVA's but narrower: Maps,
-   Downloads and Symbols each open their window in the list's place, a second click or the cross closes it and the map
+   Search and Downloads each open their window in the list's place, a second click or the cross closes it and the map
    takes the room. The download row under the map goes (its files in the Downloads window), so the map window reaches
    8 px above the window's bottom, a line under it. */
 {% include default-lines-base.css %}
