@@ -8,7 +8,7 @@
    8 px above the window's bottom, a line under it. */
 {% include default-lines-base.css %}
 
-:root { --m2-icons: 1; --m2-below-view: 8px; --m2-info-float: 1; }   /* the panel floats over the map, which never moves when it opens (user, 2026-11-11) */
+:root { --m2-icons: 1; --m2-below-view: 8px; }   /* the panel a column on the right again, not a floating card (user, 2026-11-11: "return it") */
 html #m2-view { border-bottom: 1px solid var(--m2-frame); }
 /* the highlight blue as in Default (user, 2026-11-11: grey tried and returned the same day); the windows' text (title,
    Info) soft grey as the icons at rest (user, 2026-11-11); the buttons in Downloads and Open in are the page's download buttons */
