@@ -15,3 +15,6 @@ html #m2-view { border-bottom: 1px solid var(--m2-frame); }
 html #m2-infowin, html #m2-infowin .m2-pi-name { color: #5f6368; }
 /* no Info tab (user, 2026-11-11: "remove info"), no Legend for now (user, the same day) */
 html .m2-icon-row .m2-ri[data-win="info"], html .m2-icon-row .m2-ri[data-win="leg"] { display: none; }
+/* no highlight on the open tab (user, 2026-11-12: "simply click, not highlight"; Maps was blue all the time): the
+   tabs stay grey, the accent fill only under the pointer */
+html .m2-icon-row .m2-ri.m2-open:not(:hover) { background: none; color: #80868b; }
