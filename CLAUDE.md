@@ -30,6 +30,10 @@ Names no private repository in files, pages, code comments or commit messages.
   Default the main styles, above the first line. Default's rules live in `_includes/default-lines-base.css` (Default and
   Default Panel include it), Default Panel's in `_includes/default-panel-base.css` (Default Panel and Default Panel
   Dark include it; Dark adds only colours). A change to Default Lines' base reaches all three.
+- A line under the map window in Default (user, 2026-11-11; `styles/default-panel.css`), before the download buttons, in
+  the frame colour as the other lines: it marks where the map ends and where its separator is dragged. Default only,
+  as asked (Default Downloads had it already); the other Default styles and viewer-source's `look="panel"` take it
+  when the user says.
 - Default Code (user, 2026-11-10; `?style=default-panel-code`): Default laid out as Claude Code's app, the list column from
   the top of the window with the site's name in it, white (first linen #f5f4f1, kept as Default Code Linen; user), the top bar and its line over the map
   and the panel only; includes `_includes/default-panel-base.css`; right after Default in the picker (user, 2026-11-10).
