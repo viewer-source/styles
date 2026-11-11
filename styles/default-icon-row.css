@@ -3,15 +3,15 @@
 ---
 /* Default Icon Row (user, 2026-11-11): Default Wide (Default Lines: MINERVA's thin lines, the panel only while a
    molecule is open) with the viewer's icons as a row at the top of the list's panel (--m2-icons: 1, --m2-icon-row: 1):
-   tabs over the windows they open (Maps with the search field, Downloads, Open in, Legend, Settings; Info left out, user 2026-11-11), the panel
+   tabs over the windows they open (Search, the field with the whole list; Maps; Downloads, Open in's links at its end; Settings; Info, Legend and Open in left out, user 2026-11-11), the panel
    fixed beside the map as in Default; the top bar keeps the site's name and navigation. Annotations on the right while
    a molecule is open, or on the left as a tab of the panel (Settings). The download row under the map goes (its files
    in Downloads), so the map window reaches 8 px above the window's bottom, a line under it. */
 {% include default-lines-base.css %}
 
-:root { --m2-icons: 1; --m2-icon-row: 1; --m2-below-view: 8px; }
+:root { --m2-icons: 1; --m2-icon-row: 1; --m2-dl-ext: 1; --m2-below-view: 8px; }
 html #m2-view { border-bottom: 1px solid var(--m2-frame); }
 /* as Default Icon Column: the windows' text soft grey as the icons at rest */
 html #m2-infowin, html #m2-infowin .m2-pi-name { color: #5f6368; }
-/* no Info tab (user, 2026-11-11: "remove info") */
-html .m2-icon-row .m2-ri[data-win="info"] { display: none; }
+/* no Info tab (user, 2026-11-11: "remove info"), no Legend for now (user, the same day) */
+html .m2-icon-row .m2-ri[data-win="info"], html .m2-icon-row .m2-ri[data-win="leg"] { display: none; }

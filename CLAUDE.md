@@ -44,7 +44,10 @@ Names no private repository in files, pages, code comments or commit messages.
   tabs at the top of the list's panel (`--m2-icon-row: 1`, made in viewer-source for it), the panel fixed beside the map
   as in Default (user: "lets try as in default"); the top bar for the site's name and navigation (user). Default Wide
   as the base: annotations on the right only while a molecule is open, or on the left as a tab of the panel (Settings);
-  the search field stays over the list (no Search tab), one Legend sign (C2), no Info tab (user, 2026-11-11: "remove info"), a click on the open tab keeps it, the
+  a Search tab showing the field with the whole list under it, Maps the list alone (user, 2026-11-11: "search bar
+  appear with the list (not just empty long panel)"); no Info tab (user, 2026-11-11: "remove info"; not needed, the
+  icons were tried for their number), no Legend for now, no Open in tab (its links at the end of Downloads,
+  `--m2-dl-ext: 1`, user the same day), a click on the open tab keeps it, the
   separator closes the panel. The way the default could evolve without the vertical column (user, 2026-11-11). Right
   after Default Icon Column.
 - Default Code (user, 2026-11-10; `?style=default-panel-code`): Default laid out as Claude Code's app, the list column from
