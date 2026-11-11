@@ -41,6 +41,12 @@ Names no private repository in files, pages, code comments or commit messages.
   click. Ideas kept: only the downloads in the menu, the search field staying; search at the top; downloads in the right
   panel, shown while no molecule is open (as the map's own details), hidden under an annotation (user: too heavy if
   always there).
+- Default Downloads Panel (user, 2026-11-11; `?style=default-panel-downloads-panel`): Default with the map's downloads
+  as plain links in the panel's column while no molecule is open (`--m2-dl-panel: 1`, made in viewer-source for it), in
+  place of the download row; an annotation covers them, closing it shows them again; the map window to 8 px above the
+  window's bottom, a line under it as Default Downloads. After Default Downloads. The user expected it to look heavy, to
+  be seen. Glycolysis (CellDesigner) has the official site's full download set, to compare (viewer-source, one map).
+  Another idea (user, 2026-11-11): downloads on a right click; on phones no right click.
 - Default Code Downloads (user, 2026-11-10, named Default Code Compact until 2026-11-11, user; `?style=default-panel-code-downloads`,
   the old address opens Default): Default Code with the viewer's menu
   (`--m2-menu: 1`, made in viewer-source for it), as in Claude's app: Search (magnifying glass, shows the search field
