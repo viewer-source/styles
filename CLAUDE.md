@@ -37,6 +37,10 @@ Names no private repository in files, pages, code comments or commit messages.
   as Default Code Downloads, Search and Downloads rows at the top of the list, the map window to 8 px above the window's
   bottom; Default's colours; includes `_includes/default-panel-base.css`; right after Default in the picker.
   A line under the map window (in the frame colour), before the page's text (user, 2026-11-11), also in Default Code Downloads.
+  Not the new default (user, 2026-11-11): it gains the map about 35 px at a 900 px window while search moves behind a
+  click. Ideas kept: only the downloads in the menu, the search field staying; search at the top; downloads in the right
+  panel, shown while no molecule is open (as the map's own details), hidden under an annotation (user: too heavy if
+  always there).
 - Default Code Downloads (user, 2026-11-10, named Default Code Compact until 2026-11-11, user; `?style=default-panel-code-downloads`,
   the old address opens Default): Default Code with the viewer's menu
   (`--m2-menu: 1`, made in viewer-source for it), as in Claude's app: Search (magnifying glass, shows the search field
