@@ -16,9 +16,7 @@ html #m2-infowin, html #m2-infowin .m2-pi-name { color: #5f6368; }
 /* no Info tab (user, 2026-11-11: "remove info"), no Legend for now (user, the same day) */
 html .m2-icon-row .m2-ri[data-win="info"], html .m2-icon-row .m2-ri[data-win="leg"] { display: none; }
 /* plain signs, not buttons (user, 2026-11-12: "simply click, not highlight"; "without highlights, so not button view,
-   so then they could take narrower bar"): no fill on the open tab or under the pointer, the sign only darker under the
-   pointer; 24 px tabs 12 px apart, the bar 24 px tall with 6 px under the signs */
+   so then they could take narrower bar"): no fill on the open tab or under the pointer, and no change of colour either (user, 2026-11-12, asked twice); 24 px tabs 12 px apart, the bar 24 px tall with 6 px under the signs */
 html .m2-icon-row .m2-ri, html .m2-icon-row .m2-ri.m2-open, html .m2-icon-row .m2-ri:hover { background: none; color: #80868b; }
-html .m2-icon-row .m2-ri:hover { color: #3c4043; }
 html .m2-icon-row .m2-ri { width: 24px; height: 24px; border-radius: 0; }
 html .m2-icon-row #m2-rail { height: 31px; column-gap: 12px; }

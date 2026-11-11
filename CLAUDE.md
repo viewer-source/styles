@@ -48,8 +48,8 @@ Names no private repository in files, pages, code comments or commit messages.
   appear with the list (not just empty long panel)"); no Info tab (user, 2026-11-11: "remove info"; not needed, the
   icons were tried for their number), no Legend for now, no Open in tab (its links at the end of Downloads,
   `--m2-dl-ext: 1`, user the same day), a click on the open tab keeps it, the tabs plain signs, not buttons (user, 2026-11-12: "simply click, not
-  highlight", "without highlights, so not button view, so then they could take narrower bar": no fill when open or under
-  the pointer, the sign darker under the pointer, 24 px tabs 12 px apart, the bar 24 px tall), the separator closes the panel. Icons on top or on the left as a choice in Settings (`--m2-bar-choice`, in the viewer
+  highlight", "without highlights, so not button view, so then they could take narrower bar": no fill and no change of colour
+  when open or under the pointer (user, asked twice: the darker sign under the pointer taken out), 24 px tabs 12 px apart, the bar 24 px tall), the separator closes the panel. Icons on top or on the left as a choice in Settings (`--m2-bar-choice`, in the viewer
   since 2026-11-12) was tried here and taken out the same day (user: "that is for another style, not this one"; not yet). The way the default could evolve without the vertical column (user, 2026-11-11). Right
   after Default Icon Column.
 - Default Code (user, 2026-11-10; `?style=default-panel-code`): Default laid out as Claude Code's app, the list column from
