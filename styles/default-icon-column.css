@@ -10,3 +10,8 @@
 
 :root { --m2-icons: 1; --m2-below-view: 8px; --m2-info-float: 1; }   /* the panel floats over the map, which never moves when it opens (user, 2026-11-11) */
 html #m2-view { border-bottom: 1px solid var(--m2-frame); }
+/* grey, not blue (user, 2026-11-11: "selection highlight is grey not blue, menu text soft grey, menu icons also grey"),
+   as Default Code Downloads: the chosen map, the open icon and every highlight in Dust's grey (cp108, #71777c) with
+   white text; the windows' text (title, Info, Downloads, Open in) soft grey as the icons at rest */
+:root { --m2-accent: #71777c; --m2-on-accent: #fff; }
+html .m2-icons-on .m2-winhead h3, html #m2-dlwin a, html #m2-extwin a, html #m2-infowin, html #m2-infowin .m2-pi-name { color: #5f6368; }
