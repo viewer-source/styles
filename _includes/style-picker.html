@@ -12,9 +12,10 @@ where needed, a few rules. [ and ] step through the styles; the address keeps th
     #sp { position: relative; right: auto; top: auto; transform: none; display: flex; justify-content: center; margin: 8px 0 2px; }
     #sp-menu { right: auto; left: 50%; transform: translateX(-50%); }
   }
-  /* one width in every style (user, 2026-11-09): since 2026-11-10 (user) the default width of the panel on the right,
-     240 px, a longer name ending in an ellipsis (340 px before, for the longest name; 216 px, 152 px before 2026-11-09);
-     the menu as wide as its longest name; its text to the left in every style and on phones (user, 2026-11-09) */
+  /* one width in every style (user, 2026-11-09): since 2026-11-10 (user) as wide as the longest name in the menu,
+     measured by the script once the menu is built (240 px until then; 240 px, the panel's width, for a moment the same
+     day; 340 px before; 216 px, 152 px before 2026-11-09); a name that does not fit after "Style:" ends in an ellipsis;
+     its text to the left in every style and on phones (user, 2026-11-09) */
   #sp-chip { width: 240px; box-sizing: border-box; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; text-align: left; font-size: 14px; line-height: 20px; padding: 4px 10px; color: var(--m2-muted); background: var(--m2-control-bg);
              border: 1px solid var(--m2-line); border-radius: var(--m2-radius-button); cursor: pointer; }
   /* the button filled in the style's accent under the pointer and while its menu is open, white text, in every style
@@ -80,6 +81,10 @@ where needed, a few rules. [ and ] step through the styles; the address keeps th
       b.addEventListener('click', function () { choose(j); box.classList.remove('sp-open'); });
       menu.appendChild(b);
     });
+    // the chip as wide as the menu with its longest name (user, 2026-11-10), in the page's own px (the page is zoomed)
+    menu.style.cssText = 'display: flex; flex-direction: column; visibility: hidden; min-width: 0; width: max-content;';
+    box.querySelector('#sp-chip').style.width = menu.offsetWidth + 'px';
+    menu.style.cssText = '';
     var want = new URLSearchParams(location.search).get('style');
     choose(Math.max(0, list.findIndex(function (s) { return s.id === want; })));
   });
