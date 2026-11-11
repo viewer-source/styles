@@ -49,7 +49,8 @@ Names no private repository in files, pages, code comments or commit messages.
   icons were tried for their number), no Legend for now, no Open in tab (its links at the end of Downloads,
   `--m2-dl-ext: 1`, user the same day), a click on the open tab keeps it, the tabs plain signs, not buttons (user, 2026-11-12: "simply click, not
   highlight", "without highlights, so not button view, so then they could take narrower bar": no fill when open or under
-  the pointer, the sign darker under the pointer, 24 px tabs 12 px apart, the bar 24 px tall), the separator closes the panel. The way the default could evolve without the vertical column (user, 2026-11-11). Right
+  the pointer, the sign darker under the pointer, 24 px tabs 12 px apart, the bar 24 px tall), the separator closes the panel; Settings puts the icons on top (the default) or in a column on the left, the same tabs
+  and behaviour (`--m2-bar-choice: 1`, user 2026-11-12: "vertical bar vs horizontal simply a choice in settings"). The way the default could evolve without the vertical column (user, 2026-11-11). Right
   after Default Icon Column.
 - Default Code (user, 2026-11-10; `?style=default-panel-code`): Default laid out as Claude Code's app, the list column from
   the top of the window with the site's name in it, white (first linen #f5f4f1, kept as Default Code Linen; user), the top bar and its line over the map
