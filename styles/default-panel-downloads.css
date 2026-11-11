@@ -1,0 +1,9 @@
+---
+# Jekyll front matter, kept so the file is built as the other styles
+---
+/* Default Downloads (user, 2026-11-11): Default with the viewer's menu (--m2-menu: 1), as Default Code Downloads: Search
+   and Downloads rows at the top of the list in place of the search field and the download buttons, the map window to
+   8 px above the window's bottom. Default's colours. Its master is Default Panel (_includes/default-panel-base.css). */
+{% include default-panel-base.css %}
+
+:root { --m2-menu: 1; --m2-below-view: 8px; }
