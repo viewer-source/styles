@@ -34,6 +34,11 @@ Names no private repository in files, pages, code comments or commit messages.
   the frame colour as the other lines: it marks where the map ends and where its separator is dragged. Default only,
   as asked (Default Downloads had it already); the other Default styles and viewer-source's `look="panel"` take it
   when the user says.
+- Default Icon Column (user, 2026-11-11; `?style=default-icon-column`): Default Wide with the viewer's icon column
+  (`--m2-icons: 1`, made in viewer-source for it), from MINERVA's but narrower: Maps, Downloads, Symbols, each opening
+  its window in the list's place, closed by a second click or its cross; annotations on the right, only while a molecule
+  is open; no download row, the map window 8 px above the window's bottom with a line under it. Named so by the user
+  (MINERVA2 weighed: the styles are named by how the map sits, and MINERVA is the colour study). After Default Downloads.
 - Default Code (user, 2026-11-10; `?style=default-panel-code`): Default laid out as Claude Code's app, the list column from
   the top of the window with the site's name in it, white (first linen #f5f4f1, kept as Default Code Linen; user), the top bar and its line over the map
   and the panel only; includes `_includes/default-panel-base.css`; right after Default in the picker (user, 2026-11-10).
