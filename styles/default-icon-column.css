@@ -12,4 +12,4 @@
 html #m2-view { border-bottom: 1px solid var(--m2-frame); }
 /* the highlight blue as in Default (user, 2026-11-11: grey tried and returned the same day); the windows' text (title,
    Info, Downloads, Open in) soft grey as the icons at rest (user, 2026-11-11) */
-html .m2-icons-on .m2-winhead h3, html #m2-dlwin a, html #m2-extwin a, html #m2-infowin, html #m2-infowin .m2-pi-name { color: #5f6368; }
+html .m2-icons-on .m2-winhead h3, html #m2-dlwin a:not(:hover), html #m2-extwin a:not(:hover), html #m2-infowin, html #m2-infowin .m2-pi-name { color: #5f6368; }
