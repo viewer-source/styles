@@ -2,6 +2,7 @@
   {"id": "default-panel", "name": "Default", "file": "default-panel.css", "main": true},
   {"id": "default-icon-column", "name": "Default Icon Column", "file": "default-icon-column.css", "main": true},
   {"id": "default-icon-row", "name": "Default Icon Row", "file": "default-icon-row.css", "main": true},
+  {"id": "default-edit", "name": "Default Edit", "file": "default-edit.css", "main": true},
   {"id": "default-panel-downloads", "name": "Default Downloads", "file": "default-panel-downloads.css", "main": true},
   {"id": "default-panel-code", "name": "Default Code", "file": "default-panel-code.css", "main": true},
   {"id": "default-panel-code-downloads", "name": "Default Code Downloads", "file": "default-panel-code-downloads.css", "main": true},
