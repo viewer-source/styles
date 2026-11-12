@@ -53,6 +53,9 @@ Names no private repository in files, pages, code comments or commit messages.
   behaviour (`--m2-bar-choice: 1`, user 2026-11-12: "vertical vs horizontal"; taken out once the same day, "for another
   style", then added back: "why not"); the row preferred while about five tabs or fewer (user). The way the default could evolve without the vertical column (user, 2026-11-11). Right
   after Default Icon Column.
+- Default Edit (user, 2026-11-12: "lets create a new default edit style"; `?style=default-edit`): Default Icon Row with
+  the viewer's Edit tab (`--m2-edit: 1`). Default Icon Row's rules moved into `_includes/default-icon-row-base.css`,
+  which both include (Default Icon Row is its master); right after it in the picker.
 - Default Code (user, 2026-11-10; `?style=default-panel-code`): Default laid out as Claude Code's app, the list column from
   the top of the window with the site's name in it, white (first linen #f5f4f1, kept as Default Code Linen; user), the top bar and its line over the map
   and the panel only; includes `_includes/default-panel-base.css`; right after Default in the picker (user, 2026-11-10).
