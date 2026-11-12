@@ -1,7 +1,6 @@
 [
   {"id": "default-panel", "name": "Default", "file": "default-panel.css", "main": true},
-  {"id": "default-icon-column", "name": "Default Icon Column", "file": "default-icon-column.css", "main": true},
-  {"id": "default-icon-row", "name": "Default Icon Row", "file": "default-icon-row.css", "main": true},
+  {"id": "default-icon-row", "name": "Default Icons", "file": "default-icon-row.css", "main": true},
   {"id": "default-edit", "name": "Default Edit", "file": "default-edit.css", "main": true},
   {"id": "default-panel-downloads", "name": "Default Downloads", "file": "default-panel-downloads.css", "main": true},
   {"id": "default-panel-code", "name": "Default Code", "file": "default-panel-code.css", "main": true},
@@ -19,5 +18,6 @@
   {"id": "default", "name": "Default V1 Frame Original", "file": null, "kept": true},
   {"id": "default-next", "name": "Default V2 Frame Compact", "file": "default-next.css", "kept": true},
   {"id": "default-next-dots", "name": "Default V2 Frame Compact Dots", "file": "default-next-dots.css", "kept": true},
-  {"id": "default-list", "name": "Default V2 Frame Compact List", "file": "default-list.css", "kept": true}
+  {"id": "default-list", "name": "Default V2 Frame Compact List", "file": "default-list.css", "kept": true},
+  {"id": "default-icon-column", "name": "Default Icon Column Legacy", "file": "default-icon-column.css", "kept": true}
 ]

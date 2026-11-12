@@ -34,6 +34,9 @@ Names no private repository in files, pages, code comments or commit messages.
   the frame colour as the other lines: it marks where the map ends and where its separator is dragged. Default only,
   as asked (Default Downloads had it already); the other Default styles and viewer-source's `look="panel"` take it
   when the user says.
+- Names changed (user, 2026-11-12): Default Icon Column is Default Icon Column Legacy, last in the picker with the kept
+  versions; Default Icon Row is Default Icons (it holds both, the row on top and the column on the left, by Settings). The
+  addresses stay (`?style=default-icon-column`, `?style=default-icon-row`); the notes below keep the old names.
 - Default Icon Column (user, 2026-11-11; `?style=default-icon-column`): Default Wide with the viewer's icon column
   (`--m2-icons: 1`, made in viewer-source for it), from MINERVA's but narrower: Search, Maps, Downloads, Open in, Legend (SBGN's PD learner's card in a window over the page, read from the demo's images/legend/, user 2026-11-11), then Settings and Info (in this order, Info last as About on a website, user 2026-11-11; Info and Open in added, user 2026-11-11; Search its own icon and Symbols out until a legend is
   ready, user, 2026-11-11), each opening its window in the list's place, closed by a second click or its cross; annotations on the right, only while a molecule
