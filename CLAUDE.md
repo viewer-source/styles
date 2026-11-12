@@ -59,6 +59,9 @@ Names no private repository in files, pages, code comments or commit messages.
   behaviour (`--m2-bar-choice: 1`, user 2026-11-12: "vertical vs horizontal"; taken out once the same day, "for another
   style", then added back: "why not"); the row preferred while about five tabs or fewer (user). The way the default could evolve without the vertical column (user, 2026-11-11). Right
   after Default Icon Column.
+- Right-click menu (user, 2026-11-12): Default Icons (Default Icon Row) turns on the viewer's menu over the map
+  (`--m2-context: 1` in `_includes/default-icon-row-base.css`, so Default Edit has it too); viewer-source's CLAUDE.md
+  says what it holds.
 - Default Edit (user, 2026-11-12: "lets create a new default edit style"; `?style=default-edit`): Default Icon Row with
   the viewer's Edit tab (`--m2-edit: 1`). Default Icon Row's rules moved into `_includes/default-icon-row-base.css`,
   which both include (Default Icon Row is its master); right after it in the picker.
