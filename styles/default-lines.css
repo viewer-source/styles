@@ -1,6 +1,0 @@
----
-# Jekyll front matter, kept so the file is built as the other styles
----
-/* Default (Default Lines). Its rules live in _includes/default-lines-base.css, shared with Default Panel (user,
-   2026-11-10), so a change to Default reaches both. */
-{% include default-lines-base.css %}

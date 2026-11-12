@@ -34,6 +34,9 @@ Names no private repository in files, pages, code comments or commit messages.
   the frame colour as the other lines: it marks where the map ends and where its separator is dragged. Default only,
   as asked (Default Downloads had it already); the other Default styles and viewer-source's `look="panel"` take it
   when the user says.
+- Removed (user, 2026-11-12): Default Downloads, Default Code Downloads and Default Wide (`styles/default-lines.css`;
+  its rules stay in `_includes/default-lines-base.css`, which Default and the others include); their files are in the
+  history. The notes below still describe them.
 - Names changed (user, 2026-11-12): Default Icon Column is Default Icon Column Legacy, last in the picker with the kept
   versions; Default Icon Row is Default Icons (it holds both, the row on top and the column on the left, by Settings). The
   addresses stay (`?style=default-icon-column`, `?style=default-icon-row`); the notes below keep the old names.
