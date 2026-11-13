@@ -79,7 +79,8 @@ where needed, a few rules. [ and ] step through the styles; the address keeps th
       // a line under the main styles (main: true in styles.json, now Default, Default Dark and Default Wide: user, 2026-11-10) and
       // above the styles kept only for comparing
       var prev = list[j - 1] || {};
-      if ((prev.main && !s.main) || (s.kept && !prev.kept)) { var r = document.createElement('div'); r.className = 'sp-rule'; menu.appendChild(r); }
+      // and a line under the top two, Default and Default Edit, the main development line (top: true, user, 2026-11-13)
+      if ((prev.top && !s.top) || (prev.main && !s.main) || (s.kept && !prev.kept)) { var r = document.createElement('div'); r.className = 'sp-rule'; menu.appendChild(r); }
       var b = document.createElement('button');
       b.type = 'button'; b.textContent = s.name;
       b.addEventListener('click', function () { choose(j); box.classList.remove('sp-open'); });

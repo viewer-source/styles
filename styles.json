@@ -1,7 +1,7 @@
 [
-  {"id": "default-panel", "name": "Default", "file": "default-panel.css", "main": true},
+  {"id": "default-panel", "name": "Default", "file": "default-panel.css", "main": true, "top": true},
+  {"id": "default-edit", "name": "Default Edit", "file": "default-edit.css", "main": true, "top": true},
   {"id": "default-icon-row", "name": "Default Icons", "file": "default-icon-row.css", "main": true},
-  {"id": "default-edit", "name": "Default Edit", "file": "default-edit.css", "main": true},
   {"id": "default-panel-code", "name": "Default Code", "file": "default-panel-code.css", "main": true},
   {"id": "default-panel-dark", "name": "Default Dark", "file": "default-panel-dark.css", "main": true},
   {"id": "default-panel-code-linen", "name": "Default Code Linen", "file": "default-panel-code-linen.css", "main": true},
