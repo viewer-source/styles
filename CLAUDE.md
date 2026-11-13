@@ -234,7 +234,7 @@ Names no private repository in files, pages, code comments or commit messages.
   maps is also kept as the branch `keep/default-edit-v2` in this repository (15c928c) and in viewer-source.github.io
   (0661bd5); a branch, as the session's git proxy refuses tags; branch-cleanup deletes only `claude/...` branches.
   What it holds, what it shares with the demo, its known limits and how to go back: `edit-v2/NOTES.md`.
-- Default Edit V3 Layout (user, 2026-11-14: the fallback before the editor is developed for drawing; "layout" as editing
+- Default Edit V3 Layout Fallback (user, 2026-11-14, the name the user's: "clearly and unmistakenly that version we approved and can return to"; the fallback before the editor is developed for drawing; "layout" as editing
   covers layout only; `/styles/edit-v3-layout/`, `?style=default-edit-v3-layout`, before V2 in the picker): Default Edit
   frozen after the review of everything since V2 (viewer edd77db, this repository 84006fe), with editing without a token,
   the folder and My maps. Made as V2: the viewer and style bases in `_includes/frozen/edit-v3-layout/`, the editor and

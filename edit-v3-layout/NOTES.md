@@ -1,4 +1,4 @@
-# Default Edit V3 Layout: what this backup holds
+# Default Edit V3 Layout Fallback: what this backup holds
 
 Frozen 2026-11-14 (user: "we need to have something as a fallback version before we start further developing GraphML
 editor"; the name: "default edit version ... plus call it maybe layout, because at this point editing covers layout
@@ -8,7 +8,7 @@ Editing without a token, the folder and My maps tested by the user before the fr
 
 ## Where it is
 
-- Page: https://viewer-source.github.io/styles/edit-v3-layout/ (in the picker: Default Edit V3 Layout, with the kept
+- Page: https://viewer-source.github.io/styles/edit-v3-layout/ (in the picker: Default Edit V3 Layout Fallback, with the kept
   versions, before V2).
 - Its own copies, never refreshed by `update.sh`:
   - the viewer and its style bases: `_includes/frozen/edit-v3-layout/` (atlas-app.html, atlas-tags.css,
