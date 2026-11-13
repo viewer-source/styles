@@ -48,11 +48,15 @@ Names no private repository in files, pages, code comments or commit messages.
   (MINERVA2 weighed: the styles are named by how the map sits, and MINERVA is the colour study). Right after Default in the picker (user, 2026-11-11: the most promising for now; was after Default Downloads).
 - Removed (user, 2026-11-13): Default Icons (Default Icon Row, `styles/default-icon-row.css`, in the history). Its rules
   stay in `_includes/default-icon-row-base.css`, now Default Edit's base; the notes below still describe it.
-- Default View (user, 2026-11-13: "bring it back as default view"; `?style=default-view`): Default Edit without the
-  editor, the viewer alone on the main line, so fixes and features of Default Edit's base reach it without copying.
-  `styles/default-view.css` includes `_includes/default-icon-row-base.css` and leaves out `--m2-edit`, as Default Icons
-  did. Second in the picker, between Default Edit and Default (`"top": true`). Default keeps its own older layout line
-  (search field, download row, no Settings or right-click menu) for comparing.
+- The main line (user, 2026-11-13: "agreed"): one look in two modes. Default Edit, first in the picker and the address
+  with no `?style=`, is the line developed here (the editor on); Default View (`?style=default-view`, "bring it back as
+  default view") is the same look with the viewer alone, the default for projects. `styles/default-view.css` includes
+  `_includes/default-icon-row-base.css` and leaves out `--m2-edit`, as Default Icons did, so a change to that base
+  reaches both. The viewer's `look="icon-row"` is its copy for the sites (mreg-atlas first, 2026-11-13).
+  Retired the same day (user): Default (Default Panel) is now Default V3 Lines Right Panel and Default Dark is Default V3
+  Lines Right Panel Dark, both with the kept versions (addresses unchanged: `?style=default-panel`,
+  `?style=default-panel-dark`); Default Code, Default Code Linen, Default Slate and Default Grey (variants of that line)
+  out of the main section, names unchanged. Below, the older names as written at the time.
 - Order of the picker (user, 2026-11-13: Default Edit "kind of became the main development line for us"): Default first,
   Default Edit second, both `"top": true` in `styles.json`, then a line, then the other main styles, their line, the
   rest and the kept versions as before. Later the same day (user: "move it to the top, making it essentially the
