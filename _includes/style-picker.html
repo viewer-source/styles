@@ -80,7 +80,9 @@ where needed, a few rules. [ and ] step through the styles; the address keeps th
       // above the styles kept only for comparing
       var prev = list[j - 1] || {};
       // and a line under the top two, Default and Default Edit, the main development line (top: true, user, 2026-11-13)
-      if ((prev.top && !s.top) || (prev.main && !s.main) || (s.kept && !prev.kept)) { var r = document.createElement('div'); r.className = 'sp-rule'; menu.appendChild(r); }
+      // and a line above the styles that mimic other tools, Reactome and MINERVA (mimic: true, user, 2026-11-14: kept as
+      // they are, not touched any more)
+      if ((prev.top && !s.top) || (prev.main && !s.main) || (s.kept && !prev.kept) || (s.mimic && !prev.mimic)) { var r = document.createElement('div'); r.className = 'sp-rule'; menu.appendChild(r); }
       var b = document.createElement('button');
       b.type = 'button'; b.textContent = s.name;
       b.addEventListener('click', function () { choose(j); box.classList.remove('sp-open'); });

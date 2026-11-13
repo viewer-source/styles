@@ -176,6 +176,9 @@ Names no private repository in files, pages, code comments or commit messages.
   under them (user, 2026-11-10: the most developed, each carrying what was learned from the other layouts and styles). Styles kept only for comparing (`"kept": true` in
   `styles.json`: the earlier defaults by version, Default V1 Frame Original, then Default V2 Frame Compact with
   its Dark and List; user, 2026-11-10: Version 2 moved there) come last, under a thin line in the menu (user, 2026-11-09).
+- Styles mimicking other tools (user, 2026-11-14: "kind of backup for trying to mimic those tools as it was actually - i do
+  not plan to touch them anymore"): Reactome Scroll, Reactome Scroll Right Panel, Reactome Fixed, Reactome Fixed Blue
+  and MINERVA under a line of their own ( in styles.json), kept as they are.
 - Kept versions newest first (user, 2026-11-14: "on the top i would have more recent ones"): under the line, by when each
   was made: the Default Edit backups (V3 Layout Fallback, V2 JavaScript, V1 Python), Default Icon Column Legacy, Default
   V3 Lines Right Panel and Dark, Default V2 Frame Compact with Dots and List, Default V1 Frame Original. A new backup goes
