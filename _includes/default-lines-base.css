@@ -1,3 +1,6 @@
+/* Frozen since 2026-11-13: the Lines rules as the retired and kept styles were made on (Default V3 Lines Right Panel and
+   Dark, Default Code, Code Linen, Slate, Grey, Default Icon Column Legacy). The main line (Default View, Default Edit)
+   takes the viewer's own look-lines.css instead, its master; a change to the Lines look is made there, not here. */
 /* Default Lines (user, 2026-11-09): Default Next with MINERVA's separators. The map has no frame and no gaps around
    it, so it no longer floats in the middle of nowhere: it runs from the list to the panel (or to the window's right
    edge while no panel is open), and one thin line joins each pair of neighbours, under the top bar, between the list
