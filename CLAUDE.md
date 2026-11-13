@@ -52,7 +52,11 @@ Names no private repository in files, pages, code comments or commit messages.
   with no `?style=`, is the line developed here (the editor on); Default View (`?style=default-view`, "bring it back as
   default view") is the same look with the viewer alone, the default for projects. `styles/default-view.css` includes
   `_includes/default-icon-row-base.css` and leaves out `--m2-edit`, as Default Icons did, so a change to that base
-  reaches both. The viewer's `look="icon-row"` is its copy for the sites (mreg-atlas first, 2026-11-13).
+  reaches both. Since the same day (user: "Making Default View the viewer's own look - okay") its rules are the
+  viewer's own look, written once in viewer-source.github.io's `_includes/look-lines.css` and `look-view.css`, copied
+  here by `update.sh`; `default-icon-row-base.css` only includes them and adds the picker's rule. A change to the main
+  line's look is made in the viewer, then `update.sh`; never in the two copies here. Sites get it by the viewer's
+  `copy-to-site.sh` with no `look=` (mreg-atlas first, 2026-11-13).
   Retired the same day (user): Default (Default Panel) is now Default V3 Lines Right Panel and Default Dark is Default V3
   Lines Right Panel Dark, both with the kept versions (addresses unchanged: `?style=default-panel`,
   `?style=default-panel-dark`); Default Code, Default Code Linen, Default Slate and Default Grey (variants of that line)
