@@ -100,3 +100,10 @@ are standard); compartments are the exception and resize.
   into `main` (the viewer: `_includes/`, `editor/`, `renderers/`, `build.py`; the styles: `_includes/`, `editor/`,
   `renderers/`, `styles/`, `styles.json`). The demo's `maps/` only if the maps should go back too: maps saved since
   would be lost.
+
+## Storage changed since the freeze
+
+- 2026-11-14: a reader's map added with a token while the site builds it is a record in the shared `mine` store with
+  `site` (its id on the site), and Default Edit deletes it once the site lists that id. This version knows nothing of
+  `site`: it shows such a record as an ordinary map of the reader's and writes it to their folder, until a page of the
+  current Default Edit deletes it. The site's map itself is unaffected.
