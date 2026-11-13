@@ -202,3 +202,6 @@ Names no private repository in files, pages, code comments or commit messages.
   with no frame round the map, the 8 px kept no edge in line. The panel on the right is as wide as the list by default, 240 px (user, 2026-11-09; was 300). Scrolls as Default since 2026-11-10 (user: the whole page, not the windows; was pinned as Default Pinned). Taken by the expo atlas (user, 2026-11-09: "to try lines
   for a change"). Kept for comparison only (user, 2026-11-09: split into pieces, "squarey",
   instead of a viewer window in the middle; not the direction taken).
+- Renderers of its own commit (2026-11-13): `update.sh` copies the four JavaScript renderers the editor runs into
+  `renderers/`, and the include's `renderers="/styles/renderers/"` loads them from there, so Default Edit no longer runs
+  its copied editor against whatever renderer the demo has at the moment.
