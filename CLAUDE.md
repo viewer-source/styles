@@ -48,6 +48,8 @@ Names no private repository in files, pages, code comments or commit messages.
   (MINERVA2 weighed: the styles are named by how the map sits, and MINERVA is the colour study). Right after Default in the picker (user, 2026-11-11: the most promising for now; was after Default Downloads).
 - Default Icon Column Legacy as the place to try new icons (user, 2026-11-13): it shows the viewer's Overlays
   candidates, O1 to O9 (O4 and O5 removed, user) before Settings (names on hover); a click does nothing until Overlays is built.
+  Legend signs C4 and C5 (user, 2026-11-13: C2 with a line of text beside each square, with and without the line under)
+  after the other Legend signs.
 - Default Icon Row (user, 2026-11-11; `?style=default-icon-row`): the icon column's windows with the icons as a row of
   tabs at the top of the list's panel (`--m2-icon-row: 1`, made in viewer-source for it), the panel fixed beside the map
   as in Default (user: "lets try as in default"); the top bar for the site's name and navigation (user). Default Wide
