@@ -1,0 +1,10 @@
+---
+# Jekyll front matter, kept so the file is built as the other styles
+---
+/* Default Edit V3 Layout (user, 2026-11-14: "default edit version ... plus layout", the last editor that does layout
+   only, before drawing from scratch): Default Edit as it was after the review of everything since V2 and its fix, viewer
+   edd77db. Its own copies of the viewer and its styles in _includes/frozen/edit-v3-layout/, of the editor in
+   edit-v3-layout/editor/ and of the four renderers in edit-v3-layout/renderers/; never refreshed by update.sh. */
+{% include frozen/edit-v3-layout/default-icon-row-base.css %}
+
+:root { --m2-edit: 1; }
