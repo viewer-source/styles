@@ -10,14 +10,14 @@
   {"id": "reactome", "name": "Reactome Fixed", "file": "reactome.css"},
   {"id": "reactome-fixed-blue", "name": "Reactome Fixed Blue", "file": "reactome-fixed-blue.css"},
   {"id": "minerva", "name": "MINERVA", "file": "minerva.css"},
+  {"id": "default-edit-v3-layout", "name": "Default Edit V3 Layout Fallback", "file": "../edit-v3-layout/default-edit.css", "page": "/styles/edit-v3-layout/", "kept": true},
+  {"id": "default-edit-v2", "name": "Default Edit V2 JavaScript", "file": "../edit-v2/default-edit.css", "page": "/styles/edit-v2/", "kept": true},
+  {"id": "default-edit-v1", "name": "Default Edit V1 Python", "file": "../edit-v1/default-edit.css", "page": "/styles/edit-v1/", "kept": true},
+  {"id": "default-icon-column", "name": "Default Icon Column Legacy", "file": "default-icon-column.css", "kept": true},
   {"id": "default-panel", "name": "Default V3 Lines Right Panel", "file": "default-panel.css", "kept": true},
   {"id": "default-panel-dark", "name": "Default V3 Lines Right Panel Dark", "file": "default-panel-dark.css", "kept": true},
-  {"id": "default", "name": "Default V1 Frame Original", "file": null, "kept": true},
   {"id": "default-next", "name": "Default V2 Frame Compact", "file": "default-next.css", "kept": true},
   {"id": "default-next-dots", "name": "Default V2 Frame Compact Dots", "file": "default-next-dots.css", "kept": true},
   {"id": "default-list", "name": "Default V2 Frame Compact List", "file": "default-list.css", "kept": true},
-  {"id": "default-icon-column", "name": "Default Icon Column Legacy", "file": "default-icon-column.css", "kept": true},
-  {"id": "default-edit-v3-layout", "name": "Default Edit V3 Layout Fallback", "file": "../edit-v3-layout/default-edit.css", "page": "/styles/edit-v3-layout/", "kept": true},
-  {"id": "default-edit-v2", "name": "Default Edit V2 JavaScript", "file": "../edit-v2/default-edit.css", "page": "/styles/edit-v2/", "kept": true},
-  {"id": "default-edit-v1", "name": "Default Edit V1 Python", "file": "../edit-v1/default-edit.css", "page": "/styles/edit-v1/", "kept": true}
+  {"id": "default", "name": "Default V1 Frame Original", "file": null, "kept": true}
 ]
