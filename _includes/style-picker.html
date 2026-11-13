@@ -47,9 +47,13 @@ where needed, a few rules. [ and ] step through the styles; the address keeps th
   var menu = box.querySelector('#sp-menu'), name = box.querySelector('#sp-name');
 
   function relayout() { window.dispatchEvent(new Event('resize')); }
-  function choose(i) {
+  // a style with a page of its own (page in styles.json: Default Edit V1 Python, user 2026-11-13, its own frozen viewer)
+  // is opened there; any other style from it goes back to /styles/
+  function pageOf(s) { return s.page || '/styles/'; }
+  function choose(i, start) {
     at = (i + styles.length) % styles.length;
     var s = styles[at];
+    if (!start && pageOf(s) !== location.pathname) { location.href = pageOf(s) + (s.page || at ? '?style=' + s.id : ''); return; }
     // ?v= the build time: a new build of a style is fetched at once, not after the browser's 10 minutes
     if (s.file) { link.href = '/styles/styles/' + s.file + '?v={{ site.time | date: '%s' }}'; link.disabled = false; }
     else { link.disabled = true; link.removeAttribute('href'); }
@@ -86,7 +90,9 @@ where needed, a few rules. [ and ] step through the styles; the address keeps th
     box.querySelector('#sp-chip').style.width = menu.offsetWidth + 'px';
     menu.style.cssText = '';
     var want = new URLSearchParams(location.search).get('style');
-    choose(Math.max(0, list.findIndex(function (s) { return s.id === want; })));
+    var i = list.findIndex(function (s) { return s.id === want && pageOf(s) === location.pathname; });
+    if (i < 0) i = list.findIndex(function (s) { return pageOf(s) === location.pathname; });   // the page's own style
+    choose(Math.max(0, i), true);
   });
 })();
 </script>

@@ -1,0 +1,10 @@
+---
+# Jekyll front matter, kept so the file is built as the other styles
+---
+/* Default Edit V1 Python (user, 2026-11-13: kept frozen "so we can come back to it if needed"): Default Edit as it was
+   before the editor moved into its own files and to JavaScript, viewer a6d3018. Its own copies of the viewer, the editor
+   and their styles in _includes/frozen/edit-v1/, of the Python renderers and layout tools in edit-v1/renderers/; never
+   refreshed by update.sh. */
+{% include frozen/edit-v1/default-icon-row-base.css %}
+
+:root { --m2-edit: 1; }

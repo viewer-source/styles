@@ -16,5 +16,6 @@
   {"id": "default-next", "name": "Default V2 Frame Compact", "file": "default-next.css", "kept": true},
   {"id": "default-next-dots", "name": "Default V2 Frame Compact Dots", "file": "default-next-dots.css", "kept": true},
   {"id": "default-list", "name": "Default V2 Frame Compact List", "file": "default-list.css", "kept": true},
-  {"id": "default-icon-column", "name": "Default Icon Column Legacy", "file": "default-icon-column.css", "kept": true}
+  {"id": "default-icon-column", "name": "Default Icon Column Legacy", "file": "default-icon-column.css", "kept": true},
+  {"id": "default-edit-v1", "name": "Default Edit V1 Python", "file": "../edit-v1/default-edit.css", "page": "/styles/edit-v1/", "kept": true}
 ]
