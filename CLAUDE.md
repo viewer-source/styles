@@ -213,3 +213,4 @@ Names no private repository in files, pages, code comments or commit messages.
   the build or the map files change, check it still saves cleanly, else turn its saving off. The exact state of code and
   maps is also kept as the branch `keep/default-edit-v2` in this repository (15c928c) and in viewer-source.github.io
   (0661bd5); a branch, as the session's git proxy refuses tags; branch-cleanup deletes only `claude/...` branches.
+  What it holds, what it shares with the demo, its known limits and how to go back: `edit-v2/NOTES.md`.
