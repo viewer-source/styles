@@ -119,6 +119,38 @@
       for (var i = 0; i < u.length; i += 0x8000) s += String.fromCharCode.apply(null, u.subarray(i, i + 0x8000));
       return btoa(s);
     }
+    // a reader's map added to the site (user, 2026-11-14: with a token, Add map "would be saved indeed" on GitHub): the
+    // file as maps/<id>.graphml or .xml and its maps/<id>.md (title from the file's name, group, order) in one commit on
+    // main, so the build makes it a map of the site; the id from the file's name, made unique among maps/. A branch moved
+    // meanwhile (the build commits after each push): built again on the newest main, three tries
+    function toSite(name, text, group, order) {
+      if (!(repo() && token())) return Promise.reject(new Error('not connected to GitHub'));
+      var ext = /\.graphml$/i.test(name) ? '.graphml' : '.xml', base = name.replace(/\.(graphml|xml)$/i, ''),
+          slug = base.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '') || 'map';
+      var head = text.slice(0, 5000);
+      if (ext === '.graphml' ? head.indexOf('yworks.com') < 0 : !(/<sbml[\s>]/.test(head) && text.indexOf('celldesigner') >= 0))
+        return Promise.reject(new Error(ext === '.graphml' ? 'not a yEd GraphML file' : 'not a CellDesigner file'));
+      base = base.replace(/["\\]/g, '');   // the build reads the front matter's quotes plainly
+      var md = '---\ntitle: ' + JSON.stringify(base) + '\ntopic: ' + JSON.stringify(base) + '\ngroup: ' + JSON.stringify(group || '') + '\norder: ' + (order | 0) + '\n---\n';
+      var j = function (r) { return r.ok ? r.json() : r.json().then(function (d) { var e = new Error(d && d.message || 'GitHub ' + r.status); e.status = r.status; throw e; }); };
+      var post = function (path, body, method) { return api(path, { method: method || 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) }).then(j); };
+      var listing = api('/contents/maps?ref=main').then(j).then(function (d) { var o = {}; d.forEach(function (f) { o[f.name.replace(/\.[^.]+$/, '')] = 1; }); return o; });
+      return listing.then(function (taken) {
+        var id = slug; for (var k = 2; taken[id]; k++) id = slug + '-' + k;
+        return Promise.all([post('/git/blobs', { content: b64(text), encoding: 'base64' }), post('/git/blobs', { content: b64(md), encoding: 'base64' })]).then(function (b) {
+          var tries = 0;
+          var go = function () {
+            return api('/git/ref/heads/main').then(j).then(function (ref) {
+              return api('/git/commits/' + ref.object.sha).then(j).then(function (c) {
+                return post('/git/trees', { base_tree: c.tree.sha, tree: [{ path: 'maps/' + id + ext, mode: '100644', type: 'blob', sha: b[0].sha }, { path: 'maps/' + id + '.md', mode: '100644', type: 'blob', sha: b[1].sha }] });
+              }).then(function (t) { return post('/git/commits', { message: 'Map added in the viewer: ' + id + ext, tree: t.sha, parents: [ref.object.sha] }); })
+                .then(function (c) { return post('/git/refs/heads/main', { sha: c.sha }, 'PATCH'); });
+            }).catch(function (e) { if (e.status === 422 && ++tries < 3) return go(); throw e; });
+          };
+          return go().then(function () { ghDir = null; return { id: id }; });   // the listing read again next time
+        });
+      });
+    }
     function changed() {   // after every move, undo or redo: the site's map is saved a few seconds after the last one
       if (site && site.pending) { localFor = site; clearTimeout(localTimer); localTimer = setTimeout(local, 800); localBox(); return; }   // no token: kept in this browser
       if (!site || !token() || stuck) return;
@@ -177,8 +209,8 @@
       var mine = saving;
       return saving;
     }
-    // no token (user, 2026-11-13, the first layer): the map's file as edited and its drawing kept in this browser by the
-    // viewer (draftPut), a moment after the last move once the move is drawn, so a reload shows it and editing goes on from
+    // no token (user, 2026-11-13, the first layer): the map's file as edited and its drawing kept in this browser
+    // (draftPut, own.js), a moment after the last move once the move is drawn, so a reload shows it and editing goes on from
     // it; the map back as the site has it (every move undone): let go. force: written now, the drawing as it is (another
     // map is being opened)
     var localTimer = null, localFor = null;
@@ -196,15 +228,16 @@
       var pic = function () { return own ? Promise.resolve({ svg: own, width: at.width, height: at.height }) : drawText(t); };
       var fail = function (e) { if (site === s) warn('Not kept in this browser: ' + String(e && e.message ? e.message : e).replace(/\.$/, '') + '. Download the map to keep your changes.'); };
       if (s.mine) {   // a reader's own map: the map itself changed, in this browser and its folder (no draft)
+        if (!mine[s.id] || mine[s.id].site) return;   // gone from this browser meanwhile (to the site): nothing to keep
         toFolder(s.id, name, t);
-        pic().then(function (d) { return V.minePut(Object.assign({}, V.mine[s.id], { text: t, svg: d.svg, width: d.width, height: d.height, at: Date.now() })); })
+        pic().then(function (d) { return minePut(Object.assign({}, mine[s.id], { text: t, svg: d.svg, width: d.width, height: d.height, at: Date.now() })); })
           .then(function () { if (site === s && src() === t) dirty = false; if (!on || site !== s) V.refreshMine(); })
           .catch(fail);
         return;
       }
-      if (atSite()) { V.draftDrop(s.id); dirty = false; localBox(); toFolder(s.id, name, t, true); return; }   // a file in the folder back to the site's map too
+      if (atSite()) { draftDrop(s.id); dirty = false; localBox(); toFolder(s.id, name, t, true); return; }   // a file in the folder back to the site's map too
       toFolder(s.id, name, t);   // layer 2: the same file into the reader's folder, when there is one
-      pic().then(function (d) { return V.draftPut(s.id, { file: name, v: s.v, text: t, svg: d.svg, width: d.width, height: d.height, x0: at.x0, y0: at.y0, ref: at.ref, cur: at.cur, at: Date.now() }); })
+      pic().then(function (d) { return draftPut(s.id, { file: name, v: s.v, text: t, svg: d.svg, width: d.width, height: d.height, x0: at.x0, y0: at.y0, ref: at.ref, cur: at.cur, at: Date.now() }); })
         .then(function () { if (site === s && src() === t) dirty = false; })
         .catch(fail);
     }
@@ -213,23 +246,23 @@
     function atSite() { return site.pending && (src() === site.pub || (!undo.length && !site.fromDraft)); }
     function unkeep(id) {   // the reader's changes let go (Back to the site's map, a token connected): a write waiting dropped too
       if (localFor && localFor.id === id) { clearTimeout(localTimer); localTimer = null; localFor = null; }
-      return V.draftDrop(id);
+      return draftDrop(id);
     }
     // layer 2 (user, 2026-11-13: "saved automatically in a certain folder they choose"): a folder on the reader's computer,
     // chosen once (Chrome, Edge: showDirectoryPicker), where every map kept in this browser is also written as its file, a
     // moment after the last move. A file this browser did not write is never overwritten: one there already, or changed
     // since by another program, gets the next free name beside it (acly-2.graphml). After a reload the browser may ask
-    // again (Allow), unless it keeps the permission (Chrome 122 and later can). The folder kept by the viewer (V.folder)
+    // again (Allow), unless it keeps the permission (Chrome 122 and later can). Its record: folder() in own.js
     var canFolder = 'showDirectoryPicker' in window, folderOk = null, fq = Promise.resolve();   // folderOk null: not known yet (no text 3 or 4)
     function folderCheck() {   // whether the page may write into the folder now (the Edit window's texts follow it)
       folderOk = null; localBox();
-      return V.folder().then(function (f) {
-        if (!f) return V.folderForget().then(function () { return null; });   // its record lost: Choose a folder again
+      return folder().then(function (f) {
+        if (!f) return folderForget().then(function () { return null; });   // its record lost: Choose a folder again
         return f.dir.queryPermission({ mode: 'readwrite' });
       }).then(function (p) { folderOk = p === 'granted'; localBox(); }, function () { folderOk = false; localBox(); });
     }
     function lost(e) {   // the folder moved, deleted or refused for good: said, and Choose a folder offered again
-      V.folderForget().then(function () { folderOk = null; localBox(); });
+      folderForget().then(function () { folderOk = null; localBox(); });
       warn('Not saved to the folder: ' + String(e && e.message ? e.message : e).replace(/\.$/, '') + '.');
     }
     function freeName(dir, file, n) {
@@ -239,7 +272,7 @@
     function toFolder(id, file, t, ours) {   // one at a time, in the order asked; ours: only into a file written here before
       if (!canFolder || !V.folderName() || !file) return fq;
       fq = fq.then(function () {
-        return V.folder().then(function (f) {
+        return folder().then(function (f) {
           if (!f) return;
           var w = f.files[id];
           if (ours && !w) return;
@@ -255,7 +288,7 @@
               return f.dir.getFileHandle(nm2, { create: true }).then(function (x) { h = x; return h.createWritable(); })
                 .then(function (wr) { return wr.write(t).then(function () { return wr.close(); }); })
                 .then(function () { return h.getFile(); })
-                .then(function (fl) { return V.folderFile(id, { name: nm2, mod: fl.lastModified, size: fl.size }); });
+                .then(function (fl) { return folderFile(id, { name: nm2, mod: fl.lastModified, size: fl.size }); });
             });
           });
         });
@@ -268,18 +301,18 @@
         var m = V.byId[id], f = d[id].file || (graphmlOf(m) || '').split('?')[0].split('/').pop();
         toFolder(id, f, d[id].text);
       });
-      Object.keys(V.mine).forEach(function (id) { var r = V.mine[id]; if (!r.hidden) toFolder(id, r.file, r.text); });
+      Object.keys(mine).forEach(function (id) { var r = mine[id]; if (!r.hidden && !r.site) toFolder(id, r.file, r.text); });   // one added to the site is not the folder's
       return fq;
     }
     function chooseFolder() {
       if (!canFolder) return Promise.resolve();
       return window.showDirectoryPicker({ id: 'atlas-maps', mode: 'readwrite' })
-        .then(function (dir) { return V.folderSet(dir); })
+        .then(function (dir) { return folderSet(dir); })
         .then(function () { folderOk = true; localBox(); return allToFolder(); }).then(syncFolder)
         .catch(function (e) { if (e && e.name === 'AbortError') return; warn('No folder chosen: ' + String(e && e.message ? e.message : e).replace(/\.$/, '') + '.'); throw e; });
     }
     function allowFolder() {
-      return V.folder().then(function (f) { return f ? f.dir.requestPermission({ mode: 'readwrite' }) : 'denied'; })
+      return folder().then(function (f) { return f ? f.dir.requestPermission({ mode: 'readwrite' }) : 'denied'; })
         .then(function (p) {
           if (p === 'granted') { folderOk = true; localBox(); return allToFolder().then(syncFolder); }
           lost('the browser did not allow it');   // refused for good (or its record lost): Choose a folder again
@@ -296,28 +329,30 @@
         var it = dir.values(), out = [];
         return (function next() { return it.next().then(function (x) { if (x.done) return out; out.push(x.value); return next(); }); })();
       };
-      return V.mineIn.then(V.folder).then(function (f) {   // the reader's maps read first, else one would be added twice
+      return mineIn.then(folder).then(function (f) {   // the reader's maps read first, else one would be added twice
         if (!f) return;
         return f.dir.queryPermission({ mode: 'readwrite' }).then(function (p) {
           if (p !== 'granted') return;
-          var ours = {}, byFile = {}, siteFiles = {};
+          var ours = {}, siteFiles = {};
           Object.keys(f.files).forEach(function (id) { ours[f.files[id].name] = id; });
-          Object.keys(V.mine).forEach(function (id) { byFile[V.mine[id].file] = V.mine[id]; });
           V.maps.forEach(function (m) { if (!m.mine) siteFiles[(graphmlOf(m) || '').split('?')[0].split('/').pop()] = 1; });   // the site's maps' files (a draft kept here)
           return all(f.dir).then(function (hs) {
             return hs.filter(function (h) { return h.kind === 'file' && /\.(graphml|xml)$/i.test(h.name); }).reduce(function (q, h) {
               return q.then(function () {
                 var id = ours[h.name];
-                if (id ? !V.mine[id] : siteFiles[h.name.replace(/-\d+(\.[^.]+)$/, '$1')]) return;   // a site's map kept here
-                var r = id ? V.mine[id] : byFile[h.name], w = r && f.files[r.id];
+                if (id ? !mine[id] : siteFiles[h.name.replace(/-\d+(\.[^.]+)$/, '$1')]) return;   // a site's map kept here
+                var r = id ? mine[id] : null, w = r && f.files[r.id];
                 if (r && r.hidden) return;
-                if (!id && w && w.name !== h.name) return;   // the reader's own file beside the one written here for that map
                 return h.getFile().then(function (fl) {
                   if (r && w && fl.lastModified === w.mod && fl.size === w.size) return;
                   return fl.text().then(function (t) {
-                    return drawText(t).then(function (d) { return V.mineAdd(h.name, t, d, r && r.id); }).then(function (n) {
+                    // a file not written here: a map of its own only when no map of the reader's is this file (name and
+                    // content, user 2026-11-14), so their original beside the copy written here, or a map taken off the
+                    // list, is left as it is
+                    if (!id && mineMatch(h.name, t)) return;
+                    return drawText(t).then(function (d) { return mineAdd(h.name, t, d, id || null); }).then(function (n) {
                       news = true;
-                      return V.folderFile(n.id, { name: h.name, mod: fl.lastModified, size: fl.size });
+                      return folderFile(n.id, { name: h.name, mod: fl.lastModified, size: fl.size });
                     });
                   });
                 }).catch(function () {});   // not a map this viewer can draw: left out
@@ -1148,6 +1183,7 @@
       var notLoaded = function (e) { if (tk === opening) warn('Cannot edit ' + m.title + ': its file did not load (' + e + ').'); };
       var fromSite = function (s) { return published.then(function (t) { return go(t, s); }).catch(notLoaded); };
       quiet();
+      if (m.mine && mine[m.id] && mine[m.id].site) { warn('Cannot edit ' + m.title + ' yet: the site is building it (a few minutes).'); return; }   // its moves would be lost when the site's map takes its place
       if (m.mine) return fromSite({ path: null, sha: null, pending: true, mine: true });   // a reader's own map: kept in this browser and its folder
       if (!repo()) return fromSite(null);
       if (!token()) return fromSite({ path: path, sha: null, pending: true });

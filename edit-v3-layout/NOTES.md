@@ -6,6 +6,10 @@ only"). Default Edit as it was after the independent review of everything since 
 improves a map's layout, before the editor's model is reworked for drawing (adding and deleting nodes, lines, labels).
 Editing without a token, the folder and My maps tested by the user before the freeze ("It looks fine").
 
+Refreshed 2026-11-14 (user: "some small changes were made to improve the current default edit, so lets update our
+backup fallback one so it is all aligned at its best state") to viewer 12da828: the viewer's file and the editor taken
+again from Default Edit; the renderers, look files and style bases were already the same.
+
 ## Where it is
 
 - Page: https://viewer-source.github.io/styles/edit-v3-layout/ (in the picker: Default Edit V3 Layout Fallback, with the kept
@@ -16,13 +20,13 @@ Editing without a token, the folder and My maps tested by the user before the fr
   - the editor: `edit-v3-layout/editor/` (editor.js joined from `src/core.js`, `graphml.js`, `celldesigner.js`, `help.js`);
   - the four renderers it runs: `edit-v3-layout/renderers/` (yrender.js, cdrender.js, cd_edit.js, layout.js);
   - its style: `edit-v3-layout/default-edit.css`.
-- Copied from viewer-source.github.io edd77db through this repository's 84006fe. Not in it: the list's right-click menu
-  for the reader's maps and groups (viewer b3e6892, styles 34e8a22), pushed by another session minutes after, untested.
+- First frozen from viewer-source.github.io edd77db through this repository's 84006fe; refreshed 2026-11-14 from viewer
+  12da828 through this repository's d6ed7e5.
 - The exact state of everything, code and demo maps together, as branches `keep/default-edit-v3-layout`:
-  - viewer-source/viewer-source.github.io at edd77db;
-  - viewer-source/styles at 84006fe.
+  - viewer-source/viewer-source.github.io at bd0b8b1 (12da828's code; edd77db until the refresh);
+  - viewer-source/styles at the refresh's commit (84006fe until then).
   Branches, as the session's git proxy refuses tags. The branch cleanup deletes only `claude/...` branches, so these
-  stay. Nothing is ever pushed to `keep/...`.
+  stay. Nothing is pushed to `keep/...` but a refresh the user asks for (2026-11-14, a fast-forward).
 
 ## Not frozen: what the page shares with the demo and Default Edit
 
@@ -54,6 +58,14 @@ are standard); compartments are the exception and resize.
     process glyph moves among CellDesigner's six places, a drop on the centre takes the place facing the modifier.
   - The right-click menu, the Downloads tab and the download row give the source file, SVG and PNG as on screen.
   - Default View's look as the viewer's own (look-lines.css, look-view.css); Map colours File and Default only.
+- Added by the refresh (2026-11-14):
+  - The reader's maps from the list's right-click menu: Add map, Add group (named at once), Remove map, Rename and
+    Remove group; one file at a time.
+  - With a token, Add map puts the map on the site (file and page in one commit, shown from the browser until built);
+    Remove map hides a site map in this browser, Show removed maps brings them back.
+  - Own maps matched by name and content: the same file again brings the map back with its edits, another file of
+    the same name is a map of its own.
+  - The drafts, folder and own-maps code in the editor (`editor/src/own.js`), no longer in the viewer's file.
 
 ## Fixed just before the freeze (review of 2026-11-14)
 
@@ -68,15 +80,12 @@ are standard); compartments are the exception and resize.
   (the next work).
 - A save that fails (a GitHub error), then leaving and going back, starts from GitHub's version: the moves are dropped
   with no warning left on screen.
-- My maps matches a file added again by its name: a different file with the same name replaces the edited map, in the
-  browser and in the folder (review finding, left for the user to decide: name only, or name and content).
 - If a redraw fails ("Not drawn"), the draft is not written; moves made in the last moment before a reload can be lost
   (the browser's leave warning still asks).
 - A node moved and dragged back to exactly where it was can leave "Your earlier changes to this map are shown" with no
   draft behind it, until Back to the site's map (this page visit only).
 - With a token, every save stores the kept maps' texts in localStorage, several MB on large maps.
-- The drafts' database is opened on any page of the site once a reader has drafts or own maps; the drafts, folder and
-  My maps code (about 270 lines) is in the viewer's file, loaded on every viewer page.
+- The drafts' database is opened on any page of the site once a reader has drafts or own maps.
 - Every map is read ahead for anyone who sees the Edit tab, token or not.
 - Pack keeps a complex's centre, so a complex grown by its name's room can overlap a neighbour; a complex name wider
   than the packed complex sticks out.
@@ -103,7 +112,4 @@ are standard); compartments are the exception and resize.
 
 ## Storage changed since the freeze
 
-- 2026-11-14: a reader's map added with a token while the site builds it is a record in the shared `mine` store with
-  `site` (its id on the site), and Default Edit deletes it once the site lists that id. This version knows nothing of
-  `site`: it shows such a record as an ordinary map of the reader's and writes it to their folder, until a page of the
-  current Default Edit deletes it. The site's map itself is unaffected.
+- None since the refresh of 2026-11-14 (it knows the `site` records and the `src` hash; IndexedDB still version 3).
