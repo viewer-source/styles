@@ -25,5 +25,5 @@ html .m2-info-float .m2-info.m2-over { top: 0; right: 0; bottom: 0; max-height: 
   border-radius: 0; box-shadow: none; padding: 12px 16px; }
 
 /* Overlays signs on trial (user, 2026-11-13: "use this legacy space for trying new icons"): the viewer's seven candidates
-   (O1 to O7, names on hover) shown before Settings; a click does nothing yet */
+   (O1 to O9, names on hover) shown before Settings; a click does nothing yet */
 html .m2-ri[data-win="ovl"] { display: flex !important; }
