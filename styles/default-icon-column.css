@@ -23,3 +23,7 @@ html .site-name { visibility: hidden; }   /* no site name in this style (user, 2
 :root { --m2-nav-float: 1; --m2-info-float: 1; }
 html .m2-info-float .m2-info.m2-over { top: 0; right: 0; bottom: 0; max-height: none; max-width: 70%; border: 0; border-left: 1px solid var(--m2-frame);
   border-radius: 0; box-shadow: none; padding: 12px 16px; }
+
+/* Overlays signs on trial (user, 2026-11-13: "use this legacy space for trying new icons"): the viewer's seven candidates
+   (O1 to O7, names on hover) shown before Settings; a click does nothing yet */
+html .m2-ri[data-win="ovl"] { display: flex !important; }
