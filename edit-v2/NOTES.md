@@ -83,6 +83,9 @@ are standard); compartments are the exception and resize.
 - Pack keeps a complex's centre, so a complex grown by its name's room can overlap a neighbour; a complex name wider
   than the packed complex sticks out (the layout skill's Pack does not count the name's width).
 - The first E right after opening a map can wait about half a second, until the read-ahead is done.
+- On CellDesigner maps, after Snap map to grid or Pack resized a node, the next move, undo or redo wrote a connection
+  point between the five (ENE) back as the nearest side (E). Found and fixed in Default Edit after the freeze
+  (2026-11-13); this backup still has it.
 - Not checked in the session that froze it: saving to GitHub (needs the token), the storage-full fallback (runs only
   after a save), and a saved file reopened in yEd or CellDesigner (only the user can check that).
 
