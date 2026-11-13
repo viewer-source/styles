@@ -1,0 +1,8 @@
+---
+layout: default
+---
+{% comment %} Default Edit V2 JavaScript (user, 2026-11-13): the frozen editor after the review's fixes, its own page with
+its own copies of the viewer, the editor and the renderers it runs; the picker opens it from the other styles and goes
+back to /styles/ for them. {% endcomment %}
+{% include frozen/edit-v2/atlas-app.html index="/index.json" search="/atlas-data/search.json" name="Styles" drag=true look="version1" editor="/styles/edit-v2/editor/" renderers="/styles/edit-v2/renderers/" %}
+{% include style-picker.html %}

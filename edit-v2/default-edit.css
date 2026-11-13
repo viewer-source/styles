@@ -1,0 +1,10 @@
+---
+# Jekyll front matter, kept so the file is built as the other styles
+---
+/* Default Edit V2 JavaScript (user, 2026-11-13: "fix the problems, and only then create a backup version"): Default Edit
+   as it was after the review's fixes, the editor in JavaScript, viewer 0661bd5. Its own copies of the viewer and its styles
+   in _includes/frozen/edit-v2/, of the editor in edit-v2/editor/ and of the four renderers in edit-v2/renderers/; never
+   refreshed by update.sh. */
+{% include frozen/edit-v2/default-icon-row-base.css %}
+
+:root { --m2-edit: 1; }

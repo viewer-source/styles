@@ -205,3 +205,10 @@ Names no private repository in files, pages, code comments or commit messages.
 - Renderers of its own commit (2026-11-13): `update.sh` copies the four JavaScript renderers the editor runs into
   `renderers/`, and the include's `renderers="/styles/renderers/"` loads them from there, so Default Edit no longer runs
   its copied editor against whatever renderer the demo has at the moment.
+- Default Edit V2 JavaScript (user, 2026-11-13: "first fix the problems, and only then create a backup version";
+  `/styles/edit-v2/`, `?style=default-edit-v2`, with the kept versions before V1): Default Edit frozen after the review's
+  fixes (viewer 0661bd5), the editor in JavaScript. Its own page and copies, never refreshed by `update.sh`: the viewer
+  and style bases in `_includes/frozen/edit-v2/`, the editor in `edit-v2/editor/`, the four renderers in
+  `edit-v2/renderers/` (`editor=` and `renderers=` on its include). Saves into the demo's maps as Default Edit does: when
+  the build or the map files change, check it still saves cleanly, else turn its saving off. The exact state of code and
+  maps is also kept as the tag `default-edit-v2` in this repository and in viewer-source.github.io.
