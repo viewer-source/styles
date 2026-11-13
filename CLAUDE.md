@@ -64,6 +64,10 @@ Names no private repository in files, pages, code comments or commit messages.
   Lines Right Panel Dark, both with the kept versions (addresses unchanged: `?style=default-panel`,
   `?style=default-panel-dark`); Default Code, Default Code Linen, Default Slate and Default Grey (variants of that line)
   out of the main section, names unchanged. Below, the older names as written at the time.
+  Default View keeps up (user, 2026-11-13: "yes ... so default view keeps up"): whatever is built in Default Edit goes
+  into the shared base (the viewer's look files, or `_includes/default-icon-row-base.css` for the picker's rules), never
+  into `styles/default-edit.css` alone, unless it belongs to the editor (behind `--m2-edit`). When something is made
+  edit-only, the session says so in one line, so it is known what Default View lacks and why.
 - Order of the picker (user, 2026-11-13: Default Edit "kind of became the main development line for us"): Default first,
   Default Edit second, both `"top": true` in `styles.json`, then a line, then the other main styles, their line, the
   rest and the kept versions as before. Later the same day (user: "move it to the top, making it essentially the
