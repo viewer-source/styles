@@ -6,8 +6,8 @@ Names no private repository in files, pages, code comments or commit messages.
 
 - Names (user, 2026-11-10): the defaults are numbered by version and named by how the map sits on the page, for
   keeping track of their history (long names are fine). Versions are written V1, V2, V3 (user, 2026-11-10: "Default V1 ...", was "Default Version 1 ..."). The main styles, the Lines family (MINERVA's thin lines, no
-  frame round the map): Default is Default Panel (`?style=default-panel`; first in the picker, the address with no
-  `?style=`), Default Dark is Default Panel Dark (`?style=default-panel-dark`), Default Wide is Default Lines, the panel
+  frame round the map): Default is Default Panel (`?style=default-panel`; first in the picker and the address with no
+  `?style=` until 2026-11-13, now second: Default Edit took that place), Default Dark is Default Panel Dark (`?style=default-panel-dark`), Default Wide is Default Lines, the panel
   only while a molecule is open and the map the full width otherwise (`?style=default-lines`; it was Default from
   2026-11-10 until Default Panel took its place the same day, user: the panel more controlled for scrolling, nothing
   moves when an annotation opens, cosy and easier to focus on the diagram, the space freed easily when needed). When the
@@ -50,7 +50,9 @@ Names no private repository in files, pages, code comments or commit messages.
   stay in `_includes/default-icon-row-base.css`, now Default Edit's base; the notes below still describe it.
 - Order of the picker (user, 2026-11-13: Default Edit "kind of became the main development line for us"): Default first,
   Default Edit second, both `"top": true` in `styles.json`, then a line, then the other main styles, their line, the
-  rest and the kept versions as before.
+  rest and the kept versions as before. Later the same day (user: "move it to the top, making it essentially the
+  default, even if it's not named default"): Default Edit first, so `/styles/` with no `?style=` opens it; Default
+  second, now at `?style=default-panel`. Names unchanged.
 - Default Edit V1 Python (user, 2026-11-13: "do this one as a frozen one so we can come back to it if needed"; `/styles/edit-v1/`,
   `?style=default-edit-v1`, last in the picker with the kept versions): Default Edit frozen as it was before the editor
   moved into its own files and to JavaScript (viewer a6d3018). Its own page with its own copies, never refreshed by
