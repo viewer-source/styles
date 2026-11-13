@@ -24,7 +24,7 @@ again from Default Edit; the renderers, look files and style bases were already 
   12da828 through this repository's d6ed7e5.
 - The exact state of everything, code and demo maps together, as branches `keep/default-edit-v3-layout`:
   - viewer-source/viewer-source.github.io at bd0b8b1 (12da828's code; edd77db until the refresh);
-  - viewer-source/styles at the refresh's commit (84006fe until then).
+  - viewer-source/styles at 53f122d (84006fe until the refresh).
   Branches, as the session's git proxy refuses tags. The branch cleanup deletes only `claude/...` branches, so these
   stay. Nothing is pushed to `keep/...` but a refresh the user asks for (2026-11-14, a fast-forward).
 
