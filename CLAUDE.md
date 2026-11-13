@@ -211,4 +211,5 @@ Names no private repository in files, pages, code comments or commit messages.
   and style bases in `_includes/frozen/edit-v2/`, the editor in `edit-v2/editor/`, the four renderers in
   `edit-v2/renderers/` (`editor=` and `renderers=` on its include). Saves into the demo's maps as Default Edit does: when
   the build or the map files change, check it still saves cleanly, else turn its saving off. The exact state of code and
-  maps is also kept as the tag `default-edit-v2` in this repository and in viewer-source.github.io.
+  maps is also kept as the branch `keep/default-edit-v2` in this repository (15c928c) and in viewer-source.github.io
+  (0661bd5); a branch, as the session's git proxy refuses tags; branch-cleanup deletes only `claude/...` branches.
