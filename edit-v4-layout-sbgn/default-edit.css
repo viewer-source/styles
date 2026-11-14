@@ -1,0 +1,10 @@
+---
+# Jekyll front matter, kept so the file is built as the other styles
+---
+/* Default Edit V4 Layout SBGN Fallback (user, 2026-11-14: "edit version 4 ... layout, SBGN"; a fallback before full
+   editing, V3 left untouched): Default Edit as it was after the review of everything since V3, with SBGN-ML maps edited.
+   Its own copies of the viewer and its styles in _includes/frozen/edit-v4-layout-sbgn/, of the editor in
+   edit-v4-layout-sbgn/editor/ and of the five renderers in edit-v4-layout-sbgn/renderers/; never refreshed by update.sh. */
+{% include frozen/edit-v4-layout-sbgn/default-icon-row-base.css %}
+
+:root { --m2-edit: 1; }

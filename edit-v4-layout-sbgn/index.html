@@ -1,0 +1,9 @@
+---
+layout: default
+---
+{% comment %} Default Edit V4 Layout SBGN Fallback (user, 2026-11-14: a second fallback before full editing, as SBGN is a big
+addition; V3 left as it is): Default Edit frozen with SBGN-ML maps edited, process and gate ports, line ends moved to
+another node; its own page with its own copies of the viewer, the editor and the renderers it runs; the picker opens it
+from the other styles and goes back to /styles/ for them. {% endcomment %}
+{% include frozen/edit-v4-layout-sbgn/atlas-app.html index="/index.json" search="/atlas-data/search.json" name="Styles" drag=true look="version1" editor="/styles/edit-v4-layout-sbgn/editor/" renderers="/styles/edit-v4-layout-sbgn/renderers/" %}
+{% include style-picker.html %}

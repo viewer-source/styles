@@ -183,7 +183,7 @@ Names no private repository in files, pages, code comments or commit messages.
   not plan to touch them anymore"): Reactome Scroll, Reactome Scroll Right Panel, Reactome Fixed, Reactome Fixed Blue
   and MINERVA under a line of their own (`mimic: true` in styles.json), kept as they are.
 - Kept versions newest first (user, 2026-11-14: "on the top i would have more recent ones"): under the line, by when each
-  was made: the Default Edit backups (V3 Layout Fallback, V2 JavaScript, V1 Python), Default Icon Column Legacy, Default
+  was made: the Default Edit backups (V4 Layout SBGN Fallback, V3 Layout Fallback, V2 JavaScript, V1 Python), Default Icon Column Legacy, Default
   V3 Lines Right Panel and Dark, Default V2 Frame Compact with Dots and List, Default V1 Frame Original. A new backup goes
   first among them.
 - A style the user likes goes into viewer-source as a named style only when the user says so.
@@ -244,6 +244,15 @@ Names no private repository in files, pages, code comments or commit messages.
   maps is also kept as the branch `keep/default-edit-v2` in this repository (15c928c) and in viewer-source.github.io
   (0661bd5); a branch, as the session's git proxy refuses tags; branch-cleanup deletes only `claude/...` branches.
   What it holds, what it shares with the demo, its known limits and how to go back: `edit-v2/NOTES.md`.
+- Fallback in a name (user, 2026-11-14): a version the user found mature and trusts as a reference to retrace steps
+  to; not every freeze gets it, only one the user marks so. Kept in the name, never dropped as filler.
+- Default Edit V4 Layout SBGN Fallback (user, 2026-11-14: SBGN-ML editing a significant change; the three formats of the
+  converter now edited, "all formats we need at the moment", a complete set, before the full editor; V3 left as it is;
+  `/styles/edit-v4-layout-sbgn/`, `?style=default-edit-v4-layout-sbgn`, first of the kept versions): Default Edit frozen
+  after the review of everything since V3 and its three fixes (viewer e63aaf1). Made as V3: the viewer and style bases
+  in `_includes/frozen/edit-v4-layout-sbgn/`, the editor and the five renderers (sbgn_edit.js added) in
+  `edit-v4-layout-sbgn/`, never refreshed by `update.sh`; branches `keep/default-edit-v4-layout-sbgn` in both
+  repositories. Shares the browser's storage (IndexedDB `atlas-edit-drafts` version 3). `edit-v4-layout-sbgn/NOTES.md`.
 - Default Edit V3 Layout Fallback (user, 2026-11-14, the name the user's: "clearly and unmistakenly that version we approved and can return to"; the fallback before the editor is developed for drawing; "layout" as editing
   covers layout only; `/styles/edit-v3-layout/`, `?style=default-edit-v3-layout`, before V2 in the picker): Default Edit
   frozen after the review of everything since V2 (viewer edd77db, this repository 84006fe), with editing without a token,
