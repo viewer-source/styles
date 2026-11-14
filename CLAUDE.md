@@ -249,7 +249,8 @@ Names no private repository in files, pages, code comments or commit messages.
 - Default Edit V4 Layout SBGN Fallback (user, 2026-11-14: SBGN-ML editing a significant change; the three formats of the
   converter now edited, "all formats we need at the moment", a complete set, before the full editor; V3 left as it is;
   `/styles/edit-v4-layout-sbgn/`, `?style=default-edit-v4-layout-sbgn`, first of the kept versions): Default Edit frozen
-  after the review of everything since V3 and its three fixes (viewer e63aaf1). Made as V3: the viewer and style bases
+  after the review of everything since V3 and its three fixes (viewer e63aaf1), refreshed the same day to viewer aa0c403
+  (user: Make main and Settings Editing in). Made as V3: the viewer and style bases
   in `_includes/frozen/edit-v4-layout-sbgn/`, the editor and the five renderers (sbgn_edit.js added) in
   `edit-v4-layout-sbgn/`, never refreshed by `update.sh`; branches `keep/default-edit-v4-layout-sbgn` in both
   repositories. Shares the browser's storage (IndexedDB `atlas-edit-drafts` version 3). `edit-v4-layout-sbgn/NOTES.md`.

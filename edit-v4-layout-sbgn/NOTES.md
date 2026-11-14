@@ -20,7 +20,8 @@ Not every freeze gets it.
   - the five renderers it runs: `edit-v4-layout-sbgn/renderers/` (yrender.js, cdrender.js, cd_edit.js, sbgn_edit.js,
     layout.js);
   - its style: `edit-v4-layout-sbgn/default-edit.css`.
-- Frozen from viewer-source.github.io e63aaf1 (the review's fixes on 9bbd482).
+- Frozen from viewer-source.github.io e63aaf1 (the review's fixes on 9bbd482); refreshed the same day to aa0c403
+  (user: "a complete version ... with everything sorted out", before the full editor): Make main and the Editing row added.
 - The exact state of code and demo maps, as branches `keep/default-edit-v4-layout-sbgn` in
   viewer-source/viewer-source.github.io and viewer-source/styles (branches, as the session's git proxy refuses tags;
   the branch cleanup deletes only `claude/...` branches). Nothing is pushed to `keep/...` but a refresh the user asks for.
@@ -52,6 +53,11 @@ Purpose: improving a map's layout by hand, as in yEd, in all three formats. No n
   - Drawing: lines stop at state variables and units of information, arcs behind their own nodes, 2 px of white before
     catalysis circles and inhibition bars, logic gates facing what they control.
   - The map stays on screen when the left panel moves.
+- Added by the refresh (viewer aa0c403, its own independent review: 2 bugs fixed there):
+  - Make main reactant / Make main product on CellDesigner maps: right-click an added reactant's or product's line
+    (or a bend point on it), swapped with the main one, the network unchanged, one undo step.
+  - Settings, Editing: Layout (default) or Full, kept in the browser (`atlas-edit-level`, shared with Default Edit);
+    moving a line's end to another node only in Full, on every format.
 
 ## Fixed just before the freeze (review of 2026-11-14, everything since V3)
 
@@ -78,6 +84,8 @@ Purpose: improving a map's layout by hand, as in yEd, in all three formats. No n
 
 ## Checked at the freeze
 
+- At the refresh, the eleven tests green on viewer aa0c403 (cd-make-main 468 swaps on 44 maps added, the others as
+  below).
 - The ten tests green on viewer e63aaf1: cd-compare 308/308, cd-live 2,406 reactions, cd-modifier-spot 390,
   cd-reconnect 236 moves on 44 maps, cd-snap-redo 22/22, cd-square 788, layout-compare 436, sbgn-edit 426 runs on 142
   maps, sbgn-reconnect 76 moves, yrender-compare 132.

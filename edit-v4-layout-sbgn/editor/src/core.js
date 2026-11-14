@@ -1644,6 +1644,8 @@
       return EPN.test(n.shape.kind) ? 'epn' : n.shape.kind === 'Phenotype' ? 'pheno' : null;
     }
     function takes(k, end, i) {   // whether node i can take that end of arc k (its own node aside)
+      // moving an end to another node changes the network: full editing only (Settings, Editing; user, 2026-11-14)
+      if (V.level !== 'full') return false;
       var e = edges2[k], a = e.arr, other = end ? e.s : e.t, r = roleOf(i), ro = roleOf(other);
       var hub = function (x) { return x === 'proc' || x === 'gate'; };
       if (cd) {   // a reaction's end at a species, to another species or complex (no member, no compartment, no glyph, none the reaction has already)
@@ -2100,6 +2102,21 @@
       if (!h || h.n == null || !nodes2[h.n].hub) return null;
       var i = h.n, gate = nodes2[i].shape.kind === 'Operator';
       return { label: gate ? 'Turn logic gate' : 'Turn process', go: function () { turn(i); } };
+    };
+    // Make main (user, 2026-11-14: CellDesigner's main reactant or product is often an accident of the conversion): the
+    // right-click menu on an added reactant's or product's line of a CellDesigner reaction (or a bend point of it) swaps
+    // it with the main one, cd_edit.makeMain on the GraphML (the network stays: layout editing too); place() writes the
+    // participants and CellDesigner's process square goes to the middle of the new main line. One undo step.
+    window.m2EditMain = function () {
+      if (!on || V.current !== map || !rclick || !cd || !window.cd_edit) return null;
+      var h = hit(rclick), k = h && h.e != null && !h.glyph ? h.e : h && h.p != null ? edges2.findIndex(function (e) { return e.pts.indexOf(h.p) >= 0; }) : -1;
+      if (k < 0 || !/\|[rp]\d+$/.test(edges2[k].id)) return null;
+      var t2 = window.cd_edit.makeMain(text, edges2[k].id);
+      if (!t2) return null;
+      return { label: /\|r\d+$/.test(edges2[k].id) ? 'Make main reactant' : 'Make main product', go: function () {
+        remember(false); text = t2;
+        parse(); selN = []; selP = []; selE = []; keyGuides = null; dirty = true; render(); paint(); changed();
+      } };
     };
     window.m2EditBend = function () {
       if (!on || V.current !== map || !rclick) return null;
