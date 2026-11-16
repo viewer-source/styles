@@ -87,7 +87,6 @@
   #m2-split-t::after { content: ''; position: absolute; top: 50%; left: 50%; width: 20px; height: 4px; margin: -2px 0 0 -10px;
     background: radial-gradient(circle, var(--m2-grip-t) 1.5px, transparent 2px) center / 8px 4px repeat-x; }
   .m2:not(.m2-seps) #m2-split-t { display: none; }
-  body.m2-head-shut .wrapper-masthead { display: none; }
   #m2-split-r::after { content: ''; position: absolute; top: 50%; left: 50%; width: 4px; height: 20px; margin: -10px 0 0 -2px;
     background: radial-gradient(circle, var(--m2-grip) 1.5px, transparent 2px) center / 4px 8px repeat-y; }
   #m2-list { max-height: calc(100vh / var(--zoom, 1) - 180px); overflow-y: auto; }
@@ -1555,44 +1554,6 @@
     window.addEventListener('resize', place);
     if (window.ResizeObserver) { new ResizeObserver(place).observe(info); new ResizeObserver(place).observe(view); }
     if (window.MutationObserver) new MutationObserver(place).observe(info, { childList: true });
-  })();
-  (function () {
-    var head = document.querySelector('.wrapper-masthead');
-    if (!head) return;
-    var ts = document.createElement('div'), key = 'atlas-header-shut:' + location.pathname, drag = null;
-    ts.id = 'm2-split-t'; ts.title = 'Drag up to hide the header, click to bring it back';
-    document.querySelector('.m2-main').insertBefore(ts, view);
-    function setShut(on, save) {
-      document.body.classList.toggle('m2-head-shut', on);
-      if (save) { try { if (on) localStorage.setItem(key, '1'); else localStorage.removeItem(key); } catch (e) {} }
-      window.dispatchEvent(new Event('resize'));  
-    }
-    function keepOn() {
-      ts.style.top = '';
-      if (!document.body.classList.contains('m2-head-shut')) return;
-      var y = ts.getBoundingClientRect().top + window.scrollY;
-      if (y < 0) ts.style.top = ts.offsetTop - y / (ts.currentCSSZoom || 1) + 'px';
-    }
-    window.addEventListener('resize', keepOn); window.addEventListener('load', keepOn);
-    try { if (localStorage.getItem(key)) setShut(true, false); } catch (e) {}
-    ts.addEventListener('pointerdown', function (e) {
-      if (e.button !== 0) return;
-      e.preventDefault(); ts.setPointerCapture(e.pointerId);
-      drag = { y: e.clientY, moved: false };
-    });
-    ts.addEventListener('pointermove', function (e) {
-      if (!drag) return;
-      var dy = e.clientY - drag.y, shut = document.body.classList.contains('m2-head-shut');
-      if (dy < -12 && !shut) { drag.moved = true; setShut(true, false); drag.y = e.clientY; }
-      else if (dy > 12 && shut) { drag.moved = true; setShut(false, false); drag.y = e.clientY; }
-    });
-    function end() {
-      if (!drag) return;
-      var shut = document.body.classList.contains('m2-head-shut');
-      if (drag.moved) setShut(shut, true); else if (shut) setShut(false, true);
-      drag = null;
-    }
-    ts.addEventListener('pointerup', end); ts.addEventListener('pointercancel', end);
   })();
   function loadNodes(m) {
     nodes = null; sel = null; renderInfo(); drawPin();

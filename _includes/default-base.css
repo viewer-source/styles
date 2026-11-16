@@ -5,10 +5,8 @@
    pointer turning into resize arrows over them shows where they are. */
 :root {
   --m2-grip: transparent;   /* no dots on the separators beside the list and the panel */
-  --m2-grip-t: transparent;   /* no dots above the map, the separator still works */
   --m2-grip-h: transparent; /* nor under the map window */
   --m2-separator-below: 1; /* that separator on: dragged up the map gets smaller, dragged down past the buttons the map goes to the bottom edge */
-  --m2-split-t: 8px;
   --m2-split: 8px;
   --m2-split-h: 8px;
   --m2-below-view: 46px;   /* the download buttons 8 px under the map and 8 px above the window's bottom */
@@ -37,7 +35,6 @@ html #m2-downloads { margin-top: 4px; }
 
 /* the separators' dots between the viewer's (1.5 px) and Reactome's (1 px), 8 px apart as both */
 html #m2-split::after, html #m2-split-r::after { background: radial-gradient(circle, var(--m2-grip) 1.25px, transparent 1.6px) center / 4px 8px repeat-y; }
-html #m2-split-t::after { background: radial-gradient(circle, var(--m2-grip-t) 1.25px, transparent 1.6px) center / 8px 4px repeat-x; }
 html #m2-split-h > div::after { background: radial-gradient(circle, var(--m2-grip-h) 1.25px, transparent 1.6px) center / 8px 4px repeat-x; }
 
 /* the zoom buttons over the map filled in the accent under the pointer, white sign, as in the Reactome styles */

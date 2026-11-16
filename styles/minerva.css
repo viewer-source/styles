@@ -21,7 +21,6 @@
   --m2-radius-button: 6px;
   --m2-split: 8px;         /* the separators sit on the joins: 8 px to grab */
   --m2-split-h: 8px;
-  --m2-split-t: 6px;       /* above the map, under the search in the bar */
   --m2-below-view: 46px;   /* the download buttons 8 px under the map and 8 px above the window's bottom */
 }
 html body { background: #fff; font-family: Manrope, Arial, sans-serif; color: #070130; }
@@ -33,8 +32,6 @@ html .wrapper-masthead .container { width: calc(100vw / var(--zoom, 1) - 24px); 
 html .masthead { padding: 6px 0 7px; }
 html .site-name a, html .site-name a:hover { color: #6a6977; }   /* lighter on white: MINERVA's grey text */
 html #main { padding-top: 0; }
-/* the header hidden: 6 px above the map for the separator that brings it back */
-html body.m2-head-shut #main { padding-top: 6px; }
 
 /* the whole width, no gaps: the list as a sidebar, the map, the panel, each joined by one line */
 html .m2 { width: calc(100vw / var(--zoom, 1)); column-gap: 0; grid-template-columns: var(--m2-list-w, 240px) minmax(600px, 1fr) auto; }

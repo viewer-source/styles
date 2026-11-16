@@ -8,10 +8,8 @@
    Next. */
 :root {
   --m2-grip: #b4b4b4;   /* the three dots on the separators: the soft grey of the group chevrons */
-  --m2-grip-t: transparent;   /* no dots above the map, the separator still works */
   --m2-grip-h: #b4b4b4; /* and under the map window */
   --m2-separator-below: 1; /* that separator on: dragged up the map gets smaller, dragged down past the buttons the map goes to the bottom edge */
-  --m2-split-t: 8px;
   --m2-split: 8px;
   --m2-split-h: 8px;
   --m2-below-view: 46px;   /* the download buttons 8 px under the map and 8 px above the window's bottom */
@@ -40,7 +38,6 @@ html #m2-downloads { margin-top: 4px; }
 
 /* the separators' dots between the viewer's (1.5 px) and Reactome's (1 px), 8 px apart as both */
 html #m2-split::after, html #m2-split-r::after { background: radial-gradient(circle, var(--m2-grip) 1.25px, transparent 1.6px) center / 4px 8px repeat-y; }
-html #m2-split-t::after { background: radial-gradient(circle, var(--m2-grip-t) 1.25px, transparent 1.6px) center / 8px 4px repeat-x; }
 html #m2-split-h > div::after { background: radial-gradient(circle, var(--m2-grip-h) 1.25px, transparent 1.6px) center / 8px 4px repeat-x; }
 
 /* the zoom buttons over the map filled in the accent under the pointer, white sign, as in the Reactome styles */
@@ -60,8 +57,6 @@ html #sp-chip:hover, html #sp.sp-open #sp-chip { background: var(--m2-accent); b
 /* MINERVA's separators */
 html .wrapper-masthead { border-bottom: 1px solid var(--m2-frame); margin-bottom: 0; }   /* the lines down the page meet this one (a site's own margin under the header left a gap; as in the viewer's look=panel) */
 html #main { padding-top: 0; }
-html body.m2-head-shut #main { padding-top: 6px; }
-html { --m2-split-t: 6px; }
 html .m2 { width: calc(100vw / var(--zoom, 1)); column-gap: 0; grid-template-columns: var(--m2-list-w, 240px) minmax(600px, 1fr) auto; }
 html .m2.m2-info-shut { grid-template-columns: var(--m2-list-w, 240px) minmax(600px, 1fr) 0; }
 html .m2-nav { padding: 12px 12px 0; border-right: 1px solid var(--m2-frame); box-sizing: border-box; }
@@ -79,7 +74,7 @@ html .m2:has(.m2-info:not(.m2-over):not(:empty)):not(.m2-info-shut) .m2-main { b
 }
 
 /* no dots on the separators: the lines are grabbed and moved as they are */
-:root { --m2-grip: transparent; --m2-grip-h: transparent; --m2-grip-t: transparent; }
+:root { --m2-grip: transparent; --m2-grip-h: transparent; }
 
 /* the separators show nothing under the pointer (no highlighting, the lines are there by default);
    with the list out of sight its separator sits inside the window, its whole 8 px to grab (else half outside: 4 px left) */
