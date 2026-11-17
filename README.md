@@ -9,3 +9,5 @@ https://viewer-source.github.io/styles/ (hidden from search engines). It shows t
   of `_includes/atlas-app.html`) on `:root`, and adds a few rules where a setting is not enough. `styles.json` lists
   the styles in the picker's order.
 - The viewer here is a copy of the viewer's current version, released together with it.
+
+Licence: MIT (`LICENSE`).
