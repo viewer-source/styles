@@ -933,6 +933,21 @@
       var w = /[lr]/.test(s) ? size(b[2] + (/l/.test(s) ? -dx : dx)) : b[2], h = /[tb]/.test(s) ? size(b[3] + (/t/.test(s) ? -dy : dy)) : b[3];
       return [/l/.test(s) ? b[0] + b[2] - w : b[0], /t/.test(s) ? b[1] + b[3] - h : b[1], w, h];
     }
+    // a node that holds others (a compartment; a complex with members, the only other holder a format part makes
+    // resizable): resized as a holder, its parts drawn by liveDraw
+    function holds(i) { return !!nodes2[i].comp || nodes2[i].kids.length > 0; }
+    // a complex resized by its handles: the sides dragged (s) held where its members still fit, with its Insets and labels
+    // as grown() holds a member, never further out than where they started (b0: members closer than the Insets in another
+    // tool's file keep their room); the members stay where they are
+    function roomy(i, b, s, b0) {
+      var n = nodes2[i], x0 = Infinity, y0 = Infinity, x1 = -Infinity, y1 = -Infinity;
+      n.kids.forEach(function (k) { var e = extOf(k, boxOf(k)); x0 = Math.min(x0, e[0] - n.ins[0]); y0 = Math.min(y0, e[1] - n.ins[1] - n.lab.t); x1 = Math.max(x1, e[2] + n.ins[2]); y1 = Math.max(y1, e[3] + n.ins[3] + n.lab.b); });
+      if (x0 === Infinity) return b;
+      var L = b[0], T = b[1], R = b[0] + b[2], B = b[1] + b[3];
+      if (/l/.test(s)) L = Math.min(L, Math.max(x0, b0[0])); if (/r/.test(s)) R = Math.max(R, Math.min(x1, b0[0] + b0[2]));
+      if (/t/.test(s)) T = Math.min(T, Math.max(y0, b0[1])); if (/b/.test(s)) B = Math.max(B, Math.min(y1, b0[1] + b0[3]));
+      return [L, T, R - L, B - T];
+    }
     function pt(pi) { var p = points[pi], o = mv && mv.p.has(pi); return [num(p, 'x') + (o ? mv.dx : 0), num(p, 'y') + (o ? mv.dy : 0)]; }
     // the grey guides of a bend point moved by the keys (as in a drag, to see when a segment is level or
     // upright): one bend point selected alone, a segment drawn while it is exactly level or upright; no snapping, the
@@ -1613,35 +1628,60 @@
     document.addEventListener('keydown', function (e) { if (gsMenu && e.key === 'Escape') { e.preventDefault(); gsClose(); } }, true);   // marked done: Escape closes the menu only
     window.addEventListener('resize', gsClose);
     gridButtons();
-    // Change identity's small window, for any format's part: where the menu item was, a title with a close sign, each kind
-    // with its sign ({ name, sign, own, go }), the own kind greyed and not a choice. A click runs go() only while the
-    // editor is still on the same map and its text is unchanged since it opened (every format's change passes through
-    // text); any key, a click outside, a scroll or a resize close it
-    var kwBox = null;
-    function kwClose() { if (kwBox) { kwBox.remove(); kwBox = null; } }
-    // the right-click menu stays under the window until a kind is chosen (done closes it), as a submenu; Escape, the
-    // close sign or a key close the window alone
+    // Change identity's list, for any format's part: a submenu beside its menu item (r from the viewer's menu: the item's
+    // box, the menu's sides mleft and mright, by the item, shut to call on closing), each kind by its name ({ name, own,
+    // go }), the own kind greyed and not a choice. A click runs go() only while the editor is still on the same map
+    // and its text is unchanged since it opened (every format's change passes through text). The menu stays until a kind
+    // is chosen (done closes it); Escape or the left arrow close the list alone, back on its item; another key, a click
+    // outside, a scroll or a resize close it
+    var kwBox = null, kwBy = null;
+    function kwClose(back) {
+      if (!kwBox) return;
+      var b = kwBox; kwBox = null; b.remove();
+      if (kwBy && kwBy.shut) kwBy.shut();
+      if (back && kwBy && kwBy.by && kwBy.by.isConnected) kwBy.by.focus();
+      kwBy = null;
+    }
     function kindWindow(r, items, done) {
       kwClose();
       var t0 = text, m0 = map;
-      kwBox = document.createElement('div'); kwBox.className = 'm2-cx m2-ci'; kwBox.setAttribute('role', 'dialog'); kwBox.setAttribute('aria-label', 'Change identity');
-      kwBox.innerHTML = '<div class="m2-ci-head"><span>Change identity</span><button type="button" class="m2-ci-x" title="Close" aria-label="Close"><svg viewBox="0 0 14 14" aria-hidden="true"><path d="M3 3l8 8M11 3l-8 8"/></svg></button></div><div role="menu"></div>';
-      kwBox.querySelector('.m2-ci-x').addEventListener('click', function (e) { e.stopPropagation(); kwClose(); });
+      kwBox = document.createElement('div'); kwBox.className = 'm2-cx m2-ci'; kwBox.setAttribute('role', 'menu'); kwBox.setAttribute('aria-label', 'Change identity'); kwBy = r;
       items.forEach(function (q) {
         var b = document.createElement('button'); b.type = 'button';
         b.setAttribute('role', 'menuitemradio'); b.setAttribute('aria-checked', String(!!q.own)); b.disabled = !!q.own;
-        b.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true">' + q.sign + '</svg><span>' + q.name + '</span>';
+        b.textContent = q.name;
         b.addEventListener('click', function (e) { e.stopPropagation(); kwClose(); if (done) done(); if (on && V.current === m0 && text === t0) q.go(); });
-        kwBox.lastChild.appendChild(b);
+        kwBox.appendChild(b);
       });
       document.body.appendChild(kwBox);
-      var k = kwBox.getBoundingClientRect().width / kwBox.offsetWidth || 1, w = kwBox.offsetWidth * k, h = kwBox.offsetHeight * k;   // the page's own zoom: a fixed box is placed in its units
-      kwBox.style.left = Math.max(4, Math.min(r.left, window.innerWidth - 4 - w)) / k + 'px'; kwBox.style.top = Math.max(4, Math.min(r.top, window.innerHeight - 4 - h)) / k + 'px';
+      // beside the menu, its first kind level with the item (the list's top padding and border above it), on the left
+      // where the right has no room; inside the window. The page's own zoom: a fixed box is placed in its units
+      var k = kwBox.getBoundingClientRect().width / kwBox.offsetWidth || 1, w = kwBox.offsetWidth * k, h = kwBox.offsetHeight * k;
+      var first = kwBox.firstChild, lift = first ? first.getBoundingClientRect().top - kwBox.getBoundingClientRect().top : 0;
+      var mr = r.mright != null ? r.mright : r.right, ml = r.mleft != null ? r.mleft : r.left;
+      var x = mr - 2 * k + w <= window.innerWidth - 4 ? mr - 2 * k : ml + 2 * k - w >= 4 ? ml + 2 * k - w : window.innerWidth - 4 - w;
+      kwBox.style.left = Math.max(4, x) / k + 'px'; kwBox.style.top = Math.max(4, Math.min(r.top - lift, window.innerHeight - 4 - h)) / k + 'px';
+      var box = kwBox;
+      kwBox.m2close = function () { if (kwBox === box) kwClose(); };
+      kwBox.m2first = function () { var f = box.querySelector('button:not(:disabled)'); if (f) f.focus(); };
       return kwBox;
     }
-    function subItem(f) { f.sub = true; return f; }   // a right-click item that opens a window over the menu (the viewer keeps the menu)
-    document.addEventListener('pointerdown', function (e) { if (kwBox && !kwBox.contains(e.target)) kwClose(); }, true);
-    document.addEventListener('keydown', function (e) { if (!kwBox) return; if (e.key === 'Escape') { e.stopPropagation(); e.preventDefault(); } kwClose(); }, true);   // Escape closes the window only
+    function subItem(f) { f.sub = true; return f; }   // a right-click item that opens its list beside the menu (the viewer keeps the menu)
+    document.addEventListener('pointerdown', function (e) { if (kwBox && !kwBox.contains(e.target) && !(kwBy && kwBy.by && kwBy.by.contains(e.target))) kwClose(); }, true);
+    // the list's keys, before the editor's own (arrows would also move the selection): up and down walk its kinds, Enter
+    // or Space choose, Escape or the left arrow close it; another key closes it and goes on
+    document.addEventListener('keydown', function (e) {
+      if (!kwBox || e.key === 'Enter' || e.key === ' ' || /^(Shift|Control|Alt|Meta)$/.test(e.key)) return;
+      if (!/^(ArrowDown|ArrowUp|ArrowLeft|ArrowRight|Escape)$/.test(e.key)) { kwClose(); return; }
+      e.stopImmediatePropagation(); e.preventDefault();
+      if (e.key === 'ArrowRight') return;
+      if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+        var list = Array.prototype.slice.call(kwBox.querySelectorAll('button:not(:disabled)')), i = list.indexOf(document.activeElement), d = e.key === 'ArrowDown' ? 1 : -1;
+        if (list.length) list[i < 0 ? (d > 0 ? 0 : list.length - 1) : (i + d + list.length) % list.length].focus();
+        return;
+      }
+      kwClose(true);
+    }, true);
     window.addEventListener('resize', kwClose);
     document.addEventListener('scroll', function (e) { if (kwBox && !kwBox.contains(e.target)) kwClose(); }, true);
     function lateItem(it) { var out = [it]; out.late = true; return out; }   // a rarely used right-click item: after the common ones, above Delete
@@ -2829,9 +2869,9 @@
         else if (drag.rs && !drag.rs.go && Math.hypot(e.clientX - drag.rs.cx, e.clientY - drag.rs.cy) < 4) return;   // not a resize yet: a click with a jitter changes nothing
         else if (drag.rs) {
           var seed = {}, rc = drag.rs.c; drag.rs.go = true;
-          seed[rc] = nodes2[rc].comp ? resized(drag, P, gridSet.snap && !e.altKey && !e.ctrlKey) : sized(drag, P, e.altKey || e.ctrlKey);
+          seed[rc] = nodes2[rc].comp ? resized(drag, P, gridSet.snap && !e.altKey && !e.ctrlKey) : holds(rc) ? roomy(rc, sized(drag, P, e.altKey || e.ctrlKey), drag.rs.s, drag.rs.b0) : sized(drag, P, e.altKey || e.ctrlKey);
           liveFit(seed);
-          if (!nodes2[rc].comp) sizeLive(rc, seed[rc]);
+          if (!holds(rc)) sizeLive(rc, seed[rc]);
         }
         else if (drag.grab && Math.hypot(e.clientX - drag.grab.sx, e.clientY - drag.grab.sy) < 4) return;   // not a drag yet
         else {
@@ -2902,15 +2942,16 @@
         else paint();
         return;
       }
-      if (d.rs) {   // a compartment resized: its box set; in Full what no longer overlaps it let go, what it now covers taken in, past its holder's edge it leaves it (regroup); in Layout its holder grows (grown)
+      if (d.rs) {   // a compartment or a complex resized: its box set; in Full what no longer overlaps it let go, what it now covers taken in, past its holder's edge it leaves it (regroup); in Layout its holder grows (grown)
         var nb = liveC && liveC[d.rs.c];
         if (!nb || nb.every(function (v, j) { return Math.abs(v - d.rs.b0[j]) < 0.01; })) { liveOff(); sizeOff(); paint(); return; }
-        if (!nodes2[d.rs.c].comp) { setSize(d.rs.c, nb); return; }   // a node resized by its handles (create.js, the format's part)
+        if (!holds(d.rs.c)) { setSize(d.rs.c, nb); return; }   // a node resized by its handles (create.js, the format's part)
         var rc = d.rs.c, rid = nodes2[rc].id, b0r = d.rs.b0, one = {}; remember(false);
         one[rc] = nb; setBoxes(one);
+        var pf = propFmt(); if (pf && pf.ends) pf.ends(rid, b0r, nb);   // the format's part: its line ends at the box scaled with it (SBGN-ML)
         var before = boxesBefore(function (k) { return nodes2[k].id === rid ? b0r : boxOf(k); });
         var B0r = function (k) { return before[nodes2[k].id] || boxOf(k); }, doneR = function () { render(); paint(); changed(); }, ri = nodes2.findIndex(function (n) { return n.id === rid; });
-        if (!full()) { setBoxes(grown([ri], boxOf, B0r, function () { return false; })); refit([rid]); doneR(); return; }
+        if (!full() || !nodes2[ri].comp) { setBoxes(grown([ri], boxOf, B0r, function () { return false; })); refit([rid]); doneR(); return; }   // a complex: its members kept (roomy), its holders grown
         settle(regroup('box', new Set([ri]), boxOf, B0r), { moving: [rid] }, doneR, function (why) { text = unpush(); parse(); liveOff(); paint(); warn(why); });
         return;
       }

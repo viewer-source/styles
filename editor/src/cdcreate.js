@@ -411,7 +411,7 @@
         if (r === 'proc') return cdRxItems(cdRid(i));
         var A = cdMk.aliasInfo(cd.now, id);
         if (!A.cls || A.cls === 'COMPLEX') return null;
-        out.push(['Change identity\u2026', subItem(function (r, done) { return cdIdentity(id, r, done); })]);
+        out.push(['Change identity', subItem(function (r, done) { return cdIdentity(id, r, done); })]);
         // after it, the species' homodimer, as Properties' Multimer (2 when made, 1 back)
         if (A.cls !== 'DEGRADED') out.push([A.homodimer > 1 ? 'Make monomer' : 'Make multimer', function () { cdApply(function (t) { return cdMk.homodimer(t, id, A.homodimer > 1 ? 1 : 2); }, [id]); }]);
         out.late = true;   // rarely used: after the common items, above Delete
@@ -432,21 +432,21 @@
       }
       return null;
     }
-    // Change identity (core.js kindWindow): a species' kinds, the palette's signs and names, no complex or compartment (a
+    // Change identity (core.js kindWindow): a species' kinds, the palette's names, no complex or compartment (a
     // complex and a single species are not changed into one another), none a complex cannot hold for its member (phenotype,
     // degraded); a click retypes it (cd_make.retype, its colour following the scheme), one undo step
     function cdIdentity(id, r, done) {
       var A = cdMk.aliasInfo(cd.now, id);
       if (!A.cls) return null;
       return kindWindow(r, CD_SP.filter(function (q) { return q[0] !== 'COMPLEX' && !cdComp(q[0]) && !(A.complex && /^(PHENOTYPE|DEGRADED)$/.test(q[0])); }).map(function (q) {
-        return { name: q[1], sign: q[2], own: q[0] === A.cls, go: function () { cdApply(function (t) { return cdMk.retype(t, id, q[0], { from: cdColour(t, A.cls), to: cdColour(t, q[0]) }); }, [id]); } };
+        return { name: q[1], own: q[0] === A.cls, go: function () { cdApply(function (t) { return cdMk.retype(t, id, q[0], { from: cdColour(t, A.cls), to: cdColour(t, q[0]) }); }, [id]); } };
       }), done);
     }
     // a modulation's kinds (a modifier on a reaction: the five; reduced notation between species: its four, no catalysis),
     // each by the modifier's sign and name; set: [[type, modifier type]], go(type) writes it
     function cdModIdentity(set, was, go) {
-      return lateItem(['Change identity\u2026', subItem(function (r, done) {
-        return kindWindow(r, set.map(function (q) { var s = CD_MOD.filter(function (m) { return m[0] === q[1]; })[0]; return { name: CD_NAME[q[1]], sign: s[2], own: q[0] === was, go: function () { go(q[0]); } }; }), done);
+      return lateItem(['Change identity', subItem(function (r, done) {
+        return kindWindow(r, set.map(function (q) { return { name: CD_NAME[q[1]], own: q[0] === was, go: function () { go(q[0]); } }; }), done);
       })]);
     }
     var CD_MODS = CD_MOD.map(function (q) { return [q[0], q[0]]; });   // a modifier's types, each its own sign
@@ -455,8 +455,8 @@
       if (cdMk.REDUCED.indexOf(ab.type) >= 0) return cdModIdentity(CD_RED, ab.type, function (k) { cdApply(function (t) { return cdMk.reactionType(t, rid, k); }, [], [rid]); });
       if (ab.reversible === null) return null;
       // its other types by Change identity (core.js kindWindow), as a species' and a modifier's; then reversible or not
-      var out = set ? [['Change identity\u2026', subItem(function (r, done) {
-        return kindWindow(r, set.map(function (q) { return { name: q[1], sign: q[2], own: q[0] === ab.type, go: function () { cdApply(function (t) { return cdMk.reactionType(t, rid, q[0]); }, [], [rid]); } }; }), done);
+      var out = set ? [['Change identity', subItem(function (r, done) {
+        return kindWindow(r, set.map(function (q) { return { name: q[1], own: q[0] === ab.type, go: function () { cdApply(function (t) { return cdMk.reactionType(t, rid, q[0]); }, [], [rid]); } }; }), done);
       })]] : [];
       out.push([ab.reversible ? 'Make irreversible' : 'Make reversible', function () { cdReversible(rid, !ab.reversible); }]);
       out.late = true;   // rarely used: after the common items, above Delete
@@ -502,8 +502,8 @@
     }
     function cdRename(id, v) { cdApply(function (t) { return cdMk.rename(t, id, v); }, [id]); }
 
-    // resizing and Properties on a CellDesigner map (propFmt, create.js): a species not in a complex, a complex aside (its
-    // members set its size), resized by its handles or by Width and Height, as on SBGN-ML maps; the label, the fill, the
+    // resizing and Properties on a CellDesigner map (propFmt, create.js): a species resized by its handles or by Width and
+    // Height, as on SBGN-ML maps (a complex's member by its handles only, a complex with members as a holder: roomy, core.js); the label, the fill, the
     // border width and multimer (the species' homodimer, 2 when ticked) written by cd_make. No border colour (CellDesigner's
     // species have none); a degraded species keeps its look and its id as its name. Set as default not yet: the colours of
     // new species come from the palette's list
@@ -519,7 +519,11 @@
       sizeRec = null; render(); paint(); changed();
     }
     var cdLook = [];   // [alias id, file, its look]
-    var PF_CD = { sizable: cdSpecies, size: cdSetSize, def: false,
+    function cdSizable(i) {   // a species, a complex's member too (the complex grows round it)
+      var n = nodes2[i], u = n.up != null ? nodes2[n.up] : null;
+      return cdSpecies(i) || (!!u && u.shape.kind === 'Complex' && n.el.getAttribute('yfiles.foldertype') !== 'group');
+    }
+    var PF_CD = { sizable: cdSizable, size: cdSetSize, def: false,
       rx: { of: cdRxOf, set: cdReversible },   // a reaction's Reversible (propRx, create.js)
       node: function (i) { return cdSpecies(i) ? i : -1; },
       off: function (k, i) { return k === 'line' || (/^(label|fill|multimer)$/.test(k) && pNow.cls === 'DEGRADED'); },   // pNow: look's, read just before
