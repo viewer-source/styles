@@ -388,7 +388,7 @@
       var lines = cls !== 'DEGRADED' ? this.nameLines(name) : [];
       var cy = y + fh / 2 - z * 7 / 12 * (lines.length - 1), mid = cls === 'ION_CHANNEL' ? x + (fw - 20) / 2 : x + fw / 2;
       lines.forEach(function (line, k2) { self.text(line, mid, cy + z / 3 + z * 7 / 6 * k2, z, 'middle', null, self.CLASSES ? ' class="t-' + (ROLE[cls] || 'white') + '"' : ''); });
-    } else this.text(this.nameLines(name).join(' '), x + fw / 2, y + fh - z * 7 / 12, z, 'middle', null, this.CLASSES ? ' class="t-complex"' : '');
+    } else this.text(this.nameLines(name).join(' '), x + fw / 2, y + fh - 7, z, 'middle', null, this.CLASSES ? ' class="t-complex"' : '');
   };
   D.shape = function (cls, b, fill, alpha, dash) {
     var x = b[0], y = b[1], w = b[2], h = b[3], self = this;
@@ -445,7 +445,7 @@
     findall(si, 'cd:state/cd:listOfStructuralStates/cd:structuralState').forEach(function (st) {
       var sa = find(a, 'cd:structuralState'), ang = sa ? F(get(sa, 'angle')) : -Math.PI / 2, p = onBorder(b, ang), label = get(st, 'structuralState');
       self.out.push('<ellipse cx="' + fmt(p[0]) + '" cy="' + fmt(p[1]) + '" rx="' + Math.trunc(width(label, 10) / 2 + 12) + '" ry="8" fill="#fff" stroke="#000"/>');
-      self.text(label, p[0], p[1] + 3, 10);
+      self.text(label, p[0], p[1] + 3, 9);  // drawn at 9 (CellDesigner 4.4 PDF); the ellipse is sized from the text width at 10
     });
     var info = find(a, 'cd:info');
     if (front && info && get(info, 'state') === 'open') {
