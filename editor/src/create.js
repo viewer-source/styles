@@ -760,7 +760,7 @@
         var h = hit(P), ed = h && h.e != null && h.p == null ? edges2[h.e] : null, now = ed && Object.keys(MODK).filter(function (c) { return sbJs.ARROW[c] === ed.arr[1]; })[0];
         var afN = afKind();   // an AF map (the map, not the tab): its influences by AF's names, no catalysis there
         if (now) return lateItem(['Change identity', subItem(function (r, done) {   // its kinds by Change identity (core.js kindWindow), the palette's names
-          return kindWindow(r, PAL_PD[4][1].filter(function (q) { return MODK[q[0]] && !(q[0] === 'catalysis' && (afN || roleOf(ed.t) === 'pheno')); }).map(function (q) {
+          return kindWindow(r, PAL_PD[4][1].filter(function (q) { return MODK[q[0]] && !(q[0] === 'catalysis' && (afN || roleOf(ed.t) === 'epn' || pdLimit(ed.s, ed.t, 'catalysis'))); }).map(function (q) {
             var c = q[0], af = afN && sbJs.AF_ARC[c];
             return { name: af ? af[0].toUpperCase() + af.slice(1) : q[1], own: c === now, go: function () {
               var t2 = sbJs.arcKind(text, ed.id, c);
@@ -805,11 +805,27 @@
           return ['Make ' + c.toUpperCase(), function () { var t2 = sbJs.kind(text, gid, c); if (t2 === text) return; remember(false); text = t2; made(gid); }];
         });
       }
-      if (k >= 0 && !afKind() && nodes2[k].shape.kind === 'NucleicAcidFeature' && /^nucleic acid feature( multimer)?$/.test(sbJs.classOf(src(), nodes2[k].id))) {   // its units of information, the conceptual types offered
-        var nid = nodes2[k].id;
-        return [['Add unit of information', function () { makeUnit(nid); }],
-                ['Add unit of information ct:mRNA', function () { makeUnit(nid, 'ct:mRNA'); }],
-                ['Add unit of information ct:gene', function () { makeUnit(nid, 'ct:gene'); }]];
+      // an entity (macromolecule, simple chemical, nucleic acid feature, unspecified entity; not an Activity Flow activity
+      // drawn as one: write() carries none of its changes), as a CellDesigner species: its icons first, then Change
+      // identity and Make multimer, after the common items
+      var ec = k >= 0 && !afKind() && !svAt(P) ? (sbJs.classOf(src(), nodes2[k].id) || '') : '', eb = ec.replace(/ multimer$/, '');
+      if (sbJs.ENTITIES.indexOf(eb) >= 0) {
+        var eid = nodes2[k].id, eout = [], emulti = isMulti(k);
+        if (eb === 'macromolecule') eout.push(['Add state variable', function () { makeState(P); }], ['Add unit of information', function () { makeUnit(eid); }]);
+        if (eb === 'nucleic acid feature') eout.push(['Add unit of information', function () { makeUnit(eid); }],   // the conceptual types offered
+          ['Add unit of information ct:mRNA', function () { makeUnit(eid, 'ct:mRNA'); }], ['Add unit of information ct:gene', function () { makeUnit(eid, 'ct:gene'); }]);
+        eout.push(['Change identity', subItem(function (r, done) {   // its kinds by the palette's names (core.js kindWindow)
+          return kindWindow(r, sbJs.ENTITIES.map(function (c) {
+            return { name: c[0].toUpperCase() + c.slice(1), own: c === eb, go: function () { var t2 = sbJs.entityKind(text, eid, c); if (t2 === text) return; remember(false); text = t2; made(eid); } };
+          }), done);
+        })]);
+        if (eb === 'macromolecule') eout.push([emulti ? 'Make macromolecule' : 'Make multimer', function () {
+          var t2 = sbJs.multimer(text, eid, !emulti);
+          if (t2 === text) return;
+          remember(false); text = t2; made(eid);
+        }]);
+        eout.late = true;   // rarely used: after the common items, above Delete
+        return eout;
       }
       var pc = k >= 0 && nodes2[k].shape.kind === 'Process' ? sbJs.classOf(src(), nodes2[k].id) : '';
       if (sbJs.PROCESSES.indexOf(pc) >= 0) {   // its kinds by Change identity, the palette's names (not an association or dissociation of a file)
@@ -824,15 +840,7 @@
         // turned into productions from the same port (productions on both sides, SBGN's reversible process), or those on
         // the port-in side turned back (sbgn_edit.reversible); one undo step, the turned lines selected
         var rv = sbJs.reversibility(text, pid, { sbgn: src() });
-        if (rv && (rv.can || rv.rev)) pit.push([rv.rev ? 'Make irreversible' : 'Make reversible', function () {
-          var on = !rv.rev, n = on ? rv.can : rv.rev, ids = [];
-          for (var j = 0; j < n; j++) ids.push(freeId('arc_', ids));
-          var t2 = sbJs.reversible(text, pid, on, ids, { sbgn: src() });
-          if (t2 === text) return;
-          remember(false); text = t2; parse(); selN = []; selP = []; part = null;
-          selE = edges2.map(function (e2, q) { return ids.indexOf(e2.id) >= 0 ? q : -1; }).filter(function (q) { return q >= 0; });
-          dirty = true; quiet(); render(); paint(); changed();
-        }]);
+        if (rv && (rv.can || rv.rev)) pit.push([rv.rev ? 'Make irreversible' : 'Make reversible', function () { sbReversible(pid, !rv.rev, false); }]);
         return pit;
       }
       // a compartment's name in one of its six places (never in the middle):
@@ -847,16 +855,7 @@
         if (sm[0]) its.push(['Send backward', function () { go(sbJs.restack(text, cid, -1)); }]);
         if (its.length) return its;
       }
-      var i = P && palOn() && !afKind() && !svAt(P) ? macroAt(P) : -1;   // none added on an AF map (afKind)
-      if (i < 0 || !/^macromolecule( multimer)?$/.test(sbJs.classOf(src(), nodes2[i].id))) return null;   // not an Activity Flow activity drawn as one (write() carries none of its changes)
-      var id = nodes2[i].id, multi = isMulti(i);
-      return [['Add state variable', function () { makeState(P); }],
-              ['Add unit of information', function () { makeUnit(id); }],
-              [multi ? 'Make macromolecule' : 'Make multimer', function () {
-                var t2 = sbJs.multimer(text, id, !multi);
-                if (t2 === text) return;
-                remember(false); text = t2; made(id);
-              }]];
+      return null;
     }
     function isMulti(i) {   // drawn as a multimer: yEd's mcount (sbgn_edit.multimer)
       var r = realizerOf(nodes2[i].el), sp = r && Array.prototype.filter.call(r.children, function (c) { return c.localName === 'StyleProperties'; })[0];
@@ -893,7 +892,7 @@
     }
     function svRatio(p, g) { return [(p[0] - g[0]) / g[2] - 0.5, (p[1] - g[1]) / g[3] - 0.5]; }
     // node id grown to box nb: its state variables kept where they are (svKeep, their ratios written again); its units
-    // of information stay spread along the top (sbgn_edit keeps their ratios)
+    // of information keep their places too (sbgn_edit keeps their ratios)
     function svGrowTo(id, nb) {
       var i = nodes2.findIndex(function (n) { return n.id === id; }), b = boxOf(i), ic = svIconsOn(i);
       text = sbJs.resize(text, id, nb);
@@ -930,7 +929,7 @@
     }
     function svK(i) { var q = svList(i).filter(function (x) { return x[3] === SV; })[0]; return q ? q[2][1] / 18 : 1; }   // the node's icons' scale (a Newt map's own font)
     // after node id's icons changed (a unit added or typed, a state variable j typed): units of information apart from one
-    // another (the node grown in width, the units spread along its top), then state variable j if it meets an icon, or
+    // another (the node grown in width, the units on its top edge spread along it), then state variable j if it meets an icon, or
     // (a unit changed, j null) every state variable a unit meets, moved to its first free place (the node grown where none
     // is); the text changed in place, one undo step with the change; true when it grew (its holders grown by svHold)
     function svSettle(id, j) {
@@ -938,9 +937,10 @@
       if (i < 0) return false;
       var grew = false, base = svBase(i);
       for (var g = 0; g < 80; g++) {
-        var b = boxOf(i), ic = svIconsOn(i), us = ic.filter(function (q) { return q.k === UI; });
+        var b = boxOf(i), ic = svIconsOn(i), us = ic.filter(function (q) { return q.k === UI && Math.abs(q.r[1] + 0.5) < 1e-6; });   // the units on the top edge: only width parts them (one moved elsewhere stays as it is)
         if (!us.some(function (u, k) { return svClash(svPt(b, u.r), u.s, b, us.slice(k + 1)); })) break;
-        svGrowTo(id, [b[0] - 10, b[1], b[2] + 20, b[3]]);   // units side by side along the top: only width parts them grew = true; i = nodes2.findIndex(function (n) { return n.id === id; });
+        svGrowTo(id, [b[0] - 10, b[1], b[2] + 20, b[3]]);
+        grew = true; i = nodes2.findIndex(function (n) { return n.id === id; });
       }
       for (var h = 0; h < 80; h++) {
         var b2 = boxOf(i), ic2 = svIconsOn(i), us2 = ic2.filter(function (q) { return q.k === UI; });
@@ -1287,7 +1287,7 @@
       e.stopImmediatePropagation();
       selN = []; selP = []; selE = []; part = null;
       svSel = { id: nodes2[q[0]].id, j: q[1] };
-      svDrag = { i: q[0], again: again, x: e.clientX, y: e.clientY, to: null, r: null, fixed: svList(q[0])[q[1]][3] === UI };   // a unit of information stays where the converter puts it
+      svDrag = { i: q[0], again: again, x: e.clientX, y: e.clientY, to: null, r: null, fixed: !!cd && svList(q[0])[q[1]][3] === UI };   // a CellDesigner unit of information stays at the top (its angle's convention not known)
       paint();
       return true;
     }
@@ -1346,7 +1346,7 @@
       if (!svDrag || !svSel) return;
       if (!e.buttons) { svUp(); return; }   // released outside the window: no sticky hand
       if (!svDrag.to && Math.hypot(e.clientX - svDrag.x, e.clientY - svDrag.y) < 4) return;
-      if (svDrag.fixed) { svDrag.moved = true; return; }   // a unit of information is not dragged; a drag on it is no click
+      if (svDrag.fixed) { svDrag.moved = true; return; }   // a drag on it is no click
       var i = svDrag.i, b = svBox(i), r = border(i, at(e)), q = svList(i)[svSel.j];
       if (!svDrag.parts) svDrag.parts = svParts(i, q);   // the state variable itself moves, as other items on the map, no copy
       svDrag.r = r; svDrag.to = [b[0] + (0.5 + r[0]) * b[2], b[1] + (0.5 + r[1]) * b[3]];
@@ -1368,7 +1368,7 @@
     function svMove(i, j, r) {   // the state variable j of node i written at the place r (a CellDesigner map's: cdcreate.js)
       if (cd) { cdSvMove(i, j, r); return; }
       var q = svList(i)[j], share = q[3] === SV ? svShareMove(i, q, svR(i, q), r) : null;   // the copies too
-      remember(false); text = sbJs.stateMove(text, nodes2[i].id, q[4], r[0], r[1]); parse();
+      remember(false); text = (q[3] === UI ? sbJs.unitMove : sbJs.stateMove)(text, nodes2[i].id, q[4], r[0], r[1]); parse();
       if (share) share();
       dirty = true; render(); paint(); changed();
     }
@@ -1427,7 +1427,7 @@
       var d = KEYS[e.key];
       if (!d || !svSel || !svOn() || e.ctrlKey || e.metaKey || e.altKey || /input|textarea|select/i.test(document.activeElement.tagName)) return;
       var i = svNode();
-      if (i < 0 || svList(i)[svSel.j][3] === UI) return;   // a unit of information: not moved
+      if (i < 0 || (cd && svList(i)[svSel.j][3] === UI)) return;   // a CellDesigner unit of information: not moved
       e.preventDefault(); e.stopImmediatePropagation();
       var b = svBox(i), q = svList(i)[svSel.j];
       if (!svKey) svKey = { i: i, t: toT(b, [(q[1][0] - b[0]) / b[2] - 0.5, (q[1][1] - b[1]) / b[3] - 0.5]), c0: q[1], parts: svParts(i, q) };
@@ -1582,7 +1582,23 @@
       if (h && h.no && want && tool.sticky && (g = linkKind(a, b, P, null)) && !g.no && !(g.pair && MODK[want])) return g;
       return h;
     }
+    // SBGN PD's connectivity table (3.4.1) for what the roles alone do not tell: an empty set is only consumed or
+    // produced, a perturbing agent only starts a modulation (modulation, stimulation, inhibition, necessary
+    // stimulation), a nucleic acid feature is no catalyst. cls: the arc's class, 'pair' for a process made between two
+    // entities (s consumed, t produced). A reason, or null; Activity Flow and CellDesigner maps have rules of their own
+    function pdLimit(s, t, cls) {
+      if (cd || palLangNow() !== 'pd' || s < 0 || t < 0) return null;
+      var ks = nodes2[s].shape.kind, kt = nodes2[t].shape.kind, flux = cls === 'pair' || cls === 'consumption' || cls === 'production';
+      if ((ks === 'EmptySet' && !(cls === 'pair' || cls === 'consumption')) || (kt === 'EmptySet' && !(cls === 'pair' || cls === 'production'))) return 'An empty set is only consumed or produced.';
+      if ((ks === 'PerturbingAgent' && (flux || cls === 'catalysis' || cls === 'logic arc')) || kt === 'PerturbingAgent') return 'A perturbing agent only starts a modulation, stimulation, inhibition or necessary stimulation.';
+      if (cls === 'catalysis' && ks === 'NucleicAcidFeature') return 'A nucleic acid feature is no catalyst.';
+      return null;
+    }
     function linkKind(a, b, P, want) {
+      var r = linkKind0(a, b, P, want), m = r && !r.no && pdLimit(a, b, r.pair ? 'pair' : r.cls);
+      return m ? { no: m } : r;
+    }
+    function linkKind0(a, b, P, want) {
       if (b < 0) return null;
       var ra = roleOf(a), rb = roleOf(b), eqA = !!nodes2[a].eq, eqB = !!nodes2[b].eq;
       var has = function (s, t, head) { return edges2.some(function (q) { return q.s === s && q.t === t && q.arr[1] === head; }); };
@@ -1601,7 +1617,6 @@
         if (ra === 'gate' && !eqA && rb === 'epn' && (!want || MODK[want])) return want === 'catalysis' ? { no: 'A catalysis ends on a process.' } : ok(want || usual(b, 'stimulation'));
       }
       if (want === 'logic arc' && rb !== 'gate' && !(eqA && rb === 'epn')) return { no: 'A logic arc goes into a logic gate.' };
-      if (want === 'catalysis' && rb === 'pheno') return { no: 'A catalysis ends on a process; a phenotype takes a stimulation, inhibition or modulation.' };   // as the converter's rules
       if (want && MODK[want]) {   // a modulation picked: from an entity or a gate to a process or a phenotype
         if ((ra === 'epn' || (ra === 'gate' && !eqA)) && (rb === 'proc' || rb === 'pheno')) return ok(want);
         return { no: 'A ' + want + ' goes from an entity or a logic gate to a process or a phenotype' + ((ra === 'epn' || ra === 'gate') && rb === 'epn' && palLangNow() === 'pd' && !hybOn() ? ' (Reduced notation is unticked in the palette).' : '.') };
@@ -1821,7 +1836,7 @@
       props.querySelector('.m2-ed-prx').hidden = true;
       if (ns.length > 1 || (ns.length && selN.length > 1)) return propsMany(ns, all, r2);
       var rx = propRx();
-      if (rx) {   // one reaction: its Reversible tick box alone
+      if (rx && !propFmt().rx.withNode) {   // one reaction: its Reversible tick box alone (a CellDesigner reaction; an SBGN-ML process shows it under its own rows, below)
         props.hidden = false;
         ['.m2-ed-pnode', '.m2-ed-pedge', '.m2-ed-pdef'].forEach(function (c) { props.querySelector(c).hidden = true; });
         props.querySelector('.m2-ed-prx').hidden = false;
@@ -1843,6 +1858,7 @@
       if (!pNow) { props.hidden = true; return; }
       Array.prototype.forEach.call(props.querySelectorAll('.m2-ed-pnode tr[data-k]'), function (tr) { tr.hidden = (/^[wh]$/.test(tr.dataset.k) && !sizable(i)) || pf.off(tr.dataset.k, i); });
       props.querySelector('.m2-ed-pdef').hidden = !pf.def || pf.off('def', i);   // the part may keep it from a kind (CellDesigner: species only)
+      if (rx) { props.querySelector('.m2-ed-prx').hidden = false; var fr2 = field('rev'); if (all || document.activeElement !== fr2) fr2.checked = rx.on; }   // an SBGN-ML process: Reversible after its own rows
       pNow.w = r2(b[2]); pNow.h = r2(b[3]); ROWS.forEach(function (r) { if (r[2] === 'num' && pNow[r[0]] != null) pNow[r[0]] = r2(pNow[r[0]]); });
       ROWS.forEach(function (r) {
         var f = field(r[0]);
@@ -1932,7 +1948,35 @@
       return true;
     }
     function sbEnds(id, o, box) { var t2 = sbJs.scaleEnds(text, id, o, box); if (t2 !== text) { text = t2; parse(); } }   // a complex's line ends after its box was set (dragEnd, core.js)
+    // a process made reversible or irreversible (sbgn_edit.reversible), from its right-click menu or Properties' Reversible
+    // tick box: one undo step; the turned lines selected (the menu) or the process kept selected (Properties); false when
+    // nothing changed
+    function sbReversible(pid, on, keepNode) {
+      var rv = sbJs.reversibility(text, pid, { sbgn: src() }), n = rv ? (on ? rv.can : rv.rev) : 0, ids = [];
+      if (!n) return false;
+      for (var j = 0; j < n; j++) ids.push(freeId('arc_', ids));
+      var t2 = sbJs.reversible(text, pid, on, ids, { sbgn: src() });
+      if (t2 === text) return false;
+      remember(false); text = t2; parse(); selN = []; selP = []; selE = []; part = null;
+      if (keepNode) nodes2.forEach(function (q, i) { if (q.id === pid) selN.push(i); });
+      else selE = edges2.map(function (e2, q) { return ids.indexOf(e2.id) >= 0 ? q : -1; }).filter(function (q) { return q >= 0; });
+      dirty = true; quiet(); render(); paint(); changed();
+      return true;
+    }
+    // Properties' Reversible tick box for one SBGN-ML process selected alone, under its own rows (withNode): { rid, on },
+    // or null where it can be neither (no production, an association, a gate); read once per process and text, as
+    // Properties runs with every paint
+    var sbRxSeen = [null, null];
+    function sbRxOf() {
+      if (selN.length !== 1 || selE.length || selP.length || svSel) return null;
+      var id = nodes2[selN[0]] && nodes2[selN[0]].id;
+      if (!id || sbJs.PROCESSES.indexOf(sbClasses()[id] || '') < 0) return null;
+      var key = id + '\u0000' + text;
+      if (sbRxSeen[0] !== key) { var rv = null; try { rv = sbJs.reversibility(text, id, { sbgn: src() }); } catch (e) { rv = null; } sbRxSeen = [key, rv && (rv.can || rv.rev) ? { rid: id, on: rv.rev > 0 } : null]; }
+      return sbRxSeen[1];
+    }
     var PF_SB = { sizable: sbSizable, size: sbSetSize, node: sbNode, set: sbSet, def: sbDef, ends: sbEnds,
+      rx: { of: sbRxOf, set: function (pid, on) { return sbReversible(pid, on, true); }, withNode: true },
       line: { colour: sbLineColour, set: sbLineSet, width: function (k) { return sbJs.widthOf(sbEdgeEl(k)); }, setWidth: sbLineWidth, ports: true },   // a line's colour, width and its ports' rows (edgeShow, edgeSet)
       off: sbOff,
       look: function (i) { var o = sbJs.lookOf(realizerOf(nodes2[i].el)); return { label: nameOf(i), font: o.font, fill: o.fill ? o.fill.slice(0, 7).toLowerCase() : '', line: (o.line || '#000000').slice(0, 7).toLowerCase(), width: o.width, multimer: o.multimer }; } };
