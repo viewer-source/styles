@@ -94,6 +94,9 @@ page, so its styles keep the base they were made on).
   html[data-theme="linen"] { --m2-accent: #71777c; --m2-on-accent: #fff; --m2-side: #f5f4f1; --m2-soft: #e8e6e1;
     --m2-text: #000; --m2-text-soft: #222; --m2-muted: #666; --m2-faint: #888; --m2-button: #777; --m2-line: #ccc;
     --m2-frame: #ddd; --m2-bg: #fff; --m2-control-bg: #fffffff0; --m2-link: #1c47a9; }
+  html[data-theme="grey"] { --m2-accent: #71777c; --m2-on-accent: #fff; --m2-side: transparent; --m2-soft: #f1f3f4;   /* Linen's grey on white */
+    --m2-text: #000; --m2-text-soft: #222; --m2-muted: #666; --m2-faint: #888; --m2-button: #777; --m2-line: #ccc;
+    --m2-frame: #ddd; --m2-bg: #fff; --m2-control-bg: #fffffff0; --m2-link: #1c47a9; }
   .m2-nav, #m2-epanel, .m2-info:not(.m2-over) { background: var(--m2-side); }
   /* as on the Colours page: the list on the left, the map and its text in
      the middle, and an empty column of the list's width on the right, so the
@@ -1477,7 +1480,7 @@ page, so its styles keep the base they were made on).
   document.getElementById('m2-set-sites').addEventListener('change', function () { setSites(this.checked); });
   // Theme (Settings, Display): the colours of the panels and buttons (the html[data-theme] blocks in the style above),
   // kept in the browser (atlas-theme, none for Default) and set in the page's head before it is painted
-  var THEMES = [['default', 'Default'], ['linen', 'Linen']];
+  var THEMES = [['default', 'Default'], ['linen', 'Linen'], ['grey', 'Grey']];
   function themeNow() { var v = document.documentElement.getAttribute('data-theme'); return THEMES.some(function (x) { return x[0] === v; }) ? v : 'default'; }
   function setTheme(v) {
     var was = themeNow();
