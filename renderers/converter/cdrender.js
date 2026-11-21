@@ -438,7 +438,7 @@
       var e = 1e-6, o = onBorder(b, ang), fx = w ? (o[0] - x) / w - 0.5 : 0, fy = h ? (o[1] - y) / h - 0.5 : 0;
       var p = onBorder([x + 9, y + 9, Math.max(w - 18, 0), Math.max(h - 18, 0)], ang);
       var tx = p[0] + (fx <= -0.5 + e ? 2 : fx >= 0.5 - e ? -2 : 0), ty = p[1] + (fy <= -0.5 + e ? 2 : fy >= 0.5 - e ? -2 : 0);
-      self.text(site, tx, ty + 3.5, 10, fx < -e ? 'start' : fx > e ? 'end' : 'middle');
+      self.text(site, tx, ty + 3.5, 10, fx < -e ? 'start' : fx > e ? 'end' : 'middle', undefined, ' class="sv-site" display="none"');   // hidden unless Show sites (cdrender.py)
     };
     this.residues.forEach(function (r) {
       if (r[2] === pid && !mods.has(r[3])) {
@@ -827,7 +827,7 @@
     return [svg, { aliases: aliases, reactions: reactions }];
   }
   var api = { render: render, renderHits: renderHits, Drawing: Drawing, py: py, xml: xml, SQUARE: SQUARE, ANCHOR: ANCHOR, fromFrame: fromFrame, toFrame: toFrame,
-    editPoints: editPoints, unit: unit, onBorder: onBorder, width: width, target: target, plainName: plainName, NAME: NAME, GATE: GATE, SYMBOL: SYMBOL, ROLE: ROLE, ANCHOR: ANCHOR, anchorAt: anchorAt, frontBox: frontBox, compartmentShape: compartmentShape, nameLeft: nameLeft, NAME_PLACES: NAME_PLACES, namePoint: namePoint, namePlaceOf: namePlaceOf };   // GATE: the editor's palette checks its signs against it   // NAME: cd_make.js writes names
+    editPoints: editPoints, unit: unit, onBorder: onBorder, width: width, target: target, plainName: plainName, NAME: NAME, GATE: GATE, SYMBOL: SYMBOL, ROLE: ROLE, anchorAt: anchorAt, frontBox: frontBox, compartmentShape: compartmentShape, nameLeft: nameLeft, NAME_PLACES: NAME_PLACES, namePoint: namePoint, namePlaceOf: namePlaceOf };   // GATE: the editor's palette checks its signs against it   // NAME: cd_make.js writes names
   if (typeof module !== 'undefined' && module.exports) module.exports = api; else root.cdrender = api;
 
   if (typeof require !== 'undefined' && typeof module !== 'undefined' && require.main === module) {   // node cdrender.js map.xml out.svg
