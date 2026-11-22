@@ -10,6 +10,7 @@
   {"id": "reactome", "name": "Reactome Fixed", "file": "reactome.css", "mimic": true},
   {"id": "reactome-fixed-blue", "name": "Reactome Fixed Blue", "file": "reactome-fixed-blue.css", "mimic": true},
   {"id": "minerva", "name": "MINERVA", "file": "minerva.css", "mimic": true},
+  {"id": "default-edit-v6-full-celldesigner", "name": "Default Edit V6 Full CellDesigner Fallback", "file": "../edit-v6-full-celldesigner/default-edit.css", "page": "/styles/edit-v6-full-celldesigner/", "kept": true},
   {"id": "default-edit-v5-full-sbgn", "name": "Default Edit V5 Full SBGN", "file": "../edit-v5-full-sbgn/default-edit.css", "page": "/styles/edit-v5-full-sbgn/", "kept": true},
   {"id": "default-edit-v4-layout-sbgn", "name": "Default Edit V4 Layout SBGN Fallback", "file": "../edit-v4-layout-sbgn/default-edit.css", "page": "/styles/edit-v4-layout-sbgn/", "kept": true},
   {"id": "default-edit-v3-layout", "name": "Default Edit V3 Layout Fallback", "file": "../edit-v3-layout/default-edit.css", "page": "/styles/edit-v3-layout/", "kept": true},
