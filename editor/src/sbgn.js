@@ -1,5 +1,5 @@
 import { shared, V } from './state.js';
-import { drag, paint, parse, render, src, warn } from './core.js';
+import { drag, paint, parse, render, setText, src, warn } from './core.js';
 import { yr } from './graphml.js';
 
     // ---------- the SBGN-ML part (editor/src/sbgn.js) ----------
@@ -90,7 +90,7 @@ import { yr } from './graphml.js';
     function sbPlace() {
       if (!sbJs.countsPlace || shared.text === sbPlaced || shared.text.indexOf('<y:EdgeLabel') < 0) return false;
       var t2 = sbJs.countsPlace(shared.text), was = shared.text !== t2;
-      shared.text = sbPlaced = t2;
+      setText(sbPlaced = t2);
       return was;
     }
     var sbK, GEO;
@@ -109,7 +109,7 @@ import { yr } from './graphml.js';
       if (how) sbPlace();   // a change (parse)
       if (sbK.sb !== shared.sb) sbK = { sb: shared.sb, text: null, key: null, kind: 'empty', af: false, g: null, bad: false };
       if (sbK.text !== shared.text) {
-        if (sbK.bad || sbK.key !== shared.text.replace(GEO, '') || (sbK.kind === 'af' && !sbK.af)) sbRead();   // a PD file that reads AF is turned at its first change, a move too
+        if (sbK.bad || sbK.key !== shared.text.replace(GEO, '')) sbRead();   // read again when more than places changed (a move writes nothing)
         else sbK.text = shared.text;
       }
       if (sbK.bad) return sbK.kind;
@@ -119,12 +119,12 @@ import { yr } from './graphml.js';
         if (sbK.failed === key) return sbK.kind;   // a rebuild that failed: neither tried nor said again until the file's content changes (moves alone do not)
         try { g = edOf(src()).graphml(src(), shared.text); }
         catch (e) { sbK.failed = key; warn('The map could not be read again after it turned ' + (sbK.af ? 'Activity Flow' : 'Process Description') + ': ' + (e && e.message || e) + '.'); return sbK.kind; }
-        shared.text = g; sbRead();
+        setText(g); sbRead();
         if (!sbK.bad) sbK.g = sbK.af;
       }
       return sbK.kind;
     }
-    function sbFollow() {   // after a move (changed()): a file the move turned (a PD file of direct links), seen at a paint, followed now
+    function sbFollow() {   // after a move (changed()): a file the move turned, seen at a paint, followed now
       if (!shared.sb || !sbJs || drag || sbK.sb !== shared.sb) return;
       if (sbPlace()) { parse(); shared.dirty = true; render(); paint(); }   // a line moved: its cardinality with it
       sbKind();

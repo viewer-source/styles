@@ -9,7 +9,7 @@ if [ -f "$src/editor/build.js" ]; then (cd "$src" && node -e "require.resolve('e
 cp "$src/_includes/atlas-app.html" "$src/_includes/atlas-tags.css" "$src/_includes/meta.html" "$src/_includes/look-lines.css" "$src/_includes/look-view.css" _includes/   # look-*.css: the viewer's own look, Default View's and Default Edit's base
 rm -f _includes/atlas-edit.js   # a leftover single-file editor, now in editor/
 rm -rf editor && cp -r "$src/editor" editor   # the editor, served at /styles/editor/ (editor= on the include)
-rm -rf renderers && for f in yrender/yrender.js converter/cdrender.js converter/cd_edit.js converter/cd_make.js converter/sbgn_edit.js converter/sbml_edit.js layout/layout.js; do   # the renderers the editor runs, of the same commit (renderers= on the include)
+rm -rf renderers && for f in yrender/yrender.js converter/cdrender.js converter/cd_edit.js converter/cd_make.js converter/sbgn_edit.js converter/sbml_edit.js converter/graphml_edit.js converter/notation.js layout/layout.js; do   # the renderers and engines the editor runs or bundles, of the same commit (renderers= on the include)
   mkdir -p "renderers/$(dirname $f)" && cp "$src/renderers/$f" "renderers/$f"
 done
 cp "$src/style.scss" .

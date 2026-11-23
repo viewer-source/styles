@@ -584,11 +584,11 @@
     // what the map is now, the file and the editor's drawing together: where
     // that differs from what the file alone is, the file is turned to it first, its own glyphs and arcs included (toAf,
     // toPd); a file whose kind the edits leave as it was is written as before (write(s, conv(s)) is s)
-    // A PD file whose links alone read as AF (entities and direct links, nothing only PD has) is turned AF at its first
-    // change (not written PD while it reads AF); opened and saved with no change it comes back as it was
+    // A PD file whose links alone read as AF (entities and direct links, nothing only PD has) is reduced notation: SBGN-ML
+    // has no field for the display, so it keeps its PD classes when edited, what is made in it written in PD's form
+    // (an activity as the entity its unit names, a link under PD's name); only a map that becomes AF by its edits turns
     var K = { own: own, now: kinds(t, S, G) }, af;
-    var turnAf = K.now === 'af' && (K.own !== 'af' || !afForm(t, S)) && !(opt && opt.asIs);
-    if (turnAf && K.own === 'af' && !G.ids.some(function (id) { return afUnitOf(G, id) != null; }) && write(t0, gtext, Object.assign({}, opt, { asIs: true })) === t0) return t0;   // no change (an activity marked in the editor is one)
+    var turnAf = K.now === 'af' && K.own !== 'af';
     if (turnAf) { t = toAf(t, S, was); S = sbgn(t, opt); af = true; }
     else if (K.now !== K.own && (K.now === 'pd' || K.now === 'hybrid') && afForm(t, S)) { t = toPd(t, S); S = sbgn(t, opt); af = false; }
     else af = K.now === 'af' && afForm(t, S);
@@ -596,9 +596,10 @@
     // not Activity Flow: an entity the editor holds as an activity is written as the entity its unit names (a file's
     // activity turned PD by toPd included, also one kept so in the GraphML made again, afUnitOf; else a unit set by
     // hand is written as the base file's)
+    var unitCls = {};   // the classes set here: the entity's kind below leaves them (one class written once)
     if (!af) Object.keys(S.glyph).forEach(function (id) {
       var c = S.glyph[id].el.getAttribute('class') || '', u = G.node[id] ? afUnitOf(G, id) : null;
-      if (u != null && KPLAIN.test(c) && !/ multimer$|^perturbing agent$/.test(c) && actCls(u) !== c) T.set(S.glyph[id].el, 'class', actCls(u));
+      if (u != null && KPLAIN.test(c) && !/ multimer$|^perturbing agent$/.test(c) && actCls(u) !== c) { T.set(S.glyph[id].el, 'class', actCls(u)); unitCls[id] = 1; }
     });
     var close = function (a, b) { return Math.abs(a - b) < 1e-6; };   // (used by the names below too)
     var iconsOf = function (id, kind) {   // [text, rx, ry] of a node's state variables (or units of information) in the GraphML
@@ -759,7 +760,7 @@
       // an entity made another (entityKind): its class from the GraphML's shape, a multimer kept where the new class has one
       var b0 = cls.replace(/ multimer$/, ''), cf = classOfCfg(cfgOf(n.geo.parentNode)) || '', base = ENTITY.test(b0) && ENTITY.test(cf) ? cf : b0, multi = isMulti(G, id);
       var nowCls = MULTI.test(base) && (base !== b0 || multi !== drawnMulti(cls, iconsOf(id, 'UnitOfInformation').map(function (q) { return q[0]; }))) ? base + (multi ? ' multimer' : '') : base !== b0 ? base : null;   // judged by the units as now typed
-      if (nowCls && nowCls !== cls) T.set(g.el, 'class', nowCls);
+      if (nowCls && nowCls !== cls && !unitCls[id]) T.set(g.el, 'class', nowCls);
       var have = kids(g.el, 'glyph').filter(function (c) { return c.getAttribute('class') === 'state variable'; }), more = '';
       var icons = iconsOf(id), hu = unitsOf(g.el), ui = iconsOf(id, 'UnitOfInformation'), cutEls = [];
       have.slice(icons.length).forEach(function (c) { T.cut(c); cutEls.push(c); });   // deleted in the editor

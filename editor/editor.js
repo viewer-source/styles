@@ -1,5 +1,673 @@
 // Built by editor/build.js from editor/src/ (entry src/main.js); edit the sources, then run the build.
 (() => {
+  var __create = Object.create;
+  var __defProp = Object.defineProperty;
+  var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+  var __getOwnPropNames = Object.getOwnPropertyNames;
+  var __getProtoOf = Object.getPrototypeOf;
+  var __hasOwnProp = Object.prototype.hasOwnProperty;
+  var __commonJS = (cb, mod) => function __require() {
+    return mod || (0, cb[__getOwnPropNames(cb)[0]])((mod = { exports: {} }).exports, mod), mod.exports;
+  };
+  var __copyProps = (to, from, except, desc) => {
+    if (from && typeof from === "object" || typeof from === "function") {
+      for (let key of __getOwnPropNames(from))
+        if (!__hasOwnProp.call(to, key) && key !== except)
+          __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+    }
+    return to;
+  };
+  var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(
+    // If the importer is in node compatibility mode or this is not an ESM
+    // file that has been converted to a CommonJS file using a Babel-
+    // compatible transform (i.e. "__esModule" has not been set), then set
+    // "default" to the CommonJS "module.exports" for node compatibility.
+    isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target,
+    mod
+  ));
+
+  // renderers/converter/graphml_edit.js
+  var require_graphml_edit = __commonJS({
+    "renderers/converter/graphml_edit.js"(exports, module) {
+      (function(root) {
+        "use strict";
+        var G2 = "http://graphml.graphdrawing.org/xmlns", Y2 = "http://www.yworks.com/xml/graphml";
+        function els(el) {
+          return el.children ? Array.prototype.slice.call(el.children) : Array.prototype.filter.call(el.childNodes, function(c) {
+            return c.nodeType === 1;
+          });
+        }
+        function num2(el, a) {
+          return parseFloat(el.getAttribute(a));
+        }
+        function fmt2(v) {
+          return String(Math.round(v * 1e3) / 1e3);
+        }
+        function realizerOf2(el) {
+          var cs = els(el);
+          for (var i = 0; i < cs.length; i++) {
+            var dd = cs[i];
+            if (dd.localName !== "data") continue;
+            var rs0 = els(dd);
+            for (var j = 0; j < rs0.length; j++) {
+              var r = rs0[j];
+              if (r.namespaceURI !== Y2) continue;
+              if (r.localName === "ProxyAutoBoundsNode") {
+                var rs = r.getElementsByTagNameNS(Y2, "Realizers")[0];
+                return rs ? els(rs)[parseInt(rs.getAttribute("active") || "0", 10)] || null : null;
+              }
+              return r;
+            }
+          }
+          return null;
+        }
+        function shapeOf(r) {
+          var props2 = {}, kind;
+          Array.prototype.forEach.call(r.getElementsByTagNameNS(Y2, "Property"), function(p) {
+            props2[(p.getAttribute("name") || "").replace("com.yworks.sbgn.style.", "")] = p.getAttribute("value");
+          });
+          if (/^Generic/.test(r.localName)) kind = (r.getAttribute("configuration") || "").replace("com.yworks.sbgn.", "");
+          else {
+            var sh = r.getElementsByTagNameNS(Y2, "Shape")[0];
+            kind = sh ? sh.getAttribute("type") : "rectangle";
+          }
+          return { kind, props: props2 };
+        }
+        function read(t, opt) {
+          opt = opt || {};
+          var doc2 = opt.doc;
+          if (!doc2) {
+            var DP = opt.DOMParser || root.DOMParser, bad = false;
+            if (!DP) throw "no DOMParser (under Node: opt.DOMParser)";
+            try {
+              doc2 = new DP({ onError: function(l) {
+                if (l !== "warning") bad = true;
+              } }).parseFromString(t, "application/xml");
+            } catch (e) {
+              bad = true;
+            }
+            if (bad || !doc2 || !doc2.documentElement) throw "not a readable XML file";
+          }
+          if (doc2.getElementsByTagName("parsererror").length) throw "not a readable XML file";
+          var geos2 = Array.prototype.slice.call(doc2.getElementsByTagNameNS(Y2, "Geometry"));
+          var points2 = Array.prototype.slice.call(doc2.getElementsByTagNameNS(Y2, "Point"));
+          if ((t.match(/<y:Geometry\s/g) || []).length !== geos2.length || (t.match(/<y:Point\s/g) || []).length !== points2.length)
+            throw "the file is not written as yEd writes it";
+          var owner2 = function(e, tag) {
+            for (var p = e.parentNode; p; p = p.parentNode) if (p.localName === tag && p.namespaceURI === G2) return p;
+            return null;
+          };
+          var gi = /* @__PURE__ */ new Map(), byEl = /* @__PURE__ */ new Map();
+          geos2.forEach(function(g, i) {
+            gi.set(g, i);
+          });
+          var nodes = Array.prototype.slice.call(doc2.getElementsByTagNameNS(G2, "node")).map(function(n, i) {
+            byEl.set(n, i);
+            return { el: n, id: n.getAttribute("id"), geo: [] };
+          });
+          geos2.forEach(function(g, i) {
+            var n = owner2(g, "node");
+            if (n && byEl.has(n)) nodes[byEl.get(n)].geo.push(i);
+          });
+          nodes = nodes.filter(function(n) {
+            return n.geo.length;
+          });
+          byEl = /* @__PURE__ */ new Map();
+          nodes.forEach(function(n, i) {
+            byEl.set(n.el, i);
+          });
+          nodes.forEach(function(n) {
+            n.inside = Array.prototype.slice.call(n.el.getElementsByTagNameNS(G2, "node")).map(function(c) {
+              return byEl.get(c);
+            }).filter(function(c) {
+              return c != null;
+            });
+            n.kids = n.inside.filter(function(c) {
+              return owner2(nodes[c].el, "node") === n.el;
+            });
+            var r = realizerOf2(n.el), g = r && r.getElementsByTagNameNS(Y2, "Geometry")[0];
+            n.ag = g && gi.has(g) ? gi.get(g) : n.geo[0];
+            n.shape = r ? shapeOf(r) : { kind: "rectangle", props: {} };
+            n.hub = !opt.cd && /sbgn\.(Process|Operator)$/.test(r ? r.getAttribute("configuration") || "" : "");
+            n.eq = n.hub && n.shape.kind === "Operator" && Array.prototype.some.call(r.getElementsByTagNameNS(Y2, "NodeLabel"), function(l) {
+              return l.textContent.trim() === "\u2261";
+            });
+            n.up = null;
+            n.comp = n.el.getAttribute("yfiles.foldertype") === "group" && !/omplex/.test(r ? r.getAttribute("configuration") || "" : "");
+            var ins = r && r.getElementsByTagNameNS(Y2, "Insets")[0], iv = function(k) {
+              return ins ? parseFloat(ins.getAttribute(k + "F") || ins.getAttribute(k)) || 0 : 0;
+            };
+            n.ins = [iv("left"), iv("top"), iv("right"), iv("bottom")];
+            n.lab = { t: 0, b: 0 };
+            if (r) els(r).forEach(function(l) {
+              if (l.localName !== "NodeLabel" || l.getAttribute("modelName") !== "internal" || l.getAttribute("visible") === "false") return;
+              var side = (l.getAttribute("modelPosition") || "").charAt(0);
+              if (side === "t" || side === "b") n.lab[side] = Math.max(n.lab[side], parseFloat(l.getAttribute("height")) || 0);
+              if (!n.labPos) n.labPos = l.getAttribute("modelPosition") || "c";
+            });
+          });
+          nodes.forEach(function(n, i) {
+            n.kids.forEach(function(c) {
+              nodes[c].up = i;
+            });
+          });
+          var byId = {};
+          nodes.forEach(function(n, i) {
+            byId[n.id] = i;
+          });
+          var pi = /* @__PURE__ */ new Map();
+          points2.forEach(function(p, i) {
+            pi.set(p, i);
+          });
+          var edges = Array.prototype.slice.call(doc2.getElementsByTagNameNS(G2, "edge")).map(function(e) {
+            var ar = e.getElementsByTagNameNS(Y2, "Arrows")[0];
+            return {
+              id: e.getAttribute("id"),
+              s: byId[e.getAttribute("source")],
+              t: byId[e.getAttribute("target")],
+              path: e.getElementsByTagNameNS(Y2, "Path")[0] || null,
+              arr: ar ? [ar.getAttribute("source") || "none", ar.getAttribute("target") || "none"] : ["none", "none"],
+              pts: Array.prototype.slice.call(e.getElementsByTagNameNS(Y2, "Point")).map(function(p) {
+                return pi.get(p);
+              }),
+              smooth: e.getElementsByTagNameNS(Y2, "QuadCurveEdge").length > 0 || Array.prototype.some.call(e.getElementsByTagNameNS(Y2, "BendStyle"), function(b) {
+                return b.getAttribute("smoothed") === "true";
+              })
+            };
+          });
+          var byE = {};
+          edges.forEach(function(e, k) {
+            byE[e.id] = k;
+          });
+          var procs = [];
+          nodes.forEach(function(n, i) {
+            var m = n.id.match(/^(.*)\|proc$/);
+            if (m && byE[m[1] + "|a"] != null && byE[m[1] + "|b"] != null) procs.push({ g: i, a: byE[m[1] + "|a"], b: byE[m[1] + "|b"] });
+          });
+          return { doc: doc2, geos: geos2, points: points2, nodes, edges, procs };
+        }
+        function place(t, g, p) {
+          var k = { "Geometry": -1, "Point": -1 };
+          return t.replace(/<y:(Geometry|Point)\s[^>]*>/g, function(tag, kind) {
+            var i = ++k[kind], v = (kind === "Geometry" ? g : p)[i];
+            if (!v) return tag;
+            return tag.replace(/(\sx=")[^"]*"/, "$1" + v[0] + '"').replace(/(\sy=")[^"]*"/, "$1" + v[1] + '"');
+          });
+        }
+        function boxes(t, at2) {
+          var i = -1;
+          return t.replace(/<y:Geometry\s[^>]*>/g, function(tag) {
+            var v = at2[++i];
+            if (v) ["x", "y", "width", "height"].forEach(function(a, j) {
+              tag = tag.replace(new RegExp("(\\s" + a + '=")[^"]*"'), "$1" + v[j] + '"');
+            });
+            return tag;
+          });
+        }
+        function insets(t, id, ins, bins) {
+          var q = id.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/[.*+?^${}()|[\]\\\/]/g, "\\$&");
+          var m = new RegExp('<node(?=[\\s>/])[^>]*?\\sid="' + q + '"').exec(t);
+          if (!m) return t;
+          var rest = t.slice(m.index), own2 = rest.slice(0, Math.min.apply(null, [rest.search(/<graph(?=[\s>\/])/), rest.indexOf("</node>")].filter(function(k2) {
+            return k2 >= 0;
+          }).concat([rest.length])));
+          var act = /<y:Realizers\s[^>]*active="(\d+)"/.exec(own2), k = act ? +act[1] : 0, put2 = [];
+          [["Insets", ins], ["BorderInsets", bins]].forEach(function(q2) {
+            var re = new RegExp("<y:" + q2[0] + "\\s[^>]*>", "g"), x;
+            for (var j = 0; (x = re.exec(own2)) && j < k; j++) ;
+            if (!x) return;
+            var tag = x[0];
+            ["left", "top", "right", "bottom"].forEach(function(sd, j2) {
+              var v = q2[1][j2];
+              if (v == null) return;
+              v = Math.round(v * 1e3) / 1e3;
+              tag = tag.replace(new RegExp("(\\s" + sd + '=")[^"]*"'), "$1" + Math.round(v) + '"').replace(new RegExp("(\\s" + sd + 'F=")[^"]*"'), "$1" + (v % 1 ? String(v) : v + ".0") + '"');
+            });
+            if (tag !== x[0]) put2.push([m.index + x.index, x[0].length, tag]);
+          });
+          put2.sort(function(a, b) {
+            return b[0] - a[0];
+          }).forEach(function(q2) {
+            t = t.slice(0, q2[0]) + q2[2] + t.slice(q2[0] + q2[1]);
+          });
+          return t;
+        }
+        function ends(t, by, re) {
+          var c = -1, ce = -1;
+          if (re) t = t.replace(/<edge\b[^>]*>/g, function(tag) {
+            return ++ce !== re.k ? tag : tag.replace(new RegExp("(\\s" + re.att + `\\s*=\\s*)("[^"]*"|'[^']*')`), function(m, p1) {
+              return p1 + '"' + re.id + '"';
+            });
+          });
+          return t.replace(/<y:Path\b[^>]*>/g, function(tag) {
+            var kv = by.get(++c);
+            if (!kv) return tag;
+            kv.forEach(function(q) {
+              var r = new RegExp("(\\s" + q[0] + '=")[^"]*"');
+              tag = r.test(tag) ? tag.replace(r, "$1" + q[1] + '"') : tag.replace(/(\/?>)$/, " " + q[0] + '="' + q[1] + '"$1');
+            });
+            return tag;
+          });
+        }
+        function pathOf(t, id, kv) {
+          var xid = id.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+          return t.replace(new RegExp('(<edge id="' + xid + '"(?:(?!</edge>)[\\s\\S])*?<y:Path)([^>]*?)(/?>)'), function(m, a, at2, close) {
+            kv.forEach(function(k) {
+              var v = " " + k[0] + '="' + k[1] + '"', re = new RegExp("\\s" + k[0] + '="[^"]*"');
+              at2 = re.test(at2) ? at2.replace(re, v) : at2 + v;
+            });
+            return a + at2 + close;
+          });
+        }
+        function bend2(t, at2, x, y) {
+          var tag = '<y:Point x="' + fmt2(x) + '" y="' + fmt2(y) + '"/>';
+          var nth = function(re, n) {
+            var m2, c = -1;
+            re.lastIndex = 0;
+            while (m2 = re.exec(t)) if (++c === n) return m2;
+            return null;
+          };
+          var indent = function(pos) {
+            var s0 = t.lastIndexOf("\n", pos - 1) + 1;
+            return t.slice(s0, pos).match(/^[ \t]*/)[0];
+          };
+          var m;
+          if (at2.before != null) {
+            m = nth(/<y:Point\s[^>]*>/g, at2.before);
+            if (!m) return null;
+            return t.slice(0, m.index) + tag + "\n" + indent(m.index) + t.slice(m.index);
+          }
+          if (at2.after != null) {
+            m = nth(/<y:Point\s[^>]*>/g, at2.after);
+            if (!m) return null;
+            var end = m.index + m[0].length;
+            return t.slice(0, end) + "\n" + indent(m.index) + tag + t.slice(end);
+          }
+          m = nth(/<y:Path[\s>\/][^>]*>/g, at2.path);
+          if (!m) return null;
+          var w = indent(m.index), end2 = m.index + m[0].length;
+          return /\/>$/.test(m[0]) ? t.slice(0, m.index) + m[0].replace(/\s*\/>$/, ">") + "\n" + w + "  " + tag + "\n" + w + "</y:Path>" + t.slice(end2) : t.slice(0, end2) + "\n" + w + "  " + tag + t.slice(end2);
+        }
+        function unbend2(t, list2) {
+          list2 = list2.slice().sort(function(a, b) {
+            return b - a;
+          });
+          list2.forEach(function(pi) {
+            var re = /<y:Point\s[^>]*>/g, m, c = -1;
+            while (m = re.exec(t)) if (++c === pi) break;
+            if (!m) return;
+            var a = m.index, b = m.index + m[0].length;
+            var s0 = t.lastIndexOf("\n", a - 1) + 1;
+            if (/^[ \t]*$/.test(t.slice(s0, a)) && t[b] === "\n") {
+              a = s0;
+              b += 1;
+            }
+            t = t.slice(0, a) + t.slice(b);
+          });
+          return t;
+        }
+        function shiftTag(tag, sx2, sy2) {
+          if (sx2) tag = tag.replace(/(\sx=")([^"]*)"/, function(a, k, v) {
+            return k + fmt2(parseFloat(v) + sx2) + '"';
+          });
+          if (sy2) tag = tag.replace(/(\sy=")([^"]*)"/, function(a, k, v) {
+            return k + fmt2(parseFloat(v) + sy2) + '"';
+          });
+          return tag;
+        }
+        function shift2(t, sx2, sy2) {
+          return !sx2 && !sy2 ? t : t.replace(/<y:(?:Geometry|Point)\s[^>]*>/g, function(tag) {
+            return shiftTag(tag, sx2, sy2);
+          });
+        }
+        function shiftOf(bs, ps, block) {
+          var mx = Infinity, my = Infinity;
+          bs.concat(ps).forEach(function(b) {
+            mx = Math.min(mx, b[0]);
+            my = Math.min(my, b[1]);
+          });
+          var by = function(m) {
+            return m < 0 ? Math.ceil((40 - m) / block) * block : 0;
+          }, sx2 = by(mx), sy2 = by(my);
+          return sx2 || sy2 ? [sx2, sy2] : null;
+        }
+        var api2 = {
+          G: G2,
+          Y: Y2,
+          read,
+          realizerOf: realizerOf2,
+          place,
+          boxes,
+          insets,
+          ends,
+          pathOf,
+          bend: bend2,
+          unbend: unbend2,
+          shift: shift2,
+          shiftOf,
+          fmt: fmt2,
+          num: num2
+        };
+        if (typeof module !== "undefined" && module.exports) module.exports = api2;
+        else root.graphml_edit = api2;
+      })(typeof self !== "undefined" ? self : exports);
+    }
+  });
+
+  // renderers/converter/notation.js
+  var require_notation = __commonJS({
+    "renderers/converter/notation.js"(exports, module) {
+      (function(root) {
+        "use strict";
+        var ARCS2 = [
+          "consumption",
+          "production",
+          "catalysis",
+          "modulation",
+          "stimulation",
+          "inhibition",
+          "necessary stimulation",
+          "logic arc",
+          "equivalence arc"
+        ];
+        var MODS2 = ["catalysis", "modulation", "stimulation", "inhibition", "necessary stimulation"];
+        var INFL2 = ["modulation", "stimulation", "inhibition", "necessary stimulation"];
+        var ENT = function(c) {
+          return { kind: "entity", cls: c };
+        }, GATE = function(c) {
+          return { kind: "gate", cls: c };
+        };
+        var PROC = function(c) {
+          return { kind: "process", cls: c };
+        };
+        var GRAPHML = {
+          Macromolecule: ENT("macromolecule"),
+          SimpleChemical: ENT("simple chemical"),
+          NucleicAcidFeature: ENT("nucleic acid feature"),
+          UnspecifiedEntity: ENT("unspecified entity"),
+          Complex: ENT("complex"),
+          EmptySet: ENT("empty set"),
+          SourceAndSink: ENT("empty set"),
+          PerturbingAgent: ENT("perturbing agent"),
+          Phenotype: { kind: "phenotype", cls: "phenotype" },
+          Submap: { kind: "submap", cls: "submap" },
+          Tag: { kind: "tag", cls: "tag" },
+          Compartment: { kind: "compartment", cls: "compartment" },
+          Process: PROC("process"),
+          OmittedProcess: PROC("omitted process"),
+          UncertainProcess: PROC("uncertain process"),
+          Association: PROC("association"),
+          Dissociation: PROC("dissociation")
+        };
+        var WORD = { AND: "and", OR: "or", NOT: "not", "\u03C4": "delay", "\u2261": "equivalence" };
+        var SBGNML = {
+          macromolecule: ENT("macromolecule"),
+          "simple chemical": ENT("simple chemical"),
+          "nucleic acid feature": ENT("nucleic acid feature"),
+          "unspecified entity": ENT("unspecified entity"),
+          complex: ENT("complex"),
+          "empty set": ENT("empty set"),
+          "source and sink": ENT("empty set"),
+          "perturbing agent": ENT("perturbing agent"),
+          "biological activity": ENT("biological activity"),
+          perturbation: ENT("perturbing agent"),
+          phenotype: { kind: "phenotype", cls: "phenotype" },
+          submap: { kind: "submap", cls: "submap" },
+          tag: { kind: "tag", cls: "tag" },
+          terminal: { kind: "tag", cls: "terminal" },
+          compartment: { kind: "compartment", cls: "compartment" },
+          process: PROC("process"),
+          "omitted process": PROC("omitted process"),
+          "uncertain process": PROC("uncertain process"),
+          association: PROC("association"),
+          dissociation: PROC("dissociation"),
+          and: GATE("and"),
+          or: GATE("or"),
+          not: GATE("not"),
+          delay: GATE("delay"),
+          equivalence: GATE("equivalence")
+        };
+        var CELLDESIGNER = {
+          PROTEIN: ENT("macromolecule"),
+          RECEPTOR: ENT("macromolecule"),
+          ION_CHANNEL: ENT("macromolecule"),
+          TRUNCATED: ENT("macromolecule"),
+          GENE: ENT("nucleic acid feature"),
+          RNA: ENT("nucleic acid feature"),
+          ANTISENSE_RNA: ENT("nucleic acid feature"),
+          SIMPLE_MOLECULE: ENT("simple chemical"),
+          ION: ENT("simple chemical"),
+          DRUG: ENT("simple chemical"),
+          UNKNOWN: ENT("unspecified entity"),
+          COMPLEX: ENT("complex"),
+          DEGRADED: ENT("empty set"),
+          PHENOTYPE: { kind: "phenotype", cls: "phenotype" },
+          COMPARTMENT: { kind: "compartment", cls: "compartment" },
+          STATE_TRANSITION: PROC("process"),
+          KNOWN_TRANSITION_OMITTED: PROC("omitted process"),
+          UNKNOWN_TRANSITION: PROC("uncertain process"),
+          HETERODIMER_ASSOCIATION: PROC("association"),
+          DISSOCIATION: PROC("dissociation"),
+          TRANSPORT: PROC("process"),
+          TRANSCRIPTION: PROC("process"),
+          TRANSLATION: PROC("process"),
+          TRUNCATION: PROC("process"),
+          BOOLEAN_LOGIC_GATE_AND: GATE("and"),
+          BOOLEAN_LOGIC_GATE_OR: GATE("or"),
+          BOOLEAN_LOGIC_GATE_NOT: GATE("not"),
+          BOOLEAN_LOGIC_GATE_UNKNOWN: GATE("equivalence")
+        };
+        function nodeKind(format, cls, word) {
+          if (format === "graphml") {
+            if (cls === "Operator") {
+              var g = WORD[String(word || "").trim().toUpperCase()] || WORD[String(word || "").trim()];
+              return g ? GATE(g) : null;
+            }
+            return GRAPHML[cls] || null;
+          }
+          if (format === "sbgnml") return SBGNML[String(cls || "").replace(/ multimer$/, "")] || null;
+          if (format === "celldesigner") return CELLDESIGNER[cls] || null;
+          return null;
+        }
+        var HEAD = {
+          delta: "production",
+          white_circle: "catalysis",
+          t_shape: "inhibition",
+          white_diamond: "modulation",
+          white_delta: "stimulation",
+          white_delta_bar: "necessary stimulation",
+          crows_foot_one: "inhibition"
+        };
+        var SBGN_ARC = { "positive influence": "stimulation", "negative influence": "inhibition", "unknown influence": "modulation" };
+        var CD_ARC = {
+          CATALYSIS: "catalysis",
+          UNKNOWN_CATALYSIS: "catalysis",
+          INHIBITION: "inhibition",
+          UNKNOWN_INHIBITION: "inhibition",
+          PHYSICAL_STIMULATION: "stimulation",
+          MODULATION: "modulation",
+          TRIGGER: "necessary stimulation",
+          REDUCED_PHYSICAL_STIMULATION: "stimulation",
+          UNKNOWN_REDUCED_PHYSICAL_STIMULATION: "stimulation",
+          POSITIVE_INFLUENCE: "stimulation",
+          UNKNOWN_POSITIVE_INFLUENCE: "stimulation",
+          NEGATIVE_INFLUENCE: "inhibition",
+          UNKNOWN_NEGATIVE_INFLUENCE: "inhibition",
+          REDUCED_MODULATION: "modulation",
+          UNKNOWN_REDUCED_MODULATION: "modulation",
+          REDUCED_TRIGGER: "necessary stimulation",
+          UNKNOWN_REDUCED_TRIGGER: "necessary stimulation",
+          REACTANT: "consumption",
+          PRODUCT: "production"
+        };
+        function arcKind(format, cls, head) {
+          if (format === "graphml") {
+            if (cls === "none") return head === "process" ? "consumption" : head === "gate" ? "logic arc" : head === "tag" ? "equivalence arc" : head === "entity" ? "logic arc" : null;
+            return HEAD[cls] || null;
+          }
+          if (format === "sbgnml") return ARCS2.indexOf(cls) >= 0 ? cls : SBGN_ARC[cls] || null;
+          if (format === "celldesigner") return CD_ARC[cls] || null;
+          return null;
+        }
+        var CD_REDUCED = /\btype="(?:UNKNOWN_)?(?:REDUCED_PHYSICAL_STIMULATION|REDUCED_MODULATION|REDUCED_TRIGGER|NEGATIVE_INFLUENCE|POSITIVE_INFLUENCE)"/;
+        function mapKind(format, text, engines) {
+          if (format === "sbgnml") {
+            var se = engines && engines.sbgn_edit;
+            return se && se.mapKind ? se.mapKind(text) : null;
+          }
+          if (format === "celldesigner") return /<celldesigner:(?:speciesAlias|complexSpeciesAlias)\b/.test(text || "") ? CD_REDUCED.test(text) ? "hybrid" : "pd" : "empty";
+          return null;
+        }
+        var RULES = {
+          need: {
+            consumption: "A consumption goes from an entity into a process.",
+            production: "A production goes from a process to an entity.",
+            catalysis: "A catalysis goes from an entity to a process.",
+            modulation: "A modulation goes from an entity or a logic gate to a process or a phenotype.",
+            stimulation: "A stimulation goes from an entity or a logic gate to a process or a phenotype.",
+            inhibition: "An inhibition goes from an entity or a logic gate to a process or a phenotype.",
+            "necessary stimulation": "A necessary stimulation goes from an entity or a logic gate to a process or a phenotype.",
+            "logic arc": "A logic arc goes into a logic gate.",
+            "equivalence arc": "A tag is joined to an entity by an equivalence arc."
+          },
+          allow: [
+            { id: "consumption", sets: ["house"], arc: ["consumption"], from: ["entity"], to: ["process"], spec: "3.4.1" },
+            { id: "production", sets: ["house"], arc: ["production"], from: ["process"], to: ["entity"], spec: "3.4.1" },
+            { id: "modulation", sets: ["house"], arc: MODS2, from: ["entity", "gate"], to: ["process", "phenotype"], spec: "3.4.1" },
+            { id: "logic-in", sets: ["house"], arc: ["logic arc"], from: ["entity", "gate"], to: ["gate"], spec: "3.4.1" },
+            { id: "equivalence-out", sets: ["house"], arc: ["logic arc"], from: ["gate:equivalence"], to: ["entity"], spec: "2.9.4" },
+            { id: "tag", sets: ["house"], arc: ["equivalence arc"], from: ["tag"], to: ["entity"], check: "tagRoom", spec: "3.4.1" },
+            { id: "tag-in", sets: ["house"], arc: ["equivalence arc"], from: ["entity"], to: ["tag"], check: "tagRoom", spec: "3.4.1" },
+            {
+              id: "reduced-direct",
+              sets: ["reduced"],
+              arc: INFL2,
+              from: ["entity", "gate"],
+              to: ["entity"],
+              why: "Reduced notation (CellDesigner\u2019s): a modulation may end on an entity."
+            },
+            {
+              id: "reduced-phenotype",
+              sets: ["reduced"],
+              arc: INFL2,
+              from: ["phenotype", "submap"],
+              to: ["process", "entity", "phenotype", "submap"],
+              why: "CellDesigner has one glyph for phenotype, submap and perturbing agent, with lines both ways."
+            },
+            {
+              id: "reduced-submap",
+              sets: ["reduced"],
+              arc: INFL2,
+              from: ["entity", "gate"],
+              to: ["submap"],
+              why: "A submap takes a modulation as a phenotype does (CellDesigner\u2019s one glyph)."
+            },
+            { id: "af-influence", sets: ["af"], arc: INFL2, from: ["entity", "gate"], to: ["entity", "phenotype"], spec: "AF 3.3" }
+          ],
+          refuse: [
+            { id: "gate-one-out", sets: ["house"], arc: ["*"], from: ["gate"], to: ["*"], check: "gateOneOut" },
+            { id: "one-input", sets: ["house"], arc: ["*"], from: ["*"], to: ["gate:not", "gate:delay"], check: "oneInput" },
+            { id: "already", sets: ["house"], arc: ["*"], from: ["*"], to: ["*"], check: "already" },
+            { id: "reversible", sets: ["pd"], arc: ["consumption"], from: ["*"], to: ["process"], check: "reversible", spec: "3.5.2.5" },
+            {
+              id: "empty-set-from",
+              sets: ["pd"],
+              arc: ["production", "catalysis", "modulation", "stimulation", "inhibition", "necessary stimulation", "logic arc"],
+              from: ["entity:empty set"],
+              to: ["*"],
+              no: "An empty set is only consumed or produced.",
+              spec: "3.4.1"
+            },
+            {
+              id: "empty-set-to",
+              sets: ["pd"],
+              arc: ["consumption", "catalysis", "modulation", "stimulation", "inhibition", "necessary stimulation", "logic arc"],
+              from: ["*"],
+              to: ["entity:empty set"],
+              no: "An empty set is only consumed or produced.",
+              spec: "3.4.1"
+            },
+            {
+              id: "agent-from",
+              sets: ["pd"],
+              arc: ["consumption", "production", "catalysis", "logic arc"],
+              from: ["entity:perturbing agent"],
+              to: ["*"],
+              no: "A perturbing agent only starts a modulation, stimulation, inhibition or necessary stimulation.",
+              spec: "3.4.1"
+            },
+            {
+              id: "agent-to",
+              sets: ["pd"],
+              arc: ["*"],
+              from: ["*"],
+              to: ["entity:perturbing agent"],
+              no: "A perturbing agent only starts a modulation, stimulation, inhibition or necessary stimulation.",
+              spec: "3.4.1"
+            },
+            { id: "nucleic-catalyst", sets: ["pd"], arc: ["catalysis"], from: ["entity:nucleic acid feature"], to: ["*"], no: "A nucleic acid feature is no catalyst.", spec: "3.4.1" },
+            { id: "catalysis-ends", sets: ["pd"], arc: ["catalysis"], from: ["phenotype", "submap"], to: ["*"], no: "A catalysis goes from an entity to a process.", spec: "3.4.1" },
+            { id: "catalysis-submap", sets: ["pd"], arc: ["catalysis"], from: ["*"], to: ["submap"], no: "A catalysis goes from an entity to a process.", spec: "3.4.1" },
+            { id: "equivalence-entities", sets: ["house"], arc: ["logic arc"], from: ["gate:equivalence"], to: ["gate"], no: "An equivalence joins entities only.", spec: "2.9.4" },
+            { id: "into-equivalence", sets: ["house"], arc: ["logic arc"], from: ["gate"], to: ["gate:equivalence"], no: "An equivalence joins entities only.", spec: "2.9.4" },
+            { id: "equivalence-line", sets: ["house"], arc: MODS2, from: ["gate:equivalence"], to: ["*"], no: "An equivalence\u2019s line goes to an entity.", spec: "2.9.4" }
+          ],
+          palette: [
+            { sign: "tag", sets: ["cd"], no: "CellDesigner has no tag or submap terminal." },
+            { sign: "delay", sets: ["cd"], no: "CellDesigner has no delay; the converter joins its input to its target." }
+          ]
+        };
+        function side(list2, k) {
+          if (!k) return false;
+          for (var i = 0; i < list2.length; i++) {
+            var w = list2[i];
+            if (w === "*" || w === k.kind || w === k.kind + ":" + k.cls) return true;
+          }
+          return false;
+        }
+        function on2(row, sets) {
+          return row.sets.some(function(s) {
+            return s === "house" || sets.indexOf(s) >= 0;
+          });
+        }
+        function fits(row, arc, from, to) {
+          return (row.arc.indexOf("*") >= 0 || row.arc.indexOf(arc) >= 0) && side(row.from, from) && side(row.to, to);
+        }
+        function allowed(arc, from, to, ctx) {
+          ctx = ctx || {};
+          var sets = ctx.sets || ["pd"], check = ctx.check || function() {
+            return null;
+          }, i, r, why;
+          if (ARCS2.indexOf(arc) < 0) return "Not a line of the notation.";
+          for (i = 0; i < RULES.refuse.length; i++) {
+            r = RULES.refuse[i];
+            if (!on2(r, sets) || !fits(r, arc, from, to)) continue;
+            why = r.check ? check(r.check) : r.no;
+            if (why) return why;
+          }
+          for (i = 0; i < RULES.allow.length; i++) {
+            r = RULES.allow[i];
+            if (!on2(r, sets) || !fits(r, arc, from, to)) continue;
+            return r.check ? check(r.check) : null;
+          }
+          return RULES.need[arc];
+        }
+        function paletteOff(sets) {
+          var o = {};
+          RULES.palette.forEach(function(r) {
+            if (r.sets.some(function(s) {
+              return (sets || []).indexOf(s) >= 0;
+            })) o[r.sign] = r.no;
+          });
+          return o;
+        }
+        var api2 = { ARCS: ARCS2, MODS: MODS2, RULES, nodeKind, arcKind, mapKind, allowed, paletteOff };
+        if (typeof module !== "undefined" && module.exports) module.exports = api2;
+        else root.notation = api2;
+      })(typeof self !== "undefined" ? self : exports);
+    }
+  });
+
   // editor/src/state.js
   var V;
   var shared = {};
@@ -58,8 +726,10 @@
       // the process glyphs with their two main arcs (parse)
       cdBase: none,
       // the drawing the CellDesigner live session starts from { now, text }
-      cdGate: none
+      cdGate: none,
       // a CellDesigner logic gate being made: { kind, inputs: [node ids] } (cdcreate.js)
+      lastChange: none
+      // what the last whole action changed: { name, ids } (core.js commit); the shift out of negative places { name: 'shift', shift: [dx, dy], after: the action's name }
     },
     gesture: {
       tap: none,
@@ -146,6 +816,9 @@
     });
     return out;
   }
+
+  // editor/src/core.js
+  var import_graphml_edit = __toESM(require_graphml_edit());
 
   // editor/src/sbgn.js
   var sbp;
@@ -259,7 +932,7 @@
   function sbPlace() {
     if (!sbJs.countsPlace || shared.text === sbPlaced || shared.text.indexOf("<y:EdgeLabel") < 0) return false;
     var t2 = sbJs.countsPlace(shared.text), was = shared.text !== t2;
-    shared.text = sbPlaced = t2;
+    setText(sbPlaced = t2);
     return was;
   }
   var sbK;
@@ -283,7 +956,7 @@
     if (how) sbPlace();
     if (sbK.sb !== shared.sb) sbK = { sb: shared.sb, text: null, key: null, kind: "empty", af: false, g: null, bad: false };
     if (sbK.text !== shared.text) {
-      if (sbK.bad || sbK.key !== shared.text.replace(GEO, "") || sbK.kind === "af" && !sbK.af) sbRead();
+      if (sbK.bad || sbK.key !== shared.text.replace(GEO, "")) sbRead();
       else sbK.text = shared.text;
     }
     if (sbK.bad) return sbK.kind;
@@ -298,7 +971,7 @@
         warn("The map could not be read again after it turned " + (sbK.af ? "Activity Flow" : "Process Description") + ": " + (e && e.message || e) + ".");
         return sbK.kind;
       }
-      shared.text = g;
+      setText(g);
       sbRead();
       if (!sbK.bad) sbK.g = sbK.af;
     }
@@ -600,62 +1273,29 @@
     return true;
   }
   function shiftedAhead(t, d) {
-    var mx = Infinity, my = Infinity, re = /<y:(?:Geometry|Point)\s[^>]*>/g;
-    var owner2 = function(e) {
-      for (var p = e.parentNode; p; p = p.parentNode) if (p.localName === "node" && p.namespaceURI === G) return p;
-      return null;
-    };
-    var own2 = /* @__PURE__ */ new Map();
-    Array.prototype.forEach.call(d.getElementsByTagNameNS(Y, "Geometry"), function(g) {
-      var n = owner2(g);
-      if (n && !own2.has(n)) own2.set(n, g);
-    });
-    own2.forEach(function(g0, n) {
-      var r = realizerOf(n), g = r && r.getElementsByTagNameNS(Y, "Geometry")[0];
-      if (!g) g = g0;
-      mx = Math.min(mx, num(g, "x"));
-      my = Math.min(my, num(g, "y"));
-    });
-    Array.prototype.forEach.call(d.getElementsByTagNameNS(Y, "Point"), function(p) {
-      mx = Math.min(mx, num(p, "x"));
-      my = Math.min(my, num(p, "y"));
-    });
-    var B = gridBlock(), block = function(m) {
-      return m < 0 ? Math.ceil((40 - m) / B) * B : 0;
-    }, sx2 = block(mx), sy2 = block(my);
-    if (!sx2 && !sy2) return t;
-    return t.replace(re, function(tag) {
-      return shiftTag(tag, sx2, sy2);
-    });
-  }
-  function shiftTag(tag, sx2, sy2) {
-    if (sx2) tag = tag.replace(/(\sx=")([^"]*)"/, function(a, k, v) {
-      return k + fmt(parseFloat(v) + sx2) + '"';
-    });
-    if (sy2) tag = tag.replace(/(\sy=")([^"]*)"/, function(a, k, v) {
-      return k + fmt(parseFloat(v) + sy2) + '"';
-    });
-    return tag;
+    var R;
+    try {
+      R = import_graphml_edit.default.read(t, { doc: d });
+    } catch (e) {
+      return t;
+    }
+    var sh = import_graphml_edit.default.shiftOf(R.nodes.map(function(n) {
+      var g = R.geos[n.ag];
+      return [num(g, "x"), num(g, "y")];
+    }), R.points.map(function(p) {
+      return [num(p, "x"), num(p, "y")];
+    }), gridBlock());
+    return sh ? import_graphml_edit.default.shift(t, sh[0], sh[1]) : t;
   }
   function noNegative() {
-    var mx = Infinity, my = Infinity, re = /<y:(?:Geometry|Point)\s[^>]*>/g;
-    nodes2.forEach(function(n, i) {
-      var b = boxOf(i);
-      mx = Math.min(mx, b[0]);
-      my = Math.min(my, b[1]);
-    });
-    points.forEach(function(p) {
-      mx = Math.min(mx, num(p, "x"));
-      my = Math.min(my, num(p, "y"));
-    });
-    var B = gridBlock(), block = function(m) {
-      return m < 0 ? Math.ceil((40 - m) / B) * B : 0;
-    }, sx2 = block(mx), sy2 = block(my);
-    if (!sx2 && !sy2) return null;
-    shared.text = shared.text.replace(re, function(tag) {
-      return shiftTag(tag, sx2, sy2);
-    });
-    return [sx2, sy2];
+    var sh = import_graphml_edit.default.shiftOf(nodes2.map(function(n, i) {
+      return boxOf(i);
+    }), points.map(function(p) {
+      return [num(p, "x"), num(p, "y")];
+    }), gridBlock());
+    if (!sh) return null;
+    setText(import_graphml_edit.default.shift(shared.text, sh[0], sh[1]));
+    return sh;
   }
   function __start2() {
     __run12();
@@ -3449,6 +4089,7 @@
   }
 
   // editor/src/create.js
+  var import_notation = __toESM(require_notation());
   var PRESET;
   function __run110() {
     PRESET = { "nucleic acid feature ct:gene": ["nucleic acid feature", ["ct:gene"]], "nucleic acid feature ct:mRNA": ["nucleic acid feature", ["ct:mRNA"]] };
@@ -4139,11 +4780,7 @@
     var t2 = sbJs.restyleAll(shared.text, M, null, function(id) {
       return r.edge && id in r.edge && r.edge[id] !== now.edge[id] ? r.edge[id] : void 0;
     });
-    if (t2 !== shared.text) {
-      remember(false);
-      shared.text = t2;
-      made([]);
-    }
+    commit(t2, { name: "colours from a file", sel: [], quiet: true });
     return added;
   }
   var SB_FILLED;
@@ -4211,10 +4848,7 @@
     var lh = [], t2 = sbJs.restyleAll(shared.text, M, null, mode === "custom" ? null : function() {
       return mode === "confetti" ? confettiLine(lh).toUpperCase() : null;
     });
-    if (t2 === shared.text) return;
-    remember(false);
-    shared.text = t2;
-    made([]);
+    commit(t2, { name: "colours", sel: [], quiet: true });
   }
   function palFill() {
     var k = palKey();
@@ -4307,14 +4941,7 @@
       protOn = e.target.checked;
       e.target.blur();
       var t2 = palOn() ? sbJs.proteinBoxes(shared.text, protOn) : shared.text;
-      if (t2 !== shared.text) {
-        remember(false);
-        shared.text = t2;
-        parse();
-        shared.dirty = true;
-        render();
-        changed();
-      }
+      commit(t2, { name: "protein boxes" });
       palShow();
       paint();
     });
@@ -4535,7 +5162,7 @@
       if (done.length) cdRebuild(t, N.sh);
     } else joins.forEach(function(q) {
       try {
-        shared.text = sbJs.join(shared.text, q[0], q[1], { checked: true });
+        setText(sbJs.join(shared.text, q[0], q[1], { checked: true }));
         done.push(q[1]);
       } catch (err) {
         warn("A glyph could not be put into the complex.");
@@ -4679,29 +5306,27 @@
       var eids = shared.selE.map(function(k) {
         return edges2[k] && edges2[k].id;
       });
-      remember(true);
-      setBoxes(o);
-      var at2 = -1;
-      nodes2.forEach(function(m, k) {
-        if (m.id === tKey.id) at2 = k;
-      });
-      if (at2 >= 0) {
-        var t2 = tagTurnT(shared.text, at2, nw, true);
-        if (t2 !== shared.text) {
-          shared.text = t2;
-          parse();
+      commit(null, { name: "tag turned", ids: [tKey.id], merge: true, write: function() {
+        setBoxes(o);
+      }, parsed: true, then: function() {
+        var at2 = -1;
+        nodes2.forEach(function(m, k) {
+          if (m.id === tKey.id) at2 = k;
+        });
+        if (at2 >= 0) {
+          var t2 = tagTurnT(shared.text, at2, nw, true);
+          if (t2 !== shared.text) {
+            setText(t2);
+            parse();
+          }
         }
-      }
-      shared.dirty = true;
-      shared.selN = at2 >= 0 ? [at2] : [];
-      shared.selE = edges2.map(function(q2, k) {
-        return eids.indexOf(q2.id) >= 0 ? k : -1;
-      }).filter(function(k) {
-        return k >= 0;
-      });
-      render();
-      paint();
-      changed();
+        shared.selN = at2 >= 0 ? [at2] : [];
+        shared.selE = edges2.map(function(q2, k) {
+          return eids.indexOf(q2.id) >= 0 ? k : -1;
+        }).filter(function(k) {
+          return k >= 0;
+        });
+      } });
       return true;
     });
     HORIZ = { left: 1, right: 1 };
@@ -4719,14 +5344,9 @@
     if (!q && es.length !== 1) return t;
     es.forEach(function(e) {
       var end = e.t === i, o = boxOf(end ? e.s : e.t), p = tagEnd(way, nb, q, [o[0] + o[2] / 2, o[1] + o[3] / 2]);
-      var xid = e.id.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-      t = t.replace(new RegExp('(<edge id="' + xid + '"(?:(?!</edge>)[\\s\\S])*?<y:Path)([^>]*?)(/?>)'), function(m, a, at2, close) {
-        [[end ? "tx" : "sx", p[0]], [end ? "ty" : "sy", p[1]]].forEach(function(k) {
-          var v = " " + k[0] + '="' + sbJs.repr(k[1]) + '"', re = new RegExp("\\s" + k[0] + '="[^"]*"');
-          at2 = re.test(at2) ? at2.replace(re, v) : at2 + v;
-        });
-        return a + at2 + close;
-      });
+      t = import_graphml_edit.default.pathOf(t, e.id, [[end ? "tx" : "sx", p[0]], [end ? "ty" : "sy", p[1]]].map(function(k) {
+        return [k[0], sbJs.repr(k[1])];
+      }));
     });
     return t;
   }
@@ -4746,7 +5366,7 @@
       t2 = tagTurnT(t2, i, Math.abs(dx) >= Math.abs(dy) ? dx >= 0 ? "right" : "left" : dy >= 0 ? "down" : "up");
     });
     if (t2 !== shared.text) {
-      shared.text = t2;
+      setText(t2);
       parse();
       shared.dirty = true;
     }
@@ -4772,7 +5392,7 @@
       t2 = tagTurnT(t2, at2[q[0]], q[1], true);
     });
     if (t2 !== shared.text) {
-      shared.text = t2;
+      setText(t2);
       parse();
       shared.dirty = true;
     }
@@ -4818,7 +5438,7 @@
         t2 = sbJs.terminal(t2, nodes2[q[0]].id, true);
       });
       if (t2 !== shared.text) {
-        shared.text = t2;
+        setText(t2);
         parse();
         shared.dirty = true;
       }
@@ -4955,7 +5575,7 @@
       return;
     }
     remember(false);
-    shared.text = t2;
+    setText(t2);
     if (cls === "compartment") {
       parse();
       var ni = nodes2.findIndex(function(n) {
@@ -5076,22 +5696,7 @@
           var c = q[0], af = afN && sbJs.AF_ARC[c];
           return { name: af ? af[0].toUpperCase() + af.slice(1) : q[1], own: c === now, go: function() {
             var t2 = sbJs.arcKind(shared.text, ed.id, c);
-            if (t2 === shared.text) return;
-            remember(false);
-            shared.text = t2;
-            parse();
-            shared.selN = [];
-            shared.selP = [];
-            shared.part = null;
-            shared.selE = edges2.map(function(e2, j) {
-              return e2.id === ed.id ? j : -1;
-            }).filter(function(j) {
-              return j >= 0;
-            });
-            shared.dirty = true;
-            render();
-            paint();
-            changed();
+            commit(t2, { name: "arc kind", sel: [], selE: [ed.id] });
           } };
         }), done);
       })]);
@@ -5102,11 +5707,7 @@
     if (au != null) {
       var aid = nodes2[k].id, setU = function(u) {
         return function() {
-          var t2 = sbJs.activity(shared.text, aid, u);
-          if (t2 === shared.text) return;
-          remember(false);
-          shared.text = t2;
-          made(aid);
+          commit(sbJs.activity(shared.text, aid, u), { name: "activity unit", sel: [aid], quiet: true });
         };
       };
       var ui = svList(k).filter(function(q) {
@@ -5115,20 +5716,11 @@
       var setT = function(v) {
         return function() {
           var t2 = ui ? v === null ? sbJs.unitDelete(shared.text, aid, 0) : sbJs.unitValue(shared.text, aid, 0, v) : sbJs.unit(shared.text, aid, v);
-          if (t2 === shared.text) return;
-          remember(false);
-          shared.text = t2;
-          made(aid);
+          commit(t2, { name: "unit text", sel: [aid], quiet: true });
         };
       };
       var typeT = function() {
-        if (!ui) {
-          var t2 = sbJs.unit(shared.text, aid, "");
-          if (t2 === shared.text) return;
-          remember(false);
-          shared.text = t2;
-          made(aid);
-        }
+        if (!ui && !commit(sbJs.unit(shared.text, aid, ""), { name: "unit added to type in", sel: [aid], quiet: true })) return;
         var j = svList(nodes2.findIndex(function(n) {
           return n.id === aid;
         })).map(function(q) {
@@ -5157,11 +5749,7 @@
         return c !== gc && !(c === "not" && gins > 1);
       }).map(function(c) {
         return ["Make " + c.toUpperCase(), function() {
-          var t2 = sbJs.kind(shared.text, gid, c);
-          if (t2 === shared.text) return;
-          remember(false);
-          shared.text = t2;
-          made(gid);
+          commit(sbJs.kind(shared.text, gid, c), { name: "gate kind", sel: [gid], quiet: true });
         }];
       });
     }
@@ -5188,20 +5776,12 @@
       eout.push(["Change identity", subItem(function(r, done) {
         return kindWindow(r, sbJs.ENTITIES.map(function(c) {
           return { name: c[0].toUpperCase() + c.slice(1), own: c === eb, go: function() {
-            var t2 = sbJs.entityKind(shared.text, eid, c);
-            if (t2 === shared.text) return;
-            remember(false);
-            shared.text = t2;
-            made(eid);
+            commit(sbJs.entityKind(shared.text, eid, c), { name: "entity kind", sel: [eid], quiet: true });
           } };
         }), done);
       })]);
       if (eb === "macromolecule") eout.push([emulti ? "Make macromolecule" : "Make multimer", function() {
-        var t2 = sbJs.multimer(shared.text, eid, !emulti);
-        if (t2 === shared.text) return;
-        remember(false);
-        shared.text = t2;
-        made(eid);
+        commit(sbJs.multimer(shared.text, eid, !emulti), { name: "multimer", sel: [eid], quiet: true });
       }]);
       eout.late = true;
       return eout;
@@ -5217,11 +5797,7 @@
             return s[0] === c;
           })[0];
           return q && { name: q[1], own: c === pc, go: function() {
-            var t2 = sbJs.kind(shared.text, pid, c);
-            if (t2 === shared.text) return;
-            remember(false);
-            shared.text = t2;
-            made(pid);
+            commit(sbJs.kind(shared.text, pid, c), { name: "process kind", sel: [pid], quiet: true });
           } };
         }).filter(Boolean), done);
       })]);
@@ -5236,10 +5812,7 @@
     if (hc && hc.n != null && hc.p == null && nodes2[hc.n].comp) {
       var cid = nodes2[hc.n].id, np = palOn() ? sbJs.namePlaces(shared.text, cid) : null, sm = sbJs.stackMoves(shared.text, cid);
       var go = function(t2) {
-        if (t2 === shared.text) return;
-        remember(false);
-        shared.text = t2;
-        made(cid);
+        commit(t2, { name: "compartment", sel: [cid], quiet: true });
       };
       var its = (np ? np[1] : []).map(function(q) {
         return [NAME_WORDS[q], function() {
@@ -5404,9 +5977,9 @@
     }), b = boxOf(i), ic = svMoved(i, svIconsOn(i).filter(function(q) {
       return !skip || !skip(q);
     }), b, nb);
-    shared.text = sbJs.resize(shared.text, id, nb);
+    setText(sbJs.resize(shared.text, id, nb));
     ic.forEach(function(q) {
-      if (q.k === SV) shared.text = sbJs.stateMove(shared.text, id, q.n, q.r[0], q.r[1]);
+      if (q.k === SV) setText(sbJs.stateMove(shared.text, id, q.n, q.r[0], q.r[1]));
     });
     parse();
   }
@@ -5489,7 +6062,7 @@
         svGrowTo(id, r.box, sk);
         grew = true;
       }
-      shared.text = sbJs.stateMove(shared.text, id, hit2.n, r.r[0], r.r[1]);
+      setText(sbJs.stateMove(shared.text, id, hit2.n, r.r[0], r.r[1]));
       parse();
       i = nodes2.findIndex(function(n) {
         return n.id === id;
@@ -5516,15 +6089,15 @@
     var id = nodes2[i].id, j = svList(i).filter(function(h) {
       return h[3] === SV;
     }).length;
-    remember(false);
-    if (room.box) svGrowTo(id, room.box);
-    shared.text = sbJs.state(shared.text, id, "", room.r[0], room.r[1]);
-    parse();
-    if (room.box) svHold(id, was);
-    svCopies(id).forEach(function(c) {
-      svAddTo(c, room.r, "");
-    });
-    made(id);
+    commit(null, { name: "state variable added", sel: [id], quiet: true, reparse: true, write: function() {
+      if (room.box) svGrowTo(id, room.box);
+      setText(sbJs.state(shared.text, id, "", room.r[0], room.r[1]));
+    }, then: function() {
+      if (room.box) svHold(id, was);
+      svCopies(id).forEach(function(c) {
+        svAddTo(c, room.r, "");
+      });
+    } });
     shared.selN = [];
     shared.svSel = { id, j };
     paint();
@@ -5597,7 +6170,7 @@
     }
     if (!at2) at2 = svRoom(k, s, null);
     if (at2.box) svGrowTo(c, at2.box);
-    shared.text = sbJs.state(shared.text, c, txt, at2.r[0], at2.r[1]);
+    setText(sbJs.state(shared.text, c, txt, at2.r[0], at2.r[1]));
     parse();
     if (at2.box) svHold(c, b0);
   }
@@ -5610,12 +6183,12 @@
         var k = svIdx(c), wb = boxOf(k), cur = svOnly(k)[m][0];
         if (has >= 0 && has !== m) {
           if (!cur) {
-            shared.text = sbJs.stateDelete(shared.text, c, m, { sbgn: shared.sb.base });
+            setText(sbJs.stateDelete(shared.text, c, m, { sbgn: shared.sb.base }));
             parse();
           }
           return;
         }
-        shared.text = sbJs.stateValue(shared.text, c, m, svVal(cur) + (nv ? "@" + nv : ""));
+        setText(sbJs.stateValue(shared.text, c, m, svVal(cur) + (nv ? "@" + nv : "")));
         parse();
         if (svSettle(c, m)) svHold(c, wb);
       } else if (m < 0 && nv && has < 0) svAddTo(c, r, "@" + nv);
@@ -5632,7 +6205,7 @@
         var k = svIdx(w[0]);
         if (k < 0) return;
         if (!r) {
-          shared.text = sbJs.stateDelete(shared.text, w[0], w[1], { sbgn: shared.sb.base });
+          setText(sbJs.stateDelete(shared.text, w[0], w[1], { sbgn: shared.sb.base }));
           return;
         }
         var b = boxOf(k), ic = svIconsOn(k), me = ic.filter(function(o) {
@@ -5640,7 +6213,7 @@
         })[0];
         if (me && !svClash(svPt(b, r), me.s, b, ic.filter(function(o) {
           return o !== me;
-        }))) shared.text = sbJs.stateMove(shared.text, w[0], w[1], r[0], r[1]);
+        }))) setText(sbJs.stateMove(shared.text, w[0], w[1], r[0], r[1]));
       });
       parse();
     };
@@ -5664,14 +6237,9 @@
     if (i < 0) return;
     var j = svList(i).length, was = boxOf(i);
     var t2 = sbJs.unit(shared.text, id, value || "");
-    if (t2 === shared.text) return;
-    remember(false);
-    shared.text = t2;
-    if (!shared.afSbgn) {
-      parse();
-      if (svSettle(id, null)) svHold(id, was);
-    }
-    made(id);
+    if (!commit(t2, { name: "unit added", sel: [id], quiet: true, reparse: true, then: function() {
+      if (!shared.afSbgn && svSettle(id, null)) svHold(id, was);
+    } })) return;
     shared.selN = [];
     shared.svSel = { id, j };
     paint();
@@ -5838,7 +6406,7 @@
         if (fresh && (!keep || !v) && on && map === m0) {
           var t0 = undo.length ? unpush() : shared.text;
           if (t0 !== shared.text) {
-            shared.text = t0;
+            setText(t0);
             parse();
             shared.dirty = true;
             quiet();
@@ -5856,7 +6424,7 @@
         var t2 = unit ? sbJs.unitValue(shared.text, id, sv[4], v) : sbJs.stateValue(shared.text, id, sv[4], v);
         if (t2 === shared.text) return;
         if (!fresh) remember(false);
-        shared.text = t2;
+        setText(t2);
         parse();
         if (au0 == null) {
           var ix = nodes2.findIndex(function(n) {
@@ -5910,16 +6478,9 @@
     }
     if (!sbJs || shared.sb && !edOf(src()).nameable(src(), id)) return;
     var t2 = sbJs.label(shared.text, id, v);
-    if (t2 === shared.text) return;
-    remember(false);
-    shared.text = t2;
-    parse();
-    svJoin(id);
-    shared.dirty = true;
-    quiet();
-    render();
-    paint();
-    changed();
+    commit(t2, { name: "name", ids: [id], then: function() {
+      svJoin(id);
+    }, quiet: true });
   }
   function membersName(c) {
     var ms = [], rows = [], mid = function(k, d) {
@@ -6193,14 +6754,10 @@
       return;
     }
     var q = svList(i)[j], share = q[3] === SV ? svShareMove(i, q, svR(i, q), r) : null;
-    remember(false);
-    shared.text = (q[3] === UI ? sbJs.unitMove : sbJs.stateMove)(shared.text, nodes2[i].id, q[4], r[0], r[1]);
-    parse();
-    if (share) share();
-    shared.dirty = true;
-    render();
-    paint();
-    changed();
+    if (!commit((q[3] === UI ? sbJs.unitMove : sbJs.stateMove)(shared.text, nodes2[i].id, q[4], r[0], r[1]), { name: "state variable moved", ids: [nodes2[i].id], then: share })) {
+      render();
+      paint();
+    }
   }
   function svDelete() {
     var i = svNode();
@@ -6212,15 +6769,15 @@
     }
     var q = svList(i)[shared.svSel.j];
     var share = q[3] === SV ? svShareMove(i, q, svR(i, q), null) : null;
-    remember(false);
-    shared.text = (q[3] === UI ? sbJs.unitDelete : sbJs.stateDelete)(shared.text, shared.svSel.id, q[4], { sbgn: shared.sb.base });
-    shared.svSel = null;
-    parse();
-    if (share) share();
-    shared.dirty = true;
-    render();
-    paint();
-    changed();
+    var sid = shared.svSel.id;
+    if (!commit((q[3] === UI ? sbJs.unitDelete : sbJs.stateDelete)(shared.text, sid, q[4], { sbgn: shared.sb.base }), { name: "state variable deleted", ids: [sid], then: function() {
+      shared.svSel = null;
+      if (share) share();
+    } })) {
+      shared.svSel = null;
+      render();
+      paint();
+    }
     return true;
   }
   var cardSel;
@@ -6382,18 +6939,10 @@
   }
   function cardMove(id, pos) {
     var t2 = sbJs.countMove(shared.text, id, pos);
-    if (t2 === shared.text) {
+    if (!commit(t2, { name: "cardinality moved", ids: [id] })) {
       render();
       paint();
-      return;
     }
-    remember(false);
-    shared.text = t2;
-    parse();
-    shared.dirty = true;
-    render();
-    paint();
-    changed();
   }
   function __run36() {
     window.addEventListener("keydown", function(e) {
@@ -6411,17 +6960,9 @@
       if (e.key === "Delete" || e.key === "Backspace") {
         e.preventDefault();
         e.stopImmediatePropagation();
-        var t2 = sbJs.recount(shared.text, cardSel.id, "");
+        var cid = cardSel.id, t2 = sbJs.recount(shared.text, cid, "");
         cardSel = null;
-        if (t2 !== shared.text) {
-          remember(false);
-          shared.text = t2;
-          parse();
-          shared.dirty = true;
-          render();
-          paint();
-          changed();
-        }
+        commit(t2, { name: "cardinality taken off", ids: [cid] });
         return;
       }
       var d = KEYS[e.key];
@@ -6464,19 +7005,7 @@
     if (!ids.length && !eids.length) return false;
     var t2 = ids.length ? sbJs.remove(shared.text, ids) : shared.text;
     if (eids.length) t2 = sbJs.arcRemove(t2, eids);
-    if (t2 === shared.text) return false;
-    remember(false);
-    shared.text = t2;
-    shared.selN = [];
-    shared.selP = [];
-    shared.selE = [];
-    shared.part = null;
-    parse();
-    shared.dirty = true;
-    render();
-    paint();
-    changed();
-    return true;
+    return commit(t2, { name: "deleted", ids: ids.concat(eids), sel: [] });
   }
   var KEYS;
   function __run37() {
@@ -6591,20 +7120,7 @@
       return edges2[k] && edges2[k].id;
     }).filter(Boolean);
     if (!ids.length) return false;
-    var t2 = sbJs.arcRemove(shared.text, ids);
-    if (t2 === shared.text) return false;
-    remember(false);
-    shared.text = t2;
-    shared.selN = [];
-    shared.selP = [];
-    shared.selE = [];
-    shared.part = null;
-    parse();
-    shared.dirty = true;
-    render();
-    paint();
-    changed();
-    return true;
+    return commit(sbJs.arcRemove(shared.text, ids), { name: "arcs deleted", ids, sel: [] });
   }
   var palDrag;
   var GHOST;
@@ -6839,6 +7355,91 @@
     if (has(a, b, cls === "production" ? "delta" : "none")) return { no: "This " + cls + " is there already." };
     return { cls };
   }
+  function askAll(o) {
+    if (!palOn()) return null;
+    var keep = palSet, rows = {};
+    palSet = { lang: o && o.lang || "pd", look: palSet.look, strict: !!(o && o.strict) };
+    try {
+      var word = function(i) {
+        var l = nodes2[i].el.getElementsByTagNameNS(Y, "NodeLabel")[0];
+        return l ? l.textContent.trim() : "";
+      };
+      var kindOf2 = function(i) {
+        var r = roleOf(i), sub = nodes2[i].shape.kind === "Submap" && !nodes2[i].comp;
+        if (!r && !sub) return null;
+        var k = import_notation.default.nodeKind("graphml", r === "proc" ? "Process" : nodes2[i].shape.kind, word(i));
+        return k ? { kind: k.kind, cls: k.cls } : null;
+      };
+      var name2 = function(k) {
+        return k.kind + ":" + k.cls;
+      };
+      var sets = palLangNow() === "af" ? ["af"] : hybOn() ? ["pd", "reduced"] : ["pd"];
+      var checks = function(s, t, a, skip) {
+        var other = function(q, j) {
+          return j !== skip;
+        };
+        return function(c) {
+          if (c === "gateOneOut") return edges2.some(function(q, j) {
+            return other(q, j) && q.s === s;
+          }) ? "A logic gate has one line out, and this one has it." : null;
+          if (c === "oneInput") return edges2.some(function(q, j) {
+            return other(q, j) && q.t === t;
+          }) ? "This gate has one input, and it has it." : null;
+          if (c === "already") return edges2.some(function(q, j) {
+            return other(q, j) && (q.s === s && q.t === t || a === "none" && q.s === t && q.t === s) && q.arr[1] === a;
+          }) ? "This line is there already." : null;
+          if (c === "tagRoom") {
+            var tg = roleOf(s) === "tag" ? s : t;
+            return tagRoom(tg, tg === s ? t : s, skip == null ? -1 : skip);
+          }
+          if (c === "reversible") {
+            var m = pdLimit(s, t, "consumption");
+            return m && /reversible/.test(m) ? m : null;
+          }
+          return null;
+        };
+      };
+      edges2.forEach(function(e, k) {
+        var a = e.arr[1];
+        if (a !== "none" && !import_notation.default.arcKind("graphml", a)) return;
+        [0, 1].forEach(function(end) {
+          nodes2.forEach(function(n, i) {
+            if (i === e.s || i === e.t) return;
+            var s = end ? e.s : i, t = end ? i : e.t, ks = kindOf2(s), kt = kindOf2(t);
+            if (!ks || !kt) return;
+            var tagLine = a === "none" && [e.s, e.t].some(function(x) {
+              return roleOf(x) === "tag";
+            });
+            var c = a !== "none" ? import_notation.default.arcKind("graphml", a) : tagLine || ks.kind === "tag" || kt.kind === "tag" ? "equivalence arc" : import_notation.default.arcKind("graphml", "none", kt.kind) || "logic arc";
+            var was = a !== "none" ? c : import_notation.default.arcKind("graphml", "none", kindOf2(e.t) ? kindOf2(e.t).kind : "") || "logic arc";
+            var key = [was, end, name2(ks), name2(kt), name2(kindOf2(e.s) || { kind: "?" }), name2(kindOf2(e.t) || { kind: "?" })].join("|");
+            if (rows[key]) return;
+            var want = c === "equivalence arc" && (ks.kind === "tag" || kt.kind === "tag") ? "consumption" : c, h = linkKind(s, t, null, want);
+            rows[key] = {
+              arc: was,
+              now: c,
+              end: end ? "target" : "source",
+              from: name2(ks),
+              to: name2(kt),
+              line: name2(kindOf2(e.s) || { kind: "?" }) + " > " + name2(kindOf2(e.t) || { kind: "?" }),
+              drag: !!takes(k, end, i),
+              draw: !h ? "nothing" : h.no ? h.no : h.pair ? "pair" : h.cls,
+              tableDrag: import_notation.default.allowed(c, ks, kt, { sets, check: checks(s, t, a, k) }),
+              tableDraw: import_notation.default.allowed(c, ks, kt, { sets, check: checks(s, t, a, null) })
+            };
+          });
+        });
+      });
+    } finally {
+      palSet = keep;
+    }
+    return Object.keys(rows).map(function(k) {
+      return rows[k];
+    });
+  }
+  function __run61() {
+    window.m2EditAsk = askAll;
+  }
   function usual(b, dflt) {
     var rb = roleOf(b), kind = {}, n = {}, best = dflt, most = 0;
     Object.keys(MODK).forEach(function(k) {
@@ -6929,28 +7530,14 @@
       t2 = sbJs.recolour(t2, id, confettiLine(confettiHues(t2)).toUpperCase());
     });
     if (t2 === shared.text) return;
-    remember(false);
-    shared.text = t2;
-    parse();
-    tagAim([ia, ib]);
-    termsFix(nodes2.map(function(n, k) {
-      return (n.id === ia || n.id === ib) && n.sub != null ? k : -1;
-    }).filter(function(k) {
-      return k >= 0;
-    }));
-    shared.selN = [];
-    shared.selP = [];
-    shared.part = null;
-    shared.selE = edges2.map(function(q, k) {
-      return ids.indexOf(q.id) >= 0 ? k : -1;
-    }).filter(function(k) {
-      return k >= 0;
-    });
-    shared.dirty = true;
-    quiet();
-    render();
-    paint();
-    changed();
+    commit(t2, { name: "arc made", sel: [], selE: ids, quiet: true, then: function() {
+      tagAim([ia, ib]);
+      termsFix(nodes2.map(function(n, k) {
+        return (n.id === ia || n.id === ib) && n.sub != null ? k : -1;
+      }).filter(function(k) {
+        return k >= 0;
+      }));
+    } });
   }
   function linkLand(a, b, cls) {
     var B = bx(b), c = [B[0] + B[2] / 2, B[1] + B[3] / 2], r = roleOf(b), H = r && /^(proc|gate)$/.test(r) && window.yrender && hubPorts()[nodes2[b].id];
@@ -7040,33 +7627,28 @@
       paint();
       return;
     }
-    remember(false);
-    shared.text = t2;
-    parse();
-    shared.dirty = true;
-    nodes2.forEach(function(n) {
-      if (n.sub != null && ids.indexOf(n.id) >= 0) tids.push(n.id);
-    });
-    if (tids.length) termsFix(nodes2.map(function(n, k) {
-      return tids.indexOf(n.id) >= 0 ? k : -1;
-    }).filter(function(k) {
-      return k >= 0;
-    }), true);
-    shared.selN = [];
-    nodes2.forEach(function(n, k) {
-      if (ids.indexOf(n.id) >= 0) shared.selN.push(k);
-    });
-    var ks = shared.selN.slice();
-    if (ks.length) setBoxes(grown(ks, boxOf, function(k) {
-      return was[nodes2[k].id] || boxOf(k);
-    }, function() {
-      return false;
-    }));
-    refit(ids);
-    shared.sizeRec = null;
-    render();
-    paint();
-    changed();
+    commit(t2, { name: "resized", ids, then: function() {
+      nodes2.forEach(function(n) {
+        if (n.sub != null && ids.indexOf(n.id) >= 0) tids.push(n.id);
+      });
+      if (tids.length) termsFix(nodes2.map(function(n, k) {
+        return tids.indexOf(n.id) >= 0 ? k : -1;
+      }).filter(function(k) {
+        return k >= 0;
+      }), true);
+      shared.selN = [];
+      nodes2.forEach(function(n, k) {
+        if (ids.indexOf(n.id) >= 0) shared.selN.push(k);
+      });
+      var ks = shared.selN.slice();
+      if (ks.length) setBoxes(grown(ks, boxOf, function(k) {
+        return was[nodes2[k].id] || boxOf(k);
+      }, function() {
+        return false;
+      }));
+      refit(ids);
+      shared.sizeRec = null;
+    } });
   }
   var ROWS;
   var props;
@@ -7402,15 +7984,13 @@
       }
     });
     if (t2 === shared.text) return false;
-    remember(false);
-    shared.text = t2;
-    made(ids);
+    commit(t2, { name: "properties", sel: ids, quiet: true });
     return true;
   }
   function sbEnds(id, o, box2) {
     var t2 = sbJs.scaleEnds(shared.text, id, o, box2);
     if (t2 !== shared.text) {
-      shared.text = t2;
+      setText(t2);
       parse();
     }
   }
@@ -7419,28 +7999,7 @@
     if (!n) return false;
     for (var j = 0; j < n; j++) ids.push(freeId("arc_", ids));
     var t2 = sbJs.reversible(shared.text, pid, on2, ids, { sbgn: src() });
-    if (t2 === shared.text) return false;
-    remember(false);
-    shared.text = t2;
-    parse();
-    shared.selN = [];
-    shared.selP = [];
-    shared.selE = [];
-    shared.part = null;
-    if (keepNode) nodes2.forEach(function(q, i) {
-      if (q.id === pid) shared.selN.push(i);
-    });
-    else shared.selE = edges2.map(function(e2, q) {
-      return ids.indexOf(e2.id) >= 0 ? q : -1;
-    }).filter(function(q) {
-      return q >= 0;
-    });
-    shared.dirty = true;
-    quiet();
-    render();
-    paint();
-    changed();
-    return true;
+    return commit(t2, { name: "reversible", ids: [pid], sel: keepNode ? [pid] : [], selE: keepNode ? [] : ids, quiet: true });
   }
   var sbRxSeen;
   function __run49() {
@@ -7599,19 +8158,12 @@
   }
   function sbLineTo(k, t2) {
     var id = edges2[k].id;
-    if (t2 === shared.text) return false;
-    remember(false);
-    shared.text = t2;
-    parse();
-    shared.selE = [];
-    edges2.forEach(function(q, j) {
-      if (q.id === id) shared.selE = [j];
-    });
-    shared.dirty = true;
-    render();
-    paint();
-    changed();
-    return true;
+    return commit(t2, { name: "line look", ids: [id], then: function() {
+      shared.selE = [];
+      edges2.forEach(function(q, j) {
+        if (q.id === id) shared.selE = [j];
+      });
+    } });
   }
   function atHub(k, end) {
     var e = edges2[k], n = end ? e.t : e.s;
@@ -7892,28 +8444,23 @@
     var sel = shared.selN.map(function(i) {
       return nodes2[i].id;
     });
-    remember(false);
-    shared.text = t2;
-    parse();
-    shared.dirty = true;
-    shared.selN = [];
-    nodes2.forEach(function(n, k) {
-      if (sel.indexOf(n.id) >= 0) shared.selN.push(k);
-    });
-    var ks = nodes2.map(function(n, k) {
-      return was[n.id] ? k : -1;
-    }).filter(function(k) {
-      return k >= 0;
-    });
-    if (ks.length) setBoxes(grown(ks, boxOf, function(k) {
-      return was[nodes2[k].id] || boxOf(k);
-    }, function() {
-      return false;
-    }));
-    refit(Object.keys(was));
-    render();
-    paint();
-    changed();
+    commit(t2, { name: "size", ids: Object.keys(was), then: function() {
+      shared.selN = [];
+      nodes2.forEach(function(n, k) {
+        if (sel.indexOf(n.id) >= 0) shared.selN.push(k);
+      });
+      var ks = nodes2.map(function(n, k) {
+        return was[n.id] ? k : -1;
+      }).filter(function(k) {
+        return k >= 0;
+      });
+      if (ks.length) setBoxes(grown(ks, boxOf, function(k) {
+        return was[nodes2[k].id] || boxOf(k);
+      }, function() {
+        return false;
+      }));
+      refit(Object.keys(was));
+    } });
     return true;
   }
   function __run60() {
@@ -8005,6 +8552,7 @@
     __run58();
     __run59();
     __run60();
+    __run61();
   }
 
   // editor/src/cdcreate.js
@@ -8219,41 +8767,36 @@
     var grew = cdGrew;
     cdGrew = null;
     if (!t2 || t2 === now) return false;
-    remember(false);
-    cdRebuild(t2, N.sh);
-    parse();
-    var gk = nodes2.map(function(n, k) {
-      return grew[n.id] ? k : -1;
-    }).filter(function(k) {
-      return k >= 0;
-    });
-    if (gk.length) setBoxes(grown(gk, boxOf, function(k) {
-      return grew[nodes2[k].id] || boxOf(k);
-    }, function() {
-      return false;
-    }));
-    shared.selN = [];
-    shared.selP = [];
-    shared.selE = [];
-    shared.part = null;
-    if (typeof sel === "function") sel = sel();
-    if (typeof selLines === "function") selLines = selLines();
-    (sel || []).forEach(function(id) {
-      nodes2.forEach(function(n, i) {
-        if (n.id === id) shared.selN.push(i);
+    return commit(null, { name: "CellDesigner change", ids: [].concat(typeof sel === "function" ? [] : sel || []), quiet: true, write: function() {
+      cdRebuild(t2, N.sh);
+    }, then: function() {
+      var gk = nodes2.map(function(n, k) {
+        return grew[n.id] ? k : -1;
+      }).filter(function(k) {
+        return k >= 0;
       });
-    });
-    (selLines || []).forEach(function(id) {
-      edges2.forEach(function(q, k) {
-        if (q.id === id || q.id === id + "|a" || q.id === id + "|b") shared.selE.push(k);
+      if (gk.length) setBoxes(grown(gk, boxOf, function(k) {
+        return grew[nodes2[k].id] || boxOf(k);
+      }, function() {
+        return false;
+      }));
+      shared.selN = [];
+      shared.selP = [];
+      shared.selE = [];
+      shared.part = null;
+      if (typeof sel === "function") sel = sel();
+      if (typeof selLines === "function") selLines = selLines();
+      (sel || []).forEach(function(id) {
+        nodes2.forEach(function(n, i) {
+          if (n.id === id) shared.selN.push(i);
+        });
       });
-    });
-    shared.dirty = true;
-    quiet();
-    render();
-    paint();
-    changed();
-    return true;
+      (selLines || []).forEach(function(id) {
+        edges2.forEach(function(q, k) {
+          if (q.id === id || q.id === id + "|a" || q.id === id + "|b") shared.selE.push(k);
+        });
+      });
+    } });
   }
   function cdRole(i) {
     var n = nodes2[i];
@@ -9772,7 +10315,7 @@
     var chosen = function() {
       return [sel.value, fixed() ? lab.value : inp.value.trim()];
     };
-    var commit = function() {
+    var typed = function() {
       if (ui) {
         var g = (feat() || {}).info, q = chosen();
         if (q[1] && (pendOf() || !g || g.prefix !== q[0] || g.label !== q[1])) unit(q);
@@ -9806,7 +10349,7 @@
     };
     T = shared.typing = { inp, place, done: function(keep) {
       if (shared.typing !== T) return;
-      if (keep) commit();
+      if (keep) typed();
       shared.typing = null;
       box2.remove();
       document.removeEventListener("pointerdown", outside, true);
@@ -9815,7 +10358,7 @@
     } };
     sel.addEventListener("change", function() {
       if (ui) {
-        var g = (feat() || {}).info, typed = inp.value.trim(), was = typed || (g && !cdMk.INFO[g.prefix] ? g.label : "");
+        var g = (feat() || {}).info, typed2 = inp.value.trim(), was = typed2 || (g && !cdMk.INFO[g.prefix] ? g.label : "");
         labels();
         if (g && g.prefix === sel.value) {
           if (fixed()) lab.value = g.label;
@@ -9845,7 +10388,7 @@
         inp.focus();
       }
     });
-    inp.addEventListener("change", commit);
+    inp.addEventListener("change", typed);
     if (ui) lab.addEventListener("change", function() {
       unit(chosen());
     });
@@ -9999,26 +10542,25 @@
       paint();
       return;
     }
-    remember(false);
-    setBoxes(one);
-    var ks = nodes2.map(function(n, k) {
-      return ids.indexOf(n.id) >= 0 ? k : -1;
-    }).filter(function(k) {
-      return k >= 0;
-    });
-    setBoxes(grown(ks, boxOf, function(k) {
-      return was[nodes2[k].id] || boxOf(k);
-    }, function() {
-      return false;
-    }));
-    shared.selN = [];
-    nodes2.forEach(function(n, k) {
-      if (ids.indexOf(n.id) >= 0) shared.selN.push(k);
-    });
-    shared.sizeRec = null;
-    render();
-    paint();
-    changed();
+    commit(null, { name: "size", ids, write: function() {
+      setBoxes(one);
+    }, parsed: true, then: function() {
+      var ks = nodes2.map(function(n, k) {
+        return ids.indexOf(n.id) >= 0 ? k : -1;
+      }).filter(function(k) {
+        return k >= 0;
+      });
+      setBoxes(grown(ks, boxOf, function(k) {
+        return was[nodes2[k].id] || boxOf(k);
+      }, function() {
+        return false;
+      }));
+      shared.selN = [];
+      nodes2.forEach(function(n, k) {
+        if (ids.indexOf(n.id) >= 0) shared.selN.push(k);
+      });
+      shared.sizeRec = null;
+    } });
   }
   var cdLook;
   var cdLineMemo;
@@ -10380,7 +10922,7 @@
   }
   function cdRebuild(t, sh) {
     shared.cd.base = t;
-    shared.text = cdGraphml(t);
+    setText(cdGraphml(t));
     rebase(sh[0], sh[1]);
   }
   function cdGraphml(t) {
@@ -11378,6 +11920,10 @@
     Y = "http://www.yworks.com/xml/graphml", G = "http://graphml.graphdrawing.org/xmlns";
     drawing = false;
   }
+  function setText(t) {
+    shared.text = t;
+    return t;
+  }
   function src() {
     return shared.cd ? shared.cd.now : shared.sb ? sbNow() : shared.text;
   }
@@ -12221,7 +12767,7 @@
       }
       var g = fromUndo(good.u);
       if (shared.sb && good.sb) shared.sb.base = good.sb;
-      shared.text = g;
+      setText(g);
       shared.selN = [];
       shared.selP = [];
       shared.selE = [];
@@ -12355,7 +12901,7 @@
       var keepSel2 = same ? shared.selN.map(function(i) {
         return nodes2[i].id;
       }) : [];
-      shared.text = t2;
+      setText(t2);
       parse();
       shared.selN = [];
       shared.selP = [];
@@ -12419,135 +12965,20 @@
     preDoc = preDoc.filter(function(x) {
       return x !== pd;
     });
-    doc = pd ? pd.doc : new DOMParser().parseFromString(shared.text, "application/xml");
+    var R = import_graphml_edit.default.read(shared.text, { doc: pd ? pd.doc : null, cd: !!shared.cd });
+    doc = R.doc;
     docText = shared.text;
-    if (doc.getElementsByTagName("parsererror").length) throw "not a readable XML file";
-    geos = Array.prototype.slice.call(doc.getElementsByTagNameNS(Y, "Geometry"));
-    points = Array.prototype.slice.call(doc.getElementsByTagNameNS(Y, "Point"));
-    if ((shared.text.match(/<y:Geometry\s/g) || []).length !== geos.length || (shared.text.match(/<y:Point\s/g) || []).length !== points.length)
-      throw "the file is not written as yEd writes it";
-    var owner2 = function(e, tag) {
-      for (var p = e.parentNode; p; p = p.parentNode) if (p.localName === tag && p.namespaceURI === G) return p;
-      return null;
-    };
-    var gi = /* @__PURE__ */ new Map(), byEl = /* @__PURE__ */ new Map();
-    geos.forEach(function(g, i) {
-      gi.set(g, i);
-    });
-    nodes2 = Array.prototype.slice.call(doc.getElementsByTagNameNS(G, "node")).map(function(n, i) {
-      byEl.set(n, i);
-      return { el: n, id: n.getAttribute("id"), geo: [] };
-    });
-    geos.forEach(function(g, i) {
-      var n = owner2(g, "node");
-      if (n && byEl.has(n)) nodes2[byEl.get(n)].geo.push(i);
-    });
-    nodes2 = nodes2.filter(function(n) {
-      return n.geo.length;
-    });
-    byEl = /* @__PURE__ */ new Map();
-    nodes2.forEach(function(n, i) {
-      byEl.set(n.el, i);
-    });
-    nodes2.forEach(function(n) {
-      n.inside = Array.prototype.slice.call(n.el.getElementsByTagNameNS(G, "node")).map(function(c) {
-        return byEl.get(c);
-      }).filter(function(c) {
-        return c != null;
-      });
-      n.kids = n.inside.filter(function(c) {
-        return owner2(nodes2[c].el, "node") === n.el;
-      });
-      var r = realizerOf(n.el), g = r && r.getElementsByTagNameNS(Y, "Geometry")[0];
-      n.ag = g && gi.has(g) ? gi.get(g) : n.geo[0];
-      n.shape = r ? shapeOf(r) : { kind: "rectangle", props: {} };
-      n.hub = !shared.cd && /sbgn\.(Process|Operator)$/.test(r ? r.getAttribute("configuration") || "" : "");
-      n.eq = n.hub && n.shape.kind === "Operator" && Array.prototype.some.call(r.getElementsByTagNameNS(Y, "NodeLabel"), function(l) {
-        return l.textContent.trim() === "\u2261";
-      });
-      n.up = null;
-      n.comp = n.el.getAttribute("yfiles.foldertype") === "group" && !/omplex/.test(r ? r.getAttribute("configuration") || "" : "");
-      var ins = r && r.getElementsByTagNameNS(Y, "Insets")[0], iv = function(k) {
-        return ins ? parseFloat(ins.getAttribute(k + "F") || ins.getAttribute(k)) || 0 : 0;
-      };
-      n.ins = [iv("left"), iv("top"), iv("right"), iv("bottom")];
-      n.lab = { t: 0, b: 0 };
-      if (r) Array.prototype.forEach.call(r.children, function(l) {
-        if (l.localName !== "NodeLabel" || l.getAttribute("modelName") !== "internal" || l.getAttribute("visible") === "false") return;
-        var side = (l.getAttribute("modelPosition") || "").charAt(0);
-        if (side === "t" || side === "b") n.lab[side] = Math.max(n.lab[side], parseFloat(l.getAttribute("height")) || 0);
-        if (!n.labPos) n.labPos = l.getAttribute("modelPosition") || "c";
-      });
-    });
-    nodes2.forEach(function(n, i) {
-      n.kids.forEach(function(c) {
-        nodes2[c].up = i;
-      });
-    });
+    geos = R.geos;
+    points = R.points;
+    nodes2 = R.nodes;
+    edges2 = R.edges;
+    shared.procs = R.procs;
     parseFix.forEach(function(f) {
       f();
     });
-    var byId = {};
-    nodes2.forEach(function(n, i) {
-      byId[n.id] = i;
-    });
-    var pi = /* @__PURE__ */ new Map();
-    points.forEach(function(p, i) {
-      pi.set(p, i);
-    });
-    edges2 = Array.prototype.slice.call(doc.getElementsByTagNameNS(G, "edge")).map(function(e) {
-      var ar = e.getElementsByTagNameNS(Y, "Arrows")[0];
-      return {
-        id: e.getAttribute("id"),
-        s: byId[e.getAttribute("source")],
-        t: byId[e.getAttribute("target")],
-        path: e.getElementsByTagNameNS(Y, "Path")[0] || null,
-        arr: ar ? [ar.getAttribute("source") || "none", ar.getAttribute("target") || "none"] : ["none", "none"],
-        pts: Array.prototype.slice.call(e.getElementsByTagNameNS(Y, "Point")).map(function(p) {
-          return pi.get(p);
-        }),
-        smooth: e.getElementsByTagNameNS(Y, "QuadCurveEdge").length > 0 || Array.prototype.some.call(e.getElementsByTagNameNS(Y, "BendStyle"), function(b) {
-          return b.getAttribute("smoothed") === "true";
-        })
-      };
-    });
-    var byE = {};
-    edges2.forEach(function(e, k) {
-      byE[e.id] = k;
-    });
-    shared.procs = [];
-    nodes2.forEach(function(n, i) {
-      var m = n.id.match(/^(.*)\|proc$/);
-      if (m && byE[m[1] + "|a"] != null && byE[m[1] + "|b"] != null) shared.procs.push({ g: i, a: byE[m[1] + "|a"], b: byE[m[1] + "|b"] });
-    });
   }
   function realizerOf(el) {
-    for (var i = 0; i < el.children.length; i++) {
-      var dd = el.children[i];
-      if (dd.localName !== "data") continue;
-      for (var j = 0; j < dd.children.length; j++) {
-        var r = dd.children[j];
-        if (r.namespaceURI !== Y) continue;
-        if (r.localName === "ProxyAutoBoundsNode") {
-          var rs = r.getElementsByTagNameNS(Y, "Realizers")[0];
-          return rs ? rs.children[parseInt(rs.getAttribute("active") || "0", 10)] || null : null;
-        }
-        return r;
-      }
-    }
-    return null;
-  }
-  function shapeOf(r) {
-    var props2 = {}, kind;
-    Array.prototype.forEach.call(r.getElementsByTagNameNS(Y, "Property"), function(p) {
-      props2[(p.getAttribute("name") || "").replace("com.yworks.sbgn.style.", "")] = p.getAttribute("value");
-    });
-    if (/^Generic/.test(r.localName)) kind = (r.getAttribute("configuration") || "").replace("com.yworks.sbgn.", "");
-    else {
-      var sh = r.getElementsByTagNameNS(Y, "Shape")[0];
-      kind = sh ? sh.getAttribute("type") : "rectangle";
-    }
-    return { kind, props: props2 };
+    return import_graphml_edit.default.realizerOf(el);
   }
   var moveFix;
   var parseFix;
@@ -12581,15 +13012,11 @@
     return [num(g, "x"), num(g, "y"), num(g, "width"), num(g, "height")];
   }
   function fmt(v) {
-    return String(Math.round(v * 1e3) / 1e3);
+    return import_graphml_edit.default.fmt(v);
   }
   function write(g, p) {
-    var k = { "Geometry": -1, "Point": -1 }, same = docText === shared.text;
-    shared.text = shared.text.replace(/<y:(Geometry|Point)\s[^>]*>/g, function(tag, kind) {
-      var i = ++k[kind], v = (kind === "Geometry" ? g : p)[i];
-      if (!v) return tag;
-      return tag.replace(/(\sx=")[^"]*"/, "$1" + v[0] + '"').replace(/(\sy=")[^"]*"/, "$1" + v[1] + '"');
-    });
+    var same = docText === shared.text;
+    setText(import_graphml_edit.default.place(shared.text, g, p));
     if (same) docText = shared.text;
   }
   function moving(alone) {
@@ -12764,45 +13191,15 @@
     if (shared.text !== t0) parse();
   }
   function insetsOf(id, ins, bins) {
-    var q = id.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/[.*+?^${}()|[\]\\\/]/g, "\\$&");
-    var m = new RegExp('<node(?=[\\s>/])[^>]*?\\sid="' + q + '"').exec(shared.text);
-    if (!m) return;
-    var rest = shared.text.slice(m.index), own2 = rest.slice(0, Math.min.apply(null, [rest.search(/<graph(?=[\s>\/])/), rest.indexOf("</node>")].filter(function(k2) {
-      return k2 >= 0;
-    }).concat([rest.length])));
-    var act = /<y:Realizers\s[^>]*active="(\d+)"/.exec(own2), k = act ? +act[1] : 0, put2 = [];
-    [["Insets", ins], ["BorderInsets", bins]].forEach(function(q2) {
-      var re = new RegExp("<y:" + q2[0] + "\\s[^>]*>", "g"), x;
-      for (var j = 0; (x = re.exec(own2)) && j < k; j++) ;
-      if (!x) return;
-      var tag = x[0];
-      ["left", "top", "right", "bottom"].forEach(function(sd, j2) {
-        var v = q2[1][j2];
-        if (v == null) return;
-        v = Math.round(v * 1e3) / 1e3;
-        tag = tag.replace(new RegExp("(\\s" + sd + '=")[^"]*"'), "$1" + Math.round(v) + '"').replace(new RegExp("(\\s" + sd + 'F=")[^"]*"'), "$1" + (v % 1 ? String(v) : v + ".0") + '"');
-      });
-      if (tag !== x[0]) put2.push([m.index + x.index, x[0].length, tag]);
-    });
-    put2.sort(function(a, b) {
-      return b[0] - a[0];
-    }).forEach(function(q2) {
-      shared.text = shared.text.slice(0, q2[0]) + q2[2] + shared.text.slice(q2[0] + q2[1]);
-    });
+    setText(import_graphml_edit.default.insets(shared.text, id, ins, bins));
   }
   function setBoxes(nb) {
-    var at2 = {}, i = -1;
+    var at2 = {};
     Object.keys(nb).forEach(function(k) {
       at2[nodes2[+k].ag] = nb[k].map(fmt);
     });
     if (!Object.keys(at2).length) return;
-    shared.text = shared.text.replace(/<y:Geometry\s[^>]*>/g, function(tag) {
-      var v = at2[++i];
-      if (v) ["x", "y", "width", "height"].forEach(function(a, j) {
-        tag = tag.replace(new RegExp("(\\s" + a + '=")[^"]*"'), "$1" + v[j] + '"');
-      });
-      return tag;
-    });
+    setText(import_graphml_edit.default.boxes(shared.text, at2));
     parse();
     shared.dirty = true;
   }
@@ -12872,7 +13269,7 @@
     var keep = shared.selN.map(function(i) {
       return nodes2[i].id;
     });
-    shared.text = t2;
+    setText(t2);
     parse();
     shared.dirty = true;
     shared.selN = [];
@@ -12997,7 +13394,7 @@
         });
         return k < 0 ? null : [edges2[k].id, edges2[k].pts.indexOf(pi)];
       });
-      shared.text = t2;
+      setText(t2);
       parse();
       shared.dirty = true;
       shared.part = null;
@@ -13350,7 +13747,7 @@
       if (h.sbBase && shared.sb) shared.sb.base = h.sbBase;
       var g = fromUndo(h.u);
       if (g !== shared.text) {
-        shared.text = g;
+        setText(g);
         parse();
       }
       undo = h.undo;
@@ -13360,10 +13757,40 @@
       undo = [];
       shared.redo = [];
       if (shared.text !== g0) {
-        shared.text = g0;
+        setText(g0);
         parse();
       }
     }
+  }
+  function commit(t2, o) {
+    o = o || {};
+    if (!o.write && t2 === shared.text) return false;
+    remember(!!o.merge);
+    if (o.write) o.write();
+    else setText(t2);
+    if (!o.parsed) parse();
+    if (o.then) o.then();
+    if (o.reparse) parse();
+    if (o.sel || o.selE) {
+      var n = o.sel || [], e = o.selE || [];
+      shared.selN = [];
+      shared.selP = [];
+      shared.selE = [];
+      shared.part = null;
+      nodes2.forEach(function(q, i) {
+        if (n.indexOf(q.id) >= 0) shared.selN.push(i);
+      });
+      edges2.forEach(function(q, k) {
+        if (e.indexOf(q.id) >= 0) shared.selE.push(k);
+      });
+    }
+    shared.dirty = true;
+    shared.lastChange = { name: o.name || "change", ids: [].concat(o.ids || o.sel || [], o.ids ? [] : o.selE || []) };
+    if (o.quiet) quiet();
+    render();
+    paint();
+    changed();
+    return true;
   }
   function remember(merge) {
     var now = Date.now();
@@ -13395,7 +13822,8 @@
     keyRun = null;
     var was = undoText();
     step(to, was);
-    shared.text = fromUndo(t);
+    setText(fromUndo(t));
+    shared.lastChange = { name: from === undo ? "undo" : "redo", ids: [] };
     nudgeAt = 0;
     shared.cdGate = null;
     shared.sbBack = true;
@@ -13425,7 +13853,7 @@
           var ids = shared.selN.map(function(i) {
             return nodes2[i].id;
           }), np = points.length;
-          shared.text = q[2];
+          setText(q[2]);
           parse();
           shared.selN = ids.map(function(id) {
             return nodes2.findIndex(function(n) {
@@ -13444,6 +13872,8 @@
         if (sh) {
           parse();
           rebase(sh[0], sh[1]);
+          var lc = shared.lastChange;
+          shared.lastChange = { name: "shift", ids: lc ? lc.ids : [], shift: sh, after: lc ? lc.name : null };
         }
         r = drawMemo && !drawMemo.cd && drawMemo.text === shared.text && !shared.afSbgn ? drawMemo.r : drawGraphml(shared.text);
       }
@@ -13570,7 +14000,7 @@
     layout();
     sbpy();
     try {
-      shared.text = g;
+      setText(g);
       parse();
     } catch (e) {
       putMap(was);
@@ -14300,7 +14730,7 @@
             }
             if (s0.id) unkeep(s0.id);
             if (moved) {
-              shared.text = keep;
+              setText(keep);
               shared.dirty = true;
               push();
             } else quiet();
@@ -15235,21 +15665,7 @@
       return;
     }
     remember(!!merge);
-    var c = -1, ce = -1;
-    if (re) shared.text = shared.text.replace(/<edge\b[^>]*>/g, function(tag) {
-      return ++ce !== re.k ? tag : tag.replace(new RegExp("(\\s" + re.att + `\\s*=\\s*)("[^"]*"|'[^']*')`), function(m, p1) {
-        return p1 + '"' + re.id + '"';
-      });
-    });
-    shared.text = shared.text.replace(/<y:Path\b[^>]*>/g, function(tag) {
-      var kv = by.get(++c);
-      if (!kv) return tag;
-      kv.forEach(function(q) {
-        var re2 = new RegExp("(\\s" + q[0] + '=")[^"]*"');
-        tag = re2.test(tag) ? tag.replace(re2, "$1" + q[1] + '"') : tag.replace(/(\/?>)$/, " " + q[0] + '="' + q[1] + '"$1');
-      });
-      return tag;
-    });
+    setText(import_graphml_edit.default.ends(shared.text, by, re));
     parse();
     shared.dirty = true;
     render();
@@ -15649,71 +16065,21 @@
     var a = pts[j - 1], b = pts[j], dx = b[0] - a[0], dy = b[1] - a[1], L = dx * dx + dy * dy;
     var t = L ? Math.max(0, Math.min(1, ((P[0] - a[0]) * dx + (P[1] - a[1]) * dy) / L)) : 0;
     var Q = [Math.round((a[0] + dx * t) * 1e3) / 1e3, Math.round((a[1] + dy * t) * 1e3) / 1e3];
-    var tag = '<y:Point x="' + fmt(Q[0]) + '" y="' + fmt(Q[1]) + '"/>', at2 = j - 1;
-    var nth = function(re, n) {
-      var m2, c = -1;
-      re.lastIndex = 0;
-      while (m2 = re.exec(shared.text)) if (++c === n) return m2;
-      return null;
+    var at2 = j - 1, first = function() {
+      return Array.prototype.indexOf.call(doc.getElementsByTagNameNS(Y, "Path"), e.path);
     };
-    var indent = function(pos) {
-      var s0 = shared.text.lastIndexOf("\n", pos - 1) + 1, w2 = shared.text.slice(s0, pos).match(/^[ \t]*/)[0];
-      return w2;
-    };
-    var m, before = shared.text;
-    if (at2 < e.pts.length) {
-      m = nth(/<y:Point\s[^>]*>/g, e.pts[at2]);
-      shared.text = shared.text.slice(0, m.index) + tag + "\n" + indent(m.index) + shared.text.slice(m.index);
-    } else if (e.pts.length) {
-      m = nth(/<y:Point\s[^>]*>/g, e.pts[e.pts.length - 1]);
-      var end = m.index + m[0].length;
-      shared.text = shared.text.slice(0, end) + "\n" + indent(m.index) + tag + shared.text.slice(end);
-    } else {
-      var paths = Array.prototype.slice.call(doc.getElementsByTagNameNS(Y, "Path"));
-      m = nth(/<y:Path[\s>\/][^>]*>/g, paths.indexOf(e.path));
-      if (!m) return null;
-      var w = indent(m.index), end2 = m.index + m[0].length;
-      shared.text = /\/>$/.test(m[0]) ? shared.text.slice(0, m.index) + m[0].replace(/\s*\/>$/, ">") + "\n" + w + "  " + tag + "\n" + w + "</y:Path>" + shared.text.slice(end2) : shared.text.slice(0, end2) + "\n" + w + "  " + tag + shared.text.slice(end2);
-    }
-    var keep = shared.text;
-    shared.text = before;
+    var t2 = import_graphml_edit.default.bend(shared.text, at2 < e.pts.length ? { before: e.pts[at2] } : e.pts.length ? { after: e.pts[e.pts.length - 1] } : { path: first() }, Q[0], Q[1]);
+    if (t2 == null) return null;
     remember(false);
-    shared.text = keep;
+    setText(t2);
     parse();
     return { p: edges2[k].pts[at2], at: Q, k: k + 1 };
   }
   function unbend(list2) {
-    list2 = list2.slice().sort(function(a, b) {
-      return b - a;
-    });
-    var before = shared.text;
-    list2.forEach(function(pi) {
-      var re = /<y:Point\s[^>]*>/g, m, c = -1;
-      while (m = re.exec(shared.text)) if (++c === pi) break;
-      if (!m) return;
-      var a = m.index, b = m.index + m[0].length;
-      var s0 = shared.text.lastIndexOf("\n", a - 1) + 1;
-      if (/^[ \t]*$/.test(shared.text.slice(s0, a)) && shared.text[b] === "\n") {
-        a = s0;
-        b += 1;
-      }
-      shared.text = shared.text.slice(0, a) + shared.text.slice(b);
-    });
-    if (shared.text === before) return false;
-    var keep = shared.text;
-    shared.text = before;
-    remember(false);
-    shared.text = keep;
-    parse();
-    shared.selN = [];
-    shared.selP = [];
-    shared.selE = [];
+    var t = import_graphml_edit.default.unbend(shared.text, list2);
+    if (t === shared.text) return false;
     keyGuides = null;
-    shared.dirty = true;
-    render();
-    paint();
-    changed();
-    return true;
+    return commit(t, { name: "bend point removed", sel: [] });
   }
   var rclick;
   function __run372() {
@@ -15747,17 +16113,8 @@
       var t2 = window.cd_edit.makeMain(shared.text, edges2[k].id);
       if (!t2) return null;
       return { label: /\|r\d+$/.test(edges2[k].id) ? "Make main reactant" : "Make main product", go: function() {
-        remember(false);
-        shared.text = t2;
-        parse();
-        shared.selN = [];
-        shared.selP = [];
-        shared.selE = [];
         keyGuides = null;
-        shared.dirty = true;
-        render();
-        paint();
-        changed();
+        commit(t2, { name: "make main", ids: [edges2[k].id], sel: [] });
       } };
     };
   }
@@ -16247,7 +16604,7 @@
       return;
     }
     settle(regroup("box", /* @__PURE__ */ new Set([ri]), boxOf, B0r), { moving: [rid] }, doneR, function() {
-      shared.text = unpush();
+      setText(unpush());
       parse();
       liveOff();
       paint();
@@ -16302,7 +16659,7 @@
           changed();
         },
         function() {
-          shared.text = unpush();
+          setText(unpush());
           parse();
           unshift();
           paint();
@@ -16310,7 +16667,7 @@
       );
     };
     if (d.made != null && Math.abs(d.dx) < 0.01 && Math.abs(d.dy) < 0.01) {
-      shared.text = unpush();
+      setText(unpush());
       parse();
       shared.selP = [];
       shared.selE = [d.made - 1];
@@ -16497,7 +16854,7 @@
             paint();
           },
           function() {
-            shared.text = unpush();
+            setText(unpush());
             parse();
             shared.keyed = null;
             render();
