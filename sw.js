@@ -10,7 +10,7 @@
 // KILL: a release with true drops every copy this scope kept and unregisters the worker, with no reload (a page that
 // registers it again at its next load only repeats this); sw="off" on the include unregisters it from the page.
 var LAYOUT = 1;   // the kept copies' layout: a new number drops the copies of the earlier one
-var KILL = true;
+var KILL = false;
 var WAIT = 4000;
 var SCOPE = new URL(self.registration.scope).pathname;
 var NAME = 'offline-' + LAYOUT + ':' + SCOPE;
