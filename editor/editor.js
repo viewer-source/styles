@@ -14821,12 +14821,14 @@
   var REF_DB;
   var ID_DBS;
   var ANN_DB;
+  var prefsOpen;
   function __run622() {
     prefs = props.querySelector(".m2-ed-prefs");
     prefsKey = null;
     prefsSay = null;
     prefsRid = null;
     prefsFor = null;
+    prefsOpen = false;
     REF_DB = { pubmed: "PubMed", doi: "DOI", uniprot: "UniProt", hgnc: "HGNC", "hgnc.symbol": "HGNC symbol", chebi: "ChEBI", go: "GO", mesh: "MeSH", ncbigene: "NCBI Gene", "entrez.gene": "NCBI Gene", ensembl: "Ensembl", refseq: "RefSeq", "pubchem.compound": "PubChem", hmdb: "HMDB", kegg: "KEGG", "kegg.compound": "KEGG", reactome: "Reactome", ec: "EC", "ec-code": "EC", taxonomy: "Taxonomy" };
     ID_DBS = { protein: ["hgnc.symbol", "uniprot"], gene: ["hgnc.symbol"], molecule: ["chebi"], phenotype: ["go", "mesh"], compartment: ["go", "mesh"] };
     ANN_DB = {
@@ -14894,6 +14896,12 @@
     prefs.addEventListener("click", function(e) {
       if (e.target.closest && e.target.closest(".m2-ed-pplus")) {
         refsOpen();
+        return;
+      }
+      if (e.target.closest && e.target.closest(".m2-ed-pmore")) {
+        prefsOpen = !prefsOpen;
+        prefsKey = null;
+        refsShow();
         return;
       }
       var x = e.target.closest && e.target.closest(".m2-ed-px"), R = annNow();
@@ -15058,6 +15066,7 @@
     pin.value = P.bad.join(" ");
     if (!P.bad.length) refsClose();
     prefsSay = [R.at, said.join("; ") + "."];
+    if (add.length) prefsOpen = true;
     var sym = add.filter(function(k) {
       return k.indexOf("hgnc.symbol:") === 0;
     }), ni = nodes2.findIndex(function(n) {
@@ -15090,7 +15099,7 @@
       pin.setAttribute("aria-label", "IDs or links to add");
     }
     if (prefsSay && prefsSay[0] !== R.at) prefsSay = null;
-    var key = R.at + "\0" + R.title + "\0" + R.items.map(function(x) {
+    var key = prefsOpen + "\0" + R.at + "\0" + R.title + "\0" + R.items.map(function(x) {
       return x.key + "" + x.q + (x.own ? "" : "!");
     }).join("\0") + "\0" + (prefsSay ? prefsSay[1] : "");
     if (key === prefsKey) return;
@@ -15104,9 +15113,11 @@
     }).map(function(r) {
       return r[0];
     });
-    prefs.querySelector(".m2-ed-prefl").innerHTML = '<tr><th colspan="2">' + escHtml(R.title) + '<button type="button" class="m2-ed-pplus" title="Add ' + (R.kind ? "identifiers" : "references") + '" aria-label="Add ' + (R.kind ? "identifiers" : "references") + '">' + signPlus() + "</button></th></tr>" + rows.map(function(x) {
+    prefs.querySelector(".m2-ed-prefl").innerHTML = '<tr><th colspan="2">' + escHtml(R.title) + '<button type="button" class="m2-ed-pplus" title="Add ' + (R.kind ? "identifiers" : "references") + '" aria-label="Add ' + (R.kind ? "identifiers" : "references") + '">' + signPlus() + "</button></th></tr>" + rows.map(function(x, j) {
+      if (!prefsOpen && j > 0) return "";
+      var more = j || rows.length < 2 ? "" : '<button type="button" class="m2-ed-pmore" title="' + (prefsOpen ? "Show the first only" : "Show all " + rows.length) + '">' + (prefsOpen ? "less" : "+" + (rows.length - 1)) + "</button>";
       var name2 = REF_DB[x.db] || x.db || "Link", tip = name2 + " " + x.val + (x.own ? "" : ", " + x.q + (x.about ? ": about the map as a model, kept as written" : ", kept as written"));
-      return '<tr title="' + escAttr(tip) + '"><th>' + escHtml(name2) + '</th><td><span class="m2-ed-ppic"><span class="m2-ed-ppicname">' + escHtml(x.val) + (x.about ? ' <span class="m2-ed-pabout">about the map</span>' : "") + "</span>" + (x.own ? '<button type="button" class="m2-ed-px" data-key="' + escAttr(x.key) + '" title="Remove ' + escAttr(name2 + " " + x.val) + '" aria-label="Remove">' + signX() + "</button>" : "") + "</span></td></tr>";
+      return '<tr title="' + escAttr(tip) + '"><th>' + escHtml(name2) + '</th><td><span class="m2-ed-ppic"><span class="m2-ed-ppicname">' + escHtml(x.val) + (x.about ? ' <span class="m2-ed-pabout">about the map</span>' : "") + "</span>" + more + (x.own ? '<button type="button" class="m2-ed-px" data-key="' + escAttr(x.key) + '" title="Remove ' + escAttr(name2 + " " + x.val) + '" aria-label="Remove">' + signX() + "</button>" : "") + "</span></td></tr>";
     }).join("");
     var say = prefs.querySelector(".m2-ed-psay");
     say.hidden = !prefsSay;
