@@ -12,6 +12,7 @@ rm -rf editor && cp -r "$src/editor" editor   # the editor, served at /styles/ed
 rm -rf renderers && for f in yrender/yrender.js converter/cdrender.js converter/cd_edit.js converter/cd_make.js converter/sbgn_edit.js converter/sbml_edit.js converter/sbgnml_read.js converter/graphml_edit.js converter/notation.js layout/layout.js layout/holding.js; do   # the renderers and engines the editor runs or bundles, of the same commit (renderers= on the include)
   mkdir -p "renderers/$(dirname $f)" && cp "$src/renderers/$f" "renderers/$f"
 done
+cp "$src/sw.js" sw.js   # the page kept for offline, registered at /styles/ (the folder above editor=)
 cp "$src/style.scss" .
 cp "$src"/_sass/*.scss _sass/
 echo 'viewer-source/viewer-source.github.io, the release of the same date' > VERSION
